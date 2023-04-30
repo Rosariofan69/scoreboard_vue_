@@ -1,0 +1,410 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UmpireModel = exports.PositionModel = exports.RunnerNameModel = exports.PitcherInfoModel = exports.BatterStatsModel = exports.ParticipationMemberPerTeamModel = exports.ParticipationMemberModel = void 0;
+/**
+ * 出場選手情報
+ */
+class ParticipationMemberModel {
+    constructor() {
+        /** 背番号 */
+        Object.defineProperty(this, "Number", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 守備位置 */
+        Object.defineProperty(this, "Position", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 名前 */
+        Object.defineProperty(this, "Name", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 打者 */
+        Object.defineProperty(this, "Batter", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 走者 */
+        Object.defineProperty(this, "Runner", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 次回先頭 */
+        Object.defineProperty(this, "NextRead", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+    }
+}
+exports.ParticipationMemberModel = ParticipationMemberModel;
+/**
+ * 出場選手情報（1チーム単位）
+ */
+class ParticipationMemberPerTeamModel {
+    constructor() {
+        /** 1番 */
+        Object.defineProperty(this, "LeadOff", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 2番 */
+        Object.defineProperty(this, "Second", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 3番 */
+        Object.defineProperty(this, "Third", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 4番 */
+        Object.defineProperty(this, "Forth", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 5番 */
+        Object.defineProperty(this, "Fifth", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 6番 */
+        Object.defineProperty(this, "Sixth", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 7番 */
+        Object.defineProperty(this, "Seventh", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 8番 */
+        Object.defineProperty(this, "Eighth", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 9番 */
+        Object.defineProperty(this, "Ninth", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 投手 */
+        Object.defineProperty(this, "Pitcher", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+    }
+}
+exports.ParticipationMemberPerTeamModel = ParticipationMemberPerTeamModel;
+/**
+ * 打者成績
+ */
+class BatterStatsModel {
+    constructor() {
+        /** 背番号 */
+        Object.defineProperty(this, "Number", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 名前 */
+        Object.defineProperty(this, "Name", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 打率 */
+        Object.defineProperty(this, "AVG", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 打数-安打 */
+        Object.defineProperty(this, "AB_H", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 本塁打 */
+        Object.defineProperty(this, "HR", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 打点 */
+        Object.defineProperty(this, "RBI", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 盗塁 */
+        Object.defineProperty(this, "SB", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 出塁率 */
+        Object.defineProperty(this, "OBP", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** OPS */
+        Object.defineProperty(this, "OPS", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** RC27 */
+        Object.defineProperty(this, "RC27", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+    }
+}
+exports.BatterStatsModel = BatterStatsModel;
+/**
+ * 投手成績
+ */
+class PitcherInfoModel {
+    constructor() {
+        /** 背番号 */
+        Object.defineProperty(this, "Number", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 名前 */
+        Object.defineProperty(this, "Name", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 投球数 */
+        Object.defineProperty(this, "PitchCount", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** この打席 */
+        Object.defineProperty(this, "ThisAtBat", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 奪三振 */
+        Object.defineProperty(this, "SO", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 与四球 */
+        Object.defineProperty(this, "BB", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+    }
+}
+exports.PitcherInfoModel = PitcherInfoModel;
+/**
+ * 走者の名前
+ */
+class RunnerNameModel {
+    constructor() {
+        /** 1塁 */
+        Object.defineProperty(this, "First", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 2塁 */
+        Object.defineProperty(this, "Second", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 3塁 */
+        Object.defineProperty(this, "Third", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+    }
+}
+exports.RunnerNameModel = RunnerNameModel;
+/**
+ * 守備位置
+ */
+class PositionModel {
+    constructor() {
+        /** 投手 */
+        Object.defineProperty(this, "P", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 捕手 */
+        Object.defineProperty(this, "C", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 一塁手 */
+        Object.defineProperty(this, "FB", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 二塁手 */
+        Object.defineProperty(this, "SB", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 三塁手 */
+        Object.defineProperty(this, "TB", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 遊撃手 */
+        Object.defineProperty(this, "SS", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 左翼手 */
+        Object.defineProperty(this, "LF", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 中堅手 */
+        Object.defineProperty(this, "CF", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 右翼手 */
+        Object.defineProperty(this, "RF", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+    }
+}
+exports.PositionModel = PositionModel;
+/**
+ * 審判
+ */
+class UmpireModel {
+    constructor() {
+        /** 球審 */
+        Object.defineProperty(this, "PL", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 1塁 */
+        Object.defineProperty(this, "FB", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 2塁 */
+        Object.defineProperty(this, "SB", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 3塁 */
+        Object.defineProperty(this, "TB", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 左翼 */
+        Object.defineProperty(this, "LL", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 右翼 */
+        Object.defineProperty(this, "RL", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+    }
+}
+exports.UmpireModel = UmpireModel;
+//# sourceMappingURL=member-info-model.js.map
