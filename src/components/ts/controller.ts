@@ -1,5 +1,5 @@
 export class ControllerMethod {
-
+    // テスト
     async test() {
         
         await fetch('/xlsx', {
