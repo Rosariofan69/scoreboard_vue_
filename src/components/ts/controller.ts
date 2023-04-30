@@ -1,6 +1,7 @@
 export class ControllerMethod {
 
     async test() {
+        
         await fetch('/xlsx', {
               mode: 'cors',
               method: 'GET'
