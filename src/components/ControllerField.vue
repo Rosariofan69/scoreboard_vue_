@@ -2,77 +2,76 @@
   <div id="Control-Visiter" class="Control-Section">
     <div class="Input-Row">
       <label style="color: black; width: 15px; height: 8px;">1</label>
-      <input type="text" class="Input-Box">
-      <input type="text" class="Input-Box">
-      <!-- <input type="button" value="⏎" class="Enter-Button" onclick="test()"> -->
-      <button id="button1" class="Enter-Button" v-on:click="controllerMethod.test()">⏎</button>
+      <input type="text" class="Input-Box" v-model="visiterParticipationInput.LeadOff.Position">
+      <input type="text" class="Input-Box" v-model="visiterParticipationInput.LeadOff.Number">
+      <button class="Enter-Button">⏎</button>
       <input type="checkbox">
     </div>
     <div class="Input-Row">
       <label style="color: black; width: 15px; height: 8px;">2</label>
-      <input type="text" class="Input-Box">
-      <input type="text" class="Input-Box">
-      <input type="button" value="⏎" class="Enter-Button" onclick="test()">
+      <input type="text" class="Input-Box" v-model="visiterParticipationInput.Second.Position">
+      <input type="text" class="Input-Box" v-model="visiterParticipationInput.Second.Number">
+      <button class="Enter-Button">⏎</button>
       <input type="checkbox">
     </div>
     <div class="Input-Row">
       <label style="color: black; width: 15px; height: 8px;">3</label>
-      <input type="text" class="Input-Box">
-      <input type="text" class="Input-Box">
-      <input type="button" value="⏎" class="Enter-Button" onclick="test()">
+      <input type="text" class="Input-Box" v-model="visiterParticipationInput.Third.Position">
+      <input type="text" class="Input-Box" v-model="visiterParticipationInput.Third.Number">
+      <button class="Enter-Button">⏎</button>
       <input type="checkbox">
     </div>
     <div class="Input-Row">
       <label style="color: black; width: 15px; height: 8px;">4</label>
-      <input type="text" class="Input-Box">
-      <input type="text" class="Input-Box">
-      <input type="button" value="⏎" class="Enter-Button" onclick="test()">
+      <input type="text" class="Input-Box" v-model="visiterParticipationInput.Fourth.Position">
+      <input type="text" class="Input-Box" v-model="visiterParticipationInput.Fourth.Number">
+      <button class="Enter-Button">⏎</button>
       <input type="checkbox">
     </div>
     <div class="Input-Row">
       <label style="color: black; width: 15px; height: 8px;">5</label>
-      <input type="text" class="Input-Box">
-      <input type="text" class="Input-Box">
-      <input type="button" value="⏎" class="Enter-Button" onclick="test()">
+      <input type="text" class="Input-Box" v-model="visiterParticipationInput.Fifth.Position">
+      <input type="text" class="Input-Box" v-model="visiterParticipationInput.Fifth.Number">
+      <button class="Enter-Button">⏎</button>
       <input type="checkbox">
     </div>
     <div class="Input-Row">
       <label style="color: black; width: 15px; height: 8px;">6</label>
-      <input type="text" class="Input-Box">
-      <input type="text" class="Input-Box">
-      <input type="button" value="⏎" class="Enter-Button" onclick="test()">
+      <input type="text" class="Input-Box" v-model="visiterParticipationInput.Sixth.Position">
+      <input type="text" class="Input-Box" v-model="visiterParticipationInput.Sixth.Number">
+      <button class="Enter-Button">⏎</button>
       <input type="checkbox">
     </div>
     <div class="Input-Row">
       <label style="color: black; width: 15px; height: 8px;">7</label>
-      <input type="text" class="Input-Box">
-      <input type="text" class="Input-Box">
-      <input type="button" value="⏎" class="Enter-Button" onclick="test()">
+      <input type="text" class="Input-Box" v-model="visiterParticipationInput.Seventh.Position">
+      <input type="text" class="Input-Box" v-model="visiterParticipationInput.Seventh.Number">
+      <button class="Enter-Button">⏎</button>
       <input type="checkbox">
     </div>
     <div class="Input-Row">
       <label style="color: black; width: 15px; height: 8px;">8</label>
-      <input type="text" class="Input-Box">
-      <input type="text" class="Input-Box">
-      <input type="button" value="⏎" class="Enter-Button" onclick="test()">
+      <input type="text" class="Input-Box" v-model="visiterParticipationInput.Eighth.Position">
+      <input type="text" class="Input-Box" v-model="visiterParticipationInput.Eighth.Number">
+      <button class="Enter-Button">⏎</button>
       <input type="checkbox">
     </div>
     <div class="Input-Row">
       <label style="color: black; width: 15px; height: 8px;">9</label>
-      <input type="text" class="Input-Box">
-      <input type="text" class="Input-Box">
-      <input type="button" value="⏎" class="Enter-Button" onclick="test()">
+      <input type="text" class="Input-Box" v-model="visiterParticipationInput.Ninth.Position">
+      <input type="text" class="Input-Box" v-model="visiterParticipationInput.Ninth.Number">
+      <button class="Enter-Button">⏎</button>
       <input type="checkbox">
     </div>
     <div class="Input-Row">
       <label style="color: black; width: 15px; height: 8px;"></label>
-      <input type="text" class="Input-Box">
-      <input type="text" class="Input-Box">
-      <input type="button" value="⏎" class="Enter-Button" onclick="test()">
+      <input type="text" class="Input-Box" v-model="visiterParticipationInput.Pitcher.Position">
+      <input type="text" class="Input-Box" v-model="visiterParticipationInput.Pitcher.Number">
+      <button class="Enter-Button">⏎</button>
       <input type="checkbox">
     </div>
     <div class="Input-Row">
-      <input type="button" value="一括⏎" class="Bulk-Enter-Button" onclick="test()">
+      <input type="button" value="一括⏎" class="Bulk-Enter-Button" v-on:click="getBulkVisiterParticipationMember()">
     </div>
   </div>
   <div class="Control-Section">
@@ -199,7 +198,8 @@
       <button class="Fix-Button">1つ前に戻る</button>
     </div>
     <div class="Button-Row" style="margin-bottom: 10px;">
-      <button class="Fix-Button">審判</button>
+      <button class="Fix-Button" v-on:click="clickUmpire()">審判</button>
+      <button class="Fix-Button" v-on:click="clickDisp()">表示</button>
     </div>
     <div class="Button-Row">
       <button class="Confirm-Button">確定</button>
@@ -216,96 +216,163 @@
   <div id="Control-Home" class="Control-Section">
     <div class="Input-Row">
       <label style="color: black; width: 15px; height: 8px;">1</label>
-      <input type="text" class="Input-Box">
-      <input type="text" class="Input-Box">
-      <!-- <input type="button" value="⏎" class="Enter-Button" onclick="test()"> -->
-      <button id="button1" class="Enter-Button"></button>
+      <input type="text" class="Input-Box" v-model="homeParticipationInput.LeadOff.Position">
+      <input type="text" class="Input-Box" v-model="homeParticipationInput.LeadOff.Number">
+      <button class="Enter-Button">⏎</button>
       <input type="checkbox">
     </div>
     <div class="Input-Row">
       <label style="color: black; width: 15px; height: 8px;">2</label>
-      <input type="text" class="Input-Box">
-      <input type="text" class="Input-Box">
-      <input type="button" value="⏎" class="Enter-Button" onclick="test()">
+      <input type="text" class="Input-Box" v-model="homeParticipationInput.Second.Position">
+      <input type="text" class="Input-Box" v-model="homeParticipationInput.Second.Number">
+      <button class="Enter-Button">⏎</button>
       <input type="checkbox">
     </div>
     <div class="Input-Row">
       <label style="color: black; width: 15px; height: 8px;">3</label>
-      <input type="text" class="Input-Box">
-      <input type="text" class="Input-Box">
-      <input type="button" value="⏎" class="Enter-Button" onclick="test()">
+      <input type="text" class="Input-Box" v-model="homeParticipationInput.Third.Position">
+      <input type="text" class="Input-Box" v-model="homeParticipationInput.Third.Number">
+      <button class="Enter-Button">⏎</button>
       <input type="checkbox">
     </div>
     <div class="Input-Row">
       <label style="color: black; width: 15px; height: 8px;">4</label>
-      <input type="text" class="Input-Box">
-      <input type="text" class="Input-Box">
-      <input type="button" value="⏎" class="Enter-Button" onclick="test()">
+      <input type="text" class="Input-Box" v-model="homeParticipationInput.Fourth.Position">
+      <input type="text" class="Input-Box" v-model="homeParticipationInput.Fourth.Number">
+      <button class="Enter-Button">⏎</button>
       <input type="checkbox">
     </div>
     <div class="Input-Row">
       <label style="color: black; width: 15px; height: 8px;">5</label>
-      <input type="text" class="Input-Box">
-      <input type="text" class="Input-Box">
-      <input type="button" value="⏎" class="Enter-Button" onclick="test()">
+      <input type="text" class="Input-Box" v-model="homeParticipationInput.Fifth.Position">
+      <input type="text" class="Input-Box" v-model="homeParticipationInput.Fifth.Number">
+      <button class="Enter-Button">⏎</button>
       <input type="checkbox">
     </div>
     <div class="Input-Row">
       <label style="color: black; width: 15px; height: 8px;">6</label>
-      <input type="text" class="Input-Box">
-      <input type="text" class="Input-Box">
-      <input type="button" value="⏎" class="Enter-Button" onclick="test()">
+      <input type="text" class="Input-Box" v-model="homeParticipationInput.Sixth.Position">
+      <input type="text" class="Input-Box" v-model="homeParticipationInput.Sixth.Number">
+      <button class="Enter-Button">⏎</button>
       <input type="checkbox">
     </div>
     <div class="Input-Row">
       <label style="color: black; width: 15px; height: 8px;">7</label>
-      <input type="text" class="Input-Box">
-      <input type="text" class="Input-Box">
-      <input type="button" value="⏎" class="Enter-Button" onclick="test()">
+      <input type="text" class="Input-Box" v-model="homeParticipationInput.Seventh.Position">
+      <input type="text" class="Input-Box" v-model="homeParticipationInput.Seventh.Number">
+      <button class="Enter-Button">⏎</button>
       <input type="checkbox">
     </div>
     <div class="Input-Row">
       <label style="color: black; width: 15px; height: 8px;">8</label>
-      <input type="text" class="Input-Box">
-      <input type="text" class="Input-Box">
-      <input type="button" value="⏎" class="Enter-Button" onclick="test()">
+      <input type="text" class="Input-Box" v-model="homeParticipationInput.Eighth.Position">
+      <input type="text" class="Input-Box" v-model="homeParticipationInput.Eighth.Number">
+      <button class="Enter-Button">⏎</button>
       <input type="checkbox">
     </div>
     <div class="Input-Row">
       <label style="color: black; width: 15px; height: 8px;">9</label>
-      <input type="text" class="Input-Box">
-      <input type="text" class="Input-Box">
-      <input type="button" value="⏎" class="Enter-Button" onclick="test()">
+      <input type="text" class="Input-Box" v-model="homeParticipationInput.Ninth.Position">
+      <input type="text" class="Input-Box" v-model="homeParticipationInput.Ninth.Number">
+      <button class="Enter-Button">⏎</button>
       <input type="checkbox">
     </div>
     <div class="Input-Row">
       <label style="color: black; width: 15px; height: 8px;"></label>
-      <input type="text" class="Input-Box">
-      <input type="text" class="Input-Box">
-      <input type="button" value="⏎" class="Enter-Button" onclick="test()">
+      <input type="text" class="Input-Box" v-model="homeParticipationInput.Pitcher.Position">
+      <input type="text" class="Input-Box" v-model="homeParticipationInput.Pitcher.Number">
+      <button class="Enter-Button">⏎</button>
       <input type="checkbox">
     </div>
     <div class="Input-Row">
-      <input type="button" value="一括⏎" class="Bulk-Enter-Button" onclick="test()">
+      <input type="button" value="一括⏎" class="Bulk-Enter-Button" v-on:click="getBulkHomeParticipationMember()">
     </div>
+  </div>
+  <div>
+    <DialogComponent
+      :flag="dialogDispFlg"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ControllerMethod } from './ts/controller';
+import { DesignController } from './ts/design-controller';
+import { DesignModel } from './ts/model/design-model';
+import { defineEmits, ref } from 'vue';
+import { MemberController } from './ts/member-controller';
+import { DefaultMemberModel, ParticipationMemberModel, InputVModelTeam, ParticipationMemberPerTeamModel } from './ts/model/member-info-model';
+import { emit } from 'process';
+import { GameController } from './ts/game-controller';
+import { GameInfoModel } from './ts/model/game-model';
+import { VisiterHomeDivision } from './ts/constant';
+import DialogComponent from './DialogComponent.vue';
 
-// async function test() {
-//   await fetch('/xlsx', {
-//         mode: 'cors',
-//         method: 'GET'
-//   })
-//   .then(res => res.json())
-//   .then(json => console.log(json))
-// }
-// function test() {
-//   alert('yeah');
-// }
-const controllerMethod = new ControllerMethod();
+// デザインコントローラー
+const designController = new DesignController();
+// メンバーコントローラー
+const memberController = new MemberController();
+// 試合コントローラー
+const gameController = new GameController();
+// emit
+const emits = defineEmits<{
+  (e: 'sendGameInfoData', v: GameInfoModel): void;
+  (e: 'sendDesignData', v: DesignModel): void;
+  (e: 'sendVisiterMemberData', v: ParticipationMemberPerTeamModel): void;
+  (e: 'sendHomeMemberData', v: ParticipationMemberPerTeamModel): void;
+}>()
+// デザインデータ
+let design: DesignModel = new DesignModel();
+// 試合情報
+let gameInfo: GameInfoModel = new GameInfoModel();
+// ダイアログ表示フラグ
+let dialogDispFlg = ref(false);
+// ビジターメンバー初期情報リスト
+let defaultVisiterMemberList: DefaultMemberModel[] = [];
+// ビジター出場選手データ
+let visiterParticipationMember = ref(new ParticipationMemberPerTeamModel());
+// ビジター入力値
+let visiterParticipationInput: InputVModelTeam = new InputVModelTeam();
+// ホームメンバー初期情報リスト
+let defaultHomeMemberList: DefaultMemberModel[] = [];
+// ホーム出場選手データ
+let homeParticipationMember = ref(new ParticipationMemberPerTeamModel());
+// ホーム入力値
+let homeParticipationInput: InputVModelTeam = new InputVModelTeam();
+
+/**
+ * 表示ボタンクリック時処理
+ */
+async function clickDisp() {
+  gameInfo = await gameController.GetMemberInfo();
+  design = await designController.GetDesign();
+  defaultVisiterMemberList = await memberController.GetMemberInfo(VisiterHomeDivision.Visiter, gameInfo);
+  defaultHomeMemberList = await memberController.GetMemberInfo(VisiterHomeDivision.Home, gameInfo);
+  emits('sendDesignData', design);
+  emits('sendGameInfoData', gameInfo);
+}
+
+/**
+ * 一括ボタン（ビジター）クリック時処理
+ */
+function getBulkVisiterParticipationMember() {
+  visiterParticipationMember.value = memberController.GetBulkParticipationMemberData(visiterParticipationMember.value, visiterParticipationInput, defaultVisiterMemberList);
+  emits('sendVisiterMemberData', visiterParticipationMember.value);
+}
+
+/**
+ * 一括ボタン（ホーム）クリック時処理
+ */
+function getBulkHomeParticipationMember() {
+  homeParticipationMember.value = memberController.GetBulkParticipationMemberData(homeParticipationMember.value, homeParticipationInput, defaultHomeMemberList);
+  emits('sendHomeMemberData', homeParticipationMember.value);
+}
+
+/**
+ * 審判ボタンクリック時処理
+ */
+function clickUmpire() {
+  dialogDispFlg.value = true;
+}
 </script>
 
 <style scoped>

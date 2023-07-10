@@ -2,6 +2,8 @@
   <div class="Main">
     <VisiterMember
       :data="VisiterMemberData"
+      :gameInfo="GameInfoData"
+      :design="DesignData.VisiterMember"
     />
     <RunningScore
       :title="RunningScoreTitle"
@@ -35,10 +37,17 @@
     </div>
     <HomeMember
       :data="HomeMemberData"
+      :gameInfo="GameInfoData"
+      :design="DesignData.HomeMember"
     />
   </div>
   <div class="Control">
-    <ControllerField />
+    <ControllerField
+      @sendDesignData="getDesignData"
+      @sendVisiterMemberData="getVisiterMember"
+      @sendHomeMemberData="getHomeMember"
+      @sendGameInfoData="getGameInfoData"
+    />
   </div>
 </template>
   
@@ -54,46 +63,55 @@ import FielderStats from './FielderStats.vue';
 import TodayResult from './TodayResult.vue';
 import PositionField from './PositionField.vue';
 import ControllerField from './ControllerField.vue';
-import { BatterStatsModel, ParticipationMemberModel, PitcherInfoModel, PositionModel, RunnerNameModel, UmpireModel } from './ts/model/member-info-model';
-import { ref } from 'vue';
+import { BatterStatsModel, ParticipationMemberModel, ParticipationMemberPerTeamModel, PitcherInfoModel, PositionModel, RunnerNameModel, UmpireModel } from './ts/model/member-info-model';
 import { CountModel, DispRunningScoreModel, DispRunningScoreTitleModel, RunningScoreModel, JudgeModel } from './ts/model/score-info-model';
+import { DesignModel } from './ts/model/design-model';
+import { emit } from 'process';
+import { ref } from 'vue';
+import { GameInfoModel } from './ts/model/game-model';
 
 // ビジターメンバー
-let VisiterMemberData: ParticipationMemberModel[];
-VisiterMemberData = new Array(10);
+// let VisiterMemberData = ref(new Array<ParticipationMemberModel>(10));
+let VisiterMemberData = ref(new ParticipationMemberPerTeamModel());
 // ホームメンバー
-let HomeMemberData: ParticipationMemberModel[];
-HomeMemberData = new Array(10);
+let HomeMemberData = ref(new ParticipationMemberPerTeamModel());
 // ランニングスコアタイトル
-let RunningScoreTitle: DispRunningScoreTitleModel;
-RunningScoreTitle = new DispRunningScoreTitleModel();
+let RunningScoreTitle: DispRunningScoreTitleModel = new DispRunningScoreTitleModel();
 // ランニングスコア
-let RunningScoreData: DispRunningScoreModel;
-RunningScoreData = new DispRunningScoreModel();
+let RunningScoreData: DispRunningScoreModel = new DispRunningScoreModel();
 // 得点、安打、失策、残塁
-let RunningScoreAnotherData: RunningScoreModel;
-RunningScoreAnotherData = new RunningScoreModel();
+let RunningScoreAnotherData: RunningScoreModel = new RunningScoreModel();
 // 投手成績
-let PitcherData: PitcherInfoModel;
-PitcherData = new PitcherInfoModel();
+let PitcherData: PitcherInfoModel = new PitcherInfoModel();
 // 打者成績
-let BatterData: BatterStatsModel;
-BatterData = new BatterStatsModel();
-// 守備位置
-let PositionData: PositionModel;
-let RunnerData: RunnerNameModel;
-PositionData = new PositionModel();
-RunnerData = new RunnerNameModel();
+let BatterData: BatterStatsModel = new BatterStatsModel();
+// 守備表示
+let PositionData: PositionModel = new PositionModel();
+let RunnerData: RunnerNameModel = new RunnerNameModel();
 // 審判
-let UmpireData: UmpireModel;
-UmpireData = new UmpireModel();
+let UmpireData: UmpireModel = new UmpireModel();
 // カウント
-let CountData: CountModel;
-let JudgeData: JudgeModel;
-CountData = new CountModel();
-JudgeData = new JudgeModel();
+let CountData: CountModel = new CountModel();
+let JudgeData: JudgeModel = new JudgeModel();
 // 打席結果
-let ResultData: string[]
+let ResultData = ref(Array<string>());
+// デザイン
+let DesignData = ref(new DesignModel());
+// 試合情報
+let GameInfoData = ref(new GameInfoModel());
+
+const getDesignData = (data: any) => {
+  DesignData.value = data;
+}
+const getGameInfoData = (data: any) => {
+  GameInfoData.value = data;
+}
+const getVisiterMember = (data: any) => {
+  VisiterMemberData.value = data;
+}
+const getHomeMember = (data: any) => {
+  HomeMemberData.value = data;
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

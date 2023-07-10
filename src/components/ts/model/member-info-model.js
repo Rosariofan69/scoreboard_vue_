@@ -1,6 +1,49 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UmpireModel = exports.PositionModel = exports.RunnerNameModel = exports.PitcherInfoModel = exports.BatterStatsModel = exports.ParticipationMemberPerTeamModel = exports.ParticipationMemberModel = void 0;
+exports.InputVModelTeam = exports.InputVModel = exports.InputIsChangedPerTeamModel = exports.UmpireModel = exports.PositionModel = exports.RunnerNameModel = exports.PitcherInfoModel = exports.BatterStatsModel = exports.ParticipationMemberPerTeamModel = exports.ParticipationMemberModel = exports.DefaultMemberModel = void 0;
+/**
+ * 初期取得選手情報
+ */
+class DefaultMemberModel {
+    constructor() {
+        /** ID */
+        Object.defineProperty(this, "Id", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 背番号 */
+        Object.defineProperty(this, "Number", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 登録名 */
+        Object.defineProperty(this, "Name", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** フルネーム */
+        Object.defineProperty(this, "FullName", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 行番号 */
+        Object.defineProperty(this, "RowNumber", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+    }
+}
+exports.DefaultMemberModel = DefaultMemberModel;
 /**
  * 出場選手情報
  */
@@ -27,30 +70,72 @@ class ParticipationMemberModel {
             writable: true,
             value: void 0
         });
+        /** 表示状態 */
+        Object.defineProperty(this, "DispStatus", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: new ParticipationMemberDispStatus()
+        });
+    }
+}
+exports.ParticipationMemberModel = ParticipationMemberModel;
+/**
+ * 出場選手表示状態
+ */
+class ParticipationMemberDispStatus {
+    constructor() {
+        /** 表示 */
+        Object.defineProperty(this, "Display", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: false
+        });
+        /** 標準 */
+        Object.defineProperty(this, "Basic", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: false
+        });
         /** 打者 */
         Object.defineProperty(this, "Batter", {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: void 0
+            value: false
         });
         /** 走者 */
         Object.defineProperty(this, "Runner", {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: void 0
+            value: false
         });
         /** 次回先頭 */
         Object.defineProperty(this, "NextRead", {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: void 0
+            value: false
+        });
+        /** 交代前 */
+        Object.defineProperty(this, "ChangeBefore", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: false
+        });
+        /** 交代後 */
+        Object.defineProperty(this, "ChangeAfter", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: false
         });
     }
 }
-exports.ParticipationMemberModel = ParticipationMemberModel;
 /**
  * 出場選手情報（1チーム単位）
  */
@@ -61,70 +146,70 @@ class ParticipationMemberPerTeamModel {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: void 0
+            value: new ParticipationMemberModel()
         });
         /** 2番 */
         Object.defineProperty(this, "Second", {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: void 0
+            value: new ParticipationMemberModel()
         });
         /** 3番 */
         Object.defineProperty(this, "Third", {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: void 0
+            value: new ParticipationMemberModel()
         });
         /** 4番 */
-        Object.defineProperty(this, "Forth", {
+        Object.defineProperty(this, "Fourth", {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: void 0
+            value: new ParticipationMemberModel()
         });
         /** 5番 */
         Object.defineProperty(this, "Fifth", {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: void 0
+            value: new ParticipationMemberModel()
         });
         /** 6番 */
         Object.defineProperty(this, "Sixth", {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: void 0
+            value: new ParticipationMemberModel()
         });
         /** 7番 */
         Object.defineProperty(this, "Seventh", {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: void 0
+            value: new ParticipationMemberModel()
         });
         /** 8番 */
         Object.defineProperty(this, "Eighth", {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: void 0
+            value: new ParticipationMemberModel()
         });
         /** 9番 */
         Object.defineProperty(this, "Ninth", {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: void 0
+            value: new ParticipationMemberModel()
         });
         /** 投手 */
         Object.defineProperty(this, "Pitcher", {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: void 0
+            value: new ParticipationMemberModel()
         });
     }
 }
@@ -407,4 +492,175 @@ class UmpireModel {
     }
 }
 exports.UmpireModel = UmpireModel;
+/**
+ * 入力欄変更状況（チーム単位）
+ */
+class InputIsChangedPerTeamModel {
+    constructor() {
+        /** 1番 */
+        Object.defineProperty(this, "LeadOff", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 2番 */
+        Object.defineProperty(this, "Second", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 3番 */
+        Object.defineProperty(this, "Third", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 4番 */
+        Object.defineProperty(this, "Fourth", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 5番 */
+        Object.defineProperty(this, "Fifth", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 6番 */
+        Object.defineProperty(this, "Sixth", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 7番 */
+        Object.defineProperty(this, "Seventh", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 8番 */
+        Object.defineProperty(this, "Eighth", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 9番 */
+        Object.defineProperty(this, "Ninth", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+    }
+}
+exports.InputIsChangedPerTeamModel = InputIsChangedPerTeamModel;
+/**
+ * 入力欄
+ */
+class InputVModel {
+    constructor() {
+        /** 守備位置 */
+        Object.defineProperty(this, "Position", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 背番号 */
+        Object.defineProperty(this, "Number", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+    }
+}
+exports.InputVModel = InputVModel;
+/**
+ * 入力欄（チーム単位）
+ */
+class InputVModelTeam {
+    constructor() {
+        /** 1番 */
+        Object.defineProperty(this, "LeadOff", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: new InputVModel()
+        });
+        /** 2番 */
+        Object.defineProperty(this, "Second", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: new InputVModel()
+        });
+        /** 3番 */
+        Object.defineProperty(this, "Third", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: new InputVModel()
+        });
+        /** 4番 */
+        Object.defineProperty(this, "Fourth", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: new InputVModel()
+        });
+        /** 5番 */
+        Object.defineProperty(this, "Fifth", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: new InputVModel()
+        });
+        /** 6番 */
+        Object.defineProperty(this, "Sixth", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: new InputVModel()
+        });
+        /** 7番 */
+        Object.defineProperty(this, "Seventh", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: new InputVModel()
+        });
+        /** 8番 */
+        Object.defineProperty(this, "Eighth", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: new InputVModel()
+        });
+        /** 9番 */
+        Object.defineProperty(this, "Ninth", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: new InputVModel()
+        });
+        /** 投手 */
+        Object.defineProperty(this, "Pitcher", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: new InputVModel()
+        });
+    }
+}
+exports.InputVModelTeam = InputVModelTeam;
 //# sourceMappingURL=member-info-model.js.map

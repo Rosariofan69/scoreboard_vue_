@@ -1,13 +1,15 @@
 /** 
  * 初期取得選手情報
  */
-export interface DefaultMemberModel {
+export class DefaultMemberModel {
     /** ID */
-    Id: number;
+    Id: string;
     /** 背番号 */
-    Number: number;
+    Number: string;
     /** 登録名 */
     Name: string;
+    /** フルネーム */
+    FullName: string;
     /** 行番号 */
     RowNumber: number;
 }
@@ -22,12 +24,28 @@ export class ParticipationMemberModel {
     Position: string;
     /** 名前 */
     Name: string;
+    /** 表示状態 */
+    DispStatus: ParticipationMemberDispStatus = new ParticipationMemberDispStatus();
+}
+
+/**
+ * 出場選手表示状態
+ */
+class ParticipationMemberDispStatus {
+    /** 表示 */
+    Display = false;
+    /** 標準 */
+    Basic = false;
     /** 打者 */
-    Batter: boolean;
+    Batter = false;
     /** 走者 */
-    Runner: boolean;
+    Runner = false;
     /** 次回先頭 */
-    NextRead: boolean;
+    NextRead = false;
+    /** 交代前 */
+    ChangeBefore = false;
+    /** 交代後 */
+    ChangeAfter = false;
 }
 
 /** 
@@ -35,25 +53,25 @@ export class ParticipationMemberModel {
  */
 export class ParticipationMemberPerTeamModel {
     /** 1番 */
-    LeadOff: ParticipationMemberModel;
+    LeadOff: ParticipationMemberModel = new ParticipationMemberModel();
     /** 2番 */
-    Second: ParticipationMemberModel;
+    Second: ParticipationMemberModel = new ParticipationMemberModel();
     /** 3番 */
-    Third: ParticipationMemberModel;
+    Third: ParticipationMemberModel = new ParticipationMemberModel();
     /** 4番 */
-    Forth: ParticipationMemberModel;
+    Fourth: ParticipationMemberModel = new ParticipationMemberModel();
     /** 5番 */
-    Fifth: ParticipationMemberModel;
+    Fifth: ParticipationMemberModel = new ParticipationMemberModel();
     /** 6番 */
-    Sixth: ParticipationMemberModel;
+    Sixth: ParticipationMemberModel = new ParticipationMemberModel();
     /** 7番 */
-    Seventh: ParticipationMemberModel;
+    Seventh: ParticipationMemberModel = new ParticipationMemberModel();
     /** 8番 */
-    Eighth: ParticipationMemberModel;
+    Eighth: ParticipationMemberModel = new ParticipationMemberModel();
     /** 9番 */
-    Ninth: ParticipationMemberModel;
+    Ninth: ParticipationMemberModel = new ParticipationMemberModel();
     /** 投手 */
-    Pitcher: ParticipationMemberModel;
+    Pitcher: ParticipationMemberModel = new ParticipationMemberModel();
 }
 
 /**
@@ -133,7 +151,7 @@ export interface PlayerResultPerTeamModel {
     /** 3番 */
     Third: PlayerResultAtGameModel[];
     /** 4番 */
-    Forth: PlayerResultAtGameModel[];
+    Fourth: PlayerResultAtGameModel[];
     /** 5番 */
     Fifth: PlayerResultAtGameModel[];
     /** 6番 */
@@ -225,7 +243,7 @@ interface InputIsChangedModel {
 /**
  * 入力欄変更状況（チーム単位）
  */
-export interface InputIsChangedPerTeamModel {
+export class InputIsChangedPerTeamModel {
     /** 1番 */
     LeadOff: InputIsChangedModel;
     /** 2番 */
@@ -244,4 +262,40 @@ export interface InputIsChangedPerTeamModel {
     Eighth: InputIsChangedModel;
     /** 9番 */
     Ninth: InputIsChangedModel;
+}
+
+/**
+ * 入力欄
+ */
+export class InputVModel {
+    /** 守備位置 */
+    Position: string;
+    /** 背番号 */
+    Number: string;
+}
+
+/**
+ * 入力欄（チーム単位）
+ */
+export class InputVModelTeam {
+    /** 1番 */
+    LeadOff: InputVModel = new InputVModel();
+    /** 2番 */
+    Second: InputVModel = new InputVModel();
+    /** 3番 */
+    Third: InputVModel = new InputVModel();
+    /** 4番 */
+    Fourth: InputVModel = new InputVModel();
+    /** 5番 */
+    Fifth: InputVModel = new InputVModel();
+    /** 6番 */
+    Sixth: InputVModel = new InputVModel();
+    /** 7番 */
+    Seventh: InputVModel = new InputVModel();
+    /** 8番 */
+    Eighth: InputVModel = new InputVModel();
+    /** 9番 */
+    Ninth: InputVModel = new InputVModel();
+    /** 投手 */
+    Pitcher: InputVModel = new InputVModel();
 }

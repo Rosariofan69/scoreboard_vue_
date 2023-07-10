@@ -1,17 +1,31 @@
 /**
- * デザイン初期取得用モデル
+ * デザインのモデル
  */
-export class GetDesignInitModel{
+export class DesignModel {
+    VisiterMember: MemberDesignModel = new MemberDesignModel();
+    HomeMember: MemberDesignModel = new MemberDesignModel();
+    FielderStats: FielderStatsDesignSendModel;
+    Position: PositionDesignSendModel;
+    PitcherStats: PitcherStatsDesignSendModel;
+    Score: ScoreDesignModel;
+    BackGroundColor: string;
+    Umpire: UmpireDesignModel;
+}
+
+/**
+ * メンバーのデザインモデル
+ */
+export class MemberDesignModel {
     /** チーム名（メンバー） - 文字 */
-    TeamNameMemberText: string;
+    TeamNameText: string;
     /** チーム名（メンバー） - 背景 */
-    TeamNameMemberBGC: string;
-    /** チーム名（スコア） - 文字 */
-    TeamNameScoreText: string;
-    /** チーム名（スコア） - 背景 */
-    TeamNameScoreBGC: string;
+    TeamNameBGC: string;
     /** 下線 */
     UnderLine: string;
+    /** 斜線 */
+    DiagonalLine: string;
+    /** 上線 */
+    UpperLine: string;
     /** 守備位置（標準） - 文字 */
     PositionBasicText: string;
     /** 守備位置（標準） - 背景 */
@@ -36,23 +50,130 @@ export class GetDesignInitModel{
     NameRunnerText: string;
     /** 名前（走者） - 背景 */
     NameRunnerBGC: string;
-    /** 野手成績 - 文字 */
-    FielderStatsText: string;
-    /** 野手成績 - 背景 */
-    FielderStatsBGC: string;
-    /** 守備表示（野手） - 文字 */
-    DispPositionFielderText: string;
-    /** 守備表示（野手） - 背景 */
-    DispPositionFielderBGC: string;
-    /** 守備表示（走者） - 文字 */
-    DispPositionRunnerText: string;
-    /** 守備表示（走者） - 背景 */
-    DispPositionRunnerBGC: string;
-    /** 投手成績 - 文字 */
-    PitcherStatsText: string;
-    /** 投手成績 - 背景 */
-    PitcherStatsBGC: string;
+    /** 守備位置（次回先頭） - 文字 */
+    PositionNextText: string;
+    /** 守備位置（次回先頭） - 背景 */
+    PositionNextBGC: string;
+    /** 名前（次回先頭） - 文字 */
+    NameNextText: string;
+    /** 名前（次回先頭） - 背景 */
+    NameNextBGC: string;
     /** 交代時 */
     Change: string;
 }
 
+/**
+ * 野手成績の送信用デザインモデル
+ */
+export class FielderStatsDesignSendModel {
+    /** ビジター */
+    Visiter: FielderStatsDesignModel;
+    /** ホーム */
+    Home: FielderStatsDesignModel;
+}
+
+/**
+ * 野手成績のデザインモデル
+ */
+export class FielderStatsDesignModel {
+    /** 文字 */
+    Text: string;
+    /** 背景 */
+    BGC: string;
+}
+
+/**
+ * ポジション（守備表示）の送信用デザインモデル
+ */
+export class PositionDesignSendModel {
+    /** ビジター */
+    Visiter: PositionDesignModel;
+    /** ホーム */
+    Home: PositionDesignModel;
+}
+
+/**
+ * ポジション（守備表示）のデザインモデル
+ */
+export class PositionDesignModel {
+    /** 野手 - 文字 */
+    FielderText: string;
+    /** 野手 - 背景 */
+    FielderBGC: string;
+    /** 走者 - 文字 */
+    RunnerText: string;
+    /** 走者 - 背景 */
+    RunnerBGC: string;
+}
+
+/**
+ * 投手成績の送信用デザインモデル
+ */
+export class PitcherStatsDesignSendModel {
+    /** ビジター */
+    Visiter: PitcherStatsDesignModel;
+    /** ホーム */
+    Home: PitcherStatsDesignModel;
+}
+
+/**
+ * 投手成績のデザインモデル
+ */
+export class PitcherStatsDesignModel {
+    /** 文字 */
+    Text: string;
+    /** 背景 */
+    BGC: string;
+}
+
+/**
+ * スコアのデザインモデル
+ */
+export class ScoreDesignModel {
+    /** ビジターチーム名 - 文字 */
+    VisiterTeamNameText: string;
+    /** ビジターチーム名 - 背景 */
+    VisiterTeamNameBGC: string;
+    /** ホームチーム名 - 文字 */
+    HomeTeamNameText: string;
+    /** ホームチーム名 - 背景 */
+    HomeTeamNameBGC: string;
+    /** スコア（奇数回） - 文字 */
+    ScoreOddText: string;
+    /** スコア（奇数回） - 背景 */
+    ScoreOddBGC: string;
+    /** スコア（奇数回） - 文字 */
+    ScoreEvenText: string;
+    /** スコア（奇数回） - 背景 */
+    ScoreEvenBGC: string;
+    /** スコア（R） - 文字 */
+    ScoreRunText: string;
+    /** スコア（R） - 背景 */
+    ScoreRunBGC: string;
+    /** スコアタイトル（R以外） - 文字 */
+    ScoreTitleText: string;
+    /** スコアタイトル（R以外） - 背景 */
+    ScoreTitleBGC: string;
+    /** スコアタイトル（R） - 文字 */
+    ScoreTitleRunText: string;
+    /** スコアタイトル（R） - 背景 */
+    ScoreTitleRunBGC: string;
+    /** スコア枠 */
+    ScoreFrame: string;
+    /** その他の枠 */
+    OtherFrame: string;
+}
+
+/**
+ * 審判のデザインモデル
+ */
+export class UmpireDesignModel {
+    /** 位置 - 文字 */
+    PositionText: string;
+    /** 位置 - 背景 */
+    PositionBGC: string;
+    /** 名前 - 文字 */
+    NameText: string;
+    /** 名前 - 背景 */
+    NameBGC: string;
+}

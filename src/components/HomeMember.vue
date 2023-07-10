@@ -1,84 +1,368 @@
 <template>
   <div class="Member">
     <div class="Team">
-      FIGHTERS
-    </div>
-    <div class="Box-Full">
-      <div class="Box-Pos"></div>
-      <div class="Pos-Text">8</div>
-      <div class="Box-Name">
-        <div class="Name-Text">五十幡</div>
+      <div
+        id="homeTeamName"
+        class="Team-Text"
+        v-if="gameInfo.GameBaseInfo.HomeTeamText != ''"
+        :style="[{transform: `scaleX(${teamNameTrans})`, transformOrigin: 'left'}]"
+      >{{ gameInfo.GameBaseInfo.HomeTeamText }}
       </div>
     </div>
-
-    <div class="Box-Full">
+    <div
+      class="Box-Full"
+      v-if="data.LeadOff.Name"
+      :class="[{'Display-LeadOff' : data.LeadOff.DispStatus.Display}]"
+    >
       <div class="Box-Pos"></div>
-      <div class="Pos-Text-DH">DH</div>
+      <div 
+        id="homeLeadOffPos"
+        class="Pos-Text"
+        :style="[{transform: `scaleX(${leadOffPosTrans})`, transformOrigin: 'left'}]"
+      >{{ data.LeadOff.Position }}</div>
       <div class="Box-Name">
-        <div class="Name-Text">矢澤</div>
+        <div
+          id="homeLeadOffName"
+          class="Name-Text"
+          :class="[leadOffTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+          :style="[{transform: `scaleX(${leadOffNameTrans})`, transformOrigin: 'left'}]"
+        >{{ data.LeadOff.Name }}</div>
       </div>
     </div>
-    <div class="Box-Full">
+    <div
+      class="Box-Full"
+      v-if="data.Second.Name"
+      :class="[{'Display-Second' : data.Second.DispStatus.Display}]"
+    >
       <div class="Box-Pos"></div>
-      <div class="Pos-Text">7</div>
+      <div 
+        id="homeSecondPos"
+        class="Pos-Text"
+        :style="[{transform: `scaleX(${secondPosTrans})`, transformOrigin: 'left'}]"
+      >{{ data.Second.Position }}</div>
       <div class="Box-Name">
-        <div class="Name-Text">松本剛</div>
+        <div
+          id="homeSecondName"
+          class="Name-Text"
+          :class="[secondTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+          :style="[{transform: `scaleX(${secondNameTrans})`, transformOrigin: 'left'}]"
+        >{{ data.Second.Name }}</div>
       </div>
     </div>
-    <div class="Box-Full">
+    <div
+      class="Box-Full"
+      v-if="data.Third.Name"
+      :class="[{'Display-Third' : data.Third.DispStatus.Display}]"
+    >
       <div class="Box-Pos"></div>
-      <div class="Pos-Text">5</div>
+      <div 
+        id="homeThirdPos"
+        class="Pos-Text"
+        :style="[{transform: `scaleX(${thirdPosTrans})`, transformOrigin: 'left'}]"
+      >{{ data.Third.Position }}</div>
       <div class="Box-Name">
-        <div class="Name-Text">野村</div>
+        <div
+          id="homeThirdName"
+          class="Name-Text"
+          :class="[thirdTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+          :style="[{transform: `scaleX(${thirdNameTrans})`, transformOrigin: 'left'}]"
+        >{{ data.Third.Name }}</div>
       </div>
     </div>
-    <div class="Box-Full">
+    <div
+      class="Box-Full"
+      v-if="data.Fourth.Name"
+      :class="[{'Display-Fourth' : data.Fourth.DispStatus.Display}]"
+    >
       <div class="Box-Pos"></div>
-      <div class="Pos-Text">3</div>
+      <div 
+        id="homeFourthPos"
+        class="Pos-Text"
+        :style="[{transform: `scaleX(${fourthPosTrans})`, transformOrigin: 'left'}]"
+      >{{ data.Fourth.Position }}</div>
       <div class="Box-Name">
-        <div class="Name-Text">万波</div>
+        <div
+          id="homeFourthName"
+          class="Name-Text"
+          :class="[fourthTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+          :style="[{transform: `scaleX(${fourthNameTrans})`, transformOrigin: 'left'}]"
+        >{{ data.Fourth.Name }}</div>
       </div>
     </div>
-    <div class="Box-Full">
+    <div
+      class="Box-Full"
+      v-if="data.Fifth.Name"
+      :class="[{'Display-Fifth' : data.Fifth.DispStatus.Display}]"
+    >
       <div class="Box-Pos"></div>
-      <div class="Pos-Text">6</div>
+      <div 
+        id="homeFifthPos"
+        class="Pos-Text"
+        :style="[{transform: `scaleX(${fifthPosTrans})`, transformOrigin: 'left'}]"
+      >{{ data.Fifth.Position }}</div>
       <div class="Box-Name">
-        <div class="Name-Text">上川畑</div>
+        <div
+          id="homeFifthName"
+          class="Name-Text"
+          :class="[fifthTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+          :style="[{transform: `scaleX(${fifthNameTrans})`, transformOrigin: 'left'}]"
+        >{{ data.Fifth.Name }}</div>
       </div>
     </div>
-    <div class="Box-Full">
+    <div
+      class="Box-Full"
+      v-if="data.Sixth.Name"
+      :class="[{'Display-Sixth' : data.Sixth.DispStatus.Display}]"
+    >
       <div class="Box-Pos"></div>
-      <div class="Pos-Text">4</div>
+      <div 
+        id="homeSixthPos"
+        class="Pos-Text"
+        :style="[{transform: `scaleX(${sixthPosTrans})`, transformOrigin: 'left'}]"
+      >{{ data.Sixth.Position }}</div>
       <div class="Box-Name">
-        <div class="Name-Text">石井</div>
+        <div
+          id="homeSixthName"
+          class="Name-Text"
+          :class="[sixthTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+          :style="[{transform: `scaleX(${sixthNameTrans})`, transformOrigin: 'left'}]"
+        >{{ data.Sixth.Name }}</div>
       </div>
     </div>
-    <div class="Box-Full">
+    <div
+      class="Box-Full"
+      v-if="data.Seventh.Name"
+      :class="[{'Display-Seventh' : data.Seventh.DispStatus.Display}]"
+    >
       <div class="Box-Pos"></div>
-      <div class="Pos-Text">2</div>
+      <div 
+        id="homeSeventhPos"
+        class="Pos-Text"
+        :style="[{transform: `scaleX(${seventhPosTrans})`, transformOrigin: 'left'}]"
+      >{{ data.Seventh.Position }}</div>
       <div class="Box-Name">
-        <div class="Name-Text">宇佐見</div>
+        <div
+          id="homeSeventhName"
+          class="Name-Text"
+          :class="[seventhTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+          :style="[{transform: `scaleX(${seventhNameTrans})`, transformOrigin: 'left'}]"
+        >{{ data.Seventh.Name }}</div>
       </div>
     </div>
-    <div class="Box-Full">
+    <div
+      class="Box-Full"
+      v-if="data.Eighth.Name"
+      :class="[{'Display-Eighth' : data.Eighth.DispStatus.Display}]"
+    >
       <div class="Box-Pos"></div>
-      <div class="Pos-Text">9</div>
+      <div 
+        id="homeEighthPos"
+        class="Pos-Text"
+        :style="[{transform: `scaleX(${eighthPosTrans})`, transformOrigin: 'left'}]"
+      >{{ data.Eighth.Position }}</div>
       <div class="Box-Name">
-        <div class="Name-Text">江越</div>
+        <div
+          id="homeEighthName"
+          class="Name-Text"
+          :class="[eighthTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+          :style="[{transform: `scaleX(${eighthNameTrans})`, transformOrigin: 'left'}]"
+        >{{ data.Eighth.Name }}</div>
       </div>
     </div>
-    <div class="Box-Full-P">
+    <div
+      class="Box-Full"
+      v-if="data.Ninth.Name"
+      :class="[{'Display-Ninth' : data.Ninth.DispStatus.Display}]"
+    >
       <div class="Box-Pos"></div>
-      <div class="Pos-Text">1</div>
+      <div 
+        id="homeNinthPos"
+        class="Pos-Text"
+        :style="[{transform: `scaleX(${ninthPosTrans})`, transformOrigin: 'left'}]"
+      >{{ data.Ninth.Position }}</div>
       <div class="Box-Name">
-        <div class="Name-Text">田中正</div>
+        <div
+          id="homeNinthName"
+          class="Name-Text"
+          :class="[ninthTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+          :style="[{transform: `scaleX(${ninthNameTrans})`, transformOrigin: 'left'}]"
+        >{{ data.Ninth.Name }}</div>
       </div>
     </div>
-    <!-- <button v-on:click="clickButton()">ボタン</button> -->
+    <div
+      class="Box-Full-P"
+      v-if="data.Pitcher.Name"
+      :class="[{'Display-Pitcher' : data.Pitcher.DispStatus.Display}]"
+    >
+      <div class="Box-Pos"></div>
+      <div 
+        id="homePitcherPos"
+        class="Pos-Text"
+        :style="[{transform: `scaleX(${pitcherPosTrans})`, transformOrigin: 'left'}]"
+      >{{ data.Pitcher.Position }}</div>
+      <div class="Box-Name">
+        <div
+          id="homePitcherName"
+          class="Name-Text"
+          :class="[pitcherTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+          :style="[{transform: `scaleX(${pitcherNameTrans})`, transformOrigin: 'left'}]"
+        >{{ data.Pitcher.Name }}</div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ParticipationMemberModel, ParticipationMemberPerTeamModel } from './ts/model/member-info-model';
+import { defineProps, nextTick, ref, toRef, toRefs, watch } from 'vue';
+import { DesignModel, MemberDesignModel } from './ts/model/design-model';
+import { GameInfoModel } from './ts/model/game-model';
+
+const props = defineProps<{
+  data: ParticipationMemberPerTeamModel;
+  gameInfo: GameInfoModel;
+  design: MemberDesignModel;
+}>()
+
+/**
+ * チーム名の横幅計算
+ * @param element 
+ */
+function calcTeamWidth(element: any): string {
+  let returnData = '1.0';
+  if (element) {
+    if (element.scrollWidth > 170) {
+      let width = 170 / element.scrollWidth;
+      returnData = width.toString();
+    }
+  }
+  return returnData;
+}
+
+/**
+ * 守備位置の横幅計算
+ * @param element DOM要素
+ */
+function calcPosWidth(element: any): string {
+  let returnData = '1.0';
+  if (element) {
+    if (element.scrollWidth > 35) {
+      let width = 35 / element.scrollWidth;
+      returnData = width.toString();
+    }
+  }
+  return returnData;
+}
+
+/**
+ * 名前の横幅計算
+ * @param element DOM要素
+ */
+function calcNameWidth(element: any): string {
+  let returnData = '1.0';
+  if (element) {
+    if (element.scrollWidth > 120) {
+      let width = 120 / element.scrollWidth;
+      returnData = width.toString();
+    }
+  }
+  return returnData;
+}
+
+/**
+ * text-align-last決定
+ * @param text テキスト
+ */
+function decisionTextAlignLastJustify(text: string): boolean {
+  let returnData = true;
+  // 半角英数か1文字の場合、中央
+  if (text) {
+    if (text.length === 1) {
+      returnData = false;
+    }
+  }
+  return returnData;
+}
+
+// チーム名
+let teamNameTrans = ref('1.0');
+// 1番
+let leadOffPosTrans = ref('1.0');
+let leadOffNameTrans = ref('1.0');
+let leadOffTextAlignLastJustify = ref(true);
+// 2番
+let secondPosTrans = ref('1.0');
+let secondNameTrans = ref('1.0');
+let secondTextAlignLastJustify = ref(true);
+// 3番
+let thirdPosTrans = ref('1.0');
+let thirdNameTrans = ref('1.0');
+let thirdTextAlignLastJustify = ref(true);
+// 4番
+let fourthPosTrans = ref('1.0');
+let fourthNameTrans = ref('1.0');
+let fourthTextAlignLastJustify = ref(true);
+// 5番
+let fifthPosTrans = ref('1.0');
+let fifthNameTrans = ref('1.0');
+let fifthTextAlignLastJustify = ref(true);
+// 6番
+let sixthPosTrans = ref('1.0');
+let sixthNameTrans = ref('1.0');
+let sixthTextAlignLastJustify = ref(true);
+// 7番
+let seventhPosTrans = ref('1.0');
+let seventhNameTrans = ref('1.0');
+let seventhTextAlignLastJustify = ref(true);
+// 8番
+let eighthPosTrans = ref('1.0');
+let eighthNameTrans = ref('1.0');
+let eighthTextAlignLastJustify = ref(true);
+// 9番
+let ninthPosTrans = ref('1.0');
+let ninthNameTrans = ref('1.0');
+let ninthTextAlignLastJustify = ref(true);
+// 投手
+let pitcherPosTrans = ref('1.0');
+let pitcherNameTrans = ref('1.0');
+let pitcherTextAlignLastJustify = ref(true);
+
+watch(props, () => {
+  nextTick(() => {
+    teamNameTrans.value = calcTeamWidth(document.getElementById('homeTeamName'));
+    leadOffPosTrans.value = calcPosWidth(document.getElementById('homeLeadOffPos'));
+    leadOffNameTrans.value = calcNameWidth(document.getElementById('homeLeadOffName'));
+    leadOffTextAlignLastJustify.value = decisionTextAlignLastJustify(props.data.LeadOff.Name);
+    secondPosTrans.value = calcPosWidth(document.getElementById('homeSecondPos'));
+    secondNameTrans.value = calcNameWidth(document.getElementById('homeSecondName'));
+    secondTextAlignLastJustify.value = decisionTextAlignLastJustify(props.data.Second.Name);
+    thirdPosTrans.value = calcPosWidth(document.getElementById('homeThirdPos'));
+    thirdNameTrans.value = calcNameWidth(document.getElementById('homeThirdName'));
+    thirdTextAlignLastJustify.value = decisionTextAlignLastJustify(props.data.Third.Name);
+    fourthPosTrans.value = calcPosWidth(document.getElementById('homeFourthPos'));
+    fourthNameTrans.value = calcNameWidth(document.getElementById('homeFourthName'));
+    fourthTextAlignLastJustify.value = decisionTextAlignLastJustify(props.data.Fourth.Name);
+    fifthPosTrans.value = calcPosWidth(document.getElementById('homeFifthPos'));
+    fifthNameTrans.value = calcNameWidth(document.getElementById('homeFifthName'));
+    fifthTextAlignLastJustify.value = decisionTextAlignLastJustify(props.data.Fifth.Name);
+    sixthPosTrans.value = calcPosWidth(document.getElementById('homeSixthPos'));
+    sixthNameTrans.value = calcNameWidth(document.getElementById('homeSixthName'));
+    sixthTextAlignLastJustify.value = decisionTextAlignLastJustify(props.data.Sixth.Name);
+    seventhPosTrans.value = calcPosWidth(document.getElementById('homeSeventhPos'));
+    seventhNameTrans.value = calcNameWidth(document.getElementById('homeSeventhName'));
+    seventhTextAlignLastJustify.value = decisionTextAlignLastJustify(props.data.Seventh.Name);
+    eighthPosTrans.value = calcPosWidth(document.getElementById('homeEighthPos'));
+    eighthNameTrans.value = calcNameWidth(document.getElementById('homeEighthName'));
+    eighthTextAlignLastJustify.value = decisionTextAlignLastJustify(props.data.Eighth.Name);
+    ninthPosTrans.value = calcPosWidth(document.getElementById('homeNinthPos'));
+    ninthNameTrans.value = calcNameWidth(document.getElementById('homeNinthName'));
+    ninthTextAlignLastJustify.value = decisionTextAlignLastJustify(props.data.Ninth.Name);
+    pitcherPosTrans.value = calcPosWidth(document.getElementById('homePitcherPos'));
+    pitcherNameTrans.value = calcNameWidth(document.getElementById('homePitcherName'));
+    pitcherTextAlignLastJustify.value = decisionTextAlignLastJustify(props.data.Pitcher.Name);
+  })
+});
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -86,137 +370,188 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700&display=swap');
 
 .Member{
-    position: absolute;
-    vertical-align: middle;
-    margin: 15px;
-    text-align: center;
-    line-height: 46px;
-    overflow: hidden;
-    width: 230px;
-    height: 530px;
-    right: 0px;
+  position: absolute;
+  vertical-align: middle;
+  margin: 15px;
+  text-align: center;
+  line-height: 46px;
+  overflow: hidden;
+  width: 230px;
+  height: 530px;
+  right: 0px;
 }
 
 .Team{
-    font-family: 'Bahnschrift';
-    /* font-family: 'Noto Sans JP', sans-serif; */
-    margin-bottom: 10px;
-    margin-left: 20px;
-    background: linear-gradient(to bottom, #006298 0%, #006298 40%, #004468 60%, #004468 100%);
-    color: white;
-    position: relative;
-    font-size: 40px;
-    line-height: 50px;
-    overflow: hidden;
-    width: 190px;
-    height: 49px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  background: linear-gradient(to bottom, #FF0000 0%, #FF0000 40%, #c00000 60%, #c00000 100%);
+  background: v-bind('design.TeamNameBGC');
+  position: relative;
+  overflow: hidden;
+  width: 170px;
+  height: 49px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
-.Box-Full{
-    margin: auto;
-    position: relative;
-    overflow: hidden;
-    width: 190px;
-    height: 42px;
-    border-bottom: 4px solid #B4A169;
-    animation: SlideInText 1s;
+.Team-Text{
+  font-family: 'Bahnschrift';
+  /* font-family: 'Noto Sans JP', sans-serif; */
+  color: v-bind('design.TeamNameText');
+  font-size: 40px;
+  line-height: 50px;
 }
 
 .Box-Full-P{
-    margin: auto;
-    position: relative;
-    overflow: hidden;
-    width: 190px;
-    height: 42px;
-    border-top: 4px solid #ffffff;
-    border-bottom: 4px solid #B4A169;
-    animation: SlideInText 1s;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+  width: 190px;
+  height: 42px;
+  border-top: 4px solid v-bind('design.UpperLine');
+  border-bottom: 4px solid v-bind('design.UnderLine');
+  opacity: 0;
+}
+
+.Box-Full{
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+  width: 190px;
+  height: 42px;
+  border-bottom: 4px solid v-bind('design.UnderLine');
+  opacity: 0;
 }
 
 .Box-Pos{
-    position: absolute;
-    margin: 0;
-    /* position: relative; */
-    width: 51px;
-    height: 42px;
-    background: linear-gradient(to bottom, #595959 0%, #595959 40%, #333333 60%, #333333 100%);
-    transform: translateX(-5px) skewX(-10deg);
-    border-right: 2px solid #7F7F7F;
-    z-index: 1;
-    box-shadow: 3px 0px 8px black;
+  position: absolute;
+  margin: 0;
+  width: 51px;
+  height: 42px;
+  background: v-bind('design.PositionBasicBGC');
+  transform: translateX(-5px) skewX(-10deg);
+  border-right: 2px solid v-bind('design.DiagonalLine');
+  z-index: 1;
+  box-shadow: 3px 0px 8px black;
 }
 
 .Pos-Text{
-    font-family: 'Alte DIN 1451 Mittelschrift';
-    /* font-weight: bold; */
-    position: absolute;
-    width: 45px;
-    /* height: 42px; */
-    font-size: 45px;
-    line-height: 42px;
-    text-align: center;
-    z-index: 2;
-    letter-spacing: -2px;
+  font-family: 'Alte DIN 1451 Mittelschrift';
+  /* font-weight: bold; */
+  position: absolute;
+  color: v-bind('design.PositionBasicText');
+  width: 35px;
+  margin-left: 5px;
+  font-size: 45px;
+  line-height: 42px;
+  text-align: center;
+  z-index: 2;
+  letter-spacing: -2px;
 }
 
 .Pos-Text-DH{
-    font-family: 'DIN-Regular';
-    font-weight: bold;
-    position: absolute;
-    width: 65px;
-    height: 42px;
-    font-size: 43px;
-    line-height: 40px;
-    text-align: center;
-    z-index: 2;
-    letter-spacing: -2px;
-    transform: scaleX(0.7);
-    transform-origin: left;
+  font-family: 'DIN-Regular';
+  font-weight: bold;
+  position: absolute;
+  width: 65px;
+  height: 42px;
+  font-size: 45px;
+  line-height: 40px;
+  text-align: center;
+  z-index: 2;
+  letter-spacing: -2px;
+  transform: scaleX(0.7);
+  transform-origin: left;
 }
 
 .Box-Name{
-    overflow: visible;
-    margin-left: 42px;
-    position: absolute;
-    justify-content: center;
-    text-align: center;
-    width: 120px;
-    /* width: 140px; */
-    height: 42px;
-    background-color: #404040;
-    /* border-left: 18px solid transparent;
-    border-right: 10px solid transparent; */
-    padding-left: 18px;
-    padding-right: 10px;
-    z-index: 0;
+  overflow: hidden;
+  margin-left: 42px;
+  /* position: absolute; */
+  width: 120px;
+  height: 42px;
+  background-color: #404040;
+  padding-left: 18px;
+  padding-right: 10px;
+  z-index: 0;
 }
 
 .Name-Text{
-    overflow: visible;
-    white-space: nowrap;
-    font-family: 'Noto Sans JP', sans-serif;
-    line-height: 38px;
-    font-size: 36px;
-    text-align: justify;
-    text-align-last: justify;
-    /* width: 120px; */
-    height: 42px;
-    text-shadow: 3px 2px 1px black;
+  white-space: nowrap;
+  /* width: 100%; */
+  font-family: 'Noto Sans JP', sans-serif;
+  line-height: 38px;
+  font-size: 36px;
+  /* text-align-last: justify; */
+  height: 42px;
+  text-shadow: 3px 2px 1px black;
 }
 
-.Name-Text-Six{
-    overflow: visible;
-    white-space: nowrap;
-    font-family: 'Noto Sans JP', sans-serif;
-    line-height: 38px;
-    font-size: 36px;
-    text-align: justify;
-    text-align-last: justify;
-    /* width: 280px; */
-    height: 42px;
-    transform: scaleX(0.56);
-    transform-origin: left;
-    text-shadow: 3px 2px 1px black;
+.Text-Align-Last-Center {
+  text-align-last: center;
+}
+
+.Text-Align-Last-Justify {
+  text-align-last: justify;
+}
+
+.Display-LeadOff {
+  animation: SlideInText 1s;
+  animation-fill-mode: forwards;
+}
+
+.Display-Second {
+  animation: SlideInText 1s;
+  animation-delay: 100ms;
+  animation-fill-mode: forwards;
+}
+
+.Display-Third {
+  animation: SlideInText 1s;
+  animation-delay: 200ms;
+  animation-fill-mode: forwards;
+}
+
+.Display-Fourth {
+  animation: SlideInText 1s;
+  animation-delay: 300ms;
+  animation-fill-mode: forwards;
+}
+
+.Display-Fifth {
+  animation: SlideInText 1s;
+  animation-delay: 400ms;
+  animation-fill-mode: forwards;
+}
+
+.Display-Sixth {
+  animation: SlideInText 1s;
+  animation-delay: 500ms;
+  animation-fill-mode: forwards;
+}
+
+.Display-Seventh {
+  animation: SlideInText 1s;
+  animation-delay: 600ms;
+  animation-fill-mode: forwards;
+}
+
+.Display-Eighth {
+  animation: SlideInText 1s;
+  animation-delay: 700ms;
+  animation-fill-mode: forwards;
+}
+
+.Display-Ninth {
+  animation: SlideInText 1s;
+  animation-delay: 800ms;
+  animation-fill-mode: forwards;
+}
+
+.Display-Pitcher {
+  animation: SlideInText 1s;
+  animation-delay: 900ms;
+  animation-fill-mode: forwards;
 }
 
 @keyframes SlideInText
@@ -224,14 +559,17 @@
     0%
     {
         transform: translateX(200px) scale(0.1);
+        opacity: 1;
     }
     70%
     {
         transform: translateX(0px) scale(0.75);
+        opacity: 1;
     }
     100%
     {
         transform: scale(1.0);
+        opacity: 1;
     }
 }
 

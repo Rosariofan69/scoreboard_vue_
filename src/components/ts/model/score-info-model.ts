@@ -105,20 +105,6 @@ export class RunningScoreModel {
 }
 
 /**
- * 試合メイン情報
- */
-export interface GameMainInfoModel {
-    /** 試合開始成否 */
-    IsStarted: boolean;
-    /** イニング上限 */
-    InningLimit: number;
-    /** 現在のイニング */
-    NowInning: number
-    /** 攻撃中チーム */
-    NowAttackTeam: number;
-}
-
-/**
  * カウント
  */
 export class CountModel {
