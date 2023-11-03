@@ -217,3 +217,135 @@ export enum VisiterHomeDivision {
     /** ホーム */
     Home,
 }
+
+/**
+ * エクセル列名
+ */
+export enum ExcelColumnsName {
+    Id = 1,
+    Number,
+    Name,
+    Avg,
+    AtBat,
+    Hit,
+    Double,
+    Triple,
+    HomeRun,
+    TotalBases,
+    Run,
+    OBP,
+    OPS,
+    SO,
+    BB,
+    HBP,
+    SacBunt,
+    SacFly,
+    SB,
+    CS,
+    DP,
+    RC27,
+    FullName
+}
+
+
+/**
+ * 結果ラジオボタン
+ */
+export enum ResultCheckBox {
+    /** 三振 */
+    StrikeOut,
+    /** ゴロ */
+    GroundBall,
+    /** 併殺 */
+    DoublePlay,
+    /** フライ */
+    FlyBall,
+    /** 四球 */
+    FourPitchWalk,
+    /** 死球 */
+    HitByPitch,
+    /** 敬遠 */
+    IntentionalWalk,
+    /** 邪飛 */
+    FoulFly,
+    /** 犠飛 */
+    SacrificeFly,
+    /** 犠打 */
+    SacrificeBunt,
+    /** 犠打失策 */
+    SacrificeBuntError,
+    /** 犠打野選 */
+    SacrificeBuntFC,
+    /** 安打 */
+    SingleHit,
+    /** 二塁打 */
+    TwoBaseHit,
+    /** 三塁打 */
+    ThreeBaseHit,
+    /** 本塁打 */
+    HomeRun,
+    /** 失策 */
+    Error,
+    /** 野選 */
+    FieldersChoice,
+    /** 振り逃げ */
+    UncaughtThirdStrike,
+    /** 打撃妨害 */
+    Interference,
+    /** 走塁妨害 */
+    Obstruction,
+    /** 未選択 */
+    UnSelected,
+}
+
+/**
+ * 結果守備位置
+ */
+export enum ResultPositionCheckBox {
+    /** 投手 */
+    P = 1,
+    /** 捕手 */
+    C,
+    /** 一塁手 */
+    FB,
+    /** 二塁手 */
+    SB,
+    /** 三塁手 */
+    TB,
+    /** 遊撃手 */
+    SS,
+    /** 左翼手 */
+    LF,
+    /** 中堅手 */
+    CF,
+    /** 右翼手 */
+    RF,
+    /** 左中間 */
+    LeftCenter,
+    /** 右中間 */
+    RightCenter,
+}
+
+/**
+ * 守備位置
+ */
+export enum PositionName {
+    /** 投手 */
+    P = 1,
+    /** 捕手 */
+    C,
+    /** 一塁手 */
+    FB,
+    /** 二塁手 */
+    SB,
+    /** 三塁手 */
+    TB,
+    /** 遊撃手 */
+    SS,
+    /** 左翼手 */
+    LF,
+    /** 中堅手 */
+    CF,
+    /** 右翼手 */
+    RF
+}

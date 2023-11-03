@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.VisiterHomeDivision = exports.GameInfoDivision = exports.UmpireDesignDivision = exports.ScoreDesignDivision = exports.HomeDesignDivision = exports.VisiterDesignDivision = void 0;
+exports.PositionName = exports.ResultPositionCheckBox = exports.ResultCheckBox = exports.ExcelColumnsName = exports.VisiterHomeDivision = exports.GameInfoDivision = exports.UmpireDesignDivision = exports.ScoreDesignDivision = exports.HomeDesignDivision = exports.VisiterDesignDivision = void 0;
 /**
  * デザイン区分（ビジター）
  */
@@ -221,4 +221,135 @@ var VisiterHomeDivision;
     /** ホーム */
     VisiterHomeDivision[VisiterHomeDivision["Home"] = 2] = "Home";
 })(VisiterHomeDivision = exports.VisiterHomeDivision || (exports.VisiterHomeDivision = {}));
+/**
+ * エクセル列名
+ */
+var ExcelColumnsName;
+(function (ExcelColumnsName) {
+    ExcelColumnsName[ExcelColumnsName["Id"] = 1] = "Id";
+    ExcelColumnsName[ExcelColumnsName["Number"] = 2] = "Number";
+    ExcelColumnsName[ExcelColumnsName["Name"] = 3] = "Name";
+    ExcelColumnsName[ExcelColumnsName["Avg"] = 4] = "Avg";
+    ExcelColumnsName[ExcelColumnsName["AtBat"] = 5] = "AtBat";
+    ExcelColumnsName[ExcelColumnsName["Hit"] = 6] = "Hit";
+    ExcelColumnsName[ExcelColumnsName["Double"] = 7] = "Double";
+    ExcelColumnsName[ExcelColumnsName["Triple"] = 8] = "Triple";
+    ExcelColumnsName[ExcelColumnsName["HomeRun"] = 9] = "HomeRun";
+    ExcelColumnsName[ExcelColumnsName["TotalBases"] = 10] = "TotalBases";
+    ExcelColumnsName[ExcelColumnsName["Run"] = 11] = "Run";
+    ExcelColumnsName[ExcelColumnsName["OBP"] = 12] = "OBP";
+    ExcelColumnsName[ExcelColumnsName["OPS"] = 13] = "OPS";
+    ExcelColumnsName[ExcelColumnsName["SO"] = 14] = "SO";
+    ExcelColumnsName[ExcelColumnsName["BB"] = 15] = "BB";
+    ExcelColumnsName[ExcelColumnsName["HBP"] = 16] = "HBP";
+    ExcelColumnsName[ExcelColumnsName["SacBunt"] = 17] = "SacBunt";
+    ExcelColumnsName[ExcelColumnsName["SacFly"] = 18] = "SacFly";
+    ExcelColumnsName[ExcelColumnsName["SB"] = 19] = "SB";
+    ExcelColumnsName[ExcelColumnsName["CS"] = 20] = "CS";
+    ExcelColumnsName[ExcelColumnsName["DP"] = 21] = "DP";
+    ExcelColumnsName[ExcelColumnsName["RC27"] = 22] = "RC27";
+    ExcelColumnsName[ExcelColumnsName["FullName"] = 23] = "FullName";
+})(ExcelColumnsName = exports.ExcelColumnsName || (exports.ExcelColumnsName = {}));
+/**
+ * 結果ラジオボタン
+ */
+var ResultCheckBox;
+(function (ResultCheckBox) {
+    /** 三振 */
+    ResultCheckBox[ResultCheckBox["StrikeOut"] = 0] = "StrikeOut";
+    /** ゴロ */
+    ResultCheckBox[ResultCheckBox["GroundBall"] = 1] = "GroundBall";
+    /** 併殺 */
+    ResultCheckBox[ResultCheckBox["DoublePlay"] = 2] = "DoublePlay";
+    /** フライ */
+    ResultCheckBox[ResultCheckBox["FlyBall"] = 3] = "FlyBall";
+    /** 四球 */
+    ResultCheckBox[ResultCheckBox["FourPitchWalk"] = 4] = "FourPitchWalk";
+    /** 死球 */
+    ResultCheckBox[ResultCheckBox["HitByPitch"] = 5] = "HitByPitch";
+    /** 敬遠 */
+    ResultCheckBox[ResultCheckBox["IntentionalWalk"] = 6] = "IntentionalWalk";
+    /** 邪飛 */
+    ResultCheckBox[ResultCheckBox["FoulFly"] = 7] = "FoulFly";
+    /** 犠飛 */
+    ResultCheckBox[ResultCheckBox["SacrificeFly"] = 8] = "SacrificeFly";
+    /** 犠打 */
+    ResultCheckBox[ResultCheckBox["SacrificeBunt"] = 9] = "SacrificeBunt";
+    /** 犠打失策 */
+    ResultCheckBox[ResultCheckBox["SacrificeBuntError"] = 10] = "SacrificeBuntError";
+    /** 犠打野選 */
+    ResultCheckBox[ResultCheckBox["SacrificeBuntFC"] = 11] = "SacrificeBuntFC";
+    /** 安打 */
+    ResultCheckBox[ResultCheckBox["SingleHit"] = 12] = "SingleHit";
+    /** 二塁打 */
+    ResultCheckBox[ResultCheckBox["TwoBaseHit"] = 13] = "TwoBaseHit";
+    /** 三塁打 */
+    ResultCheckBox[ResultCheckBox["ThreeBaseHit"] = 14] = "ThreeBaseHit";
+    /** 本塁打 */
+    ResultCheckBox[ResultCheckBox["HomeRun"] = 15] = "HomeRun";
+    /** 失策 */
+    ResultCheckBox[ResultCheckBox["Error"] = 16] = "Error";
+    /** 野選 */
+    ResultCheckBox[ResultCheckBox["FieldersChoice"] = 17] = "FieldersChoice";
+    /** 振り逃げ */
+    ResultCheckBox[ResultCheckBox["UncaughtThirdStrike"] = 18] = "UncaughtThirdStrike";
+    /** 打撃妨害 */
+    ResultCheckBox[ResultCheckBox["Interference"] = 19] = "Interference";
+    /** 走塁妨害 */
+    ResultCheckBox[ResultCheckBox["Obstruction"] = 20] = "Obstruction";
+    /** 未選択 */
+    ResultCheckBox[ResultCheckBox["UnSelected"] = 21] = "UnSelected";
+})(ResultCheckBox = exports.ResultCheckBox || (exports.ResultCheckBox = {}));
+/**
+ * 結果守備位置
+ */
+var ResultPositionCheckBox;
+(function (ResultPositionCheckBox) {
+    /** 投手 */
+    ResultPositionCheckBox[ResultPositionCheckBox["P"] = 1] = "P";
+    /** 捕手 */
+    ResultPositionCheckBox[ResultPositionCheckBox["C"] = 2] = "C";
+    /** 一塁手 */
+    ResultPositionCheckBox[ResultPositionCheckBox["FB"] = 3] = "FB";
+    /** 二塁手 */
+    ResultPositionCheckBox[ResultPositionCheckBox["SB"] = 4] = "SB";
+    /** 三塁手 */
+    ResultPositionCheckBox[ResultPositionCheckBox["TB"] = 5] = "TB";
+    /** 遊撃手 */
+    ResultPositionCheckBox[ResultPositionCheckBox["SS"] = 6] = "SS";
+    /** 左翼手 */
+    ResultPositionCheckBox[ResultPositionCheckBox["LF"] = 7] = "LF";
+    /** 中堅手 */
+    ResultPositionCheckBox[ResultPositionCheckBox["CF"] = 8] = "CF";
+    /** 右翼手 */
+    ResultPositionCheckBox[ResultPositionCheckBox["RF"] = 9] = "RF";
+    /** 左中間 */
+    ResultPositionCheckBox[ResultPositionCheckBox["LeftCenter"] = 10] = "LeftCenter";
+    /** 右中間 */
+    ResultPositionCheckBox[ResultPositionCheckBox["RightCenter"] = 11] = "RightCenter";
+})(ResultPositionCheckBox = exports.ResultPositionCheckBox || (exports.ResultPositionCheckBox = {}));
+/**
+ * 守備位置
+ */
+var PositionName;
+(function (PositionName) {
+    /** 投手 */
+    PositionName[PositionName["P"] = 1] = "P";
+    /** 捕手 */
+    PositionName[PositionName["C"] = 2] = "C";
+    /** 一塁手 */
+    PositionName[PositionName["FB"] = 3] = "FB";
+    /** 二塁手 */
+    PositionName[PositionName["SB"] = 4] = "SB";
+    /** 三塁手 */
+    PositionName[PositionName["TB"] = 5] = "TB";
+    /** 遊撃手 */
+    PositionName[PositionName["SS"] = 6] = "SS";
+    /** 左翼手 */
+    PositionName[PositionName["LF"] = 7] = "LF";
+    /** 中堅手 */
+    PositionName[PositionName["CF"] = 8] = "CF";
+    /** 右翼手 */
+    PositionName[PositionName["RF"] = 9] = "RF";
+})(PositionName = exports.PositionName || (exports.PositionName = {}));
 //# sourceMappingURL=constant.js.map

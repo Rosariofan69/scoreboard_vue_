@@ -24,6 +24,10 @@ export class ParticipationMemberModel {
     Position: string;
     /** 名前 */
     Name: string;
+    /** フルネーム */
+    FullName: string;
+    /** 行番号 */
+    RowNumber: number;
     /** 表示状態 */
     DispStatus: ParticipationMemberDispStatus = new ParticipationMemberDispStatus();
 }
@@ -105,23 +109,25 @@ export class BatterStatsModel {
  */
 export class PitcherInfoModel {
     /** 背番号 */
-    Number: number;
+    Number: string;
     /** 名前 */
     Name: string;
+    /** フルネーム */
+    FullName: string;
     /** 投球数 */
-    PitchCount: number;
+    PitchCount = 0;
     /** この打席 */
-    ThisAtBat: number;
+    ThisAtBat = 0;
     /** 奪三振 */
-    SO: number;
+    SO = 0;
     /** 与四球 */
-    BB: number;
+    BB = 0;
 }
 
 /**
  * 打席結果
  */
-interface AtBatResultModel {
+export class AtBatResultModel {
     /** イニング */
     Inning: number;
     /** 結果 */
@@ -129,45 +135,45 @@ interface AtBatResultModel {
 }
 
 /** 選手成績 */
-interface PlayerResultAtGameModel {
+export class BattingResultAtGameModel {
     /** 背番号 */
-    Number: number;
+    Number: string;
     /** 守備位置 */
     Position: string;
     /** 名前 */
     Name: string;
     /** 打席結果 */
-    AtBatResult: AtBatResultModel[];
+    AtBatResult: AtBatResultModel[] = [];
 }
 
 /**
  * 選手成績（1チーム単位）
  */
-export interface PlayerResultPerTeamModel {
+export class BattingResultPerTeamModel {
     /** 1番 */
-    LeadOff: PlayerResultAtGameModel[];
+    LeadOff: BattingResultAtGameModel[] = [];
     /** 2番 */
-    Second: PlayerResultAtGameModel[];
+    Second: BattingResultAtGameModel[] = [];
     /** 3番 */
-    Third: PlayerResultAtGameModel[];
+    Third: BattingResultAtGameModel[] = [];
     /** 4番 */
-    Fourth: PlayerResultAtGameModel[];
+    Fourth: BattingResultAtGameModel[] = [];
     /** 5番 */
-    Fifth: PlayerResultAtGameModel[];
+    Fifth: BattingResultAtGameModel[] = [];
     /** 6番 */
-    Sixth: PlayerResultAtGameModel[];
+    Sixth: BattingResultAtGameModel[] = [];
     /** 7番 */
-    Seventh: PlayerResultAtGameModel[];
+    Seventh: BattingResultAtGameModel[] = [];
     /** 8番 */
-    Eighth: PlayerResultAtGameModel[];
+    Eighth: BattingResultAtGameModel[] = [];
     /** 9番 */
-    Ninth: PlayerResultAtGameModel[];
+    Ninth: BattingResultAtGameModel[] = [];
 }
 
 /**
  * 走者の状態
  */
-export interface RunnerStateModel {
+export class RunnerStateModel {
     /** 1塁 */
     First: boolean;
     /** 2塁 */
@@ -176,16 +182,25 @@ export interface RunnerStateModel {
     Third: boolean;
 }
 
+export class RunnerName {
+    /** 打順 */
+    Order: number;
+    /** 名前 */
+    Name: string;
+}
+
 /**
  * 走者の名前
  */
 export class RunnerNameModel {
+    /** 打者 */
+    Batter: RunnerName = new RunnerName();
     /** 1塁 */
-    First: string;
+    First: RunnerName = new RunnerName();
     /** 2塁 */
-    Second: string;
+    Second: RunnerName = new RunnerName();
     /** 3塁 */
-    Third: string;
+    Third: RunnerName = new RunnerName();
 }
 
 /**
@@ -262,6 +277,8 @@ export class InputIsChangedPerTeamModel {
     Eighth: InputIsChangedModel;
     /** 9番 */
     Ninth: InputIsChangedModel;
+    /** 投手 */
+    Pitcher: InputIsChangedModel;
 }
 
 /**
@@ -277,7 +294,7 @@ export class InputVModel {
 /**
  * 入力欄（チーム単位）
  */
-export class InputVModelTeam {
+export class InputVTeamModel {
     /** 1番 */
     LeadOff: InputVModel = new InputVModel();
     /** 2番 */

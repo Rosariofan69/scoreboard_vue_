@@ -22,25 +22,25 @@ class DesignModel {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: void 0
+            value: new FielderStatsDesignSendModel()
         });
         Object.defineProperty(this, "Position", {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: void 0
+            value: new PositionDesignSendModel()
         });
         Object.defineProperty(this, "PitcherStats", {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: void 0
+            value: new PitcherStatsDesignSendModel()
         });
         Object.defineProperty(this, "Score", {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: void 0
+            value: new ScoreDesignModel()
         });
         Object.defineProperty(this, "BackGroundColor", {
             enumerable: true,
@@ -52,7 +52,7 @@ class DesignModel {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: void 0
+            value: new UmpireDesignModel()
         });
     }
 }
@@ -229,14 +229,14 @@ class FielderStatsDesignSendModel {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: void 0
+            value: new FielderStatsDesignModel()
         });
         /** ホーム */
         Object.defineProperty(this, "Home", {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: void 0
+            value: new FielderStatsDesignModel()
         });
     }
 }
@@ -273,14 +273,14 @@ class PositionDesignSendModel {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: void 0
+            value: new PositionDesignModel()
         });
         /** ホーム */
         Object.defineProperty(this, "Home", {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: void 0
+            value: new PositionDesignModel()
         });
     }
 }
@@ -331,14 +331,14 @@ class PitcherStatsDesignSendModel {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: void 0
+            value: new PitcherStatsDesignModel()
         });
         /** ホーム */
         Object.defineProperty(this, "Home", {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: void 0
+            value: new PitcherStatsDesignModel()
         });
     }
 }

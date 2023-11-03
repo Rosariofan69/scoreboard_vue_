@@ -6,21 +6,28 @@
       :design="DesignData.VisiterMember"
     />
     <RunningScore
-      :title="RunningScoreTitle"
-      :score="RunningScoreData"
-      :another="RunningScoreAnotherData"
+      :data="RunningScoreData"
+      :gameInfo="GameInfoData"
+      :design="DesignData.Score"
     />
-    <RibbonSpace />
-    <div class="Big-Info">
+    <RibbonSpace  v-if="GameInfoData.GameBaseInfo.VisiterTeamName"/>
+    <div class="Big-Info" v-if="GameInfoData.GameBaseInfo.VisiterTeamName">
       <UmpireField
         :data="UmpireData"
+        :design="DesignData.Umpire"
       />
       <FielderStats
-        :data="BatterData"
+        :data="BatterStatsData"
+        :gameInfo="GameInfoData"
+        :design="DesignData.FielderStats"
+        :dispFlg="BatterStatsDispFlg"
       />
       <PositionField
         :position="PositionData"
         :runner="RunnerData"
+        :gameInfo="GameInfoData"
+        :design="DesignData.Position"
+        :dispFlg="PositionDataDispFlg"
       />
       <TodayResult
         :data="ResultData"
@@ -29,10 +36,13 @@
     <div class="Small-Info">
       <PitcherInfo
         :data="PitcherData"
+        :gameInfo="GameInfoData"
+        :design="DesignData.PitcherStats"
       />
       <CountField
         :count="CountData"
         :judge="JudgeData"
+        :gameInfo="GameInfoData"
       />
     </div>
     <HomeMember
@@ -47,6 +57,15 @@
       @sendVisiterMemberData="getVisiterMember"
       @sendHomeMemberData="getHomeMember"
       @sendGameInfoData="getGameInfoData"
+      @sendUmpireData="getUmpireData"
+      @sendPositionData="getPositionData"
+      @sendRunnerData="getRunnerData"
+      @sendPitcherData="getPitcherData"
+      @sendBatterStatsData="getBatterStatsData"
+      @sendScoreData="getScoreData"
+      @sendCountData="getCountData"
+      @sendJudgeData="getJudgeData"
+      @sendBigInfoDispFlg="getBigInfoDispFlg"
     />
   </div>
 </template>
@@ -64,35 +83,34 @@ import TodayResult from './TodayResult.vue';
 import PositionField from './PositionField.vue';
 import ControllerField from './ControllerField.vue';
 import { BatterStatsModel, ParticipationMemberModel, ParticipationMemberPerTeamModel, PitcherInfoModel, PositionModel, RunnerNameModel, UmpireModel } from './ts/model/member-info-model';
-import { CountModel, DispRunningScoreModel, DispRunningScoreTitleModel, RunningScoreModel, JudgeModel } from './ts/model/score-info-model';
+import { CountModel, DispRunningScoreModel, DispRunningScoreTitleModel, RunningScoreModel, JudgeModel, DispScoreModel } from './ts/model/score-info-model';
 import { DesignModel } from './ts/model/design-model';
 import { emit } from 'process';
 import { ref } from 'vue';
 import { GameInfoModel } from './ts/model/game-model';
 
 // ビジターメンバー
-// let VisiterMemberData = ref(new Array<ParticipationMemberModel>(10));
 let VisiterMemberData = ref(new ParticipationMemberPerTeamModel());
 // ホームメンバー
 let HomeMemberData = ref(new ParticipationMemberPerTeamModel());
-// ランニングスコアタイトル
-let RunningScoreTitle: DispRunningScoreTitleModel = new DispRunningScoreTitleModel();
 // ランニングスコア
-let RunningScoreData: DispRunningScoreModel = new DispRunningScoreModel();
-// 得点、安打、失策、残塁
-let RunningScoreAnotherData: RunningScoreModel = new RunningScoreModel();
+let RunningScoreData = ref(new DispScoreModel());
 // 投手成績
-let PitcherData: PitcherInfoModel = new PitcherInfoModel();
+let PitcherData = ref(new PitcherInfoModel());
 // 打者成績
-let BatterData: BatterStatsModel = new BatterStatsModel();
+let BatterStatsData = ref(new BatterStatsModel());
+// 打者成績表示フラグ
+let BatterStatsDispFlg = ref(false);
 // 守備表示
-let PositionData: PositionModel = new PositionModel();
-let RunnerData: RunnerNameModel = new RunnerNameModel();
+let PositionData = ref(new PositionModel());
+let RunnerData = ref(new RunnerNameModel());
+// 守備位置表示フラグ
+let PositionDataDispFlg = ref(false);
 // 審判
-let UmpireData: UmpireModel = new UmpireModel();
+let UmpireData = ref(new UmpireModel());
 // カウント
-let CountData: CountModel = new CountModel();
-let JudgeData: JudgeModel = new JudgeModel();
+let CountData =  ref(new CountModel());
+let JudgeData =  ref(new JudgeModel());
 // 打席結果
 let ResultData = ref(Array<string>());
 // デザイン
@@ -100,17 +118,113 @@ let DesignData = ref(new DesignModel());
 // 試合情報
 let GameInfoData = ref(new GameInfoModel());
 
+/**
+ * デザインデータ取得
+ * @param data 
+ */
 const getDesignData = (data: any) => {
   DesignData.value = data;
 }
+
+/**
+ * 試合情報取得
+ * @param data 
+ */
 const getGameInfoData = (data: any) => {
   GameInfoData.value = data;
 }
+
+/**
+ * ビジターメンバー取得
+ * @param data 
+ */
 const getVisiterMember = (data: any) => {
   VisiterMemberData.value = data;
 }
+
+/**
+ * ホームメンバー取得
+ */
 const getHomeMember = (data: any) => {
   HomeMemberData.value = data;
+}
+
+/**
+ * 審判データ取得
+ * @param data 
+ */
+const getUmpireData = (data: any) => {
+  UmpireData.value = data;
+}
+
+/**
+ * 守備位置データ取得
+ * @param data 
+ */
+const getPositionData = (data: any) => {
+  PositionData.value = data;
+}
+
+/**
+ * 走者データ取得
+ * @param data 
+ */
+const getRunnerData = (data: any) => {
+  RunnerData.value = data;
+}
+
+/**
+ * 投手情報取得
+ * @param data 
+ */
+const getPitcherData = (data: any) => {
+  PitcherData.value = data;
+}
+
+/**
+ * 打者成績取得
+ * @param data 
+ */
+const getBatterStatsData = (data: any) => {
+  BatterStatsData.value = data;
+}
+
+/**
+ * ランニングスコア取得
+ * @param data 
+ */
+const getScoreData = (data: any) => {
+  RunningScoreData.value = data;
+}
+
+/**
+ * カウントデータ取得
+ * @param data 
+ */
+const getCountData = (data: any) => {
+  CountData.value = data;
+}
+
+/**
+ * 判定データ取得
+ * @param data 
+ */
+const getJudgeData = (data: any) => {
+  JudgeData.value = data;
+}
+
+/**
+ * インフォメーション（大）表示フラグ取得
+ * @param data 
+ */
+const getBigInfoDispFlg = (data: any) => {
+  if (data) {
+    BatterStatsDispFlg.value = true;
+    PositionDataDispFlg.value = false;
+  } else {
+    BatterStatsDispFlg.value = false;
+    PositionDataDispFlg.value = true;
+  }
 }
 </script>
 
@@ -120,10 +234,10 @@ const getHomeMember = (data: any) => {
   position: relative;
   margin: auto;
   overflow: hidden;
-  width:1250px;
-  height:560px;
+  width: 1250px;
+  height: 560px;
   color: white;
-  background-color:black;
+  background-color: black;
 }
 
 .Big-Info{
@@ -148,7 +262,6 @@ const getHomeMember = (data: any) => {
 .Control{
   position: relative;
   display: flex;
-  /* margin: auto; */
   margin-top: 5px;
   margin-left: auto;
   margin-right: auto;

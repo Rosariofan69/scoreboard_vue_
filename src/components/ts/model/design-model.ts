@@ -4,12 +4,12 @@
 export class DesignModel {
     VisiterMember: MemberDesignModel = new MemberDesignModel();
     HomeMember: MemberDesignModel = new MemberDesignModel();
-    FielderStats: FielderStatsDesignSendModel;
-    Position: PositionDesignSendModel;
-    PitcherStats: PitcherStatsDesignSendModel;
-    Score: ScoreDesignModel;
+    FielderStats: FielderStatsDesignSendModel = new FielderStatsDesignSendModel();
+    Position: PositionDesignSendModel = new PositionDesignSendModel();
+    PitcherStats: PitcherStatsDesignSendModel = new PitcherStatsDesignSendModel();
+    Score: ScoreDesignModel = new ScoreDesignModel();
     BackGroundColor: string;
-    Umpire: UmpireDesignModel;
+    Umpire: UmpireDesignModel = new UmpireDesignModel();
 }
 
 /**
@@ -67,9 +67,9 @@ export class MemberDesignModel {
  */
 export class FielderStatsDesignSendModel {
     /** ビジター */
-    Visiter: FielderStatsDesignModel;
+    Visiter: FielderStatsDesignModel = new FielderStatsDesignModel();
     /** ホーム */
-    Home: FielderStatsDesignModel;
+    Home: FielderStatsDesignModel = new FielderStatsDesignModel();
 }
 
 /**
@@ -87,9 +87,9 @@ export class FielderStatsDesignModel {
  */
 export class PositionDesignSendModel {
     /** ビジター */
-    Visiter: PositionDesignModel;
+    Visiter: PositionDesignModel = new PositionDesignModel();
     /** ホーム */
-    Home: PositionDesignModel;
+    Home: PositionDesignModel = new PositionDesignModel();
 }
 
 /**
@@ -111,9 +111,9 @@ export class PositionDesignModel {
  */
 export class PitcherStatsDesignSendModel {
     /** ビジター */
-    Visiter: PitcherStatsDesignModel;
+    Visiter: PitcherStatsDesignModel = new PitcherStatsDesignModel();
     /** ホーム */
-    Home: PitcherStatsDesignModel;
+    Home: PitcherStatsDesignModel = new PitcherStatsDesignModel();
 }
 
 /**

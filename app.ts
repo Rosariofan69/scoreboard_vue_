@@ -1,11 +1,10 @@
-import { DefaultMemberModel } from './src/components/ts/model/member-info-model';
+import { ExcelColumnsName } from './src/components/ts/constant';
+import { DefaultMemberModel, BatterStatsModel } from './src/components/ts/model/member-info-model';
 import express from 'express'
 import path from 'path';
 
 const port = Number(process.env.PORT) || 3000;
 const app = express()
-const xlsx = require('xlsx');
-const book = xlsx.readFile('./Scoreboard.xlsm');
 
 // log
 app.all("*", (req: any, res: any, next: any) => {
@@ -15,7 +14,6 @@ app.all("*", (req: any, res: any, next: any) => {
 
 // static files
 app.use(express.static(path.resolve("public")));
-
 // API
 app.get("/data.json", (req: any, res: any) => {
   const data = {
@@ -31,6 +29,8 @@ app.get("/data.json", (req: any, res: any) => {
 app.get('/getMainInfo', (req: any, res: any) => {
   res.set({ 'Access-Control-Allow-Origin': '*' });
 
+  const xlsx = require('xlsx');
+  const book = xlsx.readFile('./Scoreboard.xlsm');
   const worksheet = book.Sheets['設定'];
 
   const startColumn = 11;
@@ -52,6 +52,8 @@ app.get('/getMainInfo', (req: any, res: any) => {
 app.get('/getDesign', (req: any, res: any) => {
   res.set({ 'Access-Control-Allow-Origin': '*' });
 
+  const xlsx = require('xlsx');
+  const book = xlsx.readFile('./Scoreboard.xlsm');
   const worksheet = book.Sheets['設定'];
 
   const startColumn = 15;
@@ -85,14 +87,13 @@ app.get('/getMember', (req: any, res: any) => {
   res.set({ 'Access-Control-Allow-Origin': '*' });
 
   const xlsx = require('xlsx');
-  
   const book = xlsx.readFile('./Scoreboard.xlsm');
   const teamName = req.query.Team;
   const worksheet = book.Sheets[teamName];
 
-  const startColumn = 1;
+  const startColumn = ExcelColumnsName.Id;
   let startRow = 3;
-  const endColumn = 16;
+  const endColumn = ExcelColumnsName.FullName;
   let endRow = parseInt(req.query.LastRow) - 1;
 
   let memberData: DefaultMemberModel[] = [];
@@ -106,16 +107,16 @@ app.get('/getMember', (req: any, res: any) => {
       }
 
       switch (col) {
-        case 1:
+        case ExcelColumnsName.Id:
           data.Id = worksheet[cellAddress].v;
           break;
-        case 2:
+        case ExcelColumnsName.Number:
           data.Number = worksheet[cellAddress].v;
           break;
-        case 3:
+        case ExcelColumnsName.Name:
           data.Name = worksheet[cellAddress].v;
           break;
-        case 16:
+        case ExcelColumnsName.FullName:
           data.FullName = worksheet[cellAddress].v;
         default:
           break;
@@ -128,6 +129,71 @@ app.get('/getMember', (req: any, res: any) => {
   }
 
   res.send(memberData);
+});
+
+/**
+ * 打者成績取得
+ */
+app.get('/getBatterStats', (req: any, res: any) => {
+  res.set({ 'Access-Control-Allow-Origin': '*' });
+
+  const xlsx = require('xlsx');
+  const book = xlsx.readFile('./Scoreboard.xlsm');
+  const teamName = req.query.Team;
+  const row = Number(req.query.Row);
+
+  const worksheet = book.Sheets[teamName];
+
+  let returnData = new BatterStatsModel();
+  let atBat = '';
+  let hit = '';
+  for (let col = ExcelColumnsName.Id; col <= ExcelColumnsName.FullName; col++) {
+    let cellAddress = xlsx.utils.encode_cell({ c: col, r: row })
+    
+    if (worksheet[cellAddress] === undefined) {
+      continue;
+    }
+
+    switch (col) {
+      case ExcelColumnsName.Number:
+        returnData.Number = worksheet[cellAddress].w;
+        break;
+      case ExcelColumnsName.Avg:
+        returnData.AVG = worksheet[cellAddress].w;
+        break;
+      case ExcelColumnsName.AtBat:
+        atBat = worksheet[cellAddress].w;
+        break;
+      case ExcelColumnsName.Hit:
+        hit = worksheet[cellAddress].w;
+        break;
+      case ExcelColumnsName.HomeRun:
+        returnData.HR = worksheet[cellAddress].w;
+        break;
+      case ExcelColumnsName.Run:
+        returnData.RBI = worksheet[cellAddress].w;
+        break;
+      case ExcelColumnsName.OBP:
+        returnData.OBP = worksheet[cellAddress].w;
+        break;
+      case ExcelColumnsName.OPS:
+        returnData.OPS = worksheet[cellAddress].w;
+        break;
+      case ExcelColumnsName.SB:
+        returnData.SB = worksheet[cellAddress].w;
+        break;
+      case ExcelColumnsName.RC27:
+        returnData.RC27 = worksheet[cellAddress].w;
+        break;
+      case ExcelColumnsName.FullName:
+        returnData.Name = worksheet[cellAddress].w;
+      default:
+        break;
+    }
+  }
+  returnData.AB_H = atBat + ' - ' + hit;
+
+  res.send(returnData);
 });
 
 // start

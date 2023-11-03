@@ -1,12 +1,12 @@
 <template>
   <div class="Today-Result">
     <div class="Today-Result-Box">
-      <div class="Today-Result-Number">1.</div>
+      <!-- <div class="Today-Result-Number">1.</div>
       <div class="Today-Result-Content Text-Green">本塁打</div>
       <div class="Today-Result-Number">2.</div>
       <div class="Today-Result-Content Text-Green">本塁打</div>
       <div class="Today-Result-Number">3.</div>
-      <div class="Today-Result-Content Text-Green">本塁打</div>
+      <div class="Today-Result-Content Text-Green">本塁打</div> -->
     </div>
   </div>
 </template>

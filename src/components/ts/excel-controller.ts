@@ -57,4 +57,25 @@ export class ExcelController {
 
         return response;
     }
+
+    /**
+     * 成績取得
+     * @param rowNumber 
+     * @param teamName 
+     */
+    async GetStats(rowNumber: number, teamName: string): Promise<any> {
+        const params = {
+            Row: String(rowNumber),
+            Team: teamName
+        }
+        const param = new URLSearchParams(params);
+
+        const url = `/getBatterStats?${param}`;
+        const response = await fetch(url, {
+            mode: 'cors',
+            method: 'GET',
+        }).then(res => res.json());
+
+        return response;
+    }
 }

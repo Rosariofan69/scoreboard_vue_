@@ -1,41 +1,57 @@
 <template>
-  <div class="Main">
-    <div class="Umpire">
-      <div class="Umpire-Row">
-        球審：<input v-model="umpireData.PL"> 
-      </div>
-      <div class="Umpire-Row">
-        一塁：<input v-model="umpireData.FB">
-      </div>
-      <div class="Umpire-Row">
-        二塁：<input v-model="umpireData.SB">
-      </div>
-      <div class="Umpire-Row">
-        三塁：<input v-model="umpireData.TB">
-      </div>
-      <div class="Umpire-Row">
-        左翼：<input v-model="umpireData.LL">
-      </div>
-      <div class="Umpire-Row">
-        右翼：<input v-model="umpireData.RL">
+  <div class="Main" v-show="flag">
+    <div class="Content">
+      <div class="Umpire">
+        <div class="Umpire-Row">
+          球審：<input v-model="umpireData.PL"> 
+        </div>
+        <div class="Umpire-Row">
+          一塁：<input v-model="umpireData.FB">
+        </div>
+        <div class="Umpire-Row">
+          二塁：<input v-model="umpireData.SB">
+        </div>
+        <div class="Umpire-Row">
+          三塁：<input v-model="umpireData.TB">
+        </div>
+        <div class="Umpire-Row">
+          左翼：<input v-model="umpireData.LL">
+        </div>
+        <div class="Umpire-Row">
+          右翼：<input v-model="umpireData.RL">
+        </div>
       </div>
     </div>
     <div class="Footer">
-      <button class="Ok">OK</button>
-      <button class="Cancel">キャンセル</button>
+      <button class="Ok" v-on:click="clickOK()">OK</button>
+      <button class="Cancel" v-on:click="clickCancel()">キャンセル</button>
     </div>
   </div>
 </template>
   
 <script setup lang="ts">
-import { defineProps, ref } from 'vue';
+import { defineProps, ref, defineEmits } from 'vue';
 import { UmpireModel } from './ts/model/member-info-model';
+
 const props = defineProps<{
-    flag: boolean
+  flag: boolean;
+  callDivision: string;
+}>()
+// emit
+const emits = defineEmits<{
+  (e: 'sendUmpireData', v: UmpireModel): void;
+  (e: 'closeDialog', v: boolean): void;
 }>()
 
 const umpireData = ref(new UmpireModel());
 
+function clickOK(): void {
+  emits('sendUmpireData', umpireData.value);
+}
+
+function clickCancel(): void {
+  emits('closeDialog', false);
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -53,9 +69,14 @@ const umpireData = ref(new UmpireModel());
   height: 240px;
 }
 
+.Content {
+  padding: 5px;
+}
+
 .Umpire-Row {
-  background-color: aqua;
-  width: 500px;
+  padding-top: 5px;
+  margin: auto;
+  width: 220px;
 }
 
 .Footer {

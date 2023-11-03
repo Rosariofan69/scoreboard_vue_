@@ -14,13 +14,29 @@
       v-if="data.LeadOff.Name"
       :class="[{'Display-LeadOff' : data.LeadOff.DispStatus.Display}]"
     >
-      <div class="Box-Pos"></div>
+      <div
+        class="Box-Pos"
+        :class="[{'Basic-Position-BGC' : data.LeadOff.DispStatus.Basic,
+                  'Batter-Position-BGC' : data.LeadOff.DispStatus.Batter,
+                  'Runner-Position-BGC' : data.LeadOff.DispStatus.Runner,
+                  'Next-Position-BGC' : data.LeadOff.DispStatus.NextRead}]"
+      ></div>
       <div 
         id="visiterLeadOffPos"
         class="Pos-Text"
+        :class="[{'Basic-Position-Text' : data.LeadOff.DispStatus.Basic,
+                  'Batter-Position-Text' : data.LeadOff.DispStatus.Batter,
+                  'Runner-Position-Text' : data.LeadOff.DispStatus.Runner,
+                  'Next-Position-Text' : data.LeadOff.DispStatus.NextRead}]"
         :style="[{transform: `scaleX(${leadOffPosTrans})`, transformOrigin: 'left'}]"
       >{{ data.LeadOff.Position }}</div>
-      <div class="Box-Name">
+      <div
+        class="Box-Name"
+        :class="[{'Basic-Name' : data.LeadOff.DispStatus.Basic,
+                  'Batter-Name' : data.LeadOff.DispStatus.Batter,
+                  'Runner-Name' : data.LeadOff.DispStatus.Runner,
+                  'Next-Name' : data.LeadOff.DispStatus.NextRead}]"
+      >
         <div
           id="visiterLeadOffName"
           class="Name-Text"
@@ -34,13 +50,29 @@
       v-if="data.Second.Name"
       :class="[{'Display-Second' : data.Second.DispStatus.Display}]"
     >
-      <div class="Box-Pos"></div>
+      <div
+        class="Box-Pos"
+        :class="[{'Basic-Position-BGC' : data.Second.DispStatus.Basic,
+                  'Batter-Position-BGC' : data.Second.DispStatus.Batter,
+                  'Runner-Position-BGC' : data.Second.DispStatus.Runner,
+                  'Next-Position-BGC' : data.Second.DispStatus.NextRead}]"
+      ></div>
       <div 
         id="visiterSecondPos"
         class="Pos-Text"
+        :class="[{'Basic-Position-Text' : data.Second.DispStatus.Basic,
+                  'Batter-Position-Text' : data.Second.DispStatus.Batter,
+                  'Runner-Position-Text' : data.Second.DispStatus.Runner,
+                  'Next-Position-Text' : data.Second.DispStatus.NextRead}]"
         :style="[{transform: `scaleX(${secondPosTrans})`, transformOrigin: 'left'}]"
       >{{ data.Second.Position }}</div>
-      <div class="Box-Name">
+      <div
+        class="Box-Name"
+        :class="[{'Basic-Name' : data.Second.DispStatus.Basic,
+                  'Batter-Name' : data.Second.DispStatus.Batter,
+                  'Runner-Name' : data.Second.DispStatus.Runner,
+                  'Next-Name' : data.Second.DispStatus.NextRead}]"
+      >
         <div
           id="visiterSecondName"
           class="Name-Text"
@@ -54,13 +86,29 @@
       v-if="data.Third.Name"
       :class="[{'Display-Third' : data.Third.DispStatus.Display}]"
     >
-      <div class="Box-Pos"></div>
+      <div
+        class="Box-Pos"
+        :class="[{'Basic-Position-BGC' : data.Third.DispStatus.Basic,
+                  'Batter-Position-BGC' : data.Third.DispStatus.Batter,
+                  'Runner-Position-BGC' : data.Third.DispStatus.Runner,
+                  'Next-Position-BGC' : data.Third.DispStatus.NextRead}]"
+      ></div>
       <div 
         id="visiterThirdPos"
         class="Pos-Text"
+        :class="[{'Basic-Position-Text' : data.Third.DispStatus.Basic,
+                  'Batter-Position-Text' : data.Third.DispStatus.Batter,
+                  'Runner-Position-Text' : data.Third.DispStatus.Runner,
+                  'Next-Position-Text' : data.Third.DispStatus.NextRead}]"
         :style="[{transform: `scaleX(${thirdPosTrans})`, transformOrigin: 'left'}]"
       >{{ data.Third.Position }}</div>
-      <div class="Box-Name">
+      <div
+        class="Box-Name"
+        :class="[{'Basic-Name' : data.Third.DispStatus.Basic,
+                  'Batter-Name' : data.Third.DispStatus.Batter,
+                  'Runner-Name' : data.Third.DispStatus.Runner,
+                  'Next-Name' : data.Third.DispStatus.NextRead}]"
+      >
         <div
           id="visiterThirdName"
           class="Name-Text"
@@ -74,13 +122,29 @@
       v-if="data.Fourth.Name"
       :class="[{'Display-Fourth' : data.Fourth.DispStatus.Display}]"
     >
-      <div class="Box-Pos"></div>
+      <div
+        class="Box-Pos"
+        :class="[{'Basic-Position-BGC' : data.Fourth.DispStatus.Basic,
+                  'Batter-Position-BGC' : data.Fourth.DispStatus.Batter,
+                  'Runner-Position-BGC' : data.Fourth.DispStatus.Runner,
+                  'Next-Position-BGC' : data.Fourth.DispStatus.NextRead}]"
+      ></div>
       <div 
         id="visiterFourthPos"
         class="Pos-Text"
+        :class="[{'Basic-Position-Text' : data.Fourth.DispStatus.Basic,
+                  'Batter-Position-Text' : data.Fourth.DispStatus.Batter,
+                  'Runner-Position-Text' : data.Fourth.DispStatus.Runner,
+                  'Next-Position-Text' : data.Fourth.DispStatus.NextRead}]"
         :style="[{transform: `scaleX(${fourthPosTrans})`, transformOrigin: 'left'}]"
       >{{ data.Fourth.Position }}</div>
-      <div class="Box-Name">
+      <div
+        class="Box-Name"
+        :class="[{'Basic-Name' : data.Fourth.DispStatus.Basic,
+                  'Batter-Name' : data.Fourth.DispStatus.Batter,
+                  'Runner-Name' : data.Fourth.DispStatus.Runner,
+                  'Next-Name' : data.Fourth.DispStatus.NextRead}]"
+      >
         <div
           id="visiterFourthName"
           class="Name-Text"
@@ -94,13 +158,29 @@
       v-if="data.Fifth.Name"
       :class="[{'Display-Fifth' : data.Fifth.DispStatus.Display}]"
     >
-      <div class="Box-Pos"></div>
+      <div
+        class="Box-Pos"
+        :class="[{'Basic-Position-BGC' : data.Fifth.DispStatus.Basic,
+                  'Batter-Position-BGC' : data.Fifth.DispStatus.Batter,
+                  'Runner-Position-BGC' : data.Fifth.DispStatus.Runner,
+                  'Next-Position-BGC' : data.Fifth.DispStatus.NextRead}]"
+      ></div>
       <div 
         id="visiterFifthPos"
         class="Pos-Text"
+        :class="[{'Basic-Position-Text' : data.Fifth.DispStatus.Basic,
+                  'Batter-Position-Text' : data.Fifth.DispStatus.Batter,
+                  'Runner-Position-Text' : data.Fifth.DispStatus.Runner,
+                  'Next-Position-Text' : data.Fifth.DispStatus.NextRead}]"
         :style="[{transform: `scaleX(${fifthPosTrans})`, transformOrigin: 'left'}]"
       >{{ data.Fifth.Position }}</div>
-      <div class="Box-Name">
+      <div
+        class="Box-Name"
+        :class="[{'Basic-Name' : data.Fifth.DispStatus.Basic,
+                  'Batter-Name' : data.Fifth.DispStatus.Batter,
+                  'Runner-Name' : data.Fifth.DispStatus.Runner,
+                  'Next-Name' : data.Fifth.DispStatus.NextRead}]"
+      >
         <div
           id="visiterFifthName"
           class="Name-Text"
@@ -114,13 +194,29 @@
       v-if="data.Sixth.Name"
       :class="[{'Display-Sixth' : data.Sixth.DispStatus.Display}]"
     >
-      <div class="Box-Pos"></div>
+      <div
+        class="Box-Pos"
+        :class="[{'Basic-Position-BGC' : data.Sixth.DispStatus.Basic,
+                  'Batter-Position-BGC' : data.Sixth.DispStatus.Batter,
+                  'Runner-Position-BGC' : data.Sixth.DispStatus.Runner,
+                  'Next-Position-BGC' : data.Sixth.DispStatus.NextRead}]"
+      ></div>
       <div 
         id="visiterSixthPos"
         class="Pos-Text"
+        :class="[{'Basic-Position-Text' : data.Sixth.DispStatus.Basic,
+                  'Batter-Position-Text' : data.Sixth.DispStatus.Batter,
+                  'Runner-Position-Text' : data.Sixth.DispStatus.Runner,
+                  'Next-Position-Text' : data.Sixth.DispStatus.NextRead}]"
         :style="[{transform: `scaleX(${sixthPosTrans})`, transformOrigin: 'left'}]"
       >{{ data.Sixth.Position }}</div>
-      <div class="Box-Name">
+      <div
+        class="Box-Name"
+        :class="[{'Basic-Name' : data.Sixth.DispStatus.Basic,
+                  'Batter-Name' : data.Sixth.DispStatus.Batter,
+                  'Runner-Name' : data.Sixth.DispStatus.Runner,
+                  'Next-Name' : data.Sixth.DispStatus.NextRead}]"
+      >
         <div
           id="visiterSixthName"
           class="Name-Text"
@@ -134,13 +230,29 @@
       v-if="data.Seventh.Name"
       :class="[{'Display-Seventh' : data.Seventh.DispStatus.Display}]"
     >
-      <div class="Box-Pos"></div>
+      <div
+        class="Box-Pos"
+        :class="[{'Basic-Position-BGC' : data.Seventh.DispStatus.Basic,
+                  'Batter-Position-BGC' : data.Seventh.DispStatus.Batter,
+                  'Runner-Position-BGC' : data.Seventh.DispStatus.Runner,
+                  'Next-Position-BGC' : data.Seventh.DispStatus.NextRead}]"
+      ></div>
       <div 
         id="visiterSeventhPos"
         class="Pos-Text"
+        :class="[{'Basic-Position-Text' : data.Seventh.DispStatus.Basic,
+                  'Batter-Position-Text' : data.Seventh.DispStatus.Batter,
+                  'Runner-Position-Text' : data.Seventh.DispStatus.Runner,
+                  'Next-Position-Text' : data.Seventh.DispStatus.NextRead}]"
         :style="[{transform: `scaleX(${seventhPosTrans})`, transformOrigin: 'left'}]"
       >{{ data.Seventh.Position }}</div>
-      <div class="Box-Name">
+      <div
+        class="Box-Name"
+        :class="[{'Basic-Name' : data.Seventh.DispStatus.Basic,
+                  'Batter-Name' : data.Seventh.DispStatus.Batter,
+                  'Runner-Name' : data.Seventh.DispStatus.Runner,
+                  'Next-Name' : data.Seventh.DispStatus.NextRead}]"
+      >
         <div
           id="visiterSeventhName"
           class="Name-Text"
@@ -154,13 +266,29 @@
       v-if="data.Eighth.Name"
       :class="[{'Display-Eighth' : data.Eighth.DispStatus.Display}]"
     >
-      <div class="Box-Pos"></div>
+      <div
+        class="Box-Pos"
+        :class="[{'Basic-Position-BGC' : data.Eighth.DispStatus.Basic,
+                  'Batter-Position-BGC' : data.Eighth.DispStatus.Batter,
+                  'Runner-Position-BGC' : data.Eighth.DispStatus.Runner,
+                  'Next-Position-BGC' : data.Eighth.DispStatus.NextRead}]"
+      ></div>
       <div 
         id="visiterEighthPos"
         class="Pos-Text"
+        :class="[{'Basic-Position-Text' : data.Eighth.DispStatus.Basic,
+                  'Batter-Position-Text' : data.Eighth.DispStatus.Batter,
+                  'Runner-Position-Text' : data.Eighth.DispStatus.Runner,
+                  'Next-Position-Text' : data.Eighth.DispStatus.NextRead}]"
         :style="[{transform: `scaleX(${eighthPosTrans})`, transformOrigin: 'left'}]"
       >{{ data.Eighth.Position }}</div>
-      <div class="Box-Name">
+      <div
+        class="Box-Name"
+        :class="[{'Basic-Name' : data.Eighth.DispStatus.Basic,
+                  'Batter-Name' : data.Eighth.DispStatus.Batter,
+                  'Runner-Name' : data.Eighth.DispStatus.Runner,
+                  'Next-Name' : data.Eighth.DispStatus.NextRead}]"
+      >
         <div
           id="visiterEighthName"
           class="Name-Text"
@@ -174,13 +302,29 @@
       v-if="data.Ninth.Name"
       :class="[{'Display-Ninth' : data.Ninth.DispStatus.Display}]"
     >
-      <div class="Box-Pos"></div>
+      <div
+        class="Box-Pos"
+        :class="[{'Basic-Position-BGC' : data.Ninth.DispStatus.Basic,
+                  'Batter-Position-BGC' : data.Ninth.DispStatus.Batter,
+                  'Runner-Position-BGC' : data.Ninth.DispStatus.Runner,
+                  'Next-Position-BGC' : data.Ninth.DispStatus.NextRead}]"
+      ></div>
       <div 
         id="visiterNinthPos"
         class="Pos-Text"
+        :class="[{'Basic-Position-Text' : data.Ninth.DispStatus.Basic,
+                  'Batter-Position-Text' : data.Ninth.DispStatus.Batter,
+                  'Runner-Position-Text' : data.Ninth.DispStatus.Runner,
+                  'Next-Position-Text' : data.Ninth.DispStatus.NextRead}]"
         :style="[{transform: `scaleX(${ninthPosTrans})`, transformOrigin: 'left'}]"
       >{{ data.Ninth.Position }}</div>
-      <div class="Box-Name">
+      <div
+        class="Box-Name"
+        :class="[{'Basic-Name' : data.Ninth.DispStatus.Basic,
+                  'Batter-Name' : data.Ninth.DispStatus.Batter,
+                  'Runner-Name' : data.Ninth.DispStatus.Runner,
+                  'Next-Name' : data.Ninth.DispStatus.NextRead}]"
+      >
         <div
           id="visiterNinthName"
           class="Name-Text"
@@ -383,7 +527,6 @@ watch(props, () => {
 .Team{
   margin-bottom: 10px;
   margin-left: 20px;
-  background: linear-gradient(to bottom, #FF0000 0%, #FF0000 40%, #c00000 60%, #c00000 100%);
   background: v-bind('design.TeamNameBGC');
   position: relative;
   overflow: hidden;
@@ -395,7 +538,6 @@ watch(props, () => {
 
 .Team-Text{
   font-family: 'Bahnschrift';
-  /* font-family: 'Noto Sans JP', sans-serif; */
   color: v-bind('design.TeamNameText');
   font-size: 40px;
   line-height: 50px;
@@ -427,7 +569,6 @@ watch(props, () => {
   margin: 0;
   width: 51px;
   height: 42px;
-  background: v-bind('design.PositionBasicBGC');
   transform: translateX(-5px) skewX(-10deg);
   border-right: 2px solid v-bind('design.DiagonalLine');
   z-index: 1;
@@ -436,9 +577,7 @@ watch(props, () => {
 
 .Pos-Text{
   font-family: 'Alte DIN 1451 Mittelschrift';
-  /* font-weight: bold; */
   position: absolute;
-  color: v-bind('design.PositionBasicText');
   width: 35px;
   margin-left: 5px;
   font-size: 45px;
@@ -448,28 +587,11 @@ watch(props, () => {
   letter-spacing: -2px;
 }
 
-.Pos-Text-DH{
-  font-family: 'DIN-Regular';
-  font-weight: bold;
-  position: absolute;
-  width: 65px;
-  height: 42px;
-  font-size: 45px;
-  line-height: 40px;
-  text-align: center;
-  z-index: 2;
-  letter-spacing: -2px;
-  transform: scaleX(0.7);
-  transform-origin: left;
-}
-
 .Box-Name{
   overflow: hidden;
   margin-left: 42px;
-  /* position: absolute; */
   width: 120px;
   height: 42px;
-  background-color: #404040;
   padding-left: 18px;
   padding-right: 10px;
   z-index: 0;
@@ -477,13 +599,63 @@ watch(props, () => {
 
 .Name-Text{
   white-space: nowrap;
-  /* width: 100%; */
   font-family: 'Noto Sans JP', sans-serif;
   line-height: 38px;
   font-size: 36px;
-  /* text-align-last: justify; */
   height: 42px;
-  text-shadow: 3px 2px 1px black;
+  text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.5);
+}
+
+.Basic-Position-BGC {
+  background: v-bind('design.PositionBasicBGC');
+}
+
+.Basic-Position-Text {
+  color: v-bind('design.PositionBasicText');
+}
+
+.Basic-Name {
+  background: v-bind('design.NameBasicBGC');
+  color: v-bind('design.NameBasicText');
+}
+
+.Batter-Position-BGC {
+  background: v-bind('design.PositionBatterBGC');
+}
+
+.Batter-Position-Text {
+  color: v-bind('design.PositionBatterText');
+}
+
+.Batter-Name {
+  background: v-bind('design.NameBatterBGC');
+  color: v-bind('design.NameBatterText');
+}
+
+.Runner-Position-BGC {
+  background: v-bind('design.PositionRunnerBGC');
+}
+
+.Runner-Position-Text {
+  color: v-bind('design.PositionRunnerText');
+}
+
+.Runner-Name {
+  background: v-bind('design.NameRunnerBGC');
+  color: v-bind('design.NameRunnerText');
+}
+
+.Next-Position-BGC {
+  background: v-bind('design.PositionNextBGC');
+}
+
+.Next-Position-Text {
+  color: v-bind('design.PositionNextText');
+}
+
+.Next-Name {
+  background: v-bind('design.NameNextBGC');
+  color: v-bind('design.NameNextText');
 }
 
 .Text-Align-Last-Center {
@@ -555,21 +727,21 @@ watch(props, () => {
 
 @keyframes SlideInText
 {
-    0%
-    {
-        transform: translateX(200px) scale(0.1);
-        opacity: 1;
-    }
-    70%
-    {
-        transform: translateX(0px) scale(0.75);
-        opacity: 1;
-    }
-    100%
-    {
-        transform: scale(1.0);
-        opacity: 1;
-    }
+  0%
+  {
+    transform: translateX(200px) scale(0.1);
+    opacity: 1;
+  }
+  70%
+  {
+    transform: translateX(0px) scale(0.75);
+    opacity: 1;
+  }
+  100%
+  {
+    transform: scale(1.0);
+    opacity: 1;
+  }
 }
 
 </style>
