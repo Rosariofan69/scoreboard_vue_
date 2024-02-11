@@ -1,5 +1,5 @@
 <template>
-  <div class="Running-Score-Full" v-if="gameInfo.GameBaseInfo.VisiterTeamName">
+  <div class="Running-Score-Full" v-if="gameInfo.GameBaseInfo.VisitorTeamName">
     <div class="Running-Score-Title-Full">
       <div class="Running-Score-Title" :style="[{width: parentWidth, paddingLeft: parentPadding, paddingRight: parentPadding}]">
         <div id="title1st" :style="[{transform: `scaleX(${title1stTrans})`, transformOrigin: 'left'}]">{{ data.Title.The1 }}</div>
@@ -39,10 +39,10 @@
       </div>
     </div>
     <div class="Running-Score-Box">
-      <div class="Score-Team-Visiter">
-        <img :src="visiterImageSrc" v-if="gameInfo.GameBaseInfo.VisiterTeamText == ''">
-        <div id="visiterTeamNameScore" :style="[{transform: `scaleX(${visiterTeamTrans})`, transformOrigin: 'left'}]">
-          {{ gameInfo.GameBaseInfo.VisiterTeamText }}
+      <div class="Score-Team-Visitor">
+        <img :src="visitorImageSrc" v-if="gameInfo.GameBaseInfo.VisitorTeamText == ''">
+        <div id="visitorTeamNameScore" :style="[{transform: `scaleX(${visitorTeamTrans})`, transformOrigin: 'left'}]">
+          {{ gameInfo.GameBaseInfo.VisitorTeamText }}
         </div>
       </div>
       <div
@@ -130,16 +130,16 @@
         <div id="topOf12th" :style="[{transform: `scaleX(${topOf12thTrans})`, transformOrigin: 'left'}]">{{ data.Score.TopOfThe12 }}</div>
       </div>
       <div class="Running-Score-Run" :style="[{width: parentWidth, paddingLeft: parentPadding, paddingRight: parentPadding}]">
-        <div id="visiterR" :style="[{transform: `scaleX(${visiterRTrans})`, transformOrigin: 'left'}]">{{ data.Score.VisiterR }}</div>
+        <div id="visitorR" :style="[{transform: `scaleX(${visitorRTrans})`, transformOrigin: 'left'}]">{{ data.Score.VisitorR }}</div>
       </div>
       <div class="Running-Score-Odd" :style="[{width: parentWidth, paddingLeft: parentPadding, paddingRight: parentPadding}]">
-        <div id="visiterH" :style="[{transform: `scaleX(${visiterHTrans})`, transformOrigin: 'left'}]">{{ data.Score.VisiterH }}</div>
+        <div id="visitorH" :style="[{transform: `scaleX(${visitorHTrans})`, transformOrigin: 'left'}]">{{ data.Score.VisitorH }}</div>
       </div>
       <div class="Running-Score-Even" :style="[{width: parentWidth, paddingLeft: parentPadding, paddingRight: parentPadding}]">
-        <div id="visiterE" :style="[{transform: `scaleX(${visiterETrans})`, transformOrigin: 'left'}]">{{ data.Score.VisiterE }}</div>
+        <div id="visitorE" :style="[{transform: `scaleX(${visitorETrans})`, transformOrigin: 'left'}]">{{ data.Score.VisitorE }}</div>
       </div>
       <div class="Running-Score-Odd" :style="[{width: parentWidth, paddingLeft: parentPadding, paddingRight: parentPadding}]">
-        <div id="visiterLOB" :style="[{transform: `scaleX(${visiterLOBTrans})`, transformOrigin: 'left'}]">{{ data.Score.VisiterLOB }}</div>
+        <div id="visitorLOB" :style="[{transform: `scaleX(${visitorLOBTrans})`, transformOrigin: 'left'}]">{{ data.Score.VisitorLOB }}</div>
       </div>
     </div>
     <div class="Running-Score-MidLine"></div>
@@ -257,7 +257,7 @@
 import { defineProps, nextTick, ref, toRef, toRefs, watch } from 'vue';
 import { DesignModel, MemberDesignModel, PitcherStatsDesignModel, PitcherStatsDesignSendModel, ScoreDesignModel } from './ts/model/design-model';
 import { GameInfoModel } from './ts/model/game-model';
-import { VisiterHomeDivision } from './ts/constant';
+import { VisitorHomeDivision } from './ts/constant';
 import { DispScoreModel, FrameFlgModel } from './ts/model/score-info-model';
 
 const props = defineProps<{
@@ -267,7 +267,7 @@ const props = defineProps<{
 }>()
 
 // 画像パス
-let visiterImageSrc = '';
+let visitorImageSrc = '';
 let homeImageSrc = '';
 
 // 延長表示フラグ
@@ -280,7 +280,7 @@ let parentWidth = ref('36px');
 let parentPadding = ref('4px');
 
 // 横幅
-let visiterTeamTrans = ref('1.0');
+let visitorTeamTrans = ref('1.0');
 let homeTeamTrans = ref('1.0');
 let title1stTrans = ref('1.0');
 let title2ndTrans = ref('1.0');
@@ -316,10 +316,10 @@ let bottomOf9thTrans = ref('1.0');
 let bottomOf10thTrans = ref('1.0');
 let bottomOf11thTrans = ref('1.0');
 let bottomOf12thTrans = ref('1.0');
-let visiterRTrans = ref('1.0');
-let visiterHTrans = ref('1.0');
-let visiterETrans = ref('1.0');
-let visiterLOBTrans = ref('1.0');
+let visitorRTrans = ref('1.0');
+let visitorHTrans = ref('1.0');
+let visitorETrans = ref('1.0');
+let visitorLOBTrans = ref('1.0');
 let homeRTrans = ref('1.0');
 let homeHTrans = ref('1.0');
 let homeETrans = ref('1.0');
@@ -363,7 +363,12 @@ function calcNumbersWidth(element: any): string {
  * 攻撃フレーム割り当て
  */
 function assignFrame(): void {
-  if (props.gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter) {
+  if (!props.gameInfo.GameProgressInfo.IsStarted) {
+    frameFlg.value = new FrameFlgModel();
+    return;
+  }
+
+  if (props.gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor) {
     if (props.gameInfo.GameProgressInfo.NowInning == 1 ||
        (props.gameInfo.GameBaseInfo.InningLimit > 12 && (props.gameInfo.GameProgressInfo.NowInning) % 9 == 1)) {
       frameFlg.value = new FrameFlgModel();
@@ -461,36 +466,36 @@ function assignFrame(): void {
 }
 
 watch(props, () => {
-  nextTick(() => {
-    assignFrame();
-    if (props.gameInfo.GameProgressInfo.NowInning == 10 &&
-        props.gameInfo.GameBaseInfo.InningLimit <= 12) {
-      dispFlg10th.value = true;
-      dispFlg11th.value = true;
-      dispFlg12th.value = true;
-      let parent = 0;
-      let width = 0;
-      let padding = 0;
-      const ratio = 8 / 44
-      if (props.gameInfo.GameBaseInfo.InningLimit == 10) {
-        parent = (572 / 14);
-      } else if (props.gameInfo.GameBaseInfo.InningLimit == 11) {
-        parent = (572 / 15);
-      } else if (props.gameInfo.GameBaseInfo.InningLimit == 12) {
-        parent = (572 / 16);
-      }
-      width = parent - (parent * ratio);
-      padding = (parent * ratio) / 2;
-      parentWidth.value = width.toString() + 'px';
-      parentPadding.value = padding.toString() + 'px';
+  assignFrame();
+  if (props.gameInfo.GameProgressInfo.NowInning == 10 &&
+      props.gameInfo.GameBaseInfo.InningLimit <= 12) {
+    dispFlg10th.value = true;
+    dispFlg11th.value = true;
+    dispFlg12th.value = true;
+    let parent = 0;
+    let width = 0;
+    let padding = 0;
+    const ratio = 8 / 44
+    if (props.gameInfo.GameBaseInfo.InningLimit == 10) {
+      parent = (572 / 14);
+    } else if (props.gameInfo.GameBaseInfo.InningLimit == 11) {
+      parent = (572 / 15);
+    } else if (props.gameInfo.GameBaseInfo.InningLimit == 12) {
+      parent = (572 / 16);
     }
+    width = parent - (parent * ratio);
+    padding = (parent * ratio) / 2;
+    parentWidth.value = width.toString() + 'px';
+    parentPadding.value = padding.toString() + 'px';
+  }
+  nextTick(() => {
     if (props.gameInfo.GameProgressInfo.IsStarted == undefined) {
-      visiterImageSrc = "./image/" + props.gameInfo.GameBaseInfo.VisiterTeamName + ".png";
+      visitorImageSrc = "./image/" + props.gameInfo.GameBaseInfo.VisitorTeamName + ".png";
       homeImageSrc = "./image/" + props.gameInfo.GameBaseInfo.HomeTeamName + ".png";
-      visiterTeamTrans.value = calcTeamWidth(document.getElementById('visiterTeamNameScore'));
+      visitorTeamTrans.value = calcTeamWidth(document.getElementById('visitorTeamNameScore'));
       homeTeamTrans.value = calcTeamWidth(document.getElementById('homeTeamNameScore'));
     }
-    if (props.gameInfo.GameProgressInfo.NowInning % 9 == 1) {
+    if (props.gameInfo.GameProgressInfo.NowInning == null || props.gameInfo.GameProgressInfo.NowInning % 9 == 1) {
       title1stTrans.value = calcNumbersWidth(document.getElementById('title1st'));
       title2ndTrans.value = calcNumbersWidth(document.getElementById('title2nd'));
       title3rdTrans.value = calcNumbersWidth(document.getElementById('title3rd'));
@@ -514,10 +519,10 @@ watch(props, () => {
     topOf10thTrans.value = calcNumbersWidth(document.getElementById('topOf10th'));
     topOf11thTrans.value = calcNumbersWidth(document.getElementById('topOf11th'));
     topOf12thTrans.value = calcNumbersWidth(document.getElementById('topOf12th'));
-    visiterRTrans.value = calcNumbersWidth(document.getElementById('visiterR'));
-    visiterHTrans.value = calcNumbersWidth(document.getElementById('visiterH'));
-    visiterETrans.value = calcNumbersWidth(document.getElementById('visiterE'));
-    visiterLOBTrans.value = calcNumbersWidth(document.getElementById('visiterLOB'));
+    visitorRTrans.value = calcNumbersWidth(document.getElementById('visitorR'));
+    visitorHTrans.value = calcNumbersWidth(document.getElementById('visitorH'));
+    visitorETrans.value = calcNumbersWidth(document.getElementById('visitorE'));
+    visitorLOBTrans.value = calcNumbersWidth(document.getElementById('visitorLOB'));
     bottomOf1stTrans.value = calcNumbersWidth(document.getElementById('bottomOf1st'));
     bottomOf2ndTrans.value = calcNumbersWidth(document.getElementById('bottomOf2nd'));
     bottomOf3rdTrans.value = calcNumbersWidth(document.getElementById('bottomOf3rd'));
@@ -628,7 +633,7 @@ watch(props, () => {
   background-color: v-bind('design.OtherFrame');
 }
 
-.Score-Team-Visiter{
+.Score-Team-Visitor{
   position: relative;
   width: 128px;
   height: 44px;
@@ -638,8 +643,8 @@ watch(props, () => {
   font-size: 38px;
   font-family: 'Bahnschrift';
   text-align: center;
-  background-color: v-bind('design.VisiterTeamNameBGC');
-  color: v-bind('design.VisiterTeamNameText');
+  background-color: v-bind('design.VisitorTeamNameBGC');
+  color: v-bind('design.VisitorTeamNameText');
 }
 
 .Score-Team-Home{
@@ -656,12 +661,12 @@ watch(props, () => {
   color: v-bind('design.HomeTeamNameText');
 }
 
-.Score-Team-Visiter-BGC {
-  background-color: v-bind('design.VisiterTeamNameBGC');
+.Score-Team-Visitor-BGC {
+  background-color: v-bind('design.VisitorTeamNameBGC');
 }
 
-.Score-Team-Visiter-Text {
-  color: v-bind('design.VisiterTeamNameText');
+.Score-Team-Visitor-Text {
+  color: v-bind('design.VisitorTeamNameText');
 }
 
 .Score-Team-Home-BGC {
@@ -672,7 +677,7 @@ watch(props, () => {
   color: v-bind('design.HomeTeamNameText');
 }
 
-.Score-Team-Visiter img{
+.Score-Team-Visitor img{
   position: absolute;
   top: 0;
   bottom: 0;

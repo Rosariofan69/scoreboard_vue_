@@ -26,7 +26,7 @@ class DesignController {
             // 戻り値
             const returnData = new design_model_1.DesignModel();
             // ビジターメンバーデザイン
-            returnData.VisiterMember = this.extractVisiterMemberDisign(responseData);
+            returnData.VisitorMember = this.extractVisitorMemberDisign(responseData);
             // ホームメンバーデザイン
             returnData.HomeMember = this.extractHomeMemberDesign(responseData);
             // 野手成績
@@ -50,39 +50,39 @@ class DesignController {
      * @param obj APIから取得したデータオブジェクト
      * @returns 抽出結果
      */
-    extractVisiterMemberDisign(obj) {
+    extractVisitorMemberDisign(obj) {
         const returnData = new design_model_1.MemberDesignModel();
         // チーム名
-        returnData.TeamNameText = obj[constant_1.VisiterDesignDivision.TeamNameMemberText];
-        returnData.TeamNameBGC = obj[constant_1.VisiterDesignDivision.TeamNameMemberBGC];
+        returnData.TeamNameText = obj[constant_1.VisitorDesignDivision.TeamNameMemberText];
+        returnData.TeamNameBGC = obj[constant_1.VisitorDesignDivision.TeamNameMemberBGC];
         // 下線
-        returnData.UnderLine = obj[constant_1.VisiterDesignDivision.UnderLine];
+        returnData.UnderLine = obj[constant_1.VisitorDesignDivision.UnderLine];
         // 斜線
-        returnData.DiagonalLine = obj[constant_1.VisiterDesignDivision.DiagonalLine];
+        returnData.DiagonalLine = obj[constant_1.VisitorDesignDivision.DiagonalLine];
         // 上線
-        returnData.UpperLine = obj[constant_1.VisiterDesignDivision.UpperLine];
+        returnData.UpperLine = obj[constant_1.VisitorDesignDivision.UpperLine];
         // 標準
-        returnData.PositionBasicText = obj[constant_1.VisiterDesignDivision.PositionBasicText];
-        returnData.PositionBasicBGC = obj[constant_1.VisiterDesignDivision.PositionBasicBGC];
-        returnData.NameBasicText = obj[constant_1.VisiterDesignDivision.NameBasicText];
-        returnData.NameBasicBGC = obj[constant_1.VisiterDesignDivision.NameBasicBGC];
+        returnData.PositionBasicText = obj[constant_1.VisitorDesignDivision.PositionBasicText];
+        returnData.PositionBasicBGC = obj[constant_1.VisitorDesignDivision.PositionBasicBGC];
+        returnData.NameBasicText = obj[constant_1.VisitorDesignDivision.NameBasicText];
+        returnData.NameBasicBGC = obj[constant_1.VisitorDesignDivision.NameBasicBGC];
         // 打者
-        returnData.PositionBatterText = obj[constant_1.VisiterDesignDivision.PositionBatterText];
-        returnData.PositionBatterBGC = obj[constant_1.VisiterDesignDivision.PositionBatterBGC];
-        returnData.NameBatterText = obj[constant_1.VisiterDesignDivision.NameBatterText];
-        returnData.NameBatterBGC = obj[constant_1.VisiterDesignDivision.NameBatterBGC];
+        returnData.PositionBatterText = obj[constant_1.VisitorDesignDivision.PositionBatterText];
+        returnData.PositionBatterBGC = obj[constant_1.VisitorDesignDivision.PositionBatterBGC];
+        returnData.NameBatterText = obj[constant_1.VisitorDesignDivision.NameBatterText];
+        returnData.NameBatterBGC = obj[constant_1.VisitorDesignDivision.NameBatterBGC];
         // 走者
-        returnData.PositionRunnerText = obj[constant_1.VisiterDesignDivision.PositionRunnerText];
-        returnData.PositionRunnerBGC = obj[constant_1.VisiterDesignDivision.PositionRunnerBGC];
-        returnData.NameRunnerText = obj[constant_1.VisiterDesignDivision.NameRunnerText];
-        returnData.NameRunnerBGC = obj[constant_1.VisiterDesignDivision.NameRunnerBGC];
+        returnData.PositionRunnerText = obj[constant_1.VisitorDesignDivision.PositionRunnerText];
+        returnData.PositionRunnerBGC = obj[constant_1.VisitorDesignDivision.PositionRunnerBGC];
+        returnData.NameRunnerText = obj[constant_1.VisitorDesignDivision.NameRunnerText];
+        returnData.NameRunnerBGC = obj[constant_1.VisitorDesignDivision.NameRunnerBGC];
         // 次回先頭
-        returnData.PositionNextText = obj[constant_1.VisiterDesignDivision.PositionNextText];
-        returnData.PositionNextBGC = obj[constant_1.VisiterDesignDivision.PositionNextBGC];
-        returnData.NameNextText = obj[constant_1.VisiterDesignDivision.NameNextText];
-        returnData.NameNextBGC = obj[constant_1.VisiterDesignDivision.NameNextBGC];
+        returnData.PositionNextText = obj[constant_1.VisitorDesignDivision.PositionNextText];
+        returnData.PositionNextBGC = obj[constant_1.VisitorDesignDivision.PositionNextBGC];
+        returnData.NameNextText = obj[constant_1.VisitorDesignDivision.NameNextText];
+        returnData.NameNextBGC = obj[constant_1.VisitorDesignDivision.NameNextBGC];
         // 交代時
-        returnData.Change = obj[constant_1.VisiterDesignDivision.Change];
+        returnData.Change = obj[constant_1.VisitorDesignDivision.Change];
         // 返却
         return returnData;
     }
@@ -135,12 +135,12 @@ class DesignController {
     extractFielderStatsDesign(obj) {
         const returnData = new design_model_1.FielderStatsDesignSendModel();
         // ビジター野手成績
-        const visiter = new design_model_1.FielderStatsDesignModel();
+        const visitor = new design_model_1.FielderStatsDesignModel();
         // 文字
-        visiter.Text = obj[constant_1.VisiterDesignDivision.FielderStatsText];
+        visitor.Text = obj[constant_1.VisitorDesignDivision.FielderStatsText];
         // 背景
-        visiter.BGC = obj[constant_1.VisiterDesignDivision.DispPositionFielderBGC];
-        returnData.Visiter = visiter;
+        visitor.BGC = obj[constant_1.VisitorDesignDivision.DispPositionFielderBGC];
+        returnData.Visitor = visitor;
         // ホーム野手成績
         const home = new design_model_1.FielderStatsDesignModel();
         // 文字
@@ -159,14 +159,14 @@ class DesignController {
     extractPosition(obj) {
         const returnData = new design_model_1.PositionDesignSendModel();
         // ビジター守備表示
-        const visiter = new design_model_1.PositionDesignModel();
+        const visitor = new design_model_1.PositionDesignModel();
         // 野手
-        visiter.FielderText = obj[constant_1.VisiterDesignDivision.DispPositionFielderText];
-        visiter.FielderBGC = obj[constant_1.VisiterDesignDivision.DispPositionFielderBGC];
+        visitor.FielderText = obj[constant_1.VisitorDesignDivision.DispPositionFielderText];
+        visitor.FielderBGC = obj[constant_1.VisitorDesignDivision.DispPositionFielderBGC];
         // 走者
-        visiter.RunnerText = obj[constant_1.VisiterDesignDivision.DispPositionRunnerText];
-        visiter.RunnerBGC = obj[constant_1.VisiterDesignDivision.DispPositionRunnerBGC];
-        returnData.Visiter = visiter;
+        visitor.RunnerText = obj[constant_1.VisitorDesignDivision.DispPositionRunnerText];
+        visitor.RunnerBGC = obj[constant_1.VisitorDesignDivision.DispPositionRunnerBGC];
+        returnData.Visitor = visitor;
         // ホーム守備表示
         const home = new design_model_1.PositionDesignModel();
         // 野手
@@ -187,12 +187,12 @@ class DesignController {
     extractPitcherStats(obj) {
         const returnData = new design_model_1.PitcherStatsDesignSendModel();
         // ビジター投手成績
-        const visiter = new design_model_1.PitcherStatsDesignModel();
+        const visitor = new design_model_1.PitcherStatsDesignModel();
         // 文字
-        visiter.Text = obj[constant_1.VisiterDesignDivision.PitcherStatsText];
+        visitor.Text = obj[constant_1.VisitorDesignDivision.PitcherStatsText];
         // 背景
-        visiter.BGC = obj[constant_1.VisiterDesignDivision.PitcherStatsBGC];
-        returnData.Visiter = visiter;
+        visitor.BGC = obj[constant_1.VisitorDesignDivision.PitcherStatsBGC];
+        returnData.Visitor = visitor;
         // ホーム投手成績
         const home = new design_model_1.PitcherStatsDesignModel();
         // 文字
@@ -211,8 +211,8 @@ class DesignController {
     extractScoreDesign(obj) {
         const returnData = new design_model_1.ScoreDesignModel();
         // ビジターチーム名
-        returnData.VisiterTeamNameText = obj[constant_1.VisiterDesignDivision.TeamNameScoreText];
-        returnData.VisiterTeamNameBGC = obj[constant_1.VisiterDesignDivision.TeamNameScoreBGC];
+        returnData.VisitorTeamNameText = obj[constant_1.VisitorDesignDivision.TeamNameScoreText];
+        returnData.VisitorTeamNameBGC = obj[constant_1.VisitorDesignDivision.TeamNameScoreBGC];
         // ホームチーム名
         returnData.HomeTeamNameText = obj[constant_1.HomeDesignDivision.TeamNameScoreText];
         returnData.HomeTeamNameBGC = obj[constant_1.HomeDesignDivision.TeamNameScoreBGC];

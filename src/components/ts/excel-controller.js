@@ -48,13 +48,13 @@ class ExcelController {
     GetMember(getDivision, gameInfo) {
         return __awaiter(this, void 0, void 0, function* () {
             let params;
-            if (getDivision === constant_1.VisiterHomeDivision.Visiter) {
+            if (getDivision === constant_1.VisitorHomeDivision.Visitor) {
                 params = {
-                    Team: gameInfo.GameBaseInfo.VisiterTeamName,
-                    LastRow: gameInfo.GameBaseInfo.VisiterLastRow.toString()
+                    Team: gameInfo.GameBaseInfo.VisitorTeamName,
+                    LastRow: gameInfo.GameBaseInfo.VisitorLastRow.toString()
                 };
             }
-            else if (getDivision === constant_1.VisiterHomeDivision.Home) {
+            else if (getDivision === constant_1.VisitorHomeDivision.Home) {
                 params = {
                     Team: gameInfo.GameBaseInfo.HomeTeamName,
                     LastRow: gameInfo.GameBaseInfo.HomeLastRow.toString()
@@ -85,6 +85,31 @@ class ExcelController {
             const response = yield fetch(url, {
                 mode: 'cors',
                 method: 'GET',
+            }).then(res => res.json());
+            return response;
+        });
+    }
+    /**
+     * 成績更新
+     * @param rowNumber
+     * @param teamName
+     * @returns
+     */
+    UpdateStats(rowNumber, teamName, postData) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const params = {
+                Row: String(rowNumber),
+                Team: teamName,
+                PlusData: postData
+            };
+            const url = '/updateBatterStats';
+            const response = yield fetch(url, {
+                mode: 'cors',
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(params)
             }).then(res => res.json());
             return response;
         });

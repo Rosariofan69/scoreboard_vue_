@@ -13,8 +13,13 @@
     "sourceMap": true,
     "strictPropertyInitialization": false,
     "baseUrl": ".",
+    "noImplicitAny": false,
     "types": [
       "webpack-env"
+    ],
+    "typeRoots": [
+      "./@types",
+      "./node_modules/@types"
     ],
     "paths": {
       "@/*": [

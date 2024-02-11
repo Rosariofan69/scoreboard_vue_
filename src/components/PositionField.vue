@@ -4,12 +4,12 @@
     <div
       v-if="position.P"
       class="Position-Name Position-P"
-      :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Position-BGC-Home':'Position-BGC-Visiter']"
+      :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Position-BGC-Home':'Position-BGC-Visitor']"
     >
       <div
         id="pitcher"
         class="Position-Name-Text"
-        :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Position-Text-Home':'Position-Text-Visiter',
+        :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Position-Text-Home':'Position-Text-Visitor',
                  pitcherTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
         :style="[{transform: `scaleX(${pitcherTrans})`, transformOrigin: 'left'}]"
       >{{ position.P }}</div>
@@ -17,12 +17,12 @@
     <div
       v-if="position.C"
       class="Position-Name Position-C"
-      :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Position-BGC-Home':'Position-BGC-Visiter']"
+      :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Position-BGC-Home':'Position-BGC-Visitor']"
     >
       <div
         id="catcher"
         class="Position-Name-Text"
-        :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Position-Text-Home':'Position-Text-Visiter',
+        :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Position-Text-Home':'Position-Text-Visitor',
                  catcherTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
         :style="[{transform: `scaleX(${catcherTrans})`, transformOrigin: 'left'}]"
       >{{ position.C }}</div>
@@ -30,12 +30,12 @@
     <div
       v-if="position.FB"
       class="Position-Name Position-1B"
-      :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Position-BGC-Home':'Position-BGC-Visiter']"
+      :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Position-BGC-Home':'Position-BGC-Visitor']"
     >
       <div
         id="first"
         class="Position-Name-Text"
-        :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Position-Text-Home':'Position-Text-Visiter',
+        :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Position-Text-Home':'Position-Text-Visitor',
                  firstTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
         :style="[{transform: `scaleX(${firstTrans})`, transformOrigin: 'left'}]"
       >{{ position.FB }}</div>
@@ -43,12 +43,12 @@
     <div
       v-if="position.SB"
       class="Position-Name Position-2B"
-      :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Position-BGC-Home':'Position-BGC-Visiter']"
+      :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Position-BGC-Home':'Position-BGC-Visitor']"
     >
       <div
         id="second"
         class="Position-Name-Text"
-        :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Position-Text-Home':'Position-Text-Visiter',
+        :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Position-Text-Home':'Position-Text-Visitor',
                  secondTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
         :style="[{transform: `scaleX(${secondTrans})`, transformOrigin: 'left'}]"
       >{{ position.SB }}</div>
@@ -56,12 +56,12 @@
     <div
       v-if="position.TB"
       class="Position-Name Position-3B"
-      :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Position-BGC-Home':'Position-BGC-Visiter']"
+      :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Position-BGC-Home':'Position-BGC-Visitor']"
     >
       <div
         id="third"
         class="Position-Name-Text"
-        :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Position-Text-Home':'Position-Text-Visiter',
+        :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Position-Text-Home':'Position-Text-Visitor',
                  thirdTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
         :style="[{transform: `scaleX(${thirdTrans})`, transformOrigin: 'left'}]"
       >{{ position.TB }}</div>
@@ -69,12 +69,12 @@
     <div
       v-if="position.SS"
       class="Position-Name Position-SS"
-      :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Position-BGC-Home':'Position-BGC-Visiter']"
+      :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Position-BGC-Home':'Position-BGC-Visitor']"
     >
       <div
         id="shortStop"
         class="Position-Name-Text"
-        :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Position-Text-Home':'Position-Text-Visiter',
+        :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Position-Text-Home':'Position-Text-Visitor',
                  shortStopTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
         :style="[{transform: `scaleX(${shortStopTrans})`, transformOrigin: 'left'}]"
       >{{ position.SS }}</div>
@@ -82,12 +82,12 @@
     <div
       v-if="position.LF"
       class="Position-Name Position-LF"
-      :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Position-BGC-Home':'Position-BGC-Visiter']"
+      :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Position-BGC-Home':'Position-BGC-Visitor']"
     >
       <div
         id="left"
         class="Position-Name-Text"
-        :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Position-Text-Home':'Position-Text-Visiter',
+        :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Position-Text-Home':'Position-Text-Visitor',
                  leftTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
         :style="[{transform: `scaleX(${leftTrans})`, transformOrigin: 'left'}]"
       >{{ position.LF }}</div>
@@ -95,12 +95,12 @@
     <div
       v-if="position.CF"
       class="Position-Name Position-CF"
-      :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Position-BGC-Home':'Position-BGC-Visiter']"
+      :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Position-BGC-Home':'Position-BGC-Visitor']"
     >
       <div
         id="center"
         class="Position-Name-Text"
-        :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Position-Text-Home':'Position-Text-Visiter',
+        :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Position-Text-Home':'Position-Text-Visitor',
                  centerTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
         :style="[{transform: `scaleX(${centerTrans})`, transformOrigin: 'left'}]"
       >{{ position.CF }}</div>
@@ -108,12 +108,12 @@
     <div
       v-if="position.RF"
       class="Position-Name Position-RF"
-      :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Position-BGC-Home':'Position-BGC-Visiter']"
+      :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Position-BGC-Home':'Position-BGC-Visitor']"
     >
       <div
         id="right"
         class="Position-Name-Text"
-        :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Position-Text-Home':'Position-Text-Visiter',
+        :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Position-Text-Home':'Position-Text-Visitor',
                  rightTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
         :style="[{transform: `scaleX(${rightTrans})`, transformOrigin: 'left'}]"
       >{{ position.RF }}</div>
@@ -121,12 +121,12 @@
     <div
       v-if="runner.First.Name"
       class="Position-Runner-Name Position-Runner-1B"
-      :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Runner-BGC-Visiter':'Runner-BGC-Home']"
+      :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Runner-BGC-Visitor':'Runner-BGC-Home']"
     >
       <div
         id="firstRunner"
         class="Position-Name-Text"
-        :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Runner-Text-Visiter':'Runner-Text-Home',
+        :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Runner-Text-Visitor':'Runner-Text-Home',
                  firstRunnerTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
         :style="[{transform: `scaleX(${firstRunnerTrans})`, transformOrigin: 'left'}]"
       >{{ runner.First.Name }}</div>
@@ -134,12 +134,12 @@
     <div
       v-if="runner.Second.Name"
       class="Position-Runner-Name Position-Runner-2B"
-      :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Runner-BGC-Visiter':'Runner-BGC-Home']"
+      :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Runner-BGC-Visitor':'Runner-BGC-Home']"
     >
       <div
         id="secondRunner"
         class="Position-Name-Text"
-        :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Runner-Text-Visiter':'Runner-Text-Home',
+        :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Runner-Text-Visitor':'Runner-Text-Home',
                  secondRunnerTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
         :style="[{transform: `scaleX(${secondRunnerTrans})`, transformOrigin: 'left'}]"
       >{{ runner.Second.Name }}</div>
@@ -147,12 +147,12 @@
     <div
       v-if="runner.Third.Name"
       class="Position-Runner-Name Position-Runner-3B"
-      :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Runner-BGC-Visiter':'Runner-BGC-Home']"
+      :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Runner-BGC-Visitor':'Runner-BGC-Home']"
     >
       <div
         id="thirdRunner"
         class="Position-Name-Text"
-        :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Runner-Text-Visiter':'Runner-Text-Home',
+        :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Runner-Text-Visitor':'Runner-Text-Home',
                  thirdRunnerTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
         :style="[{transform: `scaleX(${thirdRunnerTrans})`, transformOrigin: 'left'}]"
       >{{ runner.Third.Name }}</div>
@@ -165,7 +165,7 @@ import { PositionModel, RunnerNameModel } from './ts/model/member-info-model';
 import { defineProps, nextTick, ref, toRef, toRefs, watch } from 'vue';
 import { DesignModel, MemberDesignModel, PositionDesignSendModel } from './ts/model/design-model';
 import { GameInfoModel } from './ts/model/game-model';
-import { VisiterHomeDivision } from './ts/constant';
+import { VisitorHomeDivision } from './ts/constant';
 
 const props = defineProps<{
   position: PositionModel;
@@ -303,7 +303,7 @@ watch(props, () => {
   padding-left: 1.5px;
   padding-right: 1.5px;
   text-align: center;
-  text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.5);
+  text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.4);
 }
 
 .Position-Name-Text {
@@ -313,7 +313,7 @@ watch(props, () => {
   text-align-last: justify;
   font-size: 25px;
   line-height: 27.5px;
-  text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.5);
+  text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.4);
 }
 
 .Position-P {
@@ -376,12 +376,12 @@ watch(props, () => {
   right: 275px;
 }
 
-.Position-BGC-Visiter {
-  background: v-bind('design.Visiter.FielderBGC');
+.Position-BGC-Visitor {
+  background: v-bind('design.Visitor.FielderBGC');
 }
 
-.Position-Text-Visiter {
-  color: v-bind('design.Visiter.FielderText');
+.Position-Text-Visitor {
+  color: v-bind('design.Visitor.FielderText');
 }
 
 .Position-BGC-Home {
@@ -392,12 +392,12 @@ watch(props, () => {
   color: v-bind('design.Home.FielderText');
 }
 
-.Runner-BGC-Visiter {
-  background: v-bind('design.Visiter.RunnerBGC');
+.Runner-BGC-Visitor {
+  background: v-bind('design.Visitor.RunnerBGC');
 }
 
-.Runner-Text-Visiter {
-  color: v-bind('design.Visiter.RunnerText');
+.Runner-Text-Visitor {
+  color: v-bind('design.Visitor.RunnerText');
 }
 
 .Runner-BGC-Home {

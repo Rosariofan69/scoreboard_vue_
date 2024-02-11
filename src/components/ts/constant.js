@@ -1,76 +1,76 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PositionName = exports.ResultPositionCheckBox = exports.ResultCheckBox = exports.ExcelColumnsName = exports.VisiterHomeDivision = exports.GameInfoDivision = exports.UmpireDesignDivision = exports.ScoreDesignDivision = exports.HomeDesignDivision = exports.VisiterDesignDivision = void 0;
+exports.DialogCallDivision = exports.Message = exports.PositionName = exports.ResultPositionCheckBox = exports.ResultCheckBox = exports.ExcelColumnsNamePopulate = exports.ExcelColumnsName = exports.VisitorHomeDivision = exports.GameInfoDivision = exports.UmpireDesignDivision = exports.ScoreDesignDivision = exports.HomeDesignDivision = exports.VisitorDesignDivision = void 0;
 /**
  * デザイン区分（ビジター）
  */
-var VisiterDesignDivision;
-(function (VisiterDesignDivision) {
+var VisitorDesignDivision;
+(function (VisitorDesignDivision) {
     /** チーム名（メンバー） - 文字 */
-    VisiterDesignDivision[VisiterDesignDivision["TeamNameMemberText"] = 0] = "TeamNameMemberText";
+    VisitorDesignDivision[VisitorDesignDivision["TeamNameMemberText"] = 0] = "TeamNameMemberText";
     /** チーム名（メンバー） - 背景 */
-    VisiterDesignDivision[VisiterDesignDivision["TeamNameMemberBGC"] = 1] = "TeamNameMemberBGC";
+    VisitorDesignDivision[VisitorDesignDivision["TeamNameMemberBGC"] = 1] = "TeamNameMemberBGC";
     /** チーム名（スコア） - 文字 */
-    VisiterDesignDivision[VisiterDesignDivision["TeamNameScoreText"] = 2] = "TeamNameScoreText";
+    VisitorDesignDivision[VisitorDesignDivision["TeamNameScoreText"] = 2] = "TeamNameScoreText";
     /** チーム名（スコア） - 背景 */
-    VisiterDesignDivision[VisiterDesignDivision["TeamNameScoreBGC"] = 3] = "TeamNameScoreBGC";
+    VisitorDesignDivision[VisitorDesignDivision["TeamNameScoreBGC"] = 3] = "TeamNameScoreBGC";
     /** 下線 */
-    VisiterDesignDivision[VisiterDesignDivision["UnderLine"] = 4] = "UnderLine";
+    VisitorDesignDivision[VisitorDesignDivision["UnderLine"] = 4] = "UnderLine";
     /** 斜線 */
-    VisiterDesignDivision[VisiterDesignDivision["DiagonalLine"] = 5] = "DiagonalLine";
+    VisitorDesignDivision[VisitorDesignDivision["DiagonalLine"] = 5] = "DiagonalLine";
     /** 上線 */
-    VisiterDesignDivision[VisiterDesignDivision["UpperLine"] = 6] = "UpperLine";
+    VisitorDesignDivision[VisitorDesignDivision["UpperLine"] = 6] = "UpperLine";
     /** 守備位置（標準） - 文字 */
-    VisiterDesignDivision[VisiterDesignDivision["PositionBasicText"] = 7] = "PositionBasicText";
+    VisitorDesignDivision[VisitorDesignDivision["PositionBasicText"] = 7] = "PositionBasicText";
     /** 守備位置（標準） - 背景 */
-    VisiterDesignDivision[VisiterDesignDivision["PositionBasicBGC"] = 8] = "PositionBasicBGC";
+    VisitorDesignDivision[VisitorDesignDivision["PositionBasicBGC"] = 8] = "PositionBasicBGC";
     /** 名前（標準） - 文字 */
-    VisiterDesignDivision[VisiterDesignDivision["NameBasicText"] = 9] = "NameBasicText";
+    VisitorDesignDivision[VisitorDesignDivision["NameBasicText"] = 9] = "NameBasicText";
     /** 名前（標準） - 背景 */
-    VisiterDesignDivision[VisiterDesignDivision["NameBasicBGC"] = 10] = "NameBasicBGC";
+    VisitorDesignDivision[VisitorDesignDivision["NameBasicBGC"] = 10] = "NameBasicBGC";
     /** 守備位置（打者） - 文字 */
-    VisiterDesignDivision[VisiterDesignDivision["PositionBatterText"] = 11] = "PositionBatterText";
+    VisitorDesignDivision[VisitorDesignDivision["PositionBatterText"] = 11] = "PositionBatterText";
     /** 守備位置（打者） - 背景 */
-    VisiterDesignDivision[VisiterDesignDivision["PositionBatterBGC"] = 12] = "PositionBatterBGC";
+    VisitorDesignDivision[VisitorDesignDivision["PositionBatterBGC"] = 12] = "PositionBatterBGC";
     /** 名前（打者） - 文字 */
-    VisiterDesignDivision[VisiterDesignDivision["NameBatterText"] = 13] = "NameBatterText";
+    VisitorDesignDivision[VisitorDesignDivision["NameBatterText"] = 13] = "NameBatterText";
     /** 名前（打者） - 背景 */
-    VisiterDesignDivision[VisiterDesignDivision["NameBatterBGC"] = 14] = "NameBatterBGC";
+    VisitorDesignDivision[VisitorDesignDivision["NameBatterBGC"] = 14] = "NameBatterBGC";
     /** 守備位置（走者） - 文字 */
-    VisiterDesignDivision[VisiterDesignDivision["PositionRunnerText"] = 15] = "PositionRunnerText";
+    VisitorDesignDivision[VisitorDesignDivision["PositionRunnerText"] = 15] = "PositionRunnerText";
     /** 守備位置（走者） - 背景 */
-    VisiterDesignDivision[VisiterDesignDivision["PositionRunnerBGC"] = 16] = "PositionRunnerBGC";
+    VisitorDesignDivision[VisitorDesignDivision["PositionRunnerBGC"] = 16] = "PositionRunnerBGC";
     /** 名前（走者） - 文字 */
-    VisiterDesignDivision[VisiterDesignDivision["NameRunnerText"] = 17] = "NameRunnerText";
+    VisitorDesignDivision[VisitorDesignDivision["NameRunnerText"] = 17] = "NameRunnerText";
     /** 名前（走者） - 背景 */
-    VisiterDesignDivision[VisiterDesignDivision["NameRunnerBGC"] = 18] = "NameRunnerBGC";
+    VisitorDesignDivision[VisitorDesignDivision["NameRunnerBGC"] = 18] = "NameRunnerBGC";
     /** 守備位置（次回先頭） - 文字 */
-    VisiterDesignDivision[VisiterDesignDivision["PositionNextText"] = 19] = "PositionNextText";
+    VisitorDesignDivision[VisitorDesignDivision["PositionNextText"] = 19] = "PositionNextText";
     /** 守備位置（次回先頭） - 背景 */
-    VisiterDesignDivision[VisiterDesignDivision["PositionNextBGC"] = 20] = "PositionNextBGC";
+    VisitorDesignDivision[VisitorDesignDivision["PositionNextBGC"] = 20] = "PositionNextBGC";
     /** 名前（次回先頭） - 文字 */
-    VisiterDesignDivision[VisiterDesignDivision["NameNextText"] = 21] = "NameNextText";
+    VisitorDesignDivision[VisitorDesignDivision["NameNextText"] = 21] = "NameNextText";
     /** 名前（次回先頭） - 背景 */
-    VisiterDesignDivision[VisiterDesignDivision["NameNextBGC"] = 22] = "NameNextBGC";
+    VisitorDesignDivision[VisitorDesignDivision["NameNextBGC"] = 22] = "NameNextBGC";
     /** 野手成績 - 文字 */
-    VisiterDesignDivision[VisiterDesignDivision["FielderStatsText"] = 23] = "FielderStatsText";
+    VisitorDesignDivision[VisitorDesignDivision["FielderStatsText"] = 23] = "FielderStatsText";
     /** 野手成績 - 背景 */
-    VisiterDesignDivision[VisiterDesignDivision["FielderStatsBGC"] = 24] = "FielderStatsBGC";
+    VisitorDesignDivision[VisitorDesignDivision["FielderStatsBGC"] = 24] = "FielderStatsBGC";
     /** 守備表示（野手） - 文字 */
-    VisiterDesignDivision[VisiterDesignDivision["DispPositionFielderText"] = 25] = "DispPositionFielderText";
+    VisitorDesignDivision[VisitorDesignDivision["DispPositionFielderText"] = 25] = "DispPositionFielderText";
     /** 守備表示（野手） - 背景 */
-    VisiterDesignDivision[VisiterDesignDivision["DispPositionFielderBGC"] = 26] = "DispPositionFielderBGC";
+    VisitorDesignDivision[VisitorDesignDivision["DispPositionFielderBGC"] = 26] = "DispPositionFielderBGC";
     /** 守備表示（走者） - 文字 */
-    VisiterDesignDivision[VisiterDesignDivision["DispPositionRunnerText"] = 27] = "DispPositionRunnerText";
+    VisitorDesignDivision[VisitorDesignDivision["DispPositionRunnerText"] = 27] = "DispPositionRunnerText";
     /** 守備表示（走者） - 背景 */
-    VisiterDesignDivision[VisiterDesignDivision["DispPositionRunnerBGC"] = 28] = "DispPositionRunnerBGC";
+    VisitorDesignDivision[VisitorDesignDivision["DispPositionRunnerBGC"] = 28] = "DispPositionRunnerBGC";
     /** 投手成績 - 文字 */
-    VisiterDesignDivision[VisiterDesignDivision["PitcherStatsText"] = 29] = "PitcherStatsText";
+    VisitorDesignDivision[VisitorDesignDivision["PitcherStatsText"] = 29] = "PitcherStatsText";
     /** 投手成績 - 背景 */
-    VisiterDesignDivision[VisiterDesignDivision["PitcherStatsBGC"] = 30] = "PitcherStatsBGC";
+    VisitorDesignDivision[VisitorDesignDivision["PitcherStatsBGC"] = 30] = "PitcherStatsBGC";
     /** 交代時 */
-    VisiterDesignDivision[VisiterDesignDivision["Change"] = 31] = "Change";
-})(VisiterDesignDivision = exports.VisiterDesignDivision || (exports.VisiterDesignDivision = {}));
+    VisitorDesignDivision[VisitorDesignDivision["Change"] = 31] = "Change";
+})(VisitorDesignDivision = exports.VisitorDesignDivision || (exports.VisitorDesignDivision = {}));
 /**
  * デザイン区分（ホーム）
  */
@@ -193,11 +193,11 @@ var UmpireDesignDivision;
 var GameInfoDivision;
 (function (GameInfoDivision) {
     /** ビジターチーム名 */
-    GameInfoDivision[GameInfoDivision["VisiterTeamName"] = 0] = "VisiterTeamName";
+    GameInfoDivision[GameInfoDivision["VisitorTeamName"] = 0] = "VisitorTeamName";
     /** ビジターチームテキスト */
-    GameInfoDivision[GameInfoDivision["VisiterTeamText"] = 1] = "VisiterTeamText";
+    GameInfoDivision[GameInfoDivision["VisitorTeamText"] = 1] = "VisitorTeamText";
     /** ビジター最終行 */
-    GameInfoDivision[GameInfoDivision["VisiterLastRow"] = 2] = "VisiterLastRow";
+    GameInfoDivision[GameInfoDivision["VisitorLastRow"] = 2] = "VisitorLastRow";
     /** ホームチーム名 */
     GameInfoDivision[GameInfoDivision["HomeTeamName"] = 3] = "HomeTeamName";
     /** ホームチームテキスト */
@@ -214,13 +214,13 @@ var GameInfoDivision;
 /**
  * ビジターorホーム
  */
-var VisiterHomeDivision;
-(function (VisiterHomeDivision) {
+var VisitorHomeDivision;
+(function (VisitorHomeDivision) {
     /** ビジター */
-    VisiterHomeDivision[VisiterHomeDivision["Visiter"] = 1] = "Visiter";
+    VisitorHomeDivision[VisitorHomeDivision["Visitor"] = 1] = "Visitor";
     /** ホーム */
-    VisiterHomeDivision[VisiterHomeDivision["Home"] = 2] = "Home";
-})(VisiterHomeDivision = exports.VisiterHomeDivision || (exports.VisiterHomeDivision = {}));
+    VisitorHomeDivision[VisitorHomeDivision["Home"] = 2] = "Home";
+})(VisitorHomeDivision = exports.VisitorHomeDivision || (exports.VisitorHomeDivision = {}));
 /**
  * エクセル列名
  */
@@ -236,7 +236,7 @@ var ExcelColumnsName;
     ExcelColumnsName[ExcelColumnsName["Triple"] = 8] = "Triple";
     ExcelColumnsName[ExcelColumnsName["HomeRun"] = 9] = "HomeRun";
     ExcelColumnsName[ExcelColumnsName["TotalBases"] = 10] = "TotalBases";
-    ExcelColumnsName[ExcelColumnsName["Run"] = 11] = "Run";
+    ExcelColumnsName[ExcelColumnsName["RBI"] = 11] = "RBI";
     ExcelColumnsName[ExcelColumnsName["OBP"] = 12] = "OBP";
     ExcelColumnsName[ExcelColumnsName["OPS"] = 13] = "OPS";
     ExcelColumnsName[ExcelColumnsName["SO"] = 14] = "SO";
@@ -251,54 +251,85 @@ var ExcelColumnsName;
     ExcelColumnsName[ExcelColumnsName["FullName"] = 23] = "FullName";
 })(ExcelColumnsName = exports.ExcelColumnsName || (exports.ExcelColumnsName = {}));
 /**
+ * エクセル列名（xlsx-populate用）
+ */
+var ExcelColumnsNamePopulate;
+(function (ExcelColumnsNamePopulate) {
+    ExcelColumnsNamePopulate[ExcelColumnsNamePopulate["Id"] = 2] = "Id";
+    ExcelColumnsNamePopulate[ExcelColumnsNamePopulate["Number"] = 3] = "Number";
+    ExcelColumnsNamePopulate[ExcelColumnsNamePopulate["Name"] = 4] = "Name";
+    ExcelColumnsNamePopulate[ExcelColumnsNamePopulate["Avg"] = 5] = "Avg";
+    ExcelColumnsNamePopulate[ExcelColumnsNamePopulate["AtBat"] = 6] = "AtBat";
+    ExcelColumnsNamePopulate[ExcelColumnsNamePopulate["Hit"] = 7] = "Hit";
+    ExcelColumnsNamePopulate[ExcelColumnsNamePopulate["Double"] = 8] = "Double";
+    ExcelColumnsNamePopulate[ExcelColumnsNamePopulate["Triple"] = 9] = "Triple";
+    ExcelColumnsNamePopulate[ExcelColumnsNamePopulate["HomeRun"] = 10] = "HomeRun";
+    ExcelColumnsNamePopulate[ExcelColumnsNamePopulate["TotalBases"] = 11] = "TotalBases";
+    ExcelColumnsNamePopulate[ExcelColumnsNamePopulate["RBI"] = 12] = "RBI";
+    ExcelColumnsNamePopulate[ExcelColumnsNamePopulate["OBP"] = 13] = "OBP";
+    ExcelColumnsNamePopulate[ExcelColumnsNamePopulate["OPS"] = 14] = "OPS";
+    ExcelColumnsNamePopulate[ExcelColumnsNamePopulate["SO"] = 15] = "SO";
+    ExcelColumnsNamePopulate[ExcelColumnsNamePopulate["BB"] = 16] = "BB";
+    ExcelColumnsNamePopulate[ExcelColumnsNamePopulate["HBP"] = 17] = "HBP";
+    ExcelColumnsNamePopulate[ExcelColumnsNamePopulate["SacBunt"] = 18] = "SacBunt";
+    ExcelColumnsNamePopulate[ExcelColumnsNamePopulate["SacFly"] = 19] = "SacFly";
+    ExcelColumnsNamePopulate[ExcelColumnsNamePopulate["SB"] = 20] = "SB";
+    ExcelColumnsNamePopulate[ExcelColumnsNamePopulate["CS"] = 21] = "CS";
+    ExcelColumnsNamePopulate[ExcelColumnsNamePopulate["DP"] = 22] = "DP";
+    ExcelColumnsNamePopulate[ExcelColumnsNamePopulate["RC27"] = 23] = "RC27";
+    ExcelColumnsNamePopulate[ExcelColumnsNamePopulate["FullName"] = 24] = "FullName";
+})(ExcelColumnsNamePopulate = exports.ExcelColumnsNamePopulate || (exports.ExcelColumnsNamePopulate = {}));
+/**
  * 結果ラジオボタン
  */
 var ResultCheckBox;
 (function (ResultCheckBox) {
-    /** 三振 */
-    ResultCheckBox[ResultCheckBox["StrikeOut"] = 0] = "StrikeOut";
     /** ゴロ */
-    ResultCheckBox[ResultCheckBox["GroundBall"] = 1] = "GroundBall";
-    /** 併殺 */
-    ResultCheckBox[ResultCheckBox["DoublePlay"] = 2] = "DoublePlay";
+    ResultCheckBox[ResultCheckBox["GroundBall"] = 0] = "GroundBall";
     /** フライ */
-    ResultCheckBox[ResultCheckBox["FlyBall"] = 3] = "FlyBall";
+    ResultCheckBox[ResultCheckBox["FlyBall"] = 1] = "FlyBall";
+    /** ライナー */
+    ResultCheckBox[ResultCheckBox["LineDrive"] = 2] = "LineDrive";
+    /** 併殺 */
+    ResultCheckBox[ResultCheckBox["DoublePlay"] = 3] = "DoublePlay";
+    /** 三振 */
+    ResultCheckBox[ResultCheckBox["StrikeOut"] = 4] = "StrikeOut";
     /** 四球 */
-    ResultCheckBox[ResultCheckBox["FourPitchWalk"] = 4] = "FourPitchWalk";
+    ResultCheckBox[ResultCheckBox["FourPitchWalk"] = 5] = "FourPitchWalk";
     /** 死球 */
-    ResultCheckBox[ResultCheckBox["HitByPitch"] = 5] = "HitByPitch";
+    ResultCheckBox[ResultCheckBox["HitByPitch"] = 6] = "HitByPitch";
     /** 敬遠 */
-    ResultCheckBox[ResultCheckBox["IntentionalWalk"] = 6] = "IntentionalWalk";
+    ResultCheckBox[ResultCheckBox["IntentionalWalk"] = 7] = "IntentionalWalk";
     /** 邪飛 */
-    ResultCheckBox[ResultCheckBox["FoulFly"] = 7] = "FoulFly";
+    ResultCheckBox[ResultCheckBox["FoulFly"] = 8] = "FoulFly";
     /** 犠飛 */
-    ResultCheckBox[ResultCheckBox["SacrificeFly"] = 8] = "SacrificeFly";
+    ResultCheckBox[ResultCheckBox["SacrificeFly"] = 9] = "SacrificeFly";
     /** 犠打 */
-    ResultCheckBox[ResultCheckBox["SacrificeBunt"] = 9] = "SacrificeBunt";
+    ResultCheckBox[ResultCheckBox["SacrificeBunt"] = 10] = "SacrificeBunt";
     /** 犠打失策 */
-    ResultCheckBox[ResultCheckBox["SacrificeBuntError"] = 10] = "SacrificeBuntError";
+    ResultCheckBox[ResultCheckBox["SacrificeBuntError"] = 11] = "SacrificeBuntError";
     /** 犠打野選 */
-    ResultCheckBox[ResultCheckBox["SacrificeBuntFC"] = 11] = "SacrificeBuntFC";
+    ResultCheckBox[ResultCheckBox["SacrificeBuntFC"] = 12] = "SacrificeBuntFC";
     /** 安打 */
-    ResultCheckBox[ResultCheckBox["SingleHit"] = 12] = "SingleHit";
+    ResultCheckBox[ResultCheckBox["SingleHit"] = 13] = "SingleHit";
     /** 二塁打 */
-    ResultCheckBox[ResultCheckBox["TwoBaseHit"] = 13] = "TwoBaseHit";
+    ResultCheckBox[ResultCheckBox["TwoBaseHit"] = 14] = "TwoBaseHit";
     /** 三塁打 */
-    ResultCheckBox[ResultCheckBox["ThreeBaseHit"] = 14] = "ThreeBaseHit";
+    ResultCheckBox[ResultCheckBox["ThreeBaseHit"] = 15] = "ThreeBaseHit";
     /** 本塁打 */
-    ResultCheckBox[ResultCheckBox["HomeRun"] = 15] = "HomeRun";
+    ResultCheckBox[ResultCheckBox["HomeRun"] = 16] = "HomeRun";
     /** 失策 */
-    ResultCheckBox[ResultCheckBox["Error"] = 16] = "Error";
+    ResultCheckBox[ResultCheckBox["Error"] = 17] = "Error";
     /** 野選 */
-    ResultCheckBox[ResultCheckBox["FieldersChoice"] = 17] = "FieldersChoice";
+    ResultCheckBox[ResultCheckBox["FieldersChoice"] = 18] = "FieldersChoice";
     /** 振り逃げ */
-    ResultCheckBox[ResultCheckBox["UncaughtThirdStrike"] = 18] = "UncaughtThirdStrike";
+    ResultCheckBox[ResultCheckBox["UncaughtThirdStrike"] = 19] = "UncaughtThirdStrike";
     /** 打撃妨害 */
-    ResultCheckBox[ResultCheckBox["Interference"] = 19] = "Interference";
+    ResultCheckBox[ResultCheckBox["Interference"] = 20] = "Interference";
     /** 走塁妨害 */
-    ResultCheckBox[ResultCheckBox["Obstruction"] = 20] = "Obstruction";
+    ResultCheckBox[ResultCheckBox["Obstruction"] = 21] = "Obstruction";
     /** 未選択 */
-    ResultCheckBox[ResultCheckBox["UnSelected"] = 21] = "UnSelected";
+    ResultCheckBox[ResultCheckBox["UnSelected"] = 22] = "UnSelected";
 })(ResultCheckBox = exports.ResultCheckBox || (exports.ResultCheckBox = {}));
 /**
  * 結果守備位置
@@ -352,4 +383,36 @@ var PositionName;
     /** 右翼手 */
     PositionName[PositionName["RF"] = 9] = "RF";
 })(PositionName = exports.PositionName || (exports.PositionName = {}));
+/**
+ * メッセージ
+ */
+var Message;
+(function (Message) {
+    Message["Message001"] = "\u5B88\u5099\u4F4D\u7F6E\u304C\u9078\u629E\u3055\u308C\u3066\u3044\u307E\u305B\u3093\u3002";
+    Message["Message002"] = "\u8D70\u8005\u306E\u6570\u3068\u5841\u72B6\u6CC1\u304C\u5408\u3063\u3066\u3044\u307E\u305B\u3093\u3002";
+    Message["Message003"] = "\u7D50\u679C\u3092\u78BA\u5B9A\u3057\u307E\u3059\u304B\uFF1F";
+    Message["Message004"] = "\u8A66\u5408\u7D42\u4E86\u6761\u4EF6\u3092\u6E80\u305F\u3057\u307E\u3057\u305F\u3002\u7D42\u4E86\u3057\u307E\u3059\u304B\uFF1F";
+})(Message = exports.Message || (exports.Message = {}));
+/**
+ * ダイアログ呼び出し区分
+ */
+var DialogCallDivision;
+(function (DialogCallDivision) {
+    /** 審判 */
+    DialogCallDivision["Umpire"] = "\u5BE9\u5224";
+    /** 選手情報（ビジター） */
+    DialogCallDivision["VisitorMemberInfo"] = "\u9078\u624B\u60C5\u5831\uFF08\u30D3\u30B8\u30BF\u30FC\uFF09";
+    /** 選手情報（ホーム） */
+    DialogCallDivision["HomeMemberInfo"] = "\u9078\u624B\u60C5\u5831\uFF08\u30DB\u30FC\u30E0\uFF09";
+    /** 打席結果（ビジター） */
+    DialogCallDivision["VisitorBattingResult"] = "\u6253\u5E2D\u7D50\u679C\uFF08\u30D3\u30B8\u30BF\u30FC\uFF09";
+    /** 打席結果（ホーム） */
+    DialogCallDivision["HomeBattingResult"] = "\u6253\u5E2D\u7D50\u679C\uFF08\u30DB\u30FC\u30E0\uFF09";
+    /** 投手情報（ビジター） */
+    DialogCallDivision["VisitorPitcherInfo"] = "\u6295\u624B\u60C5\u5831\uFF08\u30D3\u30B8\u30BF\u30FC\uFF09";
+    /** 投手情報（ホーム） */
+    DialogCallDivision["HomePitcherInfo"] = "\u6295\u624B\u60C5\u5831\uFF08\u30DB\u30FC\u30E0\uFF09";
+    /** スコア */
+    DialogCallDivision["Score"] = "\u30B9\u30B3\u30A2";
+})(DialogCallDivision = exports.DialogCallDivision || (exports.DialogCallDivision = {}));
 //# sourceMappingURL=constant.js.map

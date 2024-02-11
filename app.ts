@@ -1,10 +1,16 @@
-import { ExcelColumnsName } from './src/components/ts/constant';
-import { DefaultMemberModel, BatterStatsModel } from './src/components/ts/model/member-info-model';
+import { ExcelColumnsName, ExcelColumnsNamePopulate } from './src/components/ts/constant';
+import { DefaultMemberModel, DispBatterStatsModel, BatterStatsUpdateModel, AtBatResultModel } from './src/components/ts/model/member-info-model';
 import express from 'express'
 import path from 'path';
 
 const port = Number(process.env.PORT) || 3000;
 const app = express()
+const xlsx = require('xlsx');
+const excel = require('exceljs');
+const xlsxPopulate = require('xlsx-populate');
+// const book = xlsx.readFile('./Scoreboard.xlsm');
+const bodyParser = require('body-parser');
+const jsonParser = bodyParser.json();
 
 // log
 app.all("*", (req: any, res: any, next: any) => {
@@ -108,16 +114,73 @@ app.get('/getMember', (req: any, res: any) => {
 
       switch (col) {
         case ExcelColumnsName.Id:
-          data.Id = worksheet[cellAddress].v;
+          data.Id = String(worksheet[cellAddress].v);
           break;
         case ExcelColumnsName.Number:
-          data.Number = worksheet[cellAddress].v;
+          data.Number = String(worksheet[cellAddress].v);
           break;
         case ExcelColumnsName.Name:
-          data.Name = worksheet[cellAddress].v;
+          data.Name = String(worksheet[cellAddress].v);
+          break;
+        case ExcelColumnsName.Avg:
+          data.BatterStats.AVG = String(worksheet[cellAddress].w);
+          break;
+        case ExcelColumnsName.AtBat:
+          data.BatterStats.Atbat = Number(worksheet[cellAddress].w);
+          break;
+        case ExcelColumnsName.Hit:
+          data.BatterStats.Hit = Number(worksheet[cellAddress].w);
+          break;
+        case ExcelColumnsName.Double:
+          data.BatterStats.Double = Number(worksheet[cellAddress].w);
+          break;
+        case ExcelColumnsName.Triple:
+          data.BatterStats.Triple = Number(worksheet[cellAddress].w);
+          break;
+        case ExcelColumnsName.HomeRun:
+          data.BatterStats.HomeRun = Number(worksheet[cellAddress].w);
+          break;
+        case ExcelColumnsName.TotalBases:
+          data.BatterStats.TotalBases = Number(worksheet[cellAddress].w);
+          break;
+        case ExcelColumnsName.RBI:
+          data.BatterStats.RBI = Number(worksheet[cellAddress].w);
+          break;
+        case ExcelColumnsName.OBP:
+          data.BatterStats.OBP = String(worksheet[cellAddress].w);
+          break;
+        case ExcelColumnsName.OPS:
+          data.BatterStats.OPS = String(worksheet[cellAddress].w);
+          break;
+        case ExcelColumnsName.SO:
+          data.BatterStats.SO = Number(worksheet[cellAddress].w);
+          break;
+        case ExcelColumnsName.BB:
+          data.BatterStats.BB = Number(worksheet[cellAddress].w);
+          break;
+        case ExcelColumnsName.HBP:
+          data.BatterStats.HBP = Number(worksheet[cellAddress].w);
+          break;
+        case ExcelColumnsName.SacBunt:
+          data.BatterStats.SacBunt = Number(worksheet[cellAddress].w);
+          break;
+        case ExcelColumnsName.SacFly:
+          data.BatterStats.SacFly = Number(worksheet[cellAddress].w);
+          break;
+        case ExcelColumnsName.SB:
+          data.BatterStats.SB = Number(worksheet[cellAddress].w);
+          break;
+        case ExcelColumnsName.CS:
+          data.BatterStats.CS = Number(worksheet[cellAddress].w);
+          break;
+        case ExcelColumnsName.DP:
+          data.BatterStats.DP = Number(worksheet[cellAddress].w);
+          break;
+        case ExcelColumnsName.RC27:
+          data.BatterStats.RC27 = String(worksheet[cellAddress].w);
           break;
         case ExcelColumnsName.FullName:
-          data.FullName = worksheet[cellAddress].v;
+          data.FullName = String(worksheet[cellAddress].v);
         default:
           break;
       }
@@ -132,68 +195,102 @@ app.get('/getMember', (req: any, res: any) => {
 });
 
 /**
- * 打者成績取得
+ * 打者成績更新
  */
-app.get('/getBatterStats', (req: any, res: any) => {
+app.post('/updateBatterStats', jsonParser, (req: any, res: any) => {
   res.set({ 'Access-Control-Allow-Origin': '*' });
+  let result = false;
 
-  const xlsx = require('xlsx');
-  const book = xlsx.readFile('./Scoreboard.xlsm');
-  const teamName = req.query.Team;
-  const row = Number(req.query.Row);
-
-  const worksheet = book.Sheets[teamName];
-
-  let returnData = new BatterStatsModel();
-  let atBat = '';
-  let hit = '';
-  for (let col = ExcelColumnsName.Id; col <= ExcelColumnsName.FullName; col++) {
-    let cellAddress = xlsx.utils.encode_cell({ c: col, r: row })
+  xlsxPopulate.fromFileAsync('./Scoreboard.xlsm').then(workbook => {
+    try {
+      const postData = req.body;
+      const row = Number(postData.Row) + 1;
+      const teamName = postData.Team;
+      const plusData = postData.PlusData;
+      const sheet = workbook.sheet(teamName);
     
-    if (worksheet[cellAddress] === undefined) {
-      continue;
+      let afterData = null;
+      // 打数
+      if (plusData.AtBat == 1) {
+        afterData = Number(sheet.cell(row, ExcelColumnsNamePopulate.AtBat).value()) + plusData.AtBat;
+        sheet.cell(row, ExcelColumnsNamePopulate.AtBat).value(afterData);
+      }
+      // 安打
+      if (plusData.Hit == 1) {
+        afterData = Number(sheet.cell(row, ExcelColumnsNamePopulate.Hit).value()) + plusData.Hit;
+        sheet.cell(row, ExcelColumnsNamePopulate.Hit).value(afterData);
+      }
+      // 二塁打
+      if (plusData.Double == 1) {
+        afterData = Number(sheet.cell(row, ExcelColumnsNamePopulate.Double).value()) + plusData.Double;
+        sheet.cell(row, ExcelColumnsNamePopulate.Double).value(afterData);
+      }
+      // 三塁打
+      if (plusData.Triple == 1) {
+        afterData = Number(sheet.cell(row, ExcelColumnsNamePopulate.Triple).value()) + plusData.Triple;
+        sheet.cell(row, ExcelColumnsNamePopulate.Triple).value(afterData);
+      }
+      // 本塁打
+      if (plusData.HomeRun == 1) {
+        afterData = Number(sheet.cell(row, ExcelColumnsNamePopulate.HomeRun).value()) + plusData.HomeRun;
+        sheet.cell(row, ExcelColumnsNamePopulate.HomeRun).value(afterData);
+      }
+      // 打点
+      if (plusData.RBI >= 1) {
+        afterData = Number(sheet.cell(row, ExcelColumnsNamePopulate.RBI).value()) + plusData.RBI;
+        sheet.cell(row, ExcelColumnsNamePopulate.RBI).value(afterData);
+      }
+      // 三振
+      if (plusData.SO == 1) {
+        afterData = Number(sheet.cell(row, ExcelColumnsNamePopulate.SO).value()) + plusData.SO;
+        sheet.cell(row, ExcelColumnsNamePopulate.SO).value(afterData);
+      }
+      // 四球
+      if (plusData.BB == 1) {
+        afterData = Number(sheet.cell(row, ExcelColumnsNamePopulate.BB).value()) + plusData.BB;
+        sheet.cell(row, ExcelColumnsNamePopulate.BB).value(afterData);
+      }
+      // 死球
+      if (plusData.HBP == 1) {
+        afterData = Number(sheet.cell(row, ExcelColumnsNamePopulate.HBP).value()) + plusData.HBP;
+        sheet.cell(row, ExcelColumnsNamePopulate.HBP).value(afterData);
+      }
+      // 犠打
+      if (plusData.SacBunt == 1) {
+        afterData = Number(sheet.cell(row, ExcelColumnsNamePopulate.SacBunt).value()) + plusData.SacBunt;
+        sheet.cell(row, ExcelColumnsNamePopulate.SacBunt).value(afterData);
+      }
+      // 犠飛
+      if (plusData.SacFly == 1) {
+        afterData = Number(sheet.cell(row, ExcelColumnsNamePopulate.SacFly).value()) + plusData.SacFly;
+        sheet.cell(row, ExcelColumnsNamePopulate.SacFly).value(afterData);
+      }
+      // 盗塁
+      if (plusData.SB == 1) {
+        afterData = Number(sheet.cell(row, ExcelColumnsNamePopulate.SB).value()) + plusData.SB;
+        sheet.cell(row, ExcelColumnsNamePopulate.SB).value(afterData);
+      }
+      // 盗塁死
+      if (plusData.CS == 1) {
+        afterData = Number(sheet.cell(row, ExcelColumnsNamePopulate.CS).value()) + plusData.CS;
+        sheet.cell(row, ExcelColumnsNamePopulate.CS).value(afterData);
+      }
+      // 併殺打
+      if (plusData.DP == 1) {
+        afterData = Number(sheet.cell(row, ExcelColumnsNamePopulate.DP).value()) + plusData.DP;
+        sheet.cell(row, ExcelColumnsNamePopulate.DP).value(afterData);
+      }
+  
+      // 書き込み
+      workbook.toFileAsync('./Scoreboard.xlsm').then(function () {
+        result = true;
+        res.send(result);
+      });
+    } catch {
+      result = false;
+      res.send(result);
     }
-
-    switch (col) {
-      case ExcelColumnsName.Number:
-        returnData.Number = worksheet[cellAddress].w;
-        break;
-      case ExcelColumnsName.Avg:
-        returnData.AVG = worksheet[cellAddress].w;
-        break;
-      case ExcelColumnsName.AtBat:
-        atBat = worksheet[cellAddress].w;
-        break;
-      case ExcelColumnsName.Hit:
-        hit = worksheet[cellAddress].w;
-        break;
-      case ExcelColumnsName.HomeRun:
-        returnData.HR = worksheet[cellAddress].w;
-        break;
-      case ExcelColumnsName.Run:
-        returnData.RBI = worksheet[cellAddress].w;
-        break;
-      case ExcelColumnsName.OBP:
-        returnData.OBP = worksheet[cellAddress].w;
-        break;
-      case ExcelColumnsName.OPS:
-        returnData.OPS = worksheet[cellAddress].w;
-        break;
-      case ExcelColumnsName.SB:
-        returnData.SB = worksheet[cellAddress].w;
-        break;
-      case ExcelColumnsName.RC27:
-        returnData.RC27 = worksheet[cellAddress].w;
-        break;
-      case ExcelColumnsName.FullName:
-        returnData.Name = worksheet[cellAddress].w;
-      default:
-        break;
-    }
-  }
-  returnData.AB_H = atBat + ' - ' + hit;
-
-  res.send(returnData);
+  });
 });
 
 // start

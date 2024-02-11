@@ -1,9 +1,9 @@
-import { RunningScoreModel, DispRunningScoreModel } from './model/score-info-model';
+import { RunningScoreModel, DispRunningScoreModel, DispScoreModel, CountModel } from './model/score-info-model';
 import { MemberController } from './member-controller';
-import { GameInfoDivision, VisiterHomeDivision } from './constant';
+import { GameInfoDivision, VisitorHomeDivision } from './constant';
 import { GameInfoModel, GameProgressInfoModel } from './model/game-model';
 import { ExcelController } from './excel-controller';
-import { DefaultMemberModel, ParticipationMemberPerTeamModel, InputVTeamModel, BattingResultPerTeamModel, BattingResultAtGameModel, PitcherInfoModel, PositionModel, BatterStatsModel, RunnerName, RunnerStateModel, RunnerNameModel } from './model/member-info-model';
+import { DefaultMemberModel, ParticipationMemberPerTeamModel, InputVTeamModel, BattingResultPerTeamModel, BattingResultAtGameModel, PitcherInfoModel, PositionModel, DispBatterStatsModel, RunnerName, RunnerStateModel, RunnerNameModel, AtBatResultModel, ParticipationMemberDispStatus } from './model/member-info-model';
 /**
  * 試合関連のコントローラークラス
  */
@@ -34,14 +34,15 @@ export class GameController {
                   'BottomOfThe10', 
                   'BottomOfThe11', 
                   'BottomOfThe12', 
-                  'VisiterR', 
-                  'VisiterH', 
-                  'VisiterE', 
-                  'VisiterLOB', 
+                  'VisitorR', 
+                  'VisitorH', 
+                  'VisitorE', 
+                  'VisitorLOB', 
                   'HomeR', 
                   'HomeH', 
                   'HomeE', 
                   'HomeLOB'] as const;
+    memberController = new MemberController();
 
     /**
      * 試合開始時試合情報取得
@@ -54,9 +55,9 @@ export class GameController {
         // 戻り値
         const returnData: GameInfoModel = new GameInfoModel();
 
-        returnData.GameBaseInfo.VisiterTeamName = responseData[GameInfoDivision.VisiterTeamName];
-        returnData.GameBaseInfo.VisiterTeamText = responseData[GameInfoDivision.VisiterTeamText];
-        returnData.GameBaseInfo.VisiterLastRow = responseData[GameInfoDivision.VisiterLastRow];
+        returnData.GameBaseInfo.VisitorTeamName = responseData[GameInfoDivision.VisitorTeamName];
+        returnData.GameBaseInfo.VisitorTeamText = responseData[GameInfoDivision.VisitorTeamText];
+        returnData.GameBaseInfo.VisitorLastRow = responseData[GameInfoDivision.VisitorLastRow];
         returnData.GameBaseInfo.HomeTeamName = responseData[GameInfoDivision.HomeTeamName];
         returnData.GameBaseInfo.HomeTeamText = responseData[GameInfoDivision.HomeTeamText];
         returnData.GameBaseInfo.HomeLastRow = responseData[GameInfoDivision.HomeLastRow];
@@ -69,15 +70,15 @@ export class GameController {
     
     /**
      * 試合開始時データセット
-     * @param visiterMember ビジターメンバー
+     * @param visitorMember ビジターメンバー
      * @param homeMember ホームメンバー
      * @returns 打席結果、投手情報
      */
-    public SetDataGameStart(visiterMember: ParticipationMemberPerTeamModel, homeMember: ParticipationMemberPerTeamModel)
-        : [BattingResultPerTeamModel, BattingResultPerTeamModel, PitcherInfoModel[], PitcherInfoModel[], PitcherInfoModel, PositionModel, GameProgressInfoModel] {
-        let returnVisiterBatting = new BattingResultPerTeamModel();
+    public SetDataGameStart(visitorMember: ParticipationMemberPerTeamModel, homeMember: ParticipationMemberPerTeamModel)
+        : [ParticipationMemberPerTeamModel, BattingResultPerTeamModel, ParticipationMemberPerTeamModel, BattingResultPerTeamModel, PitcherInfoModel[], PitcherInfoModel[], PitcherInfoModel, PositionModel, GameProgressInfoModel] {
+        let returnVisitorBatting = new BattingResultPerTeamModel();
         let returnHomeBatting = new BattingResultPerTeamModel();
-        let returnVisiterPitcher: PitcherInfoModel[] = [];
+        let returnVisitorPitcher: PitcherInfoModel[] = [];
         let returnHomePitcher: PitcherInfoModel[] = [];
         let returnPitcherInfo = new PitcherInfoModel();
         let returnPosition = new PositionModel();
@@ -85,19 +86,25 @@ export class GameController {
 
         const memberController = new MemberController();
         // 打席結果
-        [returnVisiterBatting, returnHomeBatting] = memberController.SetBattingResultGameStart(visiterMember, homeMember);
+        [returnVisitorBatting, returnHomeBatting] = memberController.SetBattingResultGameStart(visitorMember, homeMember);
         // 投手情報
-        returnVisiterPitcher = memberController.SetPitcherInfo(visiterMember);
-        returnHomePitcher = memberController.SetPitcherInfo(homeMember);
+        returnVisitorPitcher = memberController.SetPitcherInfo(visitorMember, returnVisitorPitcher);
+        returnHomePitcher = memberController.SetPitcherInfo(homeMember, returnHomePitcher);
         returnPitcherInfo = memberController.GetPitcherInfo(homeMember, returnHomePitcher);
         // 守備位置
         returnPosition = memberController.SetPositionData(homeMember);
         // 試合情報
         returnGameProgressInfo.IsStarted = true;
         returnGameProgressInfo.NowInning = 1;
-        returnGameProgressInfo.NowAttackTeam = VisiterHomeDivision.Visiter;
+        returnGameProgressInfo.NowAttackTeam = VisitorHomeDivision.Visitor;
 
-        return [returnVisiterBatting, returnHomeBatting, returnVisiterPitcher, returnHomePitcher, returnPitcherInfo, returnPosition, returnGameProgressInfo];
+        // メンバーのDisplayをfalseにする
+        this.orderKeysDH.forEach(key => {
+            visitorMember[key].DispStatus.Display = false;
+            homeMember[key].DispStatus.Display = false;
+        });
+        
+        return [visitorMember, returnVisitorBatting, homeMember, returnHomeBatting, returnVisitorPitcher, returnHomePitcher, returnPitcherInfo, returnPosition, returnGameProgressInfo];
     }
 
     /**
@@ -105,30 +112,39 @@ export class GameController {
      * @param member 編集前メンバー
      * @returns 編集後メンバー
      */
-    public NextBatter(member: ParticipationMemberPerTeamModel): [ParticipationMemberPerTeamModel, RunnerName] {
+    public NextBatter(member: ParticipationMemberPerTeamModel, batRes: BattingResultPerTeamModel): [ParticipationMemberPerTeamModel, RunnerName, AtBatResultModel[]] {
         const batterName = new RunnerName();
+        let battingResultList: AtBatResultModel[] = [];
         for (let i = 0; i < 9; i++) {
             if (member[this.orderKeysDH[i]].DispStatus.Batter){
                 if (i < 8) {
+                    member[this.orderKeysDH[i]].DispStatus = new ParticipationMemberDispStatus();
                     member[this.orderKeysDH[i]].DispStatus.Basic = true;
-                    member[this.orderKeysDH[i]].DispStatus.Batter = false;
+                    member[this.orderKeysDH[i + 1]].DispStatus = new ParticipationMemberDispStatus();
                     member[this.orderKeysDH[i + 1]].DispStatus.Batter = true;
-                    member[this.orderKeysDH[i + 1]].DispStatus.Basic = false;
                     batterName.Order = i + 2;
                     batterName.Name = member[this.orderKeysDH[i + 1]].Name;
+
+                    // 打席結果取得
+                    const id = member[this.orderKeysDH[i + 1]].ID;
+                    battingResultList = this.memberController.GetBattingResult(batRes, i + 1, id);
                 } else {
+                    member[this.orderKeysDH[i]].DispStatus = new ParticipationMemberDispStatus();
                     member[this.orderKeysDH[i]].DispStatus.Basic = true;
-                    member[this.orderKeysDH[i]].DispStatus.Batter = false;
+                    member[this.orderKeysDH[0]].DispStatus = new ParticipationMemberDispStatus();
                     member[this.orderKeysDH[0]].DispStatus.Batter = true;
-                    member[this.orderKeysDH[0]].DispStatus.Basic = false;
                     batterName.Order = 1;
                     batterName.Name = member[this.orderKeysDH[0]].Name;
+
+                    // 打席結果取得
+                    const id = member[this.orderKeysDH[0]].ID;
+                    battingResultList = this.memberController.GetBattingResult(batRes, 0, id);
                 }
                 break;
             }
         }
 
-        return [member, batterName];
+        return [member, batterName, battingResultList];
     }
 
     /**
@@ -143,11 +159,11 @@ export class GameController {
                 batter.Order = i + 1;
                 batter.Name = member[this.orderKeysDH[i]].Name;
                 if (i == 0) {
+                    member[this.orderKeysDH[8]].DispStatus = new ParticipationMemberDispStatus();
                     member[this.orderKeysDH[8]].DispStatus.Runner = true;
-                    member[this.orderKeysDH[8]].DispStatus.Basic = false;
                 } else {
+                    member[this.orderKeysDH[i - 1]].DispStatus = new ParticipationMemberDispStatus();
                     member[this.orderKeysDH[i - 1]].DispStatus.Runner = true;
-                    member[this.orderKeysDH[i - 1]].DispStatus.Basic = false;
                 }
                 break;
             }
@@ -181,6 +197,8 @@ export class GameController {
                     returnData.First.Order = i + 1;
                     returnData.First.Name = member[this.orderKeysDH[i]].Name;
                 }
+            } else if (member[this.orderKeysDH[i]].DispStatus.Batter) {
+                returnData.Batter.Name = member[this.orderKeysDH[i]].Name;
             }
 
             if (i == 8) {
@@ -202,7 +220,7 @@ export class GameController {
      */
     public ResolvedRunner(member: ParticipationMemberPerTeamModel, targetList: number[]): ParticipationMemberPerTeamModel {
         targetList.forEach(x => {
-            member[this.orderKeysDH[x - 1]].DispStatus.Runner = false;
+            member[this.orderKeysDH[x - 1]].DispStatus = new ParticipationMemberDispStatus();
             member[this.orderKeysDH[x - 1]].DispStatus.Basic = true;
         });
 
@@ -234,20 +252,20 @@ export class GameController {
         let totalRuns = 0;
         // 配列の要素をtoStringすると要素の存在が不確定なためエラーが発生する
         let nowInningRuns = 0;
-        if (gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter) {
-            if (scoreData.VisiterScore.length < gameInfo.GameProgressInfo.NowInning) {
-                scoreData.VisiterScore.push(runs);
+        if (gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor) {
+            if (scoreData.VisitorScore.length < gameInfo.GameProgressInfo.NowInning) {
+                scoreData.VisitorScore.push(runs);
                 nowInningRuns = runs;
             } else {
-                scoreData.VisiterScore[gameInfo.GameProgressInfo.NowInning - 1] += runs;
-                nowInningRuns = scoreData.VisiterScore[gameInfo.GameProgressInfo.NowInning - 1];
+                scoreData.VisitorScore[gameInfo.GameProgressInfo.NowInning - 1] += runs;
+                nowInningRuns = scoreData.VisitorScore[gameInfo.GameProgressInfo.NowInning - 1];
             }
             // 合計計算
-            scoreData.VisiterScore.forEach(x => {
+            scoreData.VisitorScore.forEach(x => {
                 totalRuns += x;
             })
             dispScoreData[this.inningKeys[setInning]] = nowInningRuns.toString();
-            dispScoreData.VisiterR = totalRuns.toString();
+            dispScoreData.VisitorR = totalRuns.toString();
         } else {
             if (scoreData.HomeScore.length < gameInfo.GameProgressInfo.NowInning) {
                 scoreData.HomeScore.push(runs);
@@ -260,10 +278,62 @@ export class GameController {
             scoreData.HomeScore.forEach(x => {
                 totalRuns += x;
             })
-            dispScoreData[this.inningKeys[setInning + 11]] = nowInningRuns.toString();
+            dispScoreData[this.inningKeys[setInning + 12]] = nowInningRuns.toString();
             dispScoreData.HomeR = totalRuns.toString();
         }
 
         return [scoreData, dispScoreData];
+    }
+
+    /**
+     * 試合終了処理
+     * @param score ランニングスコア
+     * @param dispScore 表示用スコア
+     * @param gameInfo 試合情報
+     * @returns 
+     */
+    public GameSet(score: RunningScoreModel, dispScore: DispScoreModel, gameInfo: GameInfoModel, count: CountModel): [RunningScoreModel, DispScoreModel] {
+        const nowInning = gameInfo.GameProgressInfo.NowInning;
+        const nowAttack = gameInfo.GameProgressInfo.NowAttackTeam;
+        const out = count.Out;
+        let visitorR = 0;
+        let homeR = 0;
+        score.VisitorScore.forEach(x => {
+          visitorR = visitorR + x;
+        })
+        score.HomeScore.forEach(x => {
+          homeR = homeR + x;
+        })
+        // 上限13回以上、9回以降
+        let setInning = 0;
+        if (gameInfo.GameBaseInfo.InningLimit > 12 && gameInfo.GameProgressInfo.NowInning > 9) {
+            const mod = gameInfo.GameProgressInfo.NowInning % 9;
+            if (mod == 0) {
+                setInning = 8;
+            } else {
+                setInning = mod - 1;
+            }
+        } else {
+            setInning = gameInfo.GameProgressInfo.NowInning - 1;
+        }
+
+        if (nowInning == 9 && nowAttack == VisitorHomeDivision.Visitor && visitorR < homeR && out == 3) {
+            if (score.VisitorScore.length == 8) {
+                score.VisitorScore.push(0);
+                dispScore.Score.TopOfThe9 = '0';
+            } else {
+                dispScore.Score.TopOfThe9 = score.VisitorScore[8].toString();
+            }
+            dispScore.Score.BottomOfThe9 = 'X';
+        } else if (nowInning >= 9 && nowAttack == VisitorHomeDivision.Home && visitorR > homeR && out == 3) {
+            if (score.HomeScore.length == nowInning - 1) {
+                score.HomeScore.push(0);
+                dispScore.Score[this.inningKeys[setInning + 12]] = '0';
+            }
+        } else if (nowInning >= 9 && nowAttack == VisitorHomeDivision.Home && visitorR < homeR) {
+            dispScore.Score[this.inningKeys[setInning + 12]] = score.HomeScore[nowInning - 1].toString() + 'x';
+        }
+
+        return [score, dispScore];
     }
 }

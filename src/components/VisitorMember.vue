@@ -1,15 +1,15 @@
 <template>
   <div
     class="Member"
-    :class="[gameInfo.GameBaseInfo.HomePosition == '一塁側' ? 'Position-Right' : 'Position-Left']"
+    :class="[gameInfo.GameBaseInfo.HomePosition == '一塁側' ? 'Position-Left' : 'Position-Right']"
   >
     <div class="Team">
       <div
-        id="homeTeamName"
+        id="visitorTeamName"
         class="Team-Text"
-        v-if="gameInfo.GameBaseInfo.HomeTeamText != ''"
+        v-if="gameInfo.GameBaseInfo.VisitorTeamText != ''"
         :style="[{transform: `scaleX(${teamNameTrans})`, transformOrigin: 'left'}]"
-      >{{ gameInfo.GameBaseInfo.HomeTeamText }}
+      >{{ gameInfo.GameBaseInfo.VisitorTeamText }}
       </div>
     </div>
     <div
@@ -27,7 +27,7 @@
                   'Next-Position-BGC' : data.LeadOff.DispStatus.NextRead}]"
       ></div>
       <div 
-        id="homeLeadOffPos"
+        id="visitorLeadOffPos"
         class="Pos-Text"
         :class="[{'Basic-Position-Text' : data.LeadOff.DispStatus.Basic,
                   'Batter-Position-Text' : data.LeadOff.DispStatus.Batter,
@@ -63,7 +63,7 @@
                   'Member-After-Next' : data.LeadOff.DispStatus.NextRead && data.LeadOff.DispStatus.ChangeAfterMember}]"
       >
         <div
-          id="homeLeadOffName"
+          id="visitorLeadOffName"
           class="Name-Text"
           :class="[leadOffTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
           :style="[{transform: `scaleX(${leadOffNameTrans})`, transformOrigin: 'left'}]"
@@ -85,7 +85,7 @@
                   'Next-Position-BGC' : data.Second.DispStatus.NextRead}]"
       ></div>
       <div 
-        id="homeSecondPos"
+        id="visitorSecondPos"
         class="Pos-Text"
         :class="[{'Basic-Position-Text' : data.Second.DispStatus.Basic,
                   'Batter-Position-Text' : data.Second.DispStatus.Batter,
@@ -121,7 +121,7 @@
                   'Member-After-Next' : data.Second.DispStatus.NextRead && data.Second.DispStatus.ChangeAfterMember}]"
       >
         <div
-          id="homeSecondName"
+          id="visitorSecondName"
           class="Name-Text"
           :class="[secondTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
           :style="[{transform: `scaleX(${secondNameTrans})`, transformOrigin: 'left'}]"
@@ -143,7 +143,7 @@
                   'Next-Position-BGC' : data.Third.DispStatus.NextRead}]"
       ></div>
       <div 
-        id="homeThirdPos"
+        id="visitorThirdPos"
         class="Pos-Text"
         :class="[{'Basic-Position-Text' : data.Third.DispStatus.Basic,
                   'Batter-Position-Text' : data.Third.DispStatus.Batter,
@@ -179,7 +179,7 @@
                   'Member-After-Next' : data.Third.DispStatus.NextRead && data.Third.DispStatus.ChangeAfterMember}]"
       >
         <div
-          id="homeThirdName"
+          id="visitorThirdName"
           class="Name-Text"
           :class="[thirdTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
           :style="[{transform: `scaleX(${thirdNameTrans})`, transformOrigin: 'left'}]"
@@ -201,7 +201,7 @@
                   'Next-Position-BGC' : data.Fourth.DispStatus.NextRead}]"
       ></div>
       <div 
-        id="homeFourthPos"
+        id="visitorFourthPos"
         class="Pos-Text"
         :class="[{'Basic-Position-Text' : data.Fourth.DispStatus.Basic,
                   'Batter-Position-Text' : data.Fourth.DispStatus.Batter,
@@ -237,7 +237,7 @@
                   'Member-After-Next' : data.Fourth.DispStatus.NextRead && data.Fourth.DispStatus.ChangeAfterMember}]"
       >
         <div
-          id="homeFourthName"
+          id="visitorFourthName"
           class="Name-Text"
           :class="[fourthTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
           :style="[{transform: `scaleX(${fourthNameTrans})`, transformOrigin: 'left'}]"
@@ -259,7 +259,7 @@
                   'Next-Position-BGC' : data.Fifth.DispStatus.NextRead}]"
       ></div>
       <div 
-        id="homeFifthPos"
+        id="visitorFifthPos"
         class="Pos-Text"
         :class="[{'Basic-Position-Text' : data.Fifth.DispStatus.Basic,
                   'Batter-Position-Text' : data.Fifth.DispStatus.Batter,
@@ -295,7 +295,7 @@
                   'Member-After-Next' : data.Fifth.DispStatus.NextRead && data.Fifth.DispStatus.ChangeAfterMember}]"
       >
         <div
-          id="homeFifthName"
+          id="visitorFifthName"
           class="Name-Text"
           :class="[fifthTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
           :style="[{transform: `scaleX(${fifthNameTrans})`, transformOrigin: 'left'}]"
@@ -317,7 +317,7 @@
                   'Next-Position-BGC' : data.Sixth.DispStatus.NextRead}]"
       ></div>
       <div 
-        id="homeSixthPos"
+        id="visitorSixthPos"
         class="Pos-Text"
         :class="[{'Basic-Position-Text' : data.Sixth.DispStatus.Basic,
                   'Batter-Position-Text' : data.Sixth.DispStatus.Batter,
@@ -353,7 +353,7 @@
                   'Member-After-Next' : data.Sixth.DispStatus.NextRead && data.Sixth.DispStatus.ChangeAfterMember}]"
       >
         <div
-          id="homeSixthName"
+          id="visitorSixthName"
           class="Name-Text"
           :class="[sixthTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
           :style="[{transform: `scaleX(${sixthNameTrans})`, transformOrigin: 'left'}]"
@@ -375,7 +375,7 @@
                   'Next-Position-BGC' : data.Seventh.DispStatus.NextRead}]"
       ></div>
       <div 
-        id="homeSeventhPos"
+        id="visitorSeventhPos"
         class="Pos-Text"
         :class="[{'Basic-Position-Text' : data.Seventh.DispStatus.Basic,
                   'Batter-Position-Text' : data.Seventh.DispStatus.Batter,
@@ -411,7 +411,7 @@
                   'Member-After-Next' : data.Seventh.DispStatus.NextRead && data.Seventh.DispStatus.ChangeAfterMember}]"
       >
         <div
-          id="homeSeventhName"
+          id="visitorSeventhName"
           class="Name-Text"
           :class="[seventhTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
           :style="[{transform: `scaleX(${seventhNameTrans})`, transformOrigin: 'left'}]"
@@ -433,7 +433,7 @@
                   'Next-Position-BGC' : data.Eighth.DispStatus.NextRead}]"
       ></div>
       <div 
-        id="homeEighthPos"
+        id="visitorEighthPos"
         class="Pos-Text"
         :class="[{'Basic-Position-Text' : data.Eighth.DispStatus.Basic,
                   'Batter-Position-Text' : data.Eighth.DispStatus.Batter,
@@ -469,7 +469,7 @@
                   'Member-After-Next' : data.Eighth.DispStatus.NextRead && data.Eighth.DispStatus.ChangeAfterMember}]"
       >
         <div
-          id="homeEighthName"
+          id="visitorEighthName"
           class="Name-Text"
           :class="[eighthTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
           :style="[{transform: `scaleX(${eighthNameTrans})`, transformOrigin: 'left'}]"
@@ -491,7 +491,7 @@
                   'Next-Position-BGC' : data.Ninth.DispStatus.NextRead}]"
       ></div>
       <div 
-        id="homeNinthPos"
+        id="visitorNinthPos"
         class="Pos-Text"
         :class="[{'Basic-Position-Text' : data.Ninth.DispStatus.Basic,
                   'Batter-Position-Text' : data.Ninth.DispStatus.Batter,
@@ -527,7 +527,7 @@
                   'Member-After-Next' : data.Ninth.DispStatus.NextRead && data.Ninth.DispStatus.ChangeAfterMember}]"
       >
         <div
-          id="homeNinthName"
+          id="visitorNinthName"
           class="Name-Text"
           :class="[ninthTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
           :style="[{transform: `scaleX(${ninthNameTrans})`, transformOrigin: 'left'}]"
@@ -549,7 +549,7 @@
                   'Next-Position-BGC' : data.Pitcher.DispStatus.NextRead}]"
       ></div>
       <div 
-        id="homePitcherPos"
+        id="visitorPitcherPos"
         class="Pos-Text"
         :class="[{'Basic-Position-Text' : data.Pitcher.DispStatus.Basic,
                   'Position-Member-Before-Basic' : data.Pitcher.DispStatus.Basic && data.Pitcher.DispStatus.ChangeBeforeMember,
@@ -563,10 +563,10 @@
                   'Member-After-Basic' : data.Pitcher.DispStatus.Basic && data.Pitcher.DispStatus.ChangeAfterMember}]"
       >
         <div
-          id="homePitcherName"
+          id="visitorPitcherName"
           class="Name-Text"
-          :class="[ninthTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
-          :style="[{transform: `scaleX(${ninthNameTrans})`, transformOrigin: 'left'}]"
+          :class="[pitcherTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+          :style="[{transform: `scaleX(${pitcherNameTrans})`, transformOrigin: 'left'}]"
         >{{ data.Pitcher.Name }}</div>
       </div>
     </div>
@@ -690,36 +690,36 @@ let pitcherTextAlignLastJustify = ref(true);
 
 watch(props, () => {
   nextTick(() => {
-    teamNameTrans.value = calcTeamWidth(document.getElementById('homeTeamName'));
-    leadOffPosTrans.value = calcPosWidth(document.getElementById('homeLeadOffPos'));
-    leadOffNameTrans.value = calcNameWidth(document.getElementById('homeLeadOffName'));
+    teamNameTrans.value = calcTeamWidth(document.getElementById('visitorTeamName'));
+    leadOffPosTrans.value = calcPosWidth(document.getElementById('visitorLeadOffPos'));
+    leadOffNameTrans.value = calcNameWidth(document.getElementById('visitorLeadOffName'));
     leadOffTextAlignLastJustify.value = decisionTextAlignLastJustify(props.data.LeadOff.Name);
-    secondPosTrans.value = calcPosWidth(document.getElementById('homeSecondPos'));
-    secondNameTrans.value = calcNameWidth(document.getElementById('homeSecondName'));
+    secondPosTrans.value = calcPosWidth(document.getElementById('visitorSecondPos'));
+    secondNameTrans.value = calcNameWidth(document.getElementById('visitorSecondName'));
     secondTextAlignLastJustify.value = decisionTextAlignLastJustify(props.data.Second.Name);
-    thirdPosTrans.value = calcPosWidth(document.getElementById('homeThirdPos'));
-    thirdNameTrans.value = calcNameWidth(document.getElementById('homeThirdName'));
+    thirdPosTrans.value = calcPosWidth(document.getElementById('visitorThirdPos'));
+    thirdNameTrans.value = calcNameWidth(document.getElementById('visitorThirdName'));
     thirdTextAlignLastJustify.value = decisionTextAlignLastJustify(props.data.Third.Name);
-    fourthPosTrans.value = calcPosWidth(document.getElementById('homeFourthPos'));
-    fourthNameTrans.value = calcNameWidth(document.getElementById('homeFourthName'));
+    fourthPosTrans.value = calcPosWidth(document.getElementById('visitorFourthPos'));
+    fourthNameTrans.value = calcNameWidth(document.getElementById('visitorFourthName'));
     fourthTextAlignLastJustify.value = decisionTextAlignLastJustify(props.data.Fourth.Name);
-    fifthPosTrans.value = calcPosWidth(document.getElementById('homeFifthPos'));
-    fifthNameTrans.value = calcNameWidth(document.getElementById('homeFifthName'));
+    fifthPosTrans.value = calcPosWidth(document.getElementById('visitorFifthPos'));
+    fifthNameTrans.value = calcNameWidth(document.getElementById('visitorFifthName'));
     fifthTextAlignLastJustify.value = decisionTextAlignLastJustify(props.data.Fifth.Name);
-    sixthPosTrans.value = calcPosWidth(document.getElementById('homeSixthPos'));
-    sixthNameTrans.value = calcNameWidth(document.getElementById('homeSixthName'));
+    sixthPosTrans.value = calcPosWidth(document.getElementById('visitorSixthPos'));
+    sixthNameTrans.value = calcNameWidth(document.getElementById('visitorSixthName'));
     sixthTextAlignLastJustify.value = decisionTextAlignLastJustify(props.data.Sixth.Name);
-    seventhPosTrans.value = calcPosWidth(document.getElementById('homeSeventhPos'));
-    seventhNameTrans.value = calcNameWidth(document.getElementById('homeSeventhName'));
+    seventhPosTrans.value = calcPosWidth(document.getElementById('visitorSeventhPos'));
+    seventhNameTrans.value = calcNameWidth(document.getElementById('visitorSeventhName'));
     seventhTextAlignLastJustify.value = decisionTextAlignLastJustify(props.data.Seventh.Name);
-    eighthPosTrans.value = calcPosWidth(document.getElementById('homeEighthPos'));
-    eighthNameTrans.value = calcNameWidth(document.getElementById('homeEighthName'));
+    eighthPosTrans.value = calcPosWidth(document.getElementById('visitorEighthPos'));
+    eighthNameTrans.value = calcNameWidth(document.getElementById('visitorEighthName'));
     eighthTextAlignLastJustify.value = decisionTextAlignLastJustify(props.data.Eighth.Name);
-    ninthPosTrans.value = calcPosWidth(document.getElementById('homeNinthPos'));
-    ninthNameTrans.value = calcNameWidth(document.getElementById('homeNinthName'));
+    ninthPosTrans.value = calcPosWidth(document.getElementById('visitorNinthPos'));
+    ninthNameTrans.value = calcNameWidth(document.getElementById('visitorNinthName'));
     ninthTextAlignLastJustify.value = decisionTextAlignLastJustify(props.data.Ninth.Name);
-    pitcherPosTrans.value = calcPosWidth(document.getElementById('homePitcherPos'));
-    pitcherNameTrans.value = calcNameWidth(document.getElementById('homePitcherName'));
+    pitcherPosTrans.value = calcPosWidth(document.getElementById('visitorPitcherPos'));
+    pitcherNameTrans.value = calcNameWidth(document.getElementById('visitorPitcherName'));
     pitcherTextAlignLastJustify.value = decisionTextAlignLastJustify(props.data.Pitcher.Name);
   })
 });
@@ -828,7 +828,8 @@ watch(props, () => {
   line-height: 38px;
   font-size: 36px;
   height: 42px;
-  text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.4);
+  /* text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.4); */
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
 }
 
 .Basic-Position-BGC {

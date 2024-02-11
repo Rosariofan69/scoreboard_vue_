@@ -2,14 +2,14 @@
   <div class="Pitch-Info-Box">
     <div
       v-if="gameInfo.GameProgressInfo.IsStarted && data.Number"
-      :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'BGC-Home':'BGC-Visiter']"
+      :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'BGC-Home':'BGC-Visitor']"
     >
       <div class="Pitch-Info-Row">
         <div class="Pitch-Info-Num">
           <div
             id="pitcherNumber"
             class="Pitch-Info-Num-Text"
-            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Text-Home':'Text-Visiter']"
+            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Home':'Text-Visitor']"
             :style="[{transform: `scaleX(${numTrans})`, transformOrigin: 'left'}]"
           >{{ data.Number }}</div>
         </div>
@@ -17,48 +17,66 @@
           <div
             id="pitcherName"
             class="Pitch-Info-Name-Text"
-            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Text-Home':'Text-Visiter']"
+            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Home':'Text-Visitor']"
             :style="[{transform: `scaleX(${nameTrans})`, transformOrigin: 'left'}]"
           >{{ data.FullName }}</div>
         </div>
       </div>
       <div class="Pitch-Info-Row">
-        <div class="Pitch-Info-Title">投球数</div>
+        <div
+          class="Pitch-Info-Title"
+          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Home':'Text-Visitor']"
+        >投球数</div>
         <div
           id="pitch"
           class="Pitch-Info-Val"
-          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Text-Home':'Text-Visiter']"
+          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Home':'Text-Visitor']"
           :style="[{transform: `scaleX(${pitchTrans})`, transformOrigin: 'right'}]"
         >{{ data.PitchCount }}</div>
-        <div class="Pitch-Info-Ball">球</div>
+        <div
+          class="Pitch-Info-Ball"
+          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Home':'Text-Visitor']"
+        >球</div>
       </div>
       <div class="Pitch-Info-Row">
         <div class="Pitch-Info-Title">
-          <div class="Pitch-Info-Title-AtBat">この打席</div>
+          <div
+            class="Pitch-Info-Title-AtBat"
+            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Home':'Text-Visitor']"
+          >この打席</div>
         </div>
         <div
           id="atBat"
           class="Pitch-Info-Val"
-          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Text-Home':'Text-Visiter']"
+          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Home':'Text-Visitor']"
           :style="[{transform: `scaleX(${pitchTrans})`, transformOrigin: 'right'}]"
         >{{ data.ThisAtBat }}</div>
-        <div class="Pitch-Info-Ball">球</div>
+        <div
+          class="Pitch-Info-Ball"
+          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Home':'Text-Visitor']"
+        >球</div>
       </div>
       <div class="Pitch-Info-Row">
-        <div class="Pitch-Info-Title">奪三振</div>
+        <div
+          class="Pitch-Info-Title"
+          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Home':'Text-Visitor']"
+        >奪三振</div>
         <div
           id="SO"
           class="Pitch-Info-Val"
-          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Text-Home':'Text-Visiter']"
+          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Home':'Text-Visitor']"
           :style="[{transform: `scaleX(${pitchTrans})`, transformOrigin: 'right'}]"
         >{{ data.SO }}</div>
       </div>
       <div class="Pitch-Info-Row">
-        <div class="Pitch-Info-Title">与四球</div>
+        <div
+          class="Pitch-Info-Title"
+          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Home':'Text-Visitor']"
+        >与四球</div>
         <div
           id="BB"
           class="Pitch-Info-Val"
-          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Text-Home':'Text-Visiter']"
+          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Home':'Text-Visitor']"
           :style="[{transform: `scaleX(${pitchTrans})`, transformOrigin: 'right'}]"
         >{{ data.BB }}</div>
       </div>
@@ -71,7 +89,7 @@ import { ParticipationMemberModel, ParticipationMemberPerTeamModel, PitcherInfoM
 import { defineProps, nextTick, ref, toRef, toRefs, watch } from 'vue';
 import { DesignModel, MemberDesignModel, PitcherStatsDesignModel, PitcherStatsDesignSendModel } from './ts/model/design-model';
 import { GameInfoModel } from './ts/model/game-model';
-import { VisiterHomeDivision } from './ts/constant';
+import { VisitorHomeDivision } from './ts/constant';
 
 const props = defineProps<{
   data: PitcherInfoModel;
@@ -174,7 +192,7 @@ watch(props, () => {
   font-size: 35px;
   line-height: 45px;
   text-align: center;
-  text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.5);
+  text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.4);
 }
 
 .Pitch-Info-Name{
@@ -191,7 +209,7 @@ watch(props, () => {
   font-size: 33px;
   line-height: 43px;
   text-align: center;
-  text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.5);
+  text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.4);
 }
 
 .Pitch-Info-Title{
@@ -225,7 +243,7 @@ watch(props, () => {
   font-weight: bold;
   line-height: 44px;
   text-align: right;
-  text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.5);
+  text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.4);
 }
 
 .Pitch-Info-Ball{
@@ -238,12 +256,12 @@ watch(props, () => {
   text-align: center;
 }
 
-.BGC-Visiter {
-  background: v-bind('design.Visiter.BGC');
+.BGC-Visitor {
+  background: v-bind('design.Visitor.BGC');
 }
 
-.Text-Visiter {
-  color: v-bind('design.Visiter.Text');
+.Text-Visitor {
+  color: v-bind('design.Visitor.Text');
 }
 
 .BGC-Home {

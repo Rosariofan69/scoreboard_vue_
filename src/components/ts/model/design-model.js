@@ -6,7 +6,7 @@ exports.UmpireDesignModel = exports.ScoreDesignModel = exports.PitcherStatsDesig
  */
 class DesignModel {
     constructor() {
-        Object.defineProperty(this, "VisiterMember", {
+        Object.defineProperty(this, "VisitorMember", {
             enumerable: true,
             configurable: true,
             writable: true,
@@ -225,7 +225,7 @@ exports.MemberDesignModel = MemberDesignModel;
 class FielderStatsDesignSendModel {
     constructor() {
         /** ビジター */
-        Object.defineProperty(this, "Visiter", {
+        Object.defineProperty(this, "Visitor", {
             enumerable: true,
             configurable: true,
             writable: true,
@@ -269,7 +269,7 @@ exports.FielderStatsDesignModel = FielderStatsDesignModel;
 class PositionDesignSendModel {
     constructor() {
         /** ビジター */
-        Object.defineProperty(this, "Visiter", {
+        Object.defineProperty(this, "Visitor", {
             enumerable: true,
             configurable: true,
             writable: true,
@@ -327,7 +327,7 @@ exports.PositionDesignModel = PositionDesignModel;
 class PitcherStatsDesignSendModel {
     constructor() {
         /** ビジター */
-        Object.defineProperty(this, "Visiter", {
+        Object.defineProperty(this, "Visitor", {
             enumerable: true,
             configurable: true,
             writable: true,
@@ -371,14 +371,14 @@ exports.PitcherStatsDesignModel = PitcherStatsDesignModel;
 class ScoreDesignModel {
     constructor() {
         /** ビジターチーム名 - 文字 */
-        Object.defineProperty(this, "VisiterTeamNameText", {
+        Object.defineProperty(this, "VisitorTeamNameText", {
             enumerable: true,
             configurable: true,
             writable: true,
             value: void 0
         });
         /** ビジターチーム名 - 背景 */
-        Object.defineProperty(this, "VisiterTeamNameBGC", {
+        Object.defineProperty(this, "VisitorTeamNameBGC", {
             enumerable: true,
             configurable: true,
             writable: true,

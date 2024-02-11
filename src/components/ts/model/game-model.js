@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ResultPositionCheckBoxModel = exports.ResultCheckBoxModel = exports.GameProgressInfoModel = exports.GameBaseInfoModel = exports.GameInfoModel = void 0;
+exports.GameProgressLogModel = exports.ResultPositionCheckBoxModel = exports.ResultOptionCheckBoxModel = exports.ResultCheckBoxModel = exports.GameProgressInfoModel = exports.GameBaseInfoModel = exports.GameInfoModel = void 0;
 /**
  * 試合情報
  */
@@ -29,21 +29,21 @@ exports.GameInfoModel = GameInfoModel;
 class GameBaseInfoModel {
     constructor() {
         /** ビジターチーム名 */
-        Object.defineProperty(this, "VisiterTeamName", {
+        Object.defineProperty(this, "VisitorTeamName", {
             enumerable: true,
             configurable: true,
             writable: true,
             value: void 0
         });
         /** ビジターチームテキスト */
-        Object.defineProperty(this, "VisiterTeamText", {
+        Object.defineProperty(this, "VisitorTeamText", {
             enumerable: true,
             configurable: true,
             writable: true,
             value: void 0
         });
         /** ビジター最終行 */
-        Object.defineProperty(this, "VisiterLastRow", {
+        Object.defineProperty(this, "VisitorLastRow", {
             enumerable: true,
             configurable: true,
             writable: true,
@@ -128,15 +128,22 @@ exports.GameProgressInfoModel = GameProgressInfoModel;
  */
 class ResultCheckBoxModel {
     constructor() {
-        /** 三振 */
-        Object.defineProperty(this, "StrikeOut", {
+        /** ゴロ */
+        Object.defineProperty(this, "GroundBall", {
             enumerable: true,
             configurable: true,
             writable: true,
             value: void 0
         });
-        /** ゴロ */
-        Object.defineProperty(this, "GroundBall", {
+        /** フライ */
+        Object.defineProperty(this, "FlyBall", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** ライナー */
+        Object.defineProperty(this, "LineDrive", {
             enumerable: true,
             configurable: true,
             writable: true,
@@ -149,8 +156,8 @@ class ResultCheckBoxModel {
             writable: true,
             value: void 0
         });
-        /** フライ */
-        Object.defineProperty(this, "FlyBall", {
+        /** 三振 */
+        Object.defineProperty(this, "StrikeOut", {
             enumerable: true,
             configurable: true,
             writable: true,
@@ -286,6 +293,28 @@ class ResultCheckBoxModel {
 }
 exports.ResultCheckBoxModel = ResultCheckBoxModel;
 /**
+ * 結果オプションモデル
+ */
+class ResultOptionCheckBoxModel {
+    constructor() {
+        /** 打者出塁 */
+        Object.defineProperty(this, "BatterOnBase", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** +失策 */
+        Object.defineProperty(this, "PlusError", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+    }
+}
+exports.ResultOptionCheckBoxModel = ResultOptionCheckBoxModel;
+/**
  * 結果守備位置
  */
 class ResultPositionCheckBoxModel {
@@ -370,4 +399,138 @@ class ResultPositionCheckBoxModel {
     }
 }
 exports.ResultPositionCheckBoxModel = ResultPositionCheckBoxModel;
+/**
+ * 試合経過ログモデル
+ */
+class GameProgressLogModel {
+    constructor() {
+        /** 試合情報 */
+        Object.defineProperty(this, "GameInfo", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** ビジター選手 */
+        Object.defineProperty(this, "VisitorMemberList", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** ビジター出場選手 */
+        Object.defineProperty(this, "VisitorParticipationMember", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** ビジター打席結果リスト */
+        Object.defineProperty(this, "VisterBattingResult", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** ビジター投手情報リスト */
+        Object.defineProperty(this, "VisitorPitcherInfo", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** ホーム選手 */
+        Object.defineProperty(this, "HomeMemberList", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** ホーム出場選手 */
+        Object.defineProperty(this, "HomeParticipationMember", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** ホーム打席結果リスト */
+        Object.defineProperty(this, "HomeBattingResult", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** ホーム投手情報リスト */
+        Object.defineProperty(this, "HomePitcherInfo", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** ランニングスコア */
+        Object.defineProperty(this, "RunningScore", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 表示用スコア */
+        Object.defineProperty(this, "DispScore", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** カウント */
+        Object.defineProperty(this, "Count", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 打者成績 */
+        Object.defineProperty(this, "BatterStats", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 守備位置 */
+        Object.defineProperty(this, "Position", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 投手情報 */
+        Object.defineProperty(this, "PitcherInfo", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 走者 */
+        Object.defineProperty(this, "Runner", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 走者状態 */
+        Object.defineProperty(this, "RunnerState", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 打席結果 */
+        Object.defineProperty(this, "BattingResult", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+    }
+}
+exports.GameProgressLogModel = GameProgressLogModel;
 //# sourceMappingURL=game-model.js.map

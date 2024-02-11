@@ -1,41 +1,41 @@
 <template>
-  <div class="Count-Result-Box" v-if="gameInfo.GameBaseInfo.VisiterTeamName">
+  <div class="Count-Result-Box" v-if="gameInfo.GameBaseInfo.VisitorTeamName">
     <div class="Count-Box">
       <div class="Count-Result-Row">
         <div class="Count-Result-Title">B</div>
         <div
           class="Count-Result-Circle"
-          :class="[count.Ball >= 1 ? 'Circle-SkyBlue' : 'Circle-Basic']"
+          :class="[count.Ball >= 1 && count.Ball <= 3 ? 'Circle-SkyBlue' : 'Circle-Basic']"
         />
         <div
           class="Count-Result-Circle"
-          :class="[count.Ball >= 2 ? 'Circle-SkyBlue' : 'Circle-Basic']"
+          :class="[count.Ball >= 2 && count.Ball <= 3 ? 'Circle-SkyBlue' : 'Circle-Basic']"
         />
         <div
           class="Count-Result-Circle"
-          :class="[count.Ball >= 3 ? 'Circle-SkyBlue' : 'Circle-Basic']"
+          :class="[count.Ball == 3 ? 'Circle-SkyBlue' : 'Circle-Basic']"
         />
       </div>
       <div class="Count-Result-Row">
         <div class="Count-Result-Title">S</div>
         <div
           class="Count-Result-Circle"
-          :class="[count.Strike >= 1 ? 'Circle-Yellow' : 'Circle-Basic']"
+          :class="[count.Strike >= 1 && count.Strike <= 2 ? 'Circle-Yellow' : 'Circle-Basic']"
         />
         <div
           class="Count-Result-Circle"
-          :class="[count.Strike >= 2 ? 'Circle-Yellow' : 'Circle-Basic']"
+          :class="[count.Strike == 2 ? 'Circle-Yellow' : 'Circle-Basic']"
         />
       </div>
       <div class="Count-Result-Row">
         <div class="Count-Result-Title">O</div>
         <div
           class="Count-Result-Circle"
-          :class="[count.Out >= 1 ? 'Circle-Red' : 'Circle-Basic']"
+          :class="[count.Out >= 1 && count.Out <= 2 ? 'Circle-Red' : 'Circle-Basic']"
         />
         <div
           class="Count-Result-Circle"
-          :class="[count.Out >= 2 ? 'Circle-Red' : 'Circle-Basic']"
+          :class="[count.Out == 2 ? 'Circle-Red' : 'Circle-Basic']"
         />
       </div>
     </div>

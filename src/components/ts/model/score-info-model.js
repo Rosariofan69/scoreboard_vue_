@@ -194,7 +194,7 @@ class DispRunningScoreModel {
             value: void 0
         });
         /** 得点（ビジター） */
-        Object.defineProperty(this, "VisiterR", {
+        Object.defineProperty(this, "VisitorR", {
             enumerable: true,
             configurable: true,
             writable: true,
@@ -208,7 +208,7 @@ class DispRunningScoreModel {
             value: '0'
         });
         /** 安打（ビジター） */
-        Object.defineProperty(this, "VisiterH", {
+        Object.defineProperty(this, "VisitorH", {
             enumerable: true,
             configurable: true,
             writable: true,
@@ -222,7 +222,7 @@ class DispRunningScoreModel {
             value: '0'
         });
         /** 失策（ビジター） */
-        Object.defineProperty(this, "VisiterE", {
+        Object.defineProperty(this, "VisitorE", {
             enumerable: true,
             configurable: true,
             writable: true,
@@ -236,7 +236,7 @@ class DispRunningScoreModel {
             value: '0'
         });
         /** 残塁（ビジター） */
-        Object.defineProperty(this, "VisiterLOB", {
+        Object.defineProperty(this, "VisitorLOB", {
             enumerable: true,
             configurable: true,
             writable: true,
@@ -329,7 +329,7 @@ exports.DispRunningScoreTitleModel = DispRunningScoreTitleModel;
 class RunningScoreModel {
     constructor() {
         /** ビジタースコア */
-        Object.defineProperty(this, "VisiterScore", {
+        Object.defineProperty(this, "VisitorScore", {
             enumerable: true,
             configurable: true,
             writable: true,
@@ -350,7 +350,7 @@ class RunningScoreModel {
             value: void 0
         });
         /** ビジター安打 */
-        Object.defineProperty(this, "VisiterH", {
+        Object.defineProperty(this, "VisitorH", {
             enumerable: true,
             configurable: true,
             writable: true,
@@ -364,7 +364,7 @@ class RunningScoreModel {
             value: 0
         });
         /** ビジター失策 */
-        Object.defineProperty(this, "VisiterE", {
+        Object.defineProperty(this, "VisitorE", {
             enumerable: true,
             configurable: true,
             writable: true,
@@ -378,7 +378,7 @@ class RunningScoreModel {
             value: 0
         });
         /** ビジター残塁 */
-        Object.defineProperty(this, "VisiterLOB", {
+        Object.defineProperty(this, "VisitorLOB", {
             enumerable: true,
             configurable: true,
             writable: true,

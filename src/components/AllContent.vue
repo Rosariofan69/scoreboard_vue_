@@ -1,17 +1,17 @@
 <template>
   <div class="Main">
-    <VisiterMember
-      :data="VisiterMemberData"
+    <VisitorMember
+      :data="VisitorMemberData"
       :gameInfo="GameInfoData"
-      :design="DesignData.VisiterMember"
+      :design="DesignData.VisitorMember"
     />
     <RunningScore
       :data="RunningScoreData"
       :gameInfo="GameInfoData"
       :design="DesignData.Score"
     />
-    <RibbonSpace  v-if="GameInfoData.GameBaseInfo.VisiterTeamName"/>
-    <div class="Big-Info" v-if="GameInfoData.GameBaseInfo.VisiterTeamName">
+    <RibbonSpace v-if="GameInfoData.GameBaseInfo.VisitorTeamName"/>
+    <div class="Big-Info" v-if="GameInfoData.GameBaseInfo.VisitorTeamName">
       <UmpireField
         :data="UmpireData"
         :design="DesignData.Umpire"
@@ -30,7 +30,7 @@
         :dispFlg="PositionDataDispFlg"
       />
       <TodayResult
-        :data="ResultData"
+        :datas="BattingResultData"
       />
     </div>
     <div class="Small-Info">
@@ -54,7 +54,7 @@
   <div class="Control">
     <ControllerField
       @sendDesignData="getDesignData"
-      @sendVisiterMemberData="getVisiterMember"
+      @sendVisitorMemberData="getVisitorMember"
       @sendHomeMemberData="getHomeMember"
       @sendGameInfoData="getGameInfoData"
       @sendUmpireData="getUmpireData"
@@ -65,14 +65,15 @@
       @sendScoreData="getScoreData"
       @sendCountData="getCountData"
       @sendJudgeData="getJudgeData"
+      @sendBattingResultData="getBattingResultData"
       @sendBigInfoDispFlg="getBigInfoDispFlg"
     />
   </div>
 </template>
-  
+
 <script setup lang="ts">
 import HomeMember from './HomeMember.vue';
-import VisiterMember from './VisiterMember.vue';
+import VisitorMember from './VisitorMember.vue';
 import RunningScore from './RunningScore.vue'
 import RibbonSpace from './RibbonSpace.vue';
 import UmpireField from './UmpireField.vue';
@@ -82,7 +83,7 @@ import FielderStats from './FielderStats.vue';
 import TodayResult from './TodayResult.vue';
 import PositionField from './PositionField.vue';
 import ControllerField from './ControllerField.vue';
-import { BatterStatsModel, ParticipationMemberModel, ParticipationMemberPerTeamModel, PitcherInfoModel, PositionModel, RunnerNameModel, UmpireModel } from './ts/model/member-info-model';
+import { AtBatResultModel, BatterStatsModel, BattingResultAtGameModel, DispBatterStatsModel, ParticipationMemberModel, ParticipationMemberPerTeamModel, PitcherInfoModel, PositionModel, RunnerNameModel, UmpireModel } from './ts/model/member-info-model';
 import { CountModel, DispRunningScoreModel, DispRunningScoreTitleModel, RunningScoreModel, JudgeModel, DispScoreModel } from './ts/model/score-info-model';
 import { DesignModel } from './ts/model/design-model';
 import { emit } from 'process';
@@ -90,7 +91,7 @@ import { ref } from 'vue';
 import { GameInfoModel } from './ts/model/game-model';
 
 // ビジターメンバー
-let VisiterMemberData = ref(new ParticipationMemberPerTeamModel());
+let VisitorMemberData = ref(new ParticipationMemberPerTeamModel());
 // ホームメンバー
 let HomeMemberData = ref(new ParticipationMemberPerTeamModel());
 // ランニングスコア
@@ -98,7 +99,7 @@ let RunningScoreData = ref(new DispScoreModel());
 // 投手成績
 let PitcherData = ref(new PitcherInfoModel());
 // 打者成績
-let BatterStatsData = ref(new BatterStatsModel());
+let BatterStatsData = ref(new DispBatterStatsModel());
 // 打者成績表示フラグ
 let BatterStatsDispFlg = ref(false);
 // 守備表示
@@ -112,7 +113,7 @@ let UmpireData = ref(new UmpireModel());
 let CountData =  ref(new CountModel());
 let JudgeData =  ref(new JudgeModel());
 // 打席結果
-let ResultData = ref(Array<string>());
+let BattingResultData = ref<AtBatResultModel[]>([]);
 // デザイン
 let DesignData = ref(new DesignModel());
 // 試合情報
@@ -122,7 +123,7 @@ let GameInfoData = ref(new GameInfoModel());
  * デザインデータ取得
  * @param data 
  */
-const getDesignData = (data: any) => {
+const getDesignData = (data: DesignModel) => {
   DesignData.value = data;
 }
 
@@ -130,7 +131,7 @@ const getDesignData = (data: any) => {
  * 試合情報取得
  * @param data 
  */
-const getGameInfoData = (data: any) => {
+const getGameInfoData = (data: GameInfoModel) => {
   GameInfoData.value = data;
 }
 
@@ -138,14 +139,14 @@ const getGameInfoData = (data: any) => {
  * ビジターメンバー取得
  * @param data 
  */
-const getVisiterMember = (data: any) => {
-  VisiterMemberData.value = data;
+const getVisitorMember = (data: ParticipationMemberPerTeamModel) => {
+  VisitorMemberData.value = data;
 }
 
 /**
  * ホームメンバー取得
  */
-const getHomeMember = (data: any) => {
+const getHomeMember = (data: ParticipationMemberPerTeamModel) => {
   HomeMemberData.value = data;
 }
 
@@ -153,7 +154,7 @@ const getHomeMember = (data: any) => {
  * 審判データ取得
  * @param data 
  */
-const getUmpireData = (data: any) => {
+const getUmpireData = (data: UmpireModel) => {
   UmpireData.value = data;
 }
 
@@ -161,7 +162,7 @@ const getUmpireData = (data: any) => {
  * 守備位置データ取得
  * @param data 
  */
-const getPositionData = (data: any) => {
+const getPositionData = (data: PositionModel) => {
   PositionData.value = data;
 }
 
@@ -169,7 +170,7 @@ const getPositionData = (data: any) => {
  * 走者データ取得
  * @param data 
  */
-const getRunnerData = (data: any) => {
+const getRunnerData = (data: RunnerNameModel) => {
   RunnerData.value = data;
 }
 
@@ -177,7 +178,7 @@ const getRunnerData = (data: any) => {
  * 投手情報取得
  * @param data 
  */
-const getPitcherData = (data: any) => {
+const getPitcherData = (data: PitcherInfoModel) => {
   PitcherData.value = data;
 }
 
@@ -185,7 +186,7 @@ const getPitcherData = (data: any) => {
  * 打者成績取得
  * @param data 
  */
-const getBatterStatsData = (data: any) => {
+const getBatterStatsData = (data: DispBatterStatsModel) => {
   BatterStatsData.value = data;
 }
 
@@ -193,7 +194,7 @@ const getBatterStatsData = (data: any) => {
  * ランニングスコア取得
  * @param data 
  */
-const getScoreData = (data: any) => {
+const getScoreData = (data: DispScoreModel) => {
   RunningScoreData.value = data;
 }
 
@@ -201,7 +202,7 @@ const getScoreData = (data: any) => {
  * カウントデータ取得
  * @param data 
  */
-const getCountData = (data: any) => {
+const getCountData = (data: CountModel) => {
   CountData.value = data;
 }
 
@@ -209,15 +210,22 @@ const getCountData = (data: any) => {
  * 判定データ取得
  * @param data 
  */
-const getJudgeData = (data: any) => {
+const getJudgeData = (data: JudgeModel) => {
   JudgeData.value = data;
+}
+
+/**
+ * 打席結果データ取得
+ */
+const getBattingResultData = (data: AtBatResultModel[]) => {
+  BattingResultData.value = data;
 }
 
 /**
  * インフォメーション（大）表示フラグ取得
  * @param data 
  */
-const getBigInfoDispFlg = (data: any) => {
+const getBigInfoDispFlg = (data: boolean) => {
   if (data) {
     BatterStatsDispFlg.value = true;
     PositionDataDispFlg.value = false;

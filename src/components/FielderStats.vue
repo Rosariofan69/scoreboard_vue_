@@ -2,14 +2,14 @@
   <div
     class="Stats-Box"
     v-if="(gameInfo.GameProgressInfo.IsStarted && data.Number) || dispFlg"
-    :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'BGC-Visiter':'BGC-Home']"
+    :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'BGC-Visitor':'BGC-Home']"
   >
     <div class="Stats-Name-Row">
       <div class="Stats-Num">
         <div
           id="fielderNumber"
           class="Stats-Num-Text"
-          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Text-Visiter':'Text-Home']"
+          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home']"
           :style="[{transform: `scaleX(${numTrans})`, transformOrigin: 'left'}]"
         >
           {{ data.Number }}
@@ -19,7 +19,7 @@
         <div
           id="fielderName"
           class="Stats-Name-Text"
-          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Text-Visiter':'Text-Home']"
+          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home']"
           :style="[{transform: `scaleX(${nameTrans})`, transformOrigin: 'left'}]"
         >
           {{ data.Name }}
@@ -32,7 +32,7 @@
       <div
         id="ab_h"
         class="Stats-Avg-Detail"
-        :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Text-Visiter':'Text-Home']"
+        :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home']"
         :style="[{transform: `scaleX(${ab_hTrans})`, transformOrigin: 'left'}]"
       >
         ({{ data.AB_H }})
@@ -45,7 +45,7 @@
           <div
             id="hr"
             class="Stats-Content-Left-Text"
-            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Text-Visiter':'Text-Home']"
+            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home']"
             :style="[{transform: `scaleX(${HRTrans})`, transformOrigin: 'left'}]"
           >
             {{ data.HR }}
@@ -58,7 +58,7 @@
           <div
             id="obp"
             class="Stats-Content-Right-Text"
-            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Text-Visiter':'Text-Home']"
+            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home']"
             :style="[{transform: `scaleX(${numTrans})`, transformOrigin: 'left'}]"
           >
             {{ data.OBP }}
@@ -73,7 +73,7 @@
           <div
             id="rbi"
             class="Stats-Content-Left-Text"
-            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Text-Visiter':'Text-Home']"
+            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home']"
             :style="[{transform: `scaleX(${RBITrans})`, transformOrigin: 'left'}]"
           >
             {{ data.RBI }}
@@ -86,7 +86,7 @@
           <div
             id="ops"
             class="Stats-Content-Right-Text"
-            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Text-Visiter':'Text-Home']"
+            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home']"
             :style="[{transform: `scaleX(${OPSTrans})`, transformOrigin: 'left'}]"
           >
             {{ data.OPS }}
@@ -101,7 +101,7 @@
           <div
             id="sb"
             class="Stats-Content-Left-Text"
-            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Text-Visiter':'Text-Home']"
+            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home']"
             :style="[{transform: `scaleX(${SBTrans})`, transformOrigin: 'left'}]"
           >
             {{ data.SB }}
@@ -114,7 +114,7 @@
           <div
             id="rc27"
             class="Stats-Content-Right-Text"
-            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisiterHomeDivision.Visiter ? 'Text-Visiter':'Text-Home']"
+            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home']"
             :style="[{transform: `scaleX(${RC27Trans})`, transformOrigin: 'left'}]"
           >
             {{ data.RC27 }}
@@ -126,14 +126,14 @@
 </template>
 
 <script setup lang="ts">
-import { BatterStatsModel, ParticipationMemberModel, ParticipationMemberPerTeamModel, PitcherInfoModel } from './ts/model/member-info-model';
+import { DispBatterStatsModel, ParticipationMemberModel, ParticipationMemberPerTeamModel, PitcherInfoModel } from './ts/model/member-info-model';
 import { defineProps, nextTick, ref, toRef, toRefs, watch } from 'vue';
 import { DesignModel, FielderStatsDesignSendModel, MemberDesignModel, PitcherStatsDesignModel, PitcherStatsDesignSendModel } from './ts/model/design-model';
 import { GameInfoModel } from './ts/model/game-model';
-import { VisiterHomeDivision } from './ts/constant';
+import { VisitorHomeDivision } from './ts/constant';
 
 const props = defineProps<{
-  data: BatterStatsModel;
+  data: DispBatterStatsModel;
   gameInfo: GameInfoModel;
   design: FielderStatsDesignSendModel;
   dispFlg: boolean;
@@ -246,7 +246,11 @@ watch(props, () => {
   font-size: 45px;
   line-height: 75px;
   text-align: center;
-  text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.5);
+  text-shadow: 
+    1px 1px #888,
+    2px 2px #777,
+    3px 3px #666,
+    4px 4px #000;
 }
 
 .Stats-Name {
@@ -260,7 +264,12 @@ watch(props, () => {
   font-family: 'Noto Sans JP', sans-serif;
   font-size: 50px;
   line-height: 57px;
-  text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.5);
+  /* text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.4); */
+  text-shadow: 
+    1px 1px #888,
+    2px 2px #777,
+    3px 3px #666,
+    4px 4px #000;
 }
 
 .Stats-Content-Row {
@@ -286,7 +295,11 @@ watch(props, () => {
   font-size: 45px;
   line-height: 50px;
   letter-spacing: 1px;
-  text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.5);
+  text-shadow: 
+    1px 1px #888,
+    2px 2px #777,
+    3px 3px #666,
+    4px 4px #000;
 }
 
 .Stats-Avg-Detail {
@@ -295,7 +308,11 @@ watch(props, () => {
   width: 220px;
   font-size: 35px;
   line-height: 50px;
-  text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.5);
+  text-shadow: 
+    1px 1px #888,
+    2px 2px #777,
+    3px 3px #666,
+    4px 4px #000;
 }
 
 .Stats-Content-Row-Left {
@@ -317,7 +334,11 @@ watch(props, () => {
   line-height: 50px;
   text-align: right;
   letter-spacing: 1px;
-  text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.5);
+  text-shadow: 
+    1px 1px #888,
+    2px 2px #777,
+    3px 3px #666,
+    4px 4px #000;
 }
 
 .Stats-Content-Row-Right {
@@ -339,15 +360,19 @@ watch(props, () => {
   line-height: 50px;
   text-align: right;
   letter-spacing: 1px;
-  text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.5);
+  text-shadow: 
+    1px 1px #888,
+    2px 2px #777,
+    3px 3px #666,
+    4px 4px #000;
 }
 
-.BGC-Visiter {
-  background: v-bind('design.Visiter.BGC');
+.BGC-Visitor {
+  background: v-bind('design.Visitor.BGC');
 }
 
-.Text-Visiter {
-  color: v-bind('design.Visiter.Text');
+.Text-Visitor {
+  color: v-bind('design.Visitor.Text');
 }
 
 .BGC-Home {

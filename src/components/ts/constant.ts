@@ -1,7 +1,7 @@
 /**
  * デザイン区分（ビジター）
  */
-export enum VisiterDesignDivision {
+export enum VisitorDesignDivision {
     /** チーム名（メンバー） - 文字 */
     TeamNameMemberText,
     /** チーム名（メンバー） - 背景 */
@@ -189,11 +189,11 @@ export enum UmpireDesignDivision {
  */
 export enum GameInfoDivision {
     /** ビジターチーム名 */
-    VisiterTeamName,
+    VisitorTeamName,
     /** ビジターチームテキスト */
-    VisiterTeamText,
+    VisitorTeamText,
     /** ビジター最終行 */
-    VisiterLastRow,
+    VisitorLastRow,
     /** ホームチーム名 */
     HomeTeamName,
     /** ホームチームテキスト */
@@ -211,9 +211,9 @@ export enum GameInfoDivision {
 /**
  * ビジターorホーム
  */
-export enum VisiterHomeDivision {
+export enum VisitorHomeDivision {
     /** ビジター */
-    Visiter = 1,
+    Visitor = 1,
     /** ホーム */
     Home,
 }
@@ -232,7 +232,7 @@ export enum ExcelColumnsName {
     Triple,
     HomeRun,
     TotalBases,
-    Run,
+    RBI,
     OBP,
     OPS,
     SO,
@@ -247,19 +247,49 @@ export enum ExcelColumnsName {
     FullName
 }
 
+/**
+ * エクセル列名（xlsx-populate用）
+ */
+export enum ExcelColumnsNamePopulate {
+    Id = 2,
+    Number,
+    Name,
+    Avg,
+    AtBat,
+    Hit,
+    Double,
+    Triple,
+    HomeRun,
+    TotalBases,
+    RBI,
+    OBP,
+    OPS,
+    SO,
+    BB,
+    HBP,
+    SacBunt,
+    SacFly,
+    SB,
+    CS,
+    DP,
+    RC27,
+    FullName
+}
 
 /**
  * 結果ラジオボタン
  */
 export enum ResultCheckBox {
-    /** 三振 */
-    StrikeOut,
     /** ゴロ */
     GroundBall,
-    /** 併殺 */
-    DoublePlay,
     /** フライ */
     FlyBall,
+    /** ライナー */
+    LineDrive,
+    /** 併殺 */
+    DoublePlay,
+    /** 三振 */
+    StrikeOut,
     /** 四球 */
     FourPitchWalk,
     /** 死球 */
@@ -348,4 +378,36 @@ export enum PositionName {
     CF,
     /** 右翼手 */
     RF
+}
+
+/**
+ * メッセージ
+ */
+export enum Message {
+    Message001 = '守備位置が選択されていません。',
+    Message002 = '走者の数と塁状況が合っていません。',
+    Message003 = '結果を確定しますか？',
+    Message004 = '試合終了条件を満たしました。終了しますか？',
+}
+
+/**
+ * ダイアログ呼び出し区分
+ */
+export enum DialogCallDivision {
+    /** 審判 */
+    Umpire = '審判',
+    /** 選手情報（ビジター） */
+    VisitorMemberInfo = '選手情報（ビジター）',
+    /** 選手情報（ホーム） */
+    HomeMemberInfo = '選手情報（ホーム）',
+    /** 打席結果（ビジター） */
+    VisitorBattingResult = '打席結果（ビジター）',
+    /** 打席結果（ホーム） */
+    HomeBattingResult = '打席結果（ホーム）',
+    /** 投手情報（ビジター） */
+    VisitorPitcherInfo = '投手情報（ビジター）',
+    /** 投手情報（ホーム） */
+    HomePitcherInfo = '投手情報（ホーム）',
+    /** スコア */
+    Score = 'スコア'
 }

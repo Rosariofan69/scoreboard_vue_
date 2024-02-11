@@ -2,7 +2,7 @@
  * デザインのモデル
  */
 export class DesignModel {
-    VisiterMember: MemberDesignModel = new MemberDesignModel();
+    VisitorMember: MemberDesignModel = new MemberDesignModel();
     HomeMember: MemberDesignModel = new MemberDesignModel();
     FielderStats: FielderStatsDesignSendModel = new FielderStatsDesignSendModel();
     Position: PositionDesignSendModel = new PositionDesignSendModel();
@@ -67,7 +67,7 @@ export class MemberDesignModel {
  */
 export class FielderStatsDesignSendModel {
     /** ビジター */
-    Visiter: FielderStatsDesignModel = new FielderStatsDesignModel();
+    Visitor: FielderStatsDesignModel = new FielderStatsDesignModel();
     /** ホーム */
     Home: FielderStatsDesignModel = new FielderStatsDesignModel();
 }
@@ -87,7 +87,7 @@ export class FielderStatsDesignModel {
  */
 export class PositionDesignSendModel {
     /** ビジター */
-    Visiter: PositionDesignModel = new PositionDesignModel();
+    Visitor: PositionDesignModel = new PositionDesignModel();
     /** ホーム */
     Home: PositionDesignModel = new PositionDesignModel();
 }
@@ -111,7 +111,7 @@ export class PositionDesignModel {
  */
 export class PitcherStatsDesignSendModel {
     /** ビジター */
-    Visiter: PitcherStatsDesignModel = new PitcherStatsDesignModel();
+    Visitor: PitcherStatsDesignModel = new PitcherStatsDesignModel();
     /** ホーム */
     Home: PitcherStatsDesignModel = new PitcherStatsDesignModel();
 }
@@ -131,9 +131,9 @@ export class PitcherStatsDesignModel {
  */
 export class ScoreDesignModel {
     /** ビジターチーム名 - 文字 */
-    VisiterTeamNameText: string;
+    VisitorTeamNameText: string;
     /** ビジターチーム名 - 背景 */
-    VisiterTeamNameBGC: string;
+    VisitorTeamNameBGC: string;
     /** ホームチーム名 - 文字 */
     HomeTeamNameText: string;
     /** ホームチーム名 - 背景 */

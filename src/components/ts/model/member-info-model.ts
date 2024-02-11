@@ -12,12 +12,16 @@ export class DefaultMemberModel {
     FullName: string;
     /** 行番号 */
     RowNumber: number;
+    /** 打者成績 */
+    BatterStats: BatterStatsModel = new BatterStatsModel();
 }
 
 /** 
  * 出場選手情報
  */
 export class ParticipationMemberModel {
+    /** ID */
+    ID: string;
     /** 背番号 */
     Number: string;
     /** 守備位置 */
@@ -35,7 +39,7 @@ export class ParticipationMemberModel {
 /**
  * 出場選手表示状態
  */
-class ParticipationMemberDispStatus {
+export class ParticipationMemberDispStatus {
     /** 表示 */
     Display = false;
     /** 標準 */
@@ -46,10 +50,14 @@ class ParticipationMemberDispStatus {
     Runner = false;
     /** 次回先頭 */
     NextRead = false;
-    /** 交代前 */
-    ChangeBefore = false;
-    /** 交代後 */
-    ChangeAfter = false;
+    /** 交代前（守備位置のみ） */
+    ChangeBeforePisition = false;
+    /** 交代後（守備位置のみ） */
+    ChangeAfterPisition = false;
+    /** 交代前（選手） */
+    ChangeBeforeMember = false;
+    /** 交代後（選手） */
+    ChangeAfterMember = false;
 }
 
 /** 
@@ -82,8 +90,53 @@ export class ParticipationMemberPerTeamModel {
  * 打者成績
  */
 export class BatterStatsModel {
+    /** 打率 */
+    AVG: string;
+    /** 打数 */
+    Atbat: number;
+    /** 安打 */
+    Hit: number;
+    /** 二塁打 */
+    Double: number;
+    /** 三塁打 */
+    Triple: number;
+    /** 本塁打 */
+    HomeRun: number;
+    /** 塁打 */
+    TotalBases: number;
+    /** 打点 */
+    RBI: number;
+    /** 出塁率 */
+    OBP: string;
+    /** OPS */
+    OPS: string;
+    /** 三振 */
+    SO: number;
+    /** 四球 */
+    BB: number;
+    /** 死球 */
+    HBP: number;
+    /** 犠打 */
+    SacBunt: number;
+    /** 犠飛 */
+    SacFly: number;
+    /** 盗塁 */
+    SB: number;
+    /** 盗塁死 */
+    CS: number;
+    /** 併殺打 */
+    DP: number;
+    /** RC27 */
+    RC27: string;
+}
+
+
+/**
+ * 打者成績（表示用）
+ */
+export class DispBatterStatsModel {
     /** 背番号 */
-    Number: number;
+    Number: string;
     /** 名前 */
     Name: string;
     /** 打率 */
@@ -101,13 +154,49 @@ export class BatterStatsModel {
     /** OPS */
     OPS: string;
     /** RC27 */
-    RC27: number;
+    RC27: string;
+}
+
+/**
+ * 打者成績更新用
+ */
+export class BatterStatsUpdateModel {
+    /** 打数 */
+    AtBat = 0;
+    /** 安打 */
+    Hit = 0;
+    /** 二塁打 */
+    Double = 0;
+    /** 三塁打 */
+    Triple = 0;
+    /** 本塁打 */
+    HomeRun = 0;
+    /** 打点 */
+    RBI = 0;
+    /** 三振 */
+    SO = 0;
+    /** 四球 */
+    BB = 0;
+    /** 死球 */
+    HBP = 0;
+    /** 犠打 */
+    SacBunt = 0;
+    /** 犠飛 */
+    SacFly = 0;
+    /** 盗塁 */
+    SB = 0;
+    /** 盗塁死 */
+    CS = 0;
+    /** 併殺打 */
+    DP = 0;
 }
 
 /**
  * 投手成績
  */
 export class PitcherInfoModel {
+    /** ID */
+    ID: string;
     /** 背番号 */
     Number: string;
     /** 名前 */
@@ -136,6 +225,8 @@ export class AtBatResultModel {
 
 /** 選手成績 */
 export class BattingResultAtGameModel {
+    /** ID */
+    ID: string;
     /** 背番号 */
     Number: string;
     /** 守備位置 */
@@ -246,49 +337,13 @@ export class UmpireModel {
 }
 
 /**
- * 入力欄変更状況
- */
-interface InputIsChangedModel {
-    /** 守備位置 */
-    Position: boolean;
-    /** 背番号 */
-    Number: boolean;
-}
-
-/**
- * 入力欄変更状況（チーム単位）
- */
-export class InputIsChangedPerTeamModel {
-    /** 1番 */
-    LeadOff: InputIsChangedModel;
-    /** 2番 */
-    Second: InputIsChangedModel;
-    /** 3番 */
-    Third: InputIsChangedModel;
-    /** 4番 */
-    Fourth: InputIsChangedModel;
-    /** 5番 */
-    Fifth: InputIsChangedModel;
-    /** 6番 */
-    Sixth: InputIsChangedModel;
-    /** 7番 */
-    Seventh: InputIsChangedModel;
-    /** 8番 */
-    Eighth: InputIsChangedModel;
-    /** 9番 */
-    Ninth: InputIsChangedModel;
-    /** 投手 */
-    Pitcher: InputIsChangedModel;
-}
-
-/**
  * 入力欄
  */
 export class InputVModel {
     /** 守備位置 */
     Position: string;
-    /** 背番号 */
-    Number: string;
+    /** ID */
+    ID: string;
 }
 
 /**
@@ -315,4 +370,30 @@ export class InputVTeamModel {
     Ninth: InputVModel = new InputVModel();
     /** 投手 */
     Pitcher: InputVModel = new InputVModel();
+}
+
+/**
+ * 選手交代取消モデル
+ */
+export class ChangeCancelMemberModel {
+    /** 1番 */
+    LeadOff = false;
+    /** 2番 */
+    Second = false;
+    /** 3番 */
+    Third = false;
+    /** 4番 */
+    Fourth = false;
+    /** 5番 */
+    Fifth = false;
+    /** 6番 */
+    Sixth = false;
+    /** 7番 */
+    Seventh = false;
+    /** 8番 */
+    Eighth = false;
+    /** 9番 */
+    Ninth = false;
+    /** 投手 */
+    Pitcher = false;
 }

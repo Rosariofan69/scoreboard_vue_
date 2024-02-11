@@ -1,4 +1,5 @@
-import { VisiterHomeDivision } from './constant';
+import { BatterStatsUpdateModel } from './model/member-info-model';
+import { VisitorHomeDivision } from './constant';
 import { GameInfoModel } from './model/game-model';
 /**
  * Excel関連のコントローラークラス
@@ -36,12 +37,12 @@ export class ExcelController {
      */
     async GetMember(getDivision: number, gameInfo: GameInfoModel): Promise<any> {
         let params;
-        if (getDivision === VisiterHomeDivision.Visiter) {
+        if (getDivision === VisitorHomeDivision.Visitor) {
             params = {
-                Team: gameInfo.GameBaseInfo.VisiterTeamName,
-                LastRow: gameInfo.GameBaseInfo.VisiterLastRow.toString()
+                Team: gameInfo.GameBaseInfo.VisitorTeamName,
+                LastRow: gameInfo.GameBaseInfo.VisitorLastRow.toString()
             }
-        } else if (getDivision === VisiterHomeDivision.Home) {
+        } else if (getDivision === VisitorHomeDivision.Home) {
             params = {
                 Team: gameInfo.GameBaseInfo.HomeTeamName,
                 LastRow: gameInfo.GameBaseInfo.HomeLastRow.toString()
@@ -74,6 +75,32 @@ export class ExcelController {
         const response = await fetch(url, {
             mode: 'cors',
             method: 'GET',
+        }).then(res => res.json());
+
+        return response;
+    }
+
+    /**
+     * 成績更新
+     * @param rowNumber 
+     * @param teamName 
+     * @returns 
+     */
+    async UpdateStats(rowNumber: number, teamName: string, postData: BatterStatsUpdateModel): Promise<any> {
+        const params = {
+            Row: String(rowNumber),
+            Team: teamName,
+            PlusData: postData
+        }
+
+        const url = '/updateBatterStats';
+        const response = await fetch(url, {
+            mode: 'cors',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(params)
         }).then(res => res.json());
 
         return response;

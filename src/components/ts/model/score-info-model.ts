@@ -58,19 +58,19 @@ export class DispRunningScoreModel {
     /** 12回裏 */
     BottomOfThe12: string;
     /** 得点（ビジター） */
-    VisiterR = '0';
+    VisitorR = '0';
     /** 得点（ホーム） */
     HomeR = '0';
     /** 安打（ビジター） */
-    VisiterH = '0';
+    VisitorH = '0';
     /** 安打（ホーム） */
     HomeH = '0';
     /** 失策（ビジター） */
-    VisiterE = '0';
+    VisitorE = '0';
     /** 失策（ホーム） */
     HomeE = '0';
     /** 残塁（ビジター） */
-    VisiterLOB = '0';
+    VisitorLOB = '0';
     /** 残塁（ホーム） */
     HomeLOB = '0';
 }
@@ -104,21 +104,21 @@ export class DispRunningScoreTitleModel {
  */
 export class RunningScoreModel {
     /** ビジタースコア */
-    VisiterScore: number[] = [];
+    VisitorScore: number[] = [];
     /** ホームスコア */
     HomeScore: number[] = [];
     /** 枠表示 */
     Frame: number;
     /** ビジター安打 */
-    VisiterH = 0;
+    VisitorH = 0;
     /** ホーム安打 */
     HomeH = 0;
     /** ビジター失策 */
-    VisiterE = 0;
+    VisitorE = 0;
     /** ホーム失策 */
     HomeE = 0;
     /** ビジター残塁 */
-    VisiterLOB = 0;
+    VisitorLOB = 0;
     /** ホーム残塁 */
     HomeLOB = 0;
 }

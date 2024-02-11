@@ -1,3 +1,5 @@
+import { RunningScoreModel, DispScoreModel, CountModel } from './score-info-model';
+import { DefaultMemberModel, ParticipationMemberPerTeamModel, BatterStatsModel, PositionModel, PitcherInfoModel, BattingResultPerTeamModel, RunnerNameModel, RunnerStateModel, DispBatterStatsModel, AtBatResultModel } from './member-info-model';
 /**
  * 試合情報
  */
@@ -13,11 +15,11 @@ export class GameInfoModel {
  */
 export class GameBaseInfoModel {
     /** ビジターチーム名 */
-    VisiterTeamName: string;
+    VisitorTeamName: string;
     /** ビジターチームテキスト */
-    VisiterTeamText: string;
+    VisitorTeamText: string;
     /** ビジター最終行 */
-    VisiterLastRow: number;
+    VisitorLastRow: number;
     /** ホームチーム名 */
     HomeTeamName: string;
     /** ホームチームテキスト */
@@ -27,9 +29,9 @@ export class GameBaseInfoModel {
     /** イニング上限 */
     InningLimit: number;
     /** 成績加算 */
-    StatsAddition: boolean;
+    StatsAddition: string;
     /** ホーム位置 */
-    HomePosition: number;
+    HomePosition: string;
 }
 
 /**
@@ -48,14 +50,16 @@ export class GameProgressInfoModel {
  * 結果ラジオボタン
  */
 export class ResultCheckBoxModel {
-    /** 三振 */
-    StrikeOut: boolean;
     /** ゴロ */
     GroundBall: boolean;
-    /** 併殺 */
-    DoublePlay: boolean;
     /** フライ */
     FlyBall: boolean;
+    /** ライナー */
+    LineDrive: boolean;
+    /** 併殺 */
+    DoublePlay: boolean;
+    /** 三振 */
+    StrikeOut: boolean;
     /** 四球 */
     FourPitchWalk: boolean;
     /** 死球 */
@@ -95,6 +99,16 @@ export class ResultCheckBoxModel {
 }
 
 /**
+ * 結果オプションモデル
+ */
+export class ResultOptionCheckBoxModel {
+    /** 打者出塁 */
+    BatterOnBase: boolean;
+    /** +失策 */
+    PlusError: boolean;
+}
+
+/**
  * 結果守備位置
  */
 export class ResultPositionCheckBoxModel {
@@ -120,4 +134,46 @@ export class ResultPositionCheckBoxModel {
     LeftCenter: boolean;
     /** 右中間 */
     RightCenter: boolean;
+}
+
+/**
+ * 試合経過ログモデル
+ */
+export class GameProgressLogModel {
+    /** 試合情報 */
+    GameInfo: GameInfoModel;
+    /** ビジター選手 */
+    VisitorMemberList: DefaultMemberModel[];
+    /** ビジター出場選手 */
+    VisitorParticipationMember: ParticipationMemberPerTeamModel;
+    /** ビジター打席結果リスト */
+    VisterBattingResult: BattingResultPerTeamModel;
+    /** ビジター投手情報リスト */
+    VisitorPitcherInfo: PitcherInfoModel[];
+    /** ホーム選手 */
+    HomeMemberList: DefaultMemberModel[];
+    /** ホーム出場選手 */
+    HomeParticipationMember: ParticipationMemberPerTeamModel;
+    /** ホーム打席結果リスト */
+    HomeBattingResult: BattingResultPerTeamModel;
+    /** ホーム投手情報リスト */
+    HomePitcherInfo: PitcherInfoModel[];
+    /** ランニングスコア */
+    RunningScore: RunningScoreModel;
+    /** 表示用スコア */
+    DispScore: DispScoreModel;
+    /** カウント */
+    Count: CountModel;
+    /** 打者成績 */
+    BatterStats: DispBatterStatsModel;
+    /** 守備位置 */
+    Position: PositionModel;
+    /** 投手情報 */
+    PitcherInfo: PitcherInfoModel;
+    /** 走者 */
+    Runner: RunnerNameModel;
+    /** 走者状態 */
+    RunnerState: RunnerStateModel;
+    /** 打席結果 */
+    BattingResult: AtBatResultModel[];
 }
