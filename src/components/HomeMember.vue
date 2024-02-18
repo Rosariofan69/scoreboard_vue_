@@ -565,8 +565,8 @@
         <div
           id="homePitcherName"
           class="Name-Text"
-          :class="[ninthTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
-          :style="[{transform: `scaleX(${ninthNameTrans})`, transformOrigin: 'left'}]"
+          :class="[pitcherTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+          :style="[{transform: `scaleX(${pitcherNameTrans})`, transformOrigin: 'left'}]"
         >{{ data.Pitcher.Name }}</div>
       </div>
     </div>
@@ -828,7 +828,7 @@ watch(props, () => {
   line-height: 38px;
   font-size: 36px;
   height: 42px;
-  text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.4);
+  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
 }
 
 .Basic-Position-BGC {

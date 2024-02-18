@@ -1,12 +1,46 @@
 <template>
   <div class="Ribbon">
-    <!-- <div class="Ribbon-Content">他球場の経過： De 1 - 3 ヤ（4回裏） 神 4 - 0 巨（5回表） オ 1 - 6 楽（5回裏） ロ 0 - 3 ソ（5回表） 日 0 - 2 西（3回表）</div> -->
-    <div class="Ribbon-Content">本日はYuチャンネルにご来場いただきましてありがとうございました。次回の配信をお楽しみに！</div>
-    <!-- <div class="Ribbon-Content">あああああああああああああああああああawiiああああああああああああああああああああああ</div> -->
+    <div
+      class="Ribbon-Content"
+      :class="[{'Animation' : animationSecond != ''}]"
+      id="ribbonText"
+    >{{ text }}</div>
   </div>
 </template>
   
 <script setup lang="ts">
+import { defineProps, nextTick, ref, watch } from 'vue';
+
+const props = defineProps<{
+  text: string;
+}>()
+
+// アニメーションの秒数
+let animationSecond = ref('');
+
+/**
+ * アニメーションの秒数計算
+ * @param element 
+ */
+function calcAnimation(element: any) {
+  animationSecond.value = '';
+  if (element) {
+    if (element.scrollWidth > 710) {
+      // 1周目
+      let second = element.scrollWidth / 80;
+      animationSecond.value = second.toString() + 's';
+    }
+  }
+}
+
+watch(props, () => {
+  animationSecond.value = '';
+  nextTick(() => {
+    // 秒数
+    calcAnimation(document.getElementById('ribbonText'));
+  })
+});
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -31,7 +65,10 @@
   line-height: 38px;
   padding-left: 100%;
   white-space: nowrap;
-  animation: animate-banner 25s linear infinite;
+}
+
+.Animation {
+  animation: animate-banner v-bind('animationSecond') linear infinite;
 }
 
 @keyframes animate-banner {

@@ -118,7 +118,7 @@ watch(props, () => {
 .Today-Result{
   position: absolute;
   bottom: 0%;
-  width: 450px;
+  width: 100%;
   height: 40px;
   border-top: 4px solid #7F7F7F;
   background: black;

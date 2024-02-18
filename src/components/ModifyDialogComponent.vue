@@ -200,7 +200,7 @@
           <thead>
             <tr>
               <th>チーム名</th>
-              <div v-for="n in props.gameInfo.GameProgressInfo.NowInning" :key="n"><th>{{ n }}</th></div>
+              <th v-for="n in inning" :key="n">{{ n }}</th>
               <th>R</th>
               <th>H</th>
               <th>E</th>
@@ -209,20 +209,21 @@
           </thead>
           <tbody>
             <tr>
-              <td><input type="text" class="Member-Input-Name"></td>
-              <div v-for="(visiter, index) in editScoreData.VisitorScore" :key="index">
-                <td><input type="text" v-model="visiter[index]"></td>
-              </div>
-              <td><input type="text" class="Member-Input-Name"></td>
-              <td><input type="text" class="Member-Input-Name"></td>
-              <td><input type="text" class="Member-Input-Name"></td>
-              <td><input type="text" class="Member-Input-Name"></td>
+              <td><input type="text" class="Member-Input-Name" v-model="gameInfo.GameBaseInfo.VisitorTeamName" disabled></td>
+              <td v-for="(visitor, index) in editScoreData.VisitorScore" :key="index"><input type="text" class="Member-Num" v-model="editScoreData.VisitorScore[index]" @change="calcScore()"></td>
+              <td><input type="text" class="Member-Num" v-model="visitorScore" disabled></td>
+              <td><input type="text" class="Member-Num" v-model="editScoreData.VisitorH"></td>
+              <td><input type="text" class="Member-Num" v-model="editScoreData.VisitorE"></td>
+              <td><input type="text" class="Member-Num" v-model="editScoreData.VisitorLOB"></td>
             </tr>
             <tr>
-              <td><input type="text" class="Member-Input-Name"></td>
-              <div v-for="(home, index) in editScoreData.HomeScore" :key="index">
-                <td><input type="text" v-model="home[index]"></td>
-              </div>
+              <td><input type="text" class="Member-Input-Name" v-model="gameInfo.GameBaseInfo.HomeTeamName" disabled></td>
+              <td v-for="(home, index) in editScoreData.HomeScore" :key="index"><input type="text" class="Member-Num" v-model="editScoreData.HomeScore[index]" @change="calcScore()"></td>
+              <td v-if="gameInfo.GameProgressInfo.NowInning > editScoreData.HomeScore.length"><input type="text" class="Member-Num" disabled></td>
+              <td><input type="text" class="Member-Num" v-model="homeScore" disabled></td>
+              <td><input type="text" class="Member-Num" v-model="editScoreData.HomeH"></td>
+              <td><input type="text" class="Member-Num" v-model="editScoreData.HomeE"></td>
+              <td><input type="text" class="Member-Num" v-model="editScoreData.HomeLOB"></td>
             </tr>
           </tbody>
         </table>
@@ -275,6 +276,9 @@ let editScoreData = ref(new RunningScoreModel());
 let gameInfo = ref(new GameInfoModel());
 // イニング
 let inning = ref(0);
+// 得点
+let visitorScore = ref(0);
+let homeScore = ref(0);
 
 /**
  * OKクリック
@@ -379,6 +383,22 @@ function calcBatterStats(index: number, division: number) {
   }
 }
 
+/**
+ * 得点計算
+ * @param scoreList 
+ */
+function calcScore() {
+  visitorScore.value = 0;
+  homeScore.value = 0;
+
+  editScoreData.value.VisitorScore.forEach(x => {
+    visitorScore.value += x;
+  })
+  editScoreData.value.HomeScore.forEach(x => {
+    homeScore.value += x;
+  });
+}
+
 watch(props, () => {
   switch (props.callDivision) {
     case DialogCallDivision.VisitorMemberInfo:
@@ -401,10 +421,13 @@ watch(props, () => {
       break;
     case DialogCallDivision.Score:
       editScoreData.value = _.cloneDeep(props.scoreData);
+      calcScore();
+      inning.value = props.scoreData.VisitorScore.length;
       break;
     default:
       break;
   }
+  gameInfo.value = props.gameInfo;
 });
 
 </script>

@@ -10,7 +10,10 @@
       :gameInfo="GameInfoData"
       :design="DesignData.Score"
     />
-    <RibbonSpace v-if="GameInfoData.GameBaseInfo.VisitorTeamName"/>
+    <RibbonSpace
+      v-if="GameInfoData.GameBaseInfo.VisitorTeamName"
+      :text="RibbonTextData"
+    />
     <div class="Big-Info" v-if="GameInfoData.GameBaseInfo.VisitorTeamName">
       <UmpireField
         :data="UmpireData"
@@ -118,6 +121,8 @@ let BattingResultData = ref<AtBatResultModel[]>([]);
 let DesignData = ref(new DesignModel());
 // 試合情報
 let GameInfoData = ref(new GameInfoModel());
+// リボンテキスト
+let RibbonTextData = ref('');
 
 /**
  * デザインデータ取得
@@ -233,6 +238,14 @@ const getBigInfoDispFlg = (data: boolean) => {
     BatterStatsDispFlg.value = false;
     PositionDataDispFlg.value = true;
   }
+}
+
+/**
+ * リボンテキスト取得
+ * @param data 
+ */
+const getRibbonTextData = (data: string) => {
+  RibbonTextData.value = data;
 }
 </script>
 

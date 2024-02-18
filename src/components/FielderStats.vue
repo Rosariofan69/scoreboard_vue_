@@ -27,8 +27,14 @@
       </div>
     </div>
     <div class="Stats-Content-Row">
-      <div class="Stats-Title">AVG</div>
-      <div class="Stats-Avg">{{ data.AVG }}</div>
+      <div 
+        class="Stats-Title"
+        :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home']"
+      >AVG</div>
+      <div
+        class="Stats-Avg"
+        :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home']"
+      >{{ data.AVG }}</div>
       <div
         id="ab_h"
         class="Stats-Avg-Detail"
@@ -40,7 +46,10 @@
     </div>
     <div class="Stats-Content-Row">
       <div class="Stats-Content-Row-Left">
-        <div class="Stats-Title">HR</div>
+        <div
+          class="Stats-Title"
+          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home']"
+        >HR</div>
         <div class="Stats-Content-Left">
           <div
             id="hr"
@@ -53,7 +62,10 @@
         </div>
       </div>
       <div class="Stats-Content-Row-Right">
-        <div class="Stats-Title">OBP</div>
+        <div
+          class="Stats-Title"
+          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home']"
+        >OBP</div>
         <div class="Stats-Content-Right">
           <div
             id="obp"
@@ -68,7 +80,10 @@
     </div>
     <div class="Stats-Content-Row">
       <div class="Stats-Content-Row-Left">
-        <div class="Stats-Title">RBI</div>
+        <div
+          class="Stats-Title"
+          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home']"
+        >RBI</div>
         <div class="Stats-Content-Left">
           <div
             id="rbi"
@@ -81,7 +96,10 @@
         </div>
       </div>
       <div class="Stats-Content-Row-Right">
-        <div class="Stats-Title">OPS</div>
+        <div
+          class="Stats-Title"
+          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home']"
+        >OPS</div>
         <div class="Stats-Content-Right">
           <div
             id="ops"
@@ -96,7 +114,10 @@
     </div>
     <div class="Stats-Content-Row">
       <div class="Stats-Content-Row-Left">
-        <div class="Stats-Title">SB</div>
+        <div
+          class="Stats-Title"
+          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home']"
+        >SB</div>
         <div class="Stats-Content-Left">
           <div
             id="sb"
@@ -109,7 +130,10 @@
         </div>
       </div>
       <div class="Stats-Content-Row-Right">
-        <div class="Stats-Title">RC27</div>
+        <div
+          class="Stats-Title"
+          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home']"
+        >RC27</div>
         <div class="Stats-Content-Right">
           <div
             id="rc27"
@@ -247,10 +271,9 @@ watch(props, () => {
   line-height: 75px;
   text-align: center;
   text-shadow: 
-    1px 1px #888,
-    2px 2px #777,
-    3px 3px #666,
-    4px 4px #000;
+    1px 1px #999,
+    2px 2px #666,
+    3px 3px #000;
 }
 
 .Stats-Name {
@@ -266,10 +289,9 @@ watch(props, () => {
   line-height: 57px;
   /* text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.4); */
   text-shadow: 
-    1px 1px #888,
-    2px 2px #777,
-    3px 3px #666,
-    4px 4px #000;
+    1px 1px #999,
+    2px 2px #666,
+    3px 3px #000;
 }
 
 .Stats-Content-Row {
@@ -296,10 +318,9 @@ watch(props, () => {
   line-height: 50px;
   letter-spacing: 1px;
   text-shadow: 
-    1px 1px #888,
-    2px 2px #777,
-    3px 3px #666,
-    4px 4px #000;
+    1px 1px #999,
+    2px 2px #666,
+    3px 3px #000;
 }
 
 .Stats-Avg-Detail {
@@ -309,10 +330,9 @@ watch(props, () => {
   font-size: 35px;
   line-height: 50px;
   text-shadow: 
-    1px 1px #888,
-    2px 2px #777,
-    3px 3px #666,
-    4px 4px #000;
+    1px 1px #999,
+    2px 2px #666,
+    3px 3px #000;
 }
 
 .Stats-Content-Row-Left {
@@ -335,10 +355,9 @@ watch(props, () => {
   text-align: right;
   letter-spacing: 1px;
   text-shadow: 
-    1px 1px #888,
-    2px 2px #777,
-    3px 3px #666,
-    4px 4px #000;
+    1px 1px #999,
+    2px 2px #666,
+    3px 3px #000;
 }
 
 .Stats-Content-Row-Right {
@@ -361,10 +380,9 @@ watch(props, () => {
   text-align: right;
   letter-spacing: 1px;
   text-shadow: 
-    1px 1px #888,
-    2px 2px #777,
-    3px 3px #666,
-    4px 4px #000;
+    1px 1px #999,
+    2px 2px #666,
+    3px 3px #000;
 }
 
 .BGC-Visitor {

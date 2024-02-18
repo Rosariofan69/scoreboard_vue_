@@ -283,7 +283,7 @@
       INFOスペースの表示
       <select class="Setting-DropDown"></select>
       カスタムテキスト
-      <textarea class="Custom-TextArea"></textarea>
+      <textarea class="Custom-TextArea" v-model="customText" @change="changeCustomText()"></textarea>
     </div>
   </div>
   <div
@@ -445,6 +445,7 @@ const emits = defineEmits<{
   (e: 'sendJudgeData', v: JudgeModel): void;
   (e: 'sendBattingResultData', v: AtBatResultModel[]): void;
   (e: 'sendBigInfoDispFlg', v: boolean): void;
+  (e: 'sendCustomText', v: string): void;
 }>()
 // デザインデータ
 let design: DesignModel = new DesignModel();
@@ -567,6 +568,8 @@ let confirmdDialogDispFlg = ref(false);
 let messageDialogDispFlg = ref(false);
 // 出塁状況表示フラグ
 let onBaseStatusBoxDispFlg = ref(false);
+// カスタムテキスト
+let customText = ref('');
 
 /**
  * 表示ボタンクリック時処理
@@ -770,8 +773,8 @@ async function getBulkHomeParticipationMember() {
       
       if (gameInfo.value.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home) {
         batterStats.value = memberController.GetBatterStats(homeParticipationMember.value, defaultHomeMemberList);
-        const id = visitorParticipationMember.value[memberController.orderKeysDH[runnerData.value.Batter.Order]].ID;
-        battingResultData.value = memberController.GetBattingResult(visitorBattingResult.value, runnerData.value.Batter.Order, id);
+        const id = homeParticipationMember.value[memberController.orderKeysDH[runnerData.value.Batter.Order]].ID;
+        battingResultData.value = memberController.GetBattingResult(homeBattingResult.value, runnerData.value.Batter.Order, id);
         runnerData.value = gameController.SortRunner(homeParticipationMember.value, runnerState.value, runnerData.value.Batter);
         emits('sendBatterStatsData', batterStats.value);
         emits('sendBattingResultData', battingResultData.value);
@@ -1010,7 +1013,7 @@ async function clickConfirm() {
   } else if (resultCheckBox.value.SingleHit || resultCheckBox.value.TwoBaseHit || resultCheckBox.value.ThreeBaseHit || resultCheckBox.value.HomeRun) {
     // 単打、二塁打、三塁打、本塁打
     hit();
-  } else if (resultCheckBox.value.GroundBall || resultCheckBox.value.DoublePlay || resultCheckBox.value.FlyBall ||
+  } else if (resultCheckBox.value.GroundBall || resultCheckBox.value.FlyBall || resultCheckBox.value.LineDrive || resultCheckBox.value.DoublePlay ||
              resultCheckBox.value.FoulFly || resultCheckBox.value.SacrificeBunt || resultCheckBox.value.SacrificeFly) {
     // ゴロ、フライ、ライナー、併殺、邪飛、犠打、犠飛
     batterOut();
@@ -1059,6 +1062,7 @@ async function clickConfirm() {
   }
   resultCheckBox.value = new ResultCheckBoxModel();
   resultPositionCheckBox.value = [];
+  resultOptionCheckBox.value = new ResultOptionCheckBoxModel();
   resultPositionFlg.value = true;
   selectedRBI.value = '0';
   if (checkGameSetAvailability()) {
@@ -1645,11 +1649,15 @@ function createBatterStatsUpdateData(): BatterStatsUpdateModel {
   let updateData = new BatterStatsUpdateModel();
 
   switch (true) {
-    case resultCheckBox.value.StrikeOut:
-      updateData.AtBat = 1;
-      updateData.SO = 1;
-      break;
     case resultCheckBox.value.GroundBall:
+      updateData.AtBat = 1;
+      updateData.RBI = Number(selectedRBI.value);
+      break;
+    case resultCheckBox.value.FlyBall:
+      updateData.AtBat = 1;
+      updateData.RBI = Number(selectedRBI.value);
+      break;
+    case resultCheckBox.value.LineDrive:
       updateData.AtBat = 1;
       updateData.RBI = Number(selectedRBI.value);
       break;
@@ -1657,9 +1665,9 @@ function createBatterStatsUpdateData(): BatterStatsUpdateModel {
       updateData.AtBat = 1;
       updateData.DP = 1;
       break;
-    case resultCheckBox.value.FlyBall:
+    case resultCheckBox.value.StrikeOut:
       updateData.AtBat = 1;
-      updateData.RBI = Number(selectedRBI.value);
+      updateData.SO = 1;
       break;
     case resultCheckBox.value.FourPitchWalk:
       updateData.RBI = Number(selectedRBI.value);
@@ -1955,6 +1963,13 @@ function clickModify() {
   }
 
   modifyDialogDispFlg.value = true;
+}
+
+/**
+ * カスタムテキスト変更
+ */
+function changeCustomText() {
+  emits('sendCustomText', customText.value);
 }
 
 </script>

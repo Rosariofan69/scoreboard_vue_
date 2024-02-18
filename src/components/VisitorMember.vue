@@ -828,8 +828,7 @@ watch(props, () => {
   line-height: 38px;
   font-size: 36px;
   height: 42px;
-  /* text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.4); */
-  text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
 }
 
 .Basic-Position-BGC {

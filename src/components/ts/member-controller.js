@@ -580,11 +580,10 @@ class MemberController {
      */
     ChangeAfterMember(before, after, member, defMember, batRes, pitcherInfo, index, cancel) {
         const orderDH = this.orderKeysDH[index];
-        let order = '';
+        const order = this.orderKeys[index];
         // フラグがTrueの場合、打席結果の末尾を消去（操作ミスの取消のため）
         if (cancel) {
             if (index < 9) {
-                order = this.orderKeys[index];
                 batRes[order].pop();
             }
             else {

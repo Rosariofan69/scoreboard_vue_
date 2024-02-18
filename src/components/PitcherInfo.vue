@@ -192,7 +192,7 @@ watch(props, () => {
   font-size: 35px;
   line-height: 45px;
   text-align: center;
-  text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.4);
+  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
 }
 
 .Pitch-Info-Name{
@@ -209,7 +209,7 @@ watch(props, () => {
   font-size: 33px;
   line-height: 43px;
   text-align: center;
-  text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.4);
+  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
 }
 
 .Pitch-Info-Title{
@@ -243,7 +243,7 @@ watch(props, () => {
   font-weight: bold;
   line-height: 44px;
   text-align: right;
-  text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.4);
+  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
 }
 
 .Pitch-Info-Ball{

@@ -303,7 +303,7 @@ watch(props, () => {
   padding-left: 1.5px;
   padding-right: 1.5px;
   text-align: center;
-  text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.4);
+  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
 }
 
 .Position-Name-Text {
@@ -313,7 +313,7 @@ watch(props, () => {
   text-align-last: justify;
   font-size: 25px;
   line-height: 27.5px;
-  text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.4);
+  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
 }
 
 .Position-P {
