@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GameController = void 0;
+const score_info_model_1 = require("./model/score-info-model");
 const member_controller_1 = require("./member-controller");
 const constant_1 = require("./constant");
 const game_model_1 = require("./model/game-model");
@@ -268,7 +269,6 @@ class GameController {
         else {
             setInning = gameInfo.GameProgressInfo.NowInning - 1;
         }
-        let totalRuns = 0;
         // 配列の要素をtoStringすると要素の存在が不確定なためエラーが発生する
         let nowInningRuns = 0;
         if (gameInfo.GameProgressInfo.NowAttackTeam == constant_1.VisitorHomeDivision.Visitor) {
@@ -280,12 +280,6 @@ class GameController {
                 scoreData.VisitorScore[gameInfo.GameProgressInfo.NowInning - 1] += runs;
                 nowInningRuns = scoreData.VisitorScore[gameInfo.GameProgressInfo.NowInning - 1];
             }
-            // 合計計算
-            scoreData.VisitorScore.forEach(x => {
-                totalRuns += x;
-            });
-            dispScoreData[this.inningKeys[setInning]] = nowInningRuns.toString();
-            dispScoreData.VisitorR = totalRuns.toString();
         }
         else {
             if (scoreData.HomeScore.length < gameInfo.GameProgressInfo.NowInning) {
@@ -296,14 +290,66 @@ class GameController {
                 scoreData.HomeScore[gameInfo.GameProgressInfo.NowInning - 1] += runs;
                 nowInningRuns = scoreData.HomeScore[gameInfo.GameProgressInfo.NowInning - 1];
             }
-            // 合計計算
-            scoreData.HomeScore.forEach(x => {
-                totalRuns += x;
-            });
-            dispScoreData[this.inningKeys[setInning + 12]] = nowInningRuns.toString();
-            dispScoreData.HomeR = totalRuns.toString();
         }
+        dispScoreData = this.CreateDispRunningScore(gameInfo, scoreData);
         return [scoreData, dispScoreData];
+    }
+    /**
+     * 表示用ランニングスコア作成
+     * @param gameInfo
+     * @param scoreData
+     * @param dispScoreData
+     * @returns
+     */
+    CreateDispRunningScore(gameInfo, scoreData) {
+        const dispScoreData = new score_info_model_1.DispRunningScoreModel();
+        let visitorR = 0;
+        let homeR = 0;
+        if (gameInfo.GameBaseInfo.InningLimit <= 12 || (gameInfo.GameBaseInfo.InningLimit > 12 && gameInfo.GameProgressInfo.NowInning < 10)) {
+            // ビジター
+            scoreData.VisitorScore.forEach((x, index) => {
+                dispScoreData[this.inningKeys[index]] = x.toString();
+                visitorR += Number(x);
+            });
+            // ホーム
+            scoreData.HomeScore.forEach((x, index) => {
+                dispScoreData[this.inningKeys[index + 12]] = x.toString();
+                homeR += Number(x);
+            });
+        }
+        else {
+            let startInning = 0;
+            let endInning = 0;
+            if (gameInfo.GameProgressInfo.NowInning % 9 == 0) {
+                startInning = gameInfo.GameProgressInfo.NowInning - 8;
+            }
+            else {
+                startInning = (gameInfo.GameProgressInfo.NowInning - (gameInfo.GameProgressInfo.NowInning % 9));
+            }
+            endInning = gameInfo.GameProgressInfo.NowInning;
+            for (let i = 0; i < (endInning - startInning); i++) {
+                // ビジター
+                if (scoreData.VisitorScore.length >= endInning - 1) {
+                    dispScoreData[this.inningKeys[i]] = scoreData.VisitorScore[startInning + i - 1].toString();
+                }
+                // ホーム
+                if (scoreData.HomeScore.length >= endInning - 1) {
+                    dispScoreData[this.inningKeys[i + 12]] = scoreData.HomeScore[startInning + i - 1].toString();
+                }
+            }
+        }
+        if (gameInfo.GameProgressInfo.NowInning >= 9 && gameInfo.GameProgressInfo.NowAttackTeam == constant_1.VisitorHomeDivision.Home && visitorR < homeR) {
+            dispScoreData[this.inningKeys[gameInfo.GameProgressInfo.NowInning + 11]] = scoreData.HomeScore[gameInfo.GameProgressInfo.NowInning - 1].toString() + 'x';
+        }
+        dispScoreData.VisitorR = visitorR.toString();
+        dispScoreData.VisitorH = scoreData.VisitorH.toString();
+        dispScoreData.VisitorE = scoreData.VisitorE.toString();
+        dispScoreData.VisitorLOB = scoreData.VisitorLOB.toString();
+        dispScoreData.HomeR = homeR.toString();
+        dispScoreData.HomeH = scoreData.HomeH.toString();
+        dispScoreData.HomeE = scoreData.HomeE.toString();
+        dispScoreData.HomeLOB = scoreData.HomeLOB.toString();
+        return dispScoreData;
     }
     /**
      * 試合終了処理

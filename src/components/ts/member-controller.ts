@@ -1,6 +1,5 @@
-import { GameController } from './game-controller';
 import { GameInfoModel } from './model/game-model';
-import { VisitorHomeDivision, GameInfoDivision } from './constant';
+import { VisitorHomeDivision } from './constant';
 import { ExcelController } from './excel-controller';
 import { DefaultMemberModel,
          ParticipationMemberPerTeamModel,
@@ -265,7 +264,10 @@ export class MemberController {
     public SavePitcherInfo(pitcherInfoList: PitcherInfoModel[], pitcherInfo: PitcherInfoModel): PitcherInfoModel[] {
         pitcherInfoList.forEach(x => {
             if (x.Number == pitcherInfo.Number) {
-                x = pitcherInfo;
+                x.PitchCount = pitcherInfo.PitchCount;
+                x.ThisAtBat = pitcherInfo.ThisAtBat;
+                x.SO = pitcherInfo.SO;
+                x.BB = pitcherInfo.BB;
             }
         });
 

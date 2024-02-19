@@ -104,8 +104,8 @@ const props = defineProps<{
 function calcNumberWidth(element: any): string {
   let returnData = '1.0';
   if (element) {
-    if (element.scrollWidth > 50) {
-      let width = 50 / element.scrollWidth;
+    if (element.scrollWidth > 43) {
+      let width = 43 / element.scrollWidth;
       returnData = width.toString();
     }
   }

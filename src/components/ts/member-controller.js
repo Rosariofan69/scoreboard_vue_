@@ -244,7 +244,10 @@ class MemberController {
     SavePitcherInfo(pitcherInfoList, pitcherInfo) {
         pitcherInfoList.forEach(x => {
             if (x.Number == pitcherInfo.Number) {
-                x = pitcherInfo;
+                x.PitchCount = pitcherInfo.PitchCount;
+                x.ThisAtBat = pitcherInfo.ThisAtBat;
+                x.SO = pitcherInfo.SO;
+                x.BB = pitcherInfo.BB;
             }
         });
         return pitcherInfoList;

@@ -219,7 +219,9 @@
             <tr>
               <td><input type="text" class="Member-Input-Name" v-model="gameInfo.GameBaseInfo.HomeTeamName" disabled></td>
               <td v-for="(home, index) in editScoreData.HomeScore" :key="index"><input type="text" class="Member-Num" v-model="editScoreData.HomeScore[index]" @change="calcScore()"></td>
-              <td v-if="gameInfo.GameProgressInfo.NowInning > editScoreData.HomeScore.length"><input type="text" class="Member-Num" disabled></td>
+              <td v-if="gameInfo.GameProgressInfo.NowInning > editScoreData.HomeScore.length && gameInfo.GameProgressInfo.NowInning == editScoreData.VisitorScore.length">
+                <input type="text" class="Member-Num" disabled>
+              </td>
               <td><input type="text" class="Member-Num" v-model="homeScore" disabled></td>
               <td><input type="text" class="Member-Num" v-model="editScoreData.HomeH"></td>
               <td><input type="text" class="Member-Num" v-model="editScoreData.HomeE"></td>
@@ -392,10 +394,10 @@ function calcScore() {
   homeScore.value = 0;
 
   editScoreData.value.VisitorScore.forEach(x => {
-    visitorScore.value += x;
+    visitorScore.value += Number(x);
   })
   editScoreData.value.HomeScore.forEach(x => {
-    homeScore.value += x;
+    homeScore.value += Number(x);
   });
 }
 

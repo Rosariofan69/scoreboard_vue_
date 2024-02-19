@@ -602,21 +602,32 @@ const getModifyData = (data: any) => {
   switch (selectedModifyDivision.value) {
     case DialogCallDivision.VisitorMemberInfo:
       defaultVisitorMemberList.value = data;
+      getBatterStats();
       break;
     case DialogCallDivision.HomeMemberInfo:
       defaultHomeMemberList = data;
+      getBatterStats();
       break;
     case DialogCallDivision.VisitorBattingResult:
       visitorBattingResult.value = data;
+      getBattingResult();
       break;
     case DialogCallDivision.HomeBattingResult:
       homeBattingResult.value = data;
+      getBattingResult();
       break;
     case DialogCallDivision.VisitorPitcherInfo:
       visitorPitcherInfo = data;
+      getPitcherInfo();
       break;
     case DialogCallDivision.HomePitcherInfo:
       homePitcherInfo = data;
+      getPitcherInfo();
+      break;
+    case DialogCallDivision.Score:
+      runningScore = data;
+      dispRunningScore.value.Score = gameController.CreateDispRunningScore(gameInfo.value, runningScore);
+      emits('sendScoreData', dispRunningScore.value);
       break;
     default:
       break;
@@ -655,8 +666,8 @@ async function getVisitorParticipationMember(index: number, cancel: boolean) {
       
       if (gameInfo.value.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor) {
         batterStats.value = memberController.GetBatterStats(visitorParticipationMember.value, defaultVisitorMemberList.value);
-        const id = homeParticipationMember.value[memberController.orderKeysDH[runnerData.value.Batter.Order]].ID;
-        battingResultData.value = memberController.GetBattingResult(homeBattingResult.value, runnerData.value.Batter.Order, id);
+        const id = visitorParticipationMember.value[memberController.orderKeysDH[runnerData.value.Batter.Order - 1]].ID;
+        battingResultData.value = memberController.GetBattingResult(visitorBattingResult.value, runnerData.value.Batter.Order, id);
         runnerData.value = gameController.SortRunner(visitorParticipationMember.value, runnerState.value, runnerData.value.Batter);
         emits('sendBatterStatsData', batterStats.value);
         emits('sendBattingResultData', battingResultData.value);
@@ -694,7 +705,7 @@ async function getBulkVisitorParticipationMember() {
       
       if (gameInfo.value.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor) {
         batterStats.value = memberController.GetBatterStats(visitorParticipationMember.value, defaultVisitorMemberList.value);
-        const id = visitorParticipationMember.value[memberController.orderKeysDH[runnerData.value.Batter.Order]].ID;
+        const id = visitorParticipationMember.value[memberController.orderKeysDH[runnerData.value.Batter.Order - 1]].ID;
         battingResultData.value = memberController.GetBattingResult(visitorBattingResult.value, runnerData.value.Batter.Order, id);
         runnerData.value = gameController.SortRunner(visitorParticipationMember.value, runnerState.value, runnerData.value.Batter);
         emits('sendBatterStatsData', batterStats.value);
@@ -734,7 +745,7 @@ async function getBulkVisitorParticipationMember() {
       
       if (gameInfo.value.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home) {
         batterStats.value = memberController.GetBatterStats(homeParticipationMember.value, defaultHomeMemberList);
-        const id = homeParticipationMember.value[memberController.orderKeysDH[runnerData.value.Batter.Order]].ID;
+        const id = homeParticipationMember.value[memberController.orderKeysDH[runnerData.value.Batter.Order - 1]].ID;
         battingResultData.value = memberController.GetBattingResult(homeBattingResult.value, runnerData.value.Batter.Order, id);
         runnerData.value = gameController.SortRunner(homeParticipationMember.value, runnerState.value, runnerData.value.Batter);
         emits('sendBatterStatsData', batterStats.value);
@@ -773,7 +784,7 @@ async function getBulkHomeParticipationMember() {
       
       if (gameInfo.value.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home) {
         batterStats.value = memberController.GetBatterStats(homeParticipationMember.value, defaultHomeMemberList);
-        const id = homeParticipationMember.value[memberController.orderKeysDH[runnerData.value.Batter.Order]].ID;
+        const id = homeParticipationMember.value[memberController.orderKeysDH[runnerData.value.Batter.Order - 1]].ID;
         battingResultData.value = memberController.GetBattingResult(homeBattingResult.value, runnerData.value.Batter.Order, id);
         runnerData.value = gameController.SortRunner(homeParticipationMember.value, runnerState.value, runnerData.value.Batter);
         emits('sendBatterStatsData', batterStats.value);
@@ -970,6 +981,9 @@ function thisAtBatPitchMinus() {
   emits('sendPitcherData', pitcherInfo.value);
 }
 
+/**
+ * アウトクリック
+ */
 function clickOut() {
   if (countData.value.Out < 2) {
     countData.value.Out++;
@@ -977,6 +991,9 @@ function clickOut() {
   }
 }
 
+/**
+ * アウトマイナスクリック
+ */
 function clickOutMinus() {
   if (countData.value.Out > 0) {
     countData.value.Out--;
@@ -1098,6 +1115,7 @@ function changeResultCheck(changeItem: number, targetValue: boolean) {
 
     // 本塁打の場合、全走者を生還させる
     if (changeItem == ResultCheckBox.HomeRun) {
+      selectedBaseRuns.value = [];
       runnerProperty.forEach(x => {
         if (runnerData.value[x].Order != null) {
           selectedBaseRuns.value.push(runnerData.value[x].Order);
@@ -1504,8 +1522,6 @@ async function changeAttackTeam() {
     }
     cloneGameInfo.GameProgressInfo.NowAttackTeam = VisitorHomeDivision.Home;
 
-    batterStats.value = memberController.GetBatterStats(cloneHomeMember, defaultHomeMemberList);
-    pitcherInfo.value = memberController.GetPitcherInfo(cloneVisitorMember, visitorPitcherInfo);
     positionData.value = memberController.SetPositionData(visitorParticipationMember.value);
   } else {
     // 無得点
@@ -1516,8 +1532,6 @@ async function changeAttackTeam() {
     cloneGameInfo.GameProgressInfo.NowAttackTeam = VisitorHomeDivision.Visitor;
     cloneGameInfo.GameProgressInfo.NowInning++;
 
-    batterStats.value = memberController.GetBatterStats(cloneVisitorMember, defaultVisitorMemberList.value);
-    pitcherInfo.value = memberController.GetPitcherInfo(cloneHomeMember, homePitcherInfo);
     positionData.value = memberController.SetPositionData(homeParticipationMember.value);
   }
 
@@ -1527,8 +1541,8 @@ async function changeAttackTeam() {
   emits('sendVisitorMemberData', visitorParticipationMember.value);
   emits('sendHomeMemberData', homeParticipationMember.value);
   emits('sendPositionData', positionData.value);
-  emits('sendBatterStatsData', batterStats.value);
-  emits('sendPitcherData', pitcherInfo.value);
+  getBatterStats();
+  getPitcherInfo();
   emits('sendGameInfoData', gameInfo.value);
   emits('sendRunnerData', runnerData.value);
   emits('sendBattingResultData', battingResultData.value);
@@ -1970,6 +1984,44 @@ function clickModify() {
  */
 function changeCustomText() {
   emits('sendCustomText', customText.value);
+}
+
+/**
+ * 野手成績取得
+ */
+function getBatterStats() {
+  if (gameInfo.value.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor) {
+    batterStats.value = memberController.GetBatterStats(visitorParticipationMember.value, defaultVisitorMemberList.value);
+  } else {
+    batterStats.value = memberController.GetBatterStats(homeParticipationMember.value, defaultHomeMemberList);
+  }
+  emits('sendBatterStatsData', batterStats.value);
+}
+
+/**
+ * 打席結果取得
+ */
+function getBattingResult() {
+  if (gameInfo.value.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor) {
+    const id = visitorParticipationMember.value[memberController.orderKeysDH[runnerData.value.Batter.Order]].ID;
+    battingResultData.value = memberController.GetBattingResult(visitorBattingResult.value, runnerData.value.Batter.Order, id);
+  } else {
+    const id = homeParticipationMember.value[memberController.orderKeysDH[runnerData.value.Batter.Order]].ID;
+    battingResultData.value = memberController.GetBattingResult(homeBattingResult.value, runnerData.value.Batter.Order, id);
+  }
+  emits('sendBattingResultData', battingResultData.value);
+}
+
+/**
+ * 投手情報取得
+ */
+function getPitcherInfo() {
+  if (gameInfo.value.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor) {
+    pitcherInfo.value = memberController.GetPitcherInfo(homeParticipationMember.value, homePitcherInfo);
+  } else {
+    pitcherInfo.value = memberController.GetPitcherInfo(visitorParticipationMember.value, visitorPitcherInfo);
+  }
+  emits('sendPitcherData', pitcherInfo.value);
 }
 
 </script>
