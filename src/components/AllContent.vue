@@ -70,6 +70,7 @@
       @sendJudgeData="getJudgeData"
       @sendBattingResultData="getBattingResultData"
       @sendBigInfoDispFlg="getBigInfoDispFlg"
+      @sendCustomText="getRibbonTextData"
     />
   </div>
 </template>

@@ -82,31 +82,31 @@
       <div>走塁死</div>
       <div class="MultiSelect">
         <label style="display: block;">
-          <input id="Base-Run-Out-Batter" type="checkbox" v-model="selectedBaseRunningOut" :value="runnerData.Batter.Order" v-if="runnerData.Batter.Name">{{ runnerData.Batter.Name }}
+          <input type="checkbox" v-model="selectedBaseRunningOut" :value="runnerData.Batter.Order" v-if="runnerData.Batter.Name">{{ runnerData.Batter.Name }}
         </label>
         <label style="display: block;">
-          <input id="Base-Run-Out-First" type="checkbox" v-model="selectedBaseRunningOut" :value="runnerData.First.Order" v-if="runnerData.First.Name">{{ runnerData.First.Name }}
+          <input type="checkbox" v-model="selectedBaseRunningOut" :value="runnerData.First.Order" v-if="runnerData.First.Name">{{ runnerData.First.Name }}
         </label>
         <label style="display: block;">
-          <input id="Base-Run-Out-Second" type="checkbox" v-model="selectedBaseRunningOut" :value="runnerData.Second.Order" v-if="runnerData.Second.Name">{{ runnerData.Second.Name }}
+          <input type="checkbox" v-model="selectedBaseRunningOut" :value="runnerData.Second.Order" v-if="runnerData.Second.Name">{{ runnerData.Second.Name }}
         </label>
         <label style="display: block;">
-          <input id="Base-Run-Out-Third" type="checkbox" v-model="selectedBaseRunningOut" :value="runnerData.Third.Order" v-if="runnerData.Third.Name">{{ runnerData.Third.Name }}
+          <input type="checkbox" v-model="selectedBaseRunningOut" :value="runnerData.Third.Order" v-if="runnerData.Third.Name">{{ runnerData.Third.Name }}
         </label>
       </div>
       <div>生還</div>
       <div class="MultiSelect">
         <label style="display: block;">
-          <input id="Base-Runs-Batter" type="checkbox" v-model="selectedBaseRuns" :value="runnerData.Batter.Order" v-if="runnerData.Batter.Name">{{ runnerData.Batter.Name }}
+          <input type="checkbox" v-model="selectedBaseRuns" :value="runnerData.Batter.Order" v-if="runnerData.Batter.Name">{{ runnerData.Batter.Name }}
         </label>
         <label style="display: block;">
-          <input id="Base-Runs-First" type="checkbox" v-model="selectedBaseRuns" :value="runnerData.First.Order" v-if="runnerData.First.Name">{{ runnerData.First.Name }}
+          <input type="checkbox" v-model="selectedBaseRuns" :value="runnerData.First.Order" v-if="runnerData.First.Name">{{ runnerData.First.Name }}
         </label>
         <label style="display: block;">
-          <input id="Base-Runs-Second" type="checkbox" v-model="selectedBaseRuns" :value="runnerData.Second.Order" v-if="runnerData.Second.Name">{{ runnerData.Second.Name }}
+          <input type="checkbox" v-model="selectedBaseRuns" :value="runnerData.Second.Order" v-if="runnerData.Second.Name">{{ runnerData.Second.Name }}
         </label>
         <label style="display: block;">
-          <input id="Base-Runs-Third" type="checkbox" v-model="selectedBaseRuns" :value="runnerData.Third.Order" v-if="runnerData.Third.Name">{{ runnerData.Third.Name }}
+          <input type="checkbox" v-model="selectedBaseRuns" :value="runnerData.Third.Order" v-if="runnerData.Third.Name">{{ runnerData.Third.Name }}
         </label>
       </div>
       <button class="OnBase-Status-Button" v-on:click="onBaseStatusBoxDispFlg = !onBaseStatusBoxDispFlg;">出塁状況</button>
@@ -194,25 +194,25 @@
           <button class="Stolen-Base-Button" v-on:click="stolenBaseBoxDispFlg = !stolenBaseBoxDispFlg">盗塁</button>
           <div class="Stolen-Base-Select MultiSelect" v-if="stolenBaseBoxDispFlg">
             <label style="display: block;">
-              <input id="Base-Runs-First" type="checkbox" v-model="selectedStolenBase" :value="runnerData.First.Order" v-if="runnerData.First.Name">{{ runnerData.First.Name }}
+              <input type="checkbox" v-model="selectedStolenBase" :value="runnerData.First.Order" v-if="runnerData.First.Name">{{ runnerData.First.Name }}
             </label>
             <label style="display: block;">
-              <input id="Base-Runs-Second" type="checkbox" v-model="selectedStolenBase" :value="runnerData.Second.Order" v-if="runnerData.Second.Name">{{ runnerData.Second.Name }}
+              <input type="checkbox" v-model="selectedStolenBase" :value="runnerData.Second.Order" v-if="runnerData.Second.Name">{{ runnerData.Second.Name }}
             </label>
             <label style="display: block;">
-              <input id="Base-Runs-Third" type="checkbox" v-model="selectedStolenBase" :value="runnerData.Third.Order" v-if="runnerData.Third.Name">{{ runnerData.Third.Name }}
+              <input type="checkbox" v-model="selectedStolenBase" :value="runnerData.Third.Order" v-if="runnerData.Third.Name">{{ runnerData.Third.Name }}
             </label>
           </div>
           <button class="Stolen-Base-Button" v-on:click="caughtStealingBoxDispFlg = !caughtStealingBoxDispFlg">盗塁死</button>
           <div class="Caught-Stealing-Select MultiSelect" v-if="caughtStealingBoxDispFlg">
             <label style="display: block;">
-              <input id="Base-Runs-First" type="checkbox" v-model="selectedCaughtStealing" :value="runnerData.First.Order" v-if="runnerData.First.Name">{{ runnerData.First.Name }}
+              <input type="checkbox" v-model="selectedCaughtStealing" :value="runnerData.First.Order" v-if="runnerData.First.Name">{{ runnerData.First.Name }}
             </label>
             <label style="display: block;">
-              <input id="Base-Runs-Second" type="checkbox" v-model="selectedCaughtStealing" :value="runnerData.Second.Order" v-if="runnerData.Second.Name">{{ runnerData.Second.Name }}
+              <input type="checkbox" v-model="selectedCaughtStealing" :value="runnerData.Second.Order" v-if="runnerData.Second.Name">{{ runnerData.Second.Name }}
             </label>
             <label style="display: block;">
-              <input id="Base-Runs-Third" type="checkbox" v-model="selectedCaughtStealing" :value="runnerData.Third.Order" v-if="runnerData.Third.Name">{{ runnerData.Third.Name }}
+              <input type="checkbox" v-model="selectedCaughtStealing" :value="runnerData.Third.Order" v-if="runnerData.Third.Name">{{ runnerData.Third.Name }}
             </label>
           </div>
         </div>
@@ -390,8 +390,10 @@
   </div>
   <div class="Dialog" v-if="gameSetDialogDispFlg">
     {{ Message.Message004 }}
-    <button v-on:click="clickOkGameSet()">OK</button>
-    <button v-on:click="closeGameSetDialog()">キャンセル</button>
+    <div class="Footer">
+      <button class="Ok" v-on:click="clickOkGameSet()">OK</button>
+      <button class="Cancel" v-on:click="closeGameSetDialog()">キャンセル</button>
+    </div>
   </div>
 </template>
 
@@ -667,7 +669,7 @@ async function getVisitorParticipationMember(index: number, cancel: boolean) {
       if (gameInfo.value.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor) {
         batterStats.value = memberController.GetBatterStats(visitorParticipationMember.value, defaultVisitorMemberList.value);
         const id = visitorParticipationMember.value[memberController.orderKeysDH[runnerData.value.Batter.Order - 1]].ID;
-        battingResultData.value = memberController.GetBattingResult(visitorBattingResult.value, runnerData.value.Batter.Order, id);
+        battingResultData.value = memberController.GetBattingResult(visitorBattingResult.value, runnerData.value.Batter.Order - 1, id);
         runnerData.value = gameController.SortRunner(visitorParticipationMember.value, runnerState.value, runnerData.value.Batter);
         emits('sendBatterStatsData', batterStats.value);
         emits('sendBattingResultData', battingResultData.value);
@@ -706,7 +708,7 @@ async function getBulkVisitorParticipationMember() {
       if (gameInfo.value.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor) {
         batterStats.value = memberController.GetBatterStats(visitorParticipationMember.value, defaultVisitorMemberList.value);
         const id = visitorParticipationMember.value[memberController.orderKeysDH[runnerData.value.Batter.Order - 1]].ID;
-        battingResultData.value = memberController.GetBattingResult(visitorBattingResult.value, runnerData.value.Batter.Order, id);
+        battingResultData.value = memberController.GetBattingResult(visitorBattingResult.value, runnerData.value.Batter.Order - 1, id);
         runnerData.value = gameController.SortRunner(visitorParticipationMember.value, runnerState.value, runnerData.value.Batter);
         emits('sendBatterStatsData', batterStats.value);
         emits('sendBattingResultData', battingResultData.value);
@@ -746,7 +748,7 @@ async function getBulkVisitorParticipationMember() {
       if (gameInfo.value.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home) {
         batterStats.value = memberController.GetBatterStats(homeParticipationMember.value, defaultHomeMemberList);
         const id = homeParticipationMember.value[memberController.orderKeysDH[runnerData.value.Batter.Order - 1]].ID;
-        battingResultData.value = memberController.GetBattingResult(homeBattingResult.value, runnerData.value.Batter.Order, id);
+        battingResultData.value = memberController.GetBattingResult(homeBattingResult.value, runnerData.value.Batter.Order - 1, id);
         runnerData.value = gameController.SortRunner(homeParticipationMember.value, runnerState.value, runnerData.value.Batter);
         emits('sendBatterStatsData', batterStats.value);
         emits('sendBattingResultData', battingResultData.value);
@@ -785,7 +787,7 @@ async function getBulkHomeParticipationMember() {
       if (gameInfo.value.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home) {
         batterStats.value = memberController.GetBatterStats(homeParticipationMember.value, defaultHomeMemberList);
         const id = homeParticipationMember.value[memberController.orderKeysDH[runnerData.value.Batter.Order - 1]].ID;
-        battingResultData.value = memberController.GetBattingResult(homeBattingResult.value, runnerData.value.Batter.Order, id);
+        battingResultData.value = memberController.GetBattingResult(homeBattingResult.value, runnerData.value.Batter.Order - 1, id);
         runnerData.value = gameController.SortRunner(homeParticipationMember.value, runnerState.value, runnerData.value.Batter);
         emits('sendBatterStatsData', batterStats.value);
         emits('sendBattingResultData', battingResultData.value);
@@ -1947,6 +1949,7 @@ function clickOkGameSet() {
   battingResultData.value = [];
   batterStats.value = new DispBatterStatsModel();
   positionData.value = new PositionModel();
+  runnerData.value = new RunnerNameModel();
   [visitorParticipationMember.value, homeParticipationMember.value] = memberController.InitMemberDataGameSet(visitorParticipationMember.value, homeParticipationMember.value);
   
   emits('sendScoreData', dispRunningScore.value);
@@ -1954,6 +1957,7 @@ function clickOkGameSet() {
   emits('sendBattingResultData', battingResultData.value);
   emits('sendBatterStatsData', batterStats.value);
   emits('sendPositionData', positionData.value);
+  emits('sendRunnerData', runnerData.value);
   emits('sendBigInfoDispFlg', bigInfoDispFlg.value);
   emits('sendVisitorMemberData', visitorParticipationMember.value);
   emits('sendHomeMemberData', homeParticipationMember.value);
@@ -2003,11 +2007,11 @@ function getBatterStats() {
  */
 function getBattingResult() {
   if (gameInfo.value.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor) {
-    const id = visitorParticipationMember.value[memberController.orderKeysDH[runnerData.value.Batter.Order]].ID;
-    battingResultData.value = memberController.GetBattingResult(visitorBattingResult.value, runnerData.value.Batter.Order, id);
+    const id = visitorParticipationMember.value[memberController.orderKeysDH[runnerData.value.Batter.Order - 1]].ID;
+    battingResultData.value = memberController.GetBattingResult(visitorBattingResult.value, runnerData.value.Batter.Order - 1, id);
   } else {
-    const id = homeParticipationMember.value[memberController.orderKeysDH[runnerData.value.Batter.Order]].ID;
-    battingResultData.value = memberController.GetBattingResult(homeBattingResult.value, runnerData.value.Batter.Order, id);
+    const id = homeParticipationMember.value[memberController.orderKeysDH[runnerData.value.Batter.Order - 1]].ID;
+    battingResultData.value = memberController.GetBattingResult(homeBattingResult.value, runnerData.value.Batter.Order - 1, id);
   }
   emits('sendBattingResultData', battingResultData.value);
 }
@@ -2227,15 +2231,43 @@ function getPitcherInfo() {
 
 .Caught-Stealing-Select {
   position: absolute;
-  left: 429px;
+  left: 256px;
   bottom: 29px;
 }
 
 .Dialog {
-  position: absolute;
   background-color: white;
-  color: black;
-  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 5px 5px 15px black;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 400px;
+  height: 240px;
+}
+
+.Footer {
+  position: absolute;
+  right: 0;
+  bottom: 10px;
+}
+
+.Ok {
+  width: 50px;
+  height: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: dodgerblue;
+  color: white;
+}
+
+.Cancel {
+  width: 90px;
+  height: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .Modify-DropDown {
