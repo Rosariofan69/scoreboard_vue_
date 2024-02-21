@@ -798,6 +798,7 @@ watch(props, () => {
   border-right: 2px solid v-bind('design.DiagonalLine');
   z-index: 1;
   box-shadow: 3px 0px 8px black;
+  background: v-bind('design.PositionBasicBGC');
 }
 
 .Pos-Text{
@@ -820,6 +821,7 @@ watch(props, () => {
   padding-left: 18px;
   padding-right: 10px;
   z-index: 0;
+  background: v-bind('design.NameBasicBGC');
 }
 
 .Name-Text{
@@ -828,7 +830,7 @@ watch(props, () => {
   line-height: 38px;
   font-size: 36px;
   height: 42px;
-  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+  text-shadow: 2.5px 2.5px 3px rgba(0, 0, 0, 0.5);
 }
 
 .Basic-Position-BGC {
