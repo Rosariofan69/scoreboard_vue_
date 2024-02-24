@@ -382,7 +382,8 @@ export class GameController {
                 dispScore.Score.TopOfThe9 = score.VisitorScore[8].toString();
             }
             dispScore.Score.BottomOfThe9 = 'X';
-        } else if (nowInning >= 9 && nowAttack == VisitorHomeDivision.Home && visitorR > homeR && out == 3) {
+        } else if ((nowInning >= 9 && nowAttack == VisitorHomeDivision.Home && visitorR > homeR && out == 3) ||
+                   (nowInning == gameInfo.GameBaseInfo.InningLimit && VisitorHomeDivision.Home && visitorR == homeR && out == 3)) {
             if (score.HomeScore.length == nowInning - 1) {
                 score.HomeScore.push(0);
                 dispScore.Score[this.inningKeys[setInning + 12]] = '0';

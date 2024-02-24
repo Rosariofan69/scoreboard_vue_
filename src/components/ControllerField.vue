@@ -1810,7 +1810,7 @@ function updateRunnerStats(member: ParticipationMemberPerTeamModel, defMember: D
   }
 
   runnerList.forEach(x => {
-    const id = member[memberController.orderKeys[x]].ID;
+    const id = member[memberController.orderKeys[x - 1]].ID;
     defMember = memberController.UpdateRunnerStats(id, defMember, updData);
   })
 
@@ -1928,7 +1928,8 @@ function checkGameSetAvailability(): boolean {
 
   if ((nowInning == 9 && nowAttack == VisitorHomeDivision.Visitor && visitorR < homeR && out == 3) ||
       (nowInning >= 9 && nowAttack == VisitorHomeDivision.Home && visitorR > homeR && out == 3) ||
-      (nowInning >= 9 && nowAttack == VisitorHomeDivision.Home && visitorR < homeR)) {
+      (nowInning >= 9 && nowAttack == VisitorHomeDivision.Home && visitorR < homeR) ||
+      (nowInning == gameInfo.value.GameBaseInfo.InningLimit && nowAttack == VisitorHomeDivision.Home && visitorR == homeR && out == 3)) {
     res = true;
   }
 
