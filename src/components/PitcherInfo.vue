@@ -9,7 +9,9 @@
           <div
             id="pitcherNumber"
             class="Pitch-Info-Num-Text"
-            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Home':'Text-Visitor']"
+            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Home':'Text-Visitor',
+                     gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor && design.Home.Edge != '' ? 'Home-Edge-Shadow' : 'Text-Shadow',
+                     gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home && design.Visitor.Edge != '' ? 'Visitor-Edge-Shadow' : 'Text-Shadow',]"
             :style="[{transform: `scaleX(${numTrans})`, transformOrigin: 'left'}]"
           >{{ data.Number }}</div>
         </div>
@@ -17,7 +19,9 @@
           <div
             id="pitcherName"
             class="Pitch-Info-Name-Text"
-            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Home':'Text-Visitor']"
+            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Home':'Text-Visitor',
+                     gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor && design.Home.Edge != '' ? 'Home-Edge-Shadow' : 'Text-Shadow',
+                     gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home && design.Visitor.Edge != '' ? 'Visitor-Edge-Shadow' : 'Text-Shadow',]"
             :style="[{transform: `scaleX(${nameTrans})`, transformOrigin: 'left'}]"
           >{{ data.FullName }}</div>
         </div>
@@ -30,7 +34,9 @@
         <div
           id="pitch"
           class="Pitch-Info-Val"
-          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Home':'Text-Visitor']"
+          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Home':'Text-Visitor',
+                    gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor && design.Home.Edge != '' ? 'Home-Edge-Shadow' : 'Text-Shadow',
+                    gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home && design.Visitor.Edge != '' ? 'Visitor-Edge-Shadow' : 'Text-Shadow',]"
           :style="[{transform: `scaleX(${pitchTrans})`, transformOrigin: 'right'}]"
         >{{ data.PitchCount }}</div>
         <div
@@ -48,7 +54,9 @@
         <div
           id="atBat"
           class="Pitch-Info-Val"
-          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Home':'Text-Visitor']"
+          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Home':'Text-Visitor',
+                    gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor && design.Home.Edge != '' ? 'Home-Edge-Shadow' : 'Text-Shadow',
+                    gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home && design.Visitor.Edge != '' ? 'Visitor-Edge-Shadow' : 'Text-Shadow',]"
           :style="[{transform: `scaleX(${pitchTrans})`, transformOrigin: 'right'}]"
         >{{ data.ThisAtBat }}</div>
         <div
@@ -64,7 +72,9 @@
         <div
           id="SO"
           class="Pitch-Info-Val"
-          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Home':'Text-Visitor']"
+          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Home':'Text-Visitor',
+                    gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor && design.Home.Edge != '' ? 'Home-Edge-Shadow' : 'Text-Shadow',
+                    gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home && design.Visitor.Edge != '' ? 'Visitor-Edge-Shadow' : 'Text-Shadow',]"
           :style="[{transform: `scaleX(${pitchTrans})`, transformOrigin: 'right'}]"
         >{{ data.SO }}</div>
       </div>
@@ -76,7 +86,9 @@
         <div
           id="BB"
           class="Pitch-Info-Val"
-          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Home':'Text-Visitor']"
+          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Home':'Text-Visitor',
+                    gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor && design.Home.Edge != '' ? 'Home-Edge-Shadow' : 'Text-Shadow',
+                    gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home && design.Visitor.Edge != '' ? 'Visitor-Edge-Shadow' : 'Text-Shadow',]"
           :style="[{transform: `scaleX(${pitchTrans})`, transformOrigin: 'right'}]"
         >{{ data.BB }}</div>
       </div>
@@ -190,9 +202,8 @@ watch(props, () => {
   font-family: 'DIN-Regular';
   font-weight: bold;
   font-size: 35px;
-  line-height: 45px;
+  line-height: 48px;
   text-align: center;
-  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
 .Pitch-Info-Name{
@@ -209,7 +220,6 @@ watch(props, () => {
   font-size: 33px;
   line-height: 43px;
   text-align: center;
-  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
 .Pitch-Info-Title{
@@ -243,7 +253,6 @@ watch(props, () => {
   font-weight: bold;
   line-height: 44px;
   text-align: right;
-  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
 .Pitch-Info-Ball{
@@ -270,6 +279,34 @@ watch(props, () => {
 
 .Text-Home {
   color: v-bind('design.Home.Text');
+}
+
+.Text-Shadow {
+  text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.8);
+}
+
+.Visitor-Edge-Shadow {
+  text-shadow: 1px 1px 0px v-bind('design.Visitor.Edge'),
+               -1px -1px 0px v-bind('design.Visitor.Edge'),
+               -1px 1px 0px v-bind('design.Visitor.Edge'),
+               -1px -1px 0px v-bind('design.Visitor.Edge'),
+               0px 1px 0px v-bind('design.Visitor.Edge'),
+               0px -1px 0px v-bind('design.Visitor.Edge'),
+               -1px 0px 0px v-bind('design.Visitor.Edge'),
+               1px 0px 0px v-bind('design.Visitor.Edge'),
+               3px 3px 2px rgba(0, 0, 0, 0.8);
+}
+
+.Home-Edge-Shadow {
+  text-shadow: 1px 1px 0px v-bind('design.Home.Edge'),
+               -1px -1px 0px v-bind('design.Home.Edge'),
+               -1px 1px 0px v-bind('design.Home.Edge'),
+               -1px -1px 0px v-bind('design.Home.Edge'),
+               0px 1px 0px v-bind('design.Home.Edge'),
+               0px -1px 0px v-bind('design.Home.Edge'),
+               -1px 0px 0px v-bind('design.Home.Edge'),
+               1px 0px 0px v-bind('design.Home.Edge'),
+               3px 3px 2px rgba(0, 0, 0, 0.8);
 }
 
 </style>

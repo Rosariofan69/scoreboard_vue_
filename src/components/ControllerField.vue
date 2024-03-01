@@ -136,17 +136,18 @@
           <label><input type="checkbox" name="resultCheck" v-model="resultCheckBox.DoublePlay" @change="changeResultCheck(ResultCheckBox.DoublePlay, resultCheckBox.DoublePlay)">併殺</label>
         </div>
         <div class="Play-Result-Row">
-          <label><input type="checkbox" name="resultCheck" v-model="resultCheckBox.StrikeOut" @change="changeResultCheck(ResultCheckBox.StrikeOut, resultCheckBox.StrikeOut)">三振</label>
+          <label><input type="checkbox" name="resultCheck" v-model="resultCheckBox.LookingStrikeOut" @change="changeResultCheck(ResultCheckBox.LookingStrikeOut, resultCheckBox.LookingStrikeOut)">見三振</label>
+          <label><input type="checkbox" name="resultCheck" v-model="resultCheckBox.SwingingStrikeOut" @change="changeResultCheck(ResultCheckBox.SwingingStrikeOut, resultCheckBox.SwingingStrikeOut)">空三振</label>
           <label><input type="checkbox" name="resultCheck" v-model="resultCheckBox.FourPitchWalk" @change="changeResultCheck(ResultCheckBox.FourPitchWalk, resultCheckBox.FourPitchWalk)">四球</label>
           <label><input type="checkbox" name="resultCheck" v-model="resultCheckBox.HitByPitch" @change="changeResultCheck(ResultCheckBox.HitByPitch, resultCheckBox.HitByPitch)">死球</label>
-          <label><input type="checkbox" name="resultCheck" v-model="resultCheckBox.IntentionalWalk" @change="changeResultCheck(ResultCheckBox.IntentionalWalk, resultCheckBox.IntentionalWalk)">敬遠</label>
           <label><input type="checkbox" name="resultCheck" v-model="resultCheckBox.FoulFly" @change="changeResultCheck(ResultCheckBox.FoulFly, resultCheckBox.FoulFly)">邪飛</label>
         </div>
         <div class="Play-Result-Row">
           <label><input type="checkbox" name="resultCheck" v-model="resultCheckBox.SacrificeFly" @change="changeResultCheck(ResultCheckBox.SacrificeFly, resultCheckBox.SacrificeFly)">犠飛</label>
           <label><input type="checkbox" name="resultCheck" v-model="resultCheckBox.SacrificeBunt" @change="changeResultCheck(ResultCheckBox.SacrificeBunt, resultCheckBox.SacrificeBunt)">犠打</label>
-          <label><input type="checkbox" name="resultCheck" v-model="resultCheckBox.SacrificeBuntError" @change="changeResultCheck(ResultCheckBox.SacrificeBuntError, resultCheckBox.SacrificeBuntError)">犠打失策</label>
-          <label><input type="checkbox" name="resultCheck" v-model="resultCheckBox.SacrificeBuntFC" @change="changeResultCheck(ResultCheckBox.SacrificeBuntFC, resultCheckBox.SacrificeBuntFC)">犠打野選</label>
+          <label><input type="checkbox" name="resultCheck" v-model="resultCheckBox.IntentionalWalk" @change="changeResultCheck(ResultCheckBox.IntentionalWalk, resultCheckBox.IntentionalWalk)">敬遠</label>
+          <label><input type="checkbox" name="resultCheck" v-model="resultCheckBox.SacrificeBuntError" @change="changeResultCheck(ResultCheckBox.SacrificeBuntError, resultCheckBox.SacrificeBuntError)">犠打失</label>
+          <label><input type="checkbox" name="resultCheck" v-model="resultCheckBox.SacrificeBuntFC" @change="changeResultCheck(ResultCheckBox.SacrificeBuntFC, resultCheckBox.SacrificeBuntFC)">犠打選</label>
         </div>
       </div>
       <div class="Res-Second-Category">
@@ -516,13 +517,14 @@ const resultCheckBoxPropertyList = ['GroundBall',
                                     'FlyBall',
                                     'LineDrive',
                                     'DoublePlay',
-                                    'StrikeOut',
+                                    'LookingStrikeOut',
+                                    'SwingingStrikeOut',
                                     'FourPitchWalk',
                                     'HitByPitch',
-                                    'IntentionalWalk',
                                     'FoulFly',
                                     'SacrificeFly',
                                     'SacrificeBunt',
+                                    'IntentionalWalk',
                                     'SacrificeBuntError',
                                     'SacrificeBuntFC',
                                     'SingleHit',
@@ -1023,7 +1025,7 @@ async function clickConfirm() {
     caughtStealing();
   }
 
-  if (resultCheckBox.value.StrikeOut) {
+  if (resultCheckBox.value.LookingStrikeOut || resultCheckBox.value.SwingingStrikeOut) {
     // 三振
     strikeOut();
   } else if (resultCheckBox.value.FourPitchWalk) {
@@ -1102,7 +1104,8 @@ function changeResultCheck(changeItem: number, targetValue: boolean) {
   resultCheckBox.value = new ResultCheckBoxModel();
   if (targetValue) {
     // 守備位置活性制御
-    if (changeItem == ResultCheckBox.StrikeOut ||
+    if (changeItem == ResultCheckBox.LookingStrikeOut ||
+        changeItem == ResultCheckBox.SwingingStrikeOut ||
         changeItem == ResultCheckBox.FourPitchWalk ||
         changeItem == ResultCheckBox.HitByPitch ||
         changeItem == ResultCheckBox.IntentionalWalk ||
@@ -1570,17 +1573,17 @@ function SaveBattingResult() {
     case resultCheckBox.value.DoublePlay:
       result = '併殺';
       break;
-    case resultCheckBox.value.StrikeOut:
-      result = '三振';
+    case resultCheckBox.value.LookingStrikeOut:
+      result = '見三振';
+      break;
+    case resultCheckBox.value.SwingingStrikeOut:
+      result = '空三振';
       break;
     case resultCheckBox.value.FourPitchWalk:
       result = '四球';
       break;
     case resultCheckBox.value.HitByPitch:
       result = '死球';
-      break;
-    case resultCheckBox.value.IntentionalWalk:
-      result = '敬遠';
       break;
     case resultCheckBox.value.FoulFly:
       result = '邪飛';
@@ -1590,6 +1593,9 @@ function SaveBattingResult() {
       break;
     case resultCheckBox.value.SacrificeBunt:
       result = '犠打';
+      break;
+    case resultCheckBox.value.IntentionalWalk:
+      result = '敬遠';
       break;
     case resultCheckBox.value.SacrificeBuntError:
       result = '犠失';
@@ -1681,7 +1687,11 @@ function createBatterStatsUpdateData(): BatterStatsUpdateModel {
       updateData.AtBat = 1;
       updateData.DP = 1;
       break;
-    case resultCheckBox.value.StrikeOut:
+    case resultCheckBox.value.LookingStrikeOut:
+      updateData.AtBat = 1;
+      updateData.SO = 1;
+      break;
+    case resultCheckBox.value.SwingingStrikeOut:
       updateData.AtBat = 1;
       updateData.SO = 1;
       break;
@@ -1951,6 +1961,7 @@ function clickOkGameSet() {
   batterStats.value = new DispBatterStatsModel();
   positionData.value = new PositionModel();
   runnerData.value = new RunnerNameModel();
+  countData.value = new CountModel();
   [visitorParticipationMember.value, homeParticipationMember.value] = memberController.InitMemberDataGameSet(visitorParticipationMember.value, homeParticipationMember.value);
   
   emits('sendScoreData', dispRunningScore.value);
@@ -1959,6 +1970,7 @@ function clickOkGameSet() {
   emits('sendBatterStatsData', batterStats.value);
   emits('sendPositionData', positionData.value);
   emits('sendRunnerData', runnerData.value);
+  emits('sendCountData', countData.value);
   emits('sendBigInfoDispFlg', bigInfoDispFlg.value);
   emits('sendVisitorMemberData', visitorParticipationMember.value);
   emits('sendHomeMemberData', homeParticipationMember.value);

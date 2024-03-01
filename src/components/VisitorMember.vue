@@ -65,7 +65,11 @@
         <div
           id="visitorLeadOffName"
           class="Name-Text"
-          :class="[leadOffTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+          :class="[leadOffTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center',
+                   data.LeadOff.DispStatus.Basic && design.NameBasicEdge != '' ? 'Basic-Shadow' : 'Text-Shadow',
+                   data.LeadOff.DispStatus.Batter && design.NameBatterEdge != '' ? 'Batter-Shadow' : 'Text-Shadow',
+                   data.LeadOff.DispStatus.Runner && design.NameRunnerEdge != '' ? 'Runner-Shadow' : 'Text-Shadow',
+                   data.LeadOff.DispStatus.NextRead && design.NameNextEdge != '' ? 'Next-Shadow' : 'Text-Shadow',]"
           :style="[{transform: `scaleX(${leadOffNameTrans})`, transformOrigin: 'left'}]"
         >{{ data.LeadOff.Name }}</div>
       </div>
@@ -123,7 +127,11 @@
         <div
           id="visitorSecondName"
           class="Name-Text"
-          :class="[secondTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+          :class="[secondTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center',
+                   data.Second.DispStatus.Basic && design.NameBasicEdge != '' ? 'Basic-Shadow' : 'Text-Shadow',
+                   data.Second.DispStatus.Batter && design.NameBatterEdge != '' ? 'Batter-Shadow' : 'Text-Shadow',
+                   data.Second.DispStatus.Runner && design.NameRunnerEdge != '' ? 'Runner-Shadow' : 'Text-Shadow',
+                   data.Second.DispStatus.NextRead && design.NameNextEdge != '' ? 'Next-Shadow' : 'Text-Shadow',]"
           :style="[{transform: `scaleX(${secondNameTrans})`, transformOrigin: 'left'}]"
         >{{ data.Second.Name }}</div>
       </div>
@@ -181,7 +189,11 @@
         <div
           id="visitorThirdName"
           class="Name-Text"
-          :class="[thirdTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+          :class="[thirdTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center',
+                   data.Third.DispStatus.Basic && design.NameBasicEdge != '' ? 'Basic-Shadow' : 'Text-Shadow',
+                   data.Third.DispStatus.Batter && design.NameBatterEdge != '' ? 'Batter-Shadow' : 'Text-Shadow',
+                   data.Third.DispStatus.Runner && design.NameRunnerEdge != '' ? 'Runner-Shadow' : 'Text-Shadow',
+                   data.Third.DispStatus.NextRead && design.NameNextEdge != '' ? 'Next-Shadow' : 'Text-Shadow',]"
           :style="[{transform: `scaleX(${thirdNameTrans})`, transformOrigin: 'left'}]"
         >{{ data.Third.Name }}</div>
       </div>
@@ -239,7 +251,11 @@
         <div
           id="visitorFourthName"
           class="Name-Text"
-          :class="[fourthTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+          :class="[fourthTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center',
+                   data.Fourth.DispStatus.Basic && design.NameBasicEdge != '' ? 'Basic-Shadow' : 'Text-Shadow',
+                   data.Fourth.DispStatus.Batter && design.NameBatterEdge != '' ? 'Batter-Shadow' : 'Text-Shadow',
+                   data.Fourth.DispStatus.Runner && design.NameRunnerEdge != '' ? 'Runner-Shadow' : 'Text-Shadow',
+                   data.Fourth.DispStatus.NextRead && design.NameNextEdge != '' ? 'Next-Shadow' : 'Text-Shadow',]"
           :style="[{transform: `scaleX(${fourthNameTrans})`, transformOrigin: 'left'}]"
         >{{ data.Fourth.Name }}</div>
       </div>
@@ -297,7 +313,11 @@
         <div
           id="visitorFifthName"
           class="Name-Text"
-          :class="[fifthTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+          :class="[fifthTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center',
+                   data.Fifth.DispStatus.Basic && design.NameBasicEdge != '' ? 'Basic-Shadow' : 'Text-Shadow',
+                   data.Fifth.DispStatus.Batter && design.NameBatterEdge != '' ? 'Batter-Shadow' : 'Text-Shadow',
+                   data.Fifth.DispStatus.Runner && design.NameRunnerEdge != '' ? 'Runner-Shadow' : 'Text-Shadow',
+                   data.Fifth.DispStatus.NextRead && design.NameNextEdge != '' ? 'Next-Shadow' : 'Text-Shadow',]"
           :style="[{transform: `scaleX(${fifthNameTrans})`, transformOrigin: 'left'}]"
         >{{ data.Fifth.Name }}</div>
       </div>
@@ -355,7 +375,11 @@
         <div
           id="visitorSixthName"
           class="Name-Text"
-          :class="[sixthTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+          :class="[sixthTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center',
+                   data.Sixth.DispStatus.Basic && design.NameBasicEdge != '' ? 'Basic-Shadow' : 'Text-Shadow',
+                   data.Sixth.DispStatus.Batter && design.NameBatterEdge != '' ? 'Batter-Shadow' : 'Text-Shadow',
+                   data.Sixth.DispStatus.Runner && design.NameRunnerEdge != '' ? 'Runner-Shadow' : 'Text-Shadow',
+                   data.Sixth.DispStatus.NextRead && design.NameNextEdge != '' ? 'Next-Shadow' : 'Text-Shadow',]"
           :style="[{transform: `scaleX(${sixthNameTrans})`, transformOrigin: 'left'}]"
         >{{ data.Sixth.Name }}</div>
       </div>
@@ -413,7 +437,11 @@
         <div
           id="visitorSeventhName"
           class="Name-Text"
-          :class="[seventhTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+          :class="[seventhTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center',
+                   data.Seventh.DispStatus.Basic && design.NameBasicEdge != '' ? 'Basic-Shadow' : 'Text-Shadow',
+                   data.Seventh.DispStatus.Batter && design.NameBatterEdge != '' ? 'Batter-Shadow' : 'Text-Shadow',
+                   data.Seventh.DispStatus.Runner && design.NameRunnerEdge != '' ? 'Runner-Shadow' : 'Text-Shadow',
+                   data.Seventh.DispStatus.NextRead && design.NameNextEdge != '' ? 'Next-Shadow' : 'Text-Shadow',]"
           :style="[{transform: `scaleX(${seventhNameTrans})`, transformOrigin: 'left'}]"
         >{{ data.Seventh.Name }}</div>
       </div>
@@ -471,7 +499,11 @@
         <div
           id="visitorEighthName"
           class="Name-Text"
-          :class="[eighthTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+          :class="[eighthTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center',
+                   data.Eighth.DispStatus.Basic && design.NameBasicEdge != '' ? 'Basic-Shadow' : 'Text-Shadow',
+                   data.Eighth.DispStatus.Batter && design.NameBatterEdge != '' ? 'Batter-Shadow' : 'Text-Shadow',
+                   data.Eighth.DispStatus.Runner && design.NameRunnerEdge != '' ? 'Runner-Shadow' : 'Text-Shadow',
+                   data.Eighth.DispStatus.NextRead && design.NameNextEdge != '' ? 'Next-Shadow' : 'Text-Shadow',]"
           :style="[{transform: `scaleX(${eighthNameTrans})`, transformOrigin: 'left'}]"
         >{{ data.Eighth.Name }}</div>
       </div>
@@ -529,7 +561,11 @@
         <div
           id="visitorNinthName"
           class="Name-Text"
-          :class="[ninthTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+          :class="[ninthTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center',
+                   data.Ninth.DispStatus.Basic && design.NameBasicEdge != '' ? 'Basic-Shadow' : 'Text-Shadow',
+                   data.Ninth.DispStatus.Batter && design.NameBatterEdge != '' ? 'Batter-Shadow' : 'Text-Shadow',
+                   data.Ninth.DispStatus.Runner && design.NameRunnerEdge != '' ? 'Runner-Shadow' : 'Text-Shadow',
+                   data.Ninth.DispStatus.NextRead && design.NameNextEdge != '' ? 'Next-Shadow' : 'Text-Shadow',]"
           :style="[{transform: `scaleX(${ninthNameTrans})`, transformOrigin: 'left'}]"
         >{{ data.Ninth.Name }}</div>
       </div>
@@ -565,7 +601,8 @@
         <div
           id="visitorPitcherName"
           class="Name-Text"
-          :class="[pitcherTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+          :class="[pitcherTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center',
+                   data.Pitcher.DispStatus.Basic && design.NameBasicEdge != '' ? 'Basic-Shadow' : 'Text-Shadow']"
           :style="[{transform: `scaleX(${pitcherNameTrans})`, transformOrigin: 'left'}]"
         >{{ data.Pitcher.Name }}</div>
       </div>
@@ -777,6 +814,7 @@ watch(props, () => {
   border-top: 4px solid v-bind('design.UpperLine');
   border-bottom: 4px solid v-bind('design.UnderLine');
   opacity: 0;
+
 }
 
 .Box-Full{
@@ -797,7 +835,10 @@ watch(props, () => {
   transform: translateX(-5px) skewX(-10deg);
   border-right: 2px solid v-bind('design.DiagonalLine');
   z-index: 1;
-  box-shadow: 3px 0px 8px black;
+  box-shadow: 1.5px 1.5px 8px rgba(0, 0, 0, 0.5),
+              2px 2px 8px rgba(0, 0, 0, 0.5),
+              2.5px 2.5px 8px rgba(0, 0, 0, 0.5),
+              3px 3px 8px rgba(0, 0, 0, 0.5);
   background: v-bind('design.PositionBasicBGC');
 }
 
@@ -830,7 +871,6 @@ watch(props, () => {
   line-height: 38px;
   font-size: 36px;
   height: 42px;
-  text-shadow: 2.5px 2.5px 3px rgba(0, 0, 0, 0.5);
 }
 
 .Basic-Position-BGC {
@@ -1884,6 +1924,58 @@ watch(props, () => {
   animation: SlideInText 1s;
   animation-fill-mode: forwards;
   opacity: 1;
+}
+
+.Text-Shadow {
+  text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.8);
+}
+
+.Basic-Shadow {
+  text-shadow: 1px 1px 0px v-bind('design.NameBasicEdge'),
+               -1px -1px 0px v-bind('design.NameBasicEdge'),
+               -1px 1px 0px v-bind('design.NameBasicEdge'),
+               -1px -1px 0px v-bind('design.NameBasicEdge'),
+               0px 1px 0px v-bind('design.NameBasicEdge'),
+               0px -1px 0px v-bind('design.NameBasicEdge'),
+               -1px 0px 0px v-bind('design.NameBasicEdge'),
+               1px 0px 0px v-bind('design.NameBasicEdge'),
+               3px 3px 2px rgba(0, 0, 0, 0.8);
+}
+
+.Batter-Shadow {
+  text-shadow: 1px 1px 0px v-bind('design.NameBatterEdge'),
+               -1px -1px 0px v-bind('design.NameBatterEdge'),
+               -1px 1px 0px v-bind('design.NameBatterEdge'),
+               -1px -1px 0px v-bind('design.NameBatterEdge'),
+               0px 1px 0px v-bind('design.NameBatterEdge'),
+               0px -1px 0px v-bind('design.NameBatterEdge'),
+               -1px 0px 0px v-bind('design.NameBatterEdge'),
+               1px 0px 0px v-bind('design.NameBatterEdge'),
+               3px 3px 2px rgba(0, 0, 0, 0.8);
+}
+
+.Runner-Shadow {
+  text-shadow: 1px 1px 0px v-bind('design.NameRunnerEdge'),
+               -1px -1px 0px v-bind('design.NameRunnerEdge'),
+               -1px 1px 0px v-bind('design.NameRunnerEdge'),
+               -1px -1px 0px v-bind('design.NameRunnerEdge'),
+               0px 1px 0px v-bind('design.NameRunnerEdge'),
+               0px -1px 0px v-bind('design.NameRunnerEdge'),
+               -1px 0px 0px v-bind('design.NameRunnerEdge'),
+               1px 0px 0px v-bind('design.NameRunnerEdge'),
+               3px 3px 2px rgba(0, 0, 0, 0.8);
+}
+
+.Next-Shadow {
+  text-shadow: 1px 1px 0px v-bind('design.NameNextEdge'),
+               -1px -1px 0px v-bind('design.NameNextEdge'),
+               -1px 1px 0px v-bind('design.NameNextEdge'),
+               -1px -1px 0px v-bind('design.NameNextEdge'),
+               0px 1px 0px v-bind('design.NameNextEdge'),
+               0px -1px 0px v-bind('design.NameNextEdge'),
+               -1px 0px 0px v-bind('design.NameNextEdge'),
+               1px 0px 0px v-bind('design.NameNextEdge'),
+               3px 3px 2px rgba(0, 0, 0, 0.8);
 }
 
 </style>

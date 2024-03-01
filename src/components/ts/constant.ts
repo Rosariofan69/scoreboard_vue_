@@ -24,6 +24,8 @@ export enum VisitorDesignDivision {
     NameBasicText,
     /** 名前（標準） - 背景 */
     NameBasicBGC,
+    /** 名前（標準） - 縁取り */
+    NameBasicEdge,
     /** 守備位置（打者） - 文字 */
     PositionBatterText,
     /** 守備位置（打者） - 背景 */
@@ -32,6 +34,8 @@ export enum VisitorDesignDivision {
     NameBatterText,
     /** 名前（打者） - 背景 */
     NameBatterBGC,
+    /** 名前（打者） - 縁取り */
+    NameBatterEdge,
     /** 守備位置（走者） - 文字 */
     PositionRunnerText,
     /** 守備位置（走者） - 背景 */
@@ -40,6 +44,8 @@ export enum VisitorDesignDivision {
     NameRunnerText,
     /** 名前（走者） - 背景 */
     NameRunnerBGC,
+    /** 名前（走者） - 縁取り */
+    NameRunnerEdge,
     /** 守備位置（次回先頭） - 文字 */
     PositionNextText,
     /** 守備位置（次回先頭） - 背景 */
@@ -48,22 +54,32 @@ export enum VisitorDesignDivision {
     NameNextText,
     /** 名前（次回先頭） - 背景 */
     NameNextBGC,
+    /** 名前（次回先頭） - 縁取り */
+    NameNextEdge,
     /** 野手成績 - 文字 */
     FielderStatsText,
     /** 野手成績 - 背景 */
     FielderStatsBGC,
+    /** 野手成績 - 縁取り */
+    FielderStatsEdge,
     /** 守備表示（野手） - 文字 */
     DispPositionFielderText,
     /** 守備表示（野手） - 背景 */
     DispPositionFielderBGC,
+    /** 守備表示（野手） - 縁取り */
+    DispPositionFielderEdge,
     /** 守備表示（走者） - 文字 */
     DispPositionRunnerText,
     /** 守備表示（走者） - 背景 */
     DispPositionRunnerBGC,
+    /** 守備表示（走者） - 縁取り */
+    DispPositionRunnerEdge,
     /** 投手成績 - 文字 */
     PitcherStatsText,
     /** 投手成績 - 背景 */
     PitcherStatsBGC,
+    /** 投手成績 - 縁取り */
+    PitcherStatsEdge,
     /** 交代時 */
     Change,
 }
@@ -73,7 +89,7 @@ export enum VisitorDesignDivision {
  */
 export enum HomeDesignDivision {
     /** チーム名（メンバー） - 文字 */
-    TeamNameMemberText = 32,
+    TeamNameMemberText = 40,
     /** チーム名（メンバー） - 背景 */
     TeamNameMemberBGC,
     /** チーム名（スコア） - 文字 */
@@ -94,6 +110,8 @@ export enum HomeDesignDivision {
     NameBasicText,
     /** 名前（標準） - 背景 */
     NameBasicBGC,
+    /** 名前（標準） - 縁取り */
+    NameBasicEdge,
     /** 守備位置（打者） - 文字 */
     PositionBatterText,
     /** 守備位置（打者） - 背景 */
@@ -102,6 +120,8 @@ export enum HomeDesignDivision {
     NameBatterText,
     /** 名前（打者） - 背景 */
     NameBatterBGC,
+    /** 名前（打者） - 縁取り */
+    NameBatterEdge,
     /** 守備位置（走者） - 文字 */
     PositionRunnerText,
     /** 守備位置（走者） - 背景 */
@@ -110,6 +130,8 @@ export enum HomeDesignDivision {
     NameRunnerText,
     /** 名前（走者） - 背景 */
     NameRunnerBGC,
+    /** 名前（走者） - 縁取り */
+    NameRunnerEdge,
     /** 守備位置（次回先頭） - 文字 */
     PositionNextText,
     /** 守備位置（次回先頭） - 背景 */
@@ -118,22 +140,32 @@ export enum HomeDesignDivision {
     NameNextText,
     /** 名前（次回先頭） - 背景 */
     NameNextBGC,
+    /** 名前（次回先頭） - 縁取り */
+    NameNextEdge,
     /** 野手成績 - 文字 */
     FielderStatsText,
     /** 野手成績 - 背景 */
     FielderStatsBGC,
+    /** 野手成績 - 縁取り */
+    FielderStatsEdge,
     /** 守備表示（野手） - 文字 */
     DispPositionFielderText,
     /** 守備表示（野手） - 背景 */
     DispPositionFielderBGC,
+    /** 守備表示（野手） - 縁取り */
+    DispPositionFielderEdge,
     /** 守備表示（走者） - 文字 */
     DispPositionRunnerText,
     /** 守備表示（走者） - 背景 */
     DispPositionRunnerBGC,
+    /** 守備表示（走者） - 縁取り */
+    DispPositionRunnerEdge,
     /** 投手成績 - 文字 */
     PitcherStatsText,
     /** 投手成績 - 背景 */
     PitcherStatsBGC,
+    /** 投手成績 - 縁取り */
+    PitcherStatsEdge,
     /** 交代時 */
     Change,
 }
@@ -143,7 +175,7 @@ export enum HomeDesignDivision {
  */
 export enum ScoreDesignDivision {
     /** スコア（奇数回） - 文字 */
-    ScoreOddText = 64,
+    ScoreOddText = 80,
     /** スコア（奇数回） - 背景 */
     ScoreOddBGC,
     /** スコア（偶数回） - 文字 */
@@ -175,7 +207,7 @@ export enum ScoreDesignDivision {
  */
 export enum UmpireDesignDivision {
     /** 位置 - 文字 */
-    PositionText = 77,
+    PositionText = 93,
     /** 位置 - 背景 */
     PositionBGC,
     /** 名前 - 文字 */
@@ -288,8 +320,10 @@ export enum ResultCheckBox {
     LineDrive,
     /** 併殺 */
     DoublePlay,
-    /** 三振 */
-    StrikeOut,
+    /** 見逃三振 */
+    LookingStrikeOut,
+    /** 空振三振 */
+    SwingingStrikeOut,
     /** 四球 */
     FourPitchWalk,
     /** 死球 */

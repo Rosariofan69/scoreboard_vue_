@@ -65,7 +65,7 @@ app.get('/getDesign', (req: any, res: any) => {
   const startColumn = 15;
   let startRow = 3;
   const endColumn = 16;
-  let endRow = 34;
+  let endRow = 42;
 
   let teamDesign: string[] = [];
   // チームごとのデザイン
@@ -77,8 +77,8 @@ app.get('/getDesign', (req: any, res: any) => {
   }
 
   // 共通デザイン
-  startRow = 35;
-  endRow = 51;
+  startRow = 43;
+  endRow = 59;
   for (let x = startRow; x <= endRow; x++) {
     let cellAddress = xlsx.utils.encode_cell({ c: startColumn, r: x })
     teamDesign.push(worksheet[cellAddress].v);

@@ -125,6 +125,13 @@ class MemberDesignModel {
             writable: true,
             value: void 0
         });
+        /** 名前（標準） - 縁取り */
+        Object.defineProperty(this, "NameBasicEdge", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
         /** 守備位置（打者） - 文字 */
         Object.defineProperty(this, "PositionBatterText", {
             enumerable: true,
@@ -148,6 +155,13 @@ class MemberDesignModel {
         });
         /** 名前（打者） - 背景 */
         Object.defineProperty(this, "NameBatterBGC", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 名前（打者） - 縁取り */
+        Object.defineProperty(this, "NameBatterEdge", {
             enumerable: true,
             configurable: true,
             writable: true,
@@ -181,6 +195,13 @@ class MemberDesignModel {
             writable: true,
             value: void 0
         });
+        /** 名前（走者） - 縁取り */
+        Object.defineProperty(this, "NameRunnerEdge", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
         /** 守備位置（次回先頭） - 文字 */
         Object.defineProperty(this, "PositionNextText", {
             enumerable: true,
@@ -204,6 +225,13 @@ class MemberDesignModel {
         });
         /** 名前（次回先頭） - 背景 */
         Object.defineProperty(this, "NameNextBGC", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 名前（次回先頭） - 縁取り */
+        Object.defineProperty(this, "NameNextEdge", {
             enumerable: true,
             configurable: true,
             writable: true,
@@ -260,6 +288,13 @@ class FielderStatsDesignModel {
             writable: true,
             value: void 0
         });
+        /** 縁取り */
+        Object.defineProperty(this, "Edge", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
     }
 }
 exports.FielderStatsDesignModel = FielderStatsDesignModel;
@@ -304,6 +339,13 @@ class PositionDesignModel {
             writable: true,
             value: void 0
         });
+        /** 野手 - 縁取り */
+        Object.defineProperty(this, "FielderEdge", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
         /** 走者 - 文字 */
         Object.defineProperty(this, "RunnerText", {
             enumerable: true,
@@ -313,6 +355,13 @@ class PositionDesignModel {
         });
         /** 走者 - 背景 */
         Object.defineProperty(this, "RunnerBGC", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 走者 - 縁取り */
+        Object.defineProperty(this, "RunnerEdge", {
             enumerable: true,
             configurable: true,
             writable: true,
@@ -357,6 +406,13 @@ class PitcherStatsDesignModel {
         });
         /** 背景 */
         Object.defineProperty(this, "BGC", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 縁取り */
+        Object.defineProperty(this, "Edge", {
             enumerable: true,
             configurable: true,
             writable: true,

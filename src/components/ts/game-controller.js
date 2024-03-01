@@ -338,9 +338,9 @@ class GameController {
                 }
             }
         }
-        if (gameInfo.GameProgressInfo.NowInning >= 9 && gameInfo.GameProgressInfo.NowAttackTeam == constant_1.VisitorHomeDivision.Home && visitorR < homeR) {
-            dispScoreData[this.inningKeys[gameInfo.GameProgressInfo.NowInning + 11]] = scoreData.HomeScore[gameInfo.GameProgressInfo.NowInning - 1].toString() + 'x';
-        }
+        // if (gameInfo.GameProgressInfo.NowInning >= 9 && gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home && visitorR < homeR) {
+        //     dispScoreData[this.inningKeys[gameInfo.GameProgressInfo.NowInning + 11]] = scoreData.HomeScore[gameInfo.GameProgressInfo.NowInning - 1].toString() + 'x';
+        // }
         dispScoreData.VisitorR = visitorR.toString();
         dispScoreData.VisitorH = scoreData.VisitorH.toString();
         dispScoreData.VisitorE = scoreData.VisitorE.toString();
@@ -394,7 +394,8 @@ class GameController {
             }
             dispScore.Score.BottomOfThe9 = 'X';
         }
-        else if (nowInning >= 9 && nowAttack == constant_1.VisitorHomeDivision.Home && visitorR > homeR && out == 3) {
+        else if ((nowInning >= 9 && nowAttack == constant_1.VisitorHomeDivision.Home && visitorR > homeR && out == 3) ||
+            (nowInning == gameInfo.GameBaseInfo.InningLimit && constant_1.VisitorHomeDivision.Home && visitorR == homeR && out == 3)) {
             if (score.HomeScore.length == nowInning - 1) {
                 score.HomeScore.push(0);
                 dispScore.Score[this.inningKeys[setInning + 12]] = '0';

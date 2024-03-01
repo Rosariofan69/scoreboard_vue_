@@ -9,7 +9,9 @@
         <div
           id="fielderNumber"
           class="Stats-Num-Text"
-          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home']"
+          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home',
+                    gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor && design.Visitor.Edge != '' ? 'Visitor-Edge-Shadow' : 'Text-Shadow',
+                    gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home && design.Home.Edge != '' ? 'Home-Edge-Shadow' : 'Text-Shadow',]"
           :style="[{transform: `scaleX(${numTrans})`, transformOrigin: 'left'}]"
         >
           {{ data.Number }}
@@ -19,7 +21,9 @@
         <div
           id="fielderName"
           class="Stats-Name-Text"
-          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home']"
+          :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home',
+                    gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor && design.Visitor.Edge != '' ? 'Visitor-Edge-Shadow' : 'Text-Shadow',
+                    gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home && design.Home.Edge != '' ? 'Home-Edge-Shadow' : 'Text-Shadow',]"
           :style="[{transform: `scaleX(${nameTrans})`, transformOrigin: 'left'}]"
         >
           {{ data.Name }}
@@ -33,12 +37,16 @@
       >AVG</div>
       <div
         class="Stats-Avg"
-        :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home']"
+        :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home',
+                  gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor && design.Visitor.Edge != '' ? 'Visitor-Edge-Shadow' : 'Text-Shadow',
+                  gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home && design.Home.Edge != '' ? 'Home-Edge-Shadow' : 'Text-Shadow',]"
       >{{ data.AVG }}</div>
       <div
         id="ab_h"
         class="Stats-Avg-Detail"
-        :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home']"
+        :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home',
+                  gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor && design.Visitor.Edge != '' ? 'Visitor-Edge-Shadow' : 'Text-Shadow',
+                  gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home && design.Home.Edge != '' ? 'Home-Edge-Shadow' : 'Text-Shadow',]"
         :style="[{transform: `scaleX(${ab_hTrans})`, transformOrigin: 'left'}]"
       >
         ({{ data.AB_H }})
@@ -54,7 +62,9 @@
           <div
             id="hr"
             class="Stats-Content-Left-Text"
-            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home']"
+            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home',
+                      gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor && design.Visitor.Edge != '' ? 'Visitor-Edge-Shadow' : 'Text-Shadow',
+                      gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home && design.Home.Edge != '' ? 'Home-Edge-Shadow' : 'Text-Shadow',]"
             :style="[{transform: `scaleX(${HRTrans})`, transformOrigin: 'left'}]"
           >
             {{ data.HR }}
@@ -70,7 +80,9 @@
           <div
             id="obp"
             class="Stats-Content-Right-Text"
-            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home']"
+            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home',
+                      gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor && design.Visitor.Edge != '' ? 'Visitor-Edge-Shadow' : 'Text-Shadow',
+                      gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home && design.Home.Edge != '' ? 'Home-Edge-Shadow' : 'Text-Shadow',]"
             :style="[{transform: `scaleX(${numTrans})`, transformOrigin: 'left'}]"
           >
             {{ data.OBP }}
@@ -88,7 +100,9 @@
           <div
             id="rbi"
             class="Stats-Content-Left-Text"
-            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home']"
+            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home',
+                      gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor && design.Visitor.Edge != '' ? 'Visitor-Edge-Shadow' : 'Text-Shadow',
+                      gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home && design.Home.Edge != '' ? 'Home-Edge-Shadow' : 'Text-Shadow',]"
             :style="[{transform: `scaleX(${RBITrans})`, transformOrigin: 'left'}]"
           >
             {{ data.RBI }}
@@ -104,7 +118,9 @@
           <div
             id="ops"
             class="Stats-Content-Right-Text"
-            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home']"
+            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home',
+                      gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor && design.Visitor.Edge != '' ? 'Visitor-Edge-Shadow' : 'Text-Shadow',
+                      gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home && design.Home.Edge != '' ? 'Home-Edge-Shadow' : 'Text-Shadow',]"
             :style="[{transform: `scaleX(${OPSTrans})`, transformOrigin: 'left'}]"
           >
             {{ data.OPS }}
@@ -122,7 +138,9 @@
           <div
             id="sb"
             class="Stats-Content-Left-Text"
-            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home']"
+            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home',
+                      gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor && design.Visitor.Edge != '' ? 'Visitor-Edge-Shadow' : 'Text-Shadow',
+                      gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home && design.Home.Edge != '' ? 'Home-Edge-Shadow' : 'Text-Shadow',]"
             :style="[{transform: `scaleX(${SBTrans})`, transformOrigin: 'left'}]"
           >
             {{ data.SB }}
@@ -138,7 +156,9 @@
           <div
             id="rc27"
             class="Stats-Content-Right-Text"
-            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home']"
+            :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Text-Visitor':'Text-Home',
+                      gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor && design.Visitor.Edge != '' ? 'Visitor-Edge-Shadow' : 'Text-Shadow',
+                      gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home && design.Home.Edge != '' ? 'Home-Edge-Shadow' : 'Text-Shadow',]"
             :style="[{transform: `scaleX(${RC27Trans})`, transformOrigin: 'left'}]"
           >
             {{ data.RC27 }}
@@ -270,10 +290,6 @@ watch(props, () => {
   font-size: 45px;
   line-height: 75px;
   text-align: center;
-  text-shadow: 
-    1px 1px #999,
-    2px 2px #666,
-    3px 3px #000;
 }
 
 .Stats-Name {
@@ -287,11 +303,6 @@ watch(props, () => {
   font-family: 'Noto Sans JP', sans-serif;
   font-size: 50px;
   line-height: 57px;
-  /* text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.4); */
-  text-shadow: 
-    1px 1px #999,
-    2px 2px #666,
-    3px 3px #000;
 }
 
 .Stats-Content-Row {
@@ -317,10 +328,6 @@ watch(props, () => {
   font-size: 45px;
   line-height: 50px;
   letter-spacing: 1px;
-  text-shadow: 
-    1px 1px #999,
-    2px 2px #666,
-    3px 3px #000;
 }
 
 .Stats-Avg-Detail {
@@ -329,10 +336,6 @@ watch(props, () => {
   width: 220px;
   font-size: 35px;
   line-height: 50px;
-  text-shadow: 
-    1px 1px #999,
-    2px 2px #666,
-    3px 3px #000;
 }
 
 .Stats-Content-Row-Left {
@@ -354,10 +357,6 @@ watch(props, () => {
   line-height: 50px;
   text-align: right;
   letter-spacing: 1px;
-  text-shadow: 
-    1px 1px #999,
-    2px 2px #666,
-    3px 3px #000;
 }
 
 .Stats-Content-Row-Right {
@@ -379,10 +378,6 @@ watch(props, () => {
   line-height: 50px;
   text-align: right;
   letter-spacing: 1px;
-  text-shadow: 
-    1px 1px #999,
-    2px 2px #666,
-    3px 3px #000;
 }
 
 .BGC-Visitor {
@@ -399,6 +394,43 @@ watch(props, () => {
 
 .Text-Home {
   color: v-bind('design.Home.Text');
+}
+
+.Text-Shadow {
+  text-shadow: 1px 1px #999,
+               2px 2px #777,
+               3px 3px #555,
+               4px 4px #000
+}
+
+.Visitor-Edge-Shadow {
+  text-shadow: 1px 1px 0px v-bind('design.Visitor.Edge'),
+               -1px -1px 0px v-bind('design.Visitor.Edge'),
+               -1px 1px 0px v-bind('design.Visitor.Edge'),
+               -1px -1px 0px v-bind('design.Visitor.Edge'),
+               0px 1px 0px v-bind('design.Visitor.Edge'),
+               0px -1px 0px v-bind('design.Visitor.Edge'),
+               -1px 0px 0px v-bind('design.Visitor.Edge'),
+               1px 0px 0px v-bind('design.Visitor.Edge'),
+               1px 1px #999,
+               2px 2px #777,
+               3px 3px #555,
+               4px 4px #000
+}
+
+.Home-Edge-Shadow {
+  text-shadow: 1px 1px 0px v-bind('design.Home.Edge'),
+               -1px -1px 0px v-bind('design.Home.Edge'),
+               -1px 1px 0px v-bind('design.Home.Edge'),
+               -1px -1px 0px v-bind('design.Home.Edge'),
+               0px 1px 0px v-bind('design.Home.Edge'),
+               0px -1px 0px v-bind('design.Home.Edge'),
+               -1px 0px 0px v-bind('design.Home.Edge'),
+               1px 0px 0px v-bind('design.Home.Edge'),
+               1px 1px #999,
+               2px 2px #777,
+               3px 3px #555,
+               4px 4px #000
 }
 
 </style>

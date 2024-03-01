@@ -67,21 +67,25 @@ export class DesignController {
         returnData.PositionBasicBGC = obj[VisitorDesignDivision.PositionBasicBGC];
         returnData.NameBasicText = obj[VisitorDesignDivision.NameBasicText];
         returnData.NameBasicBGC = obj[VisitorDesignDivision.NameBasicBGC];
+        returnData.NameBasicEdge = obj[VisitorDesignDivision.NameBasicEdge];
         // 打者
         returnData.PositionBatterText = obj[VisitorDesignDivision.PositionBatterText];
         returnData.PositionBatterBGC = obj[VisitorDesignDivision.PositionBatterBGC];
         returnData.NameBatterText = obj[VisitorDesignDivision.NameBatterText];
         returnData.NameBatterBGC = obj[VisitorDesignDivision.NameBatterBGC];
+        returnData.NameBatterEdge = obj[VisitorDesignDivision.NameBatterEdge];
         // 走者
         returnData.PositionRunnerText = obj[VisitorDesignDivision.PositionRunnerText];
         returnData.PositionRunnerBGC = obj[VisitorDesignDivision.PositionRunnerBGC];
         returnData.NameRunnerText = obj[VisitorDesignDivision.NameRunnerText];
         returnData.NameRunnerBGC = obj[VisitorDesignDivision.NameRunnerBGC];
+        returnData.NameRunnerEdge = obj[VisitorDesignDivision.NameRunnerEdge];
         // 次回先頭
         returnData.PositionNextText = obj[VisitorDesignDivision.PositionNextText];
         returnData.PositionNextBGC = obj[VisitorDesignDivision.PositionNextBGC];
         returnData.NameNextText = obj[VisitorDesignDivision.NameNextText];
         returnData.NameNextBGC = obj[VisitorDesignDivision.NameNextBGC];
+        returnData.NameNextEdge = obj[VisitorDesignDivision.NameNextEdge];
         // 交代時
         returnData.Change = obj[VisitorDesignDivision.Change];
 
@@ -111,21 +115,25 @@ export class DesignController {
         returnData.PositionBasicBGC = obj[HomeDesignDivision.PositionBasicBGC];
         returnData.NameBasicText = obj[HomeDesignDivision.NameBasicText];
         returnData.NameBasicBGC = obj[HomeDesignDivision.NameBasicBGC];
+        returnData.NameBasicEdge = obj[HomeDesignDivision.NameBasicEdge];
         // 打者
         returnData.PositionBatterText = obj[HomeDesignDivision.PositionBatterText];
         returnData.PositionBatterBGC = obj[HomeDesignDivision.PositionBatterBGC];
         returnData.NameBatterText = obj[HomeDesignDivision.NameBatterText];
         returnData.NameBatterBGC = obj[HomeDesignDivision.NameBatterBGC];
+        returnData.NameBatterEdge = obj[HomeDesignDivision.NameBatterEdge];
         // 走者
         returnData.PositionRunnerText = obj[HomeDesignDivision.PositionRunnerText];
         returnData.PositionRunnerBGC = obj[HomeDesignDivision.PositionRunnerBGC];
         returnData.NameRunnerText = obj[HomeDesignDivision.NameRunnerText];
         returnData.NameRunnerBGC = obj[HomeDesignDivision.NameRunnerBGC];
+        returnData.NameRunnerEdge = obj[HomeDesignDivision.NameRunnerEdge];
         // 次回先頭
         returnData.PositionNextText = obj[HomeDesignDivision.PositionNextText];
         returnData.PositionNextBGC = obj[HomeDesignDivision.PositionNextBGC];
         returnData.NameNextText = obj[HomeDesignDivision.NameNextText];
         returnData.NameNextBGC = obj[HomeDesignDivision.NameNextBGC];
+        returnData.NameNextEdge = obj[HomeDesignDivision.NameNextEdge];
         // 交代時
         returnData.Change = obj[HomeDesignDivision.Change];
 
@@ -147,6 +155,8 @@ export class DesignController {
         visitor.Text = obj[VisitorDesignDivision.FielderStatsText];
         // 背景
         visitor.BGC = obj[VisitorDesignDivision.DispPositionFielderBGC];
+        // 縁取り
+        visitor.Edge = obj[VisitorDesignDivision.DispPositionFielderEdge];
         returnData.Visitor = visitor;
 
         // ホーム野手成績
@@ -155,6 +165,8 @@ export class DesignController {
         home.Text = obj[HomeDesignDivision.FielderStatsText];
         // 背景
         home.BGC = obj[HomeDesignDivision.DispPositionFielderBGC];
+        // 縁取り
+        home.Edge = obj[HomeDesignDivision.DispPositionFielderEdge];
         returnData.Home = home;
 
         // 返却
@@ -174,9 +186,11 @@ export class DesignController {
         // 野手
         visitor.FielderText = obj[VisitorDesignDivision.DispPositionFielderText];
         visitor.FielderBGC = obj[VisitorDesignDivision.DispPositionFielderBGC];
+        visitor.FielderEdge = obj[VisitorDesignDivision.DispPositionFielderEdge];
         // 走者
         visitor.RunnerText = obj[VisitorDesignDivision.DispPositionRunnerText];
         visitor.RunnerBGC = obj[VisitorDesignDivision.DispPositionRunnerBGC];
+        visitor.RunnerEdge = obj[VisitorDesignDivision.DispPositionRunnerEdge];
         returnData.Visitor = visitor;
 
         // ホーム守備表示
@@ -184,9 +198,11 @@ export class DesignController {
         // 野手
         home.FielderText = obj[HomeDesignDivision.DispPositionFielderText];
         home.FielderBGC = obj[HomeDesignDivision.DispPositionFielderBGC];
+        home.FielderEdge = obj[HomeDesignDivision.DispPositionFielderEdge];
         // 走者
         home.RunnerText = obj[HomeDesignDivision.DispPositionRunnerText];
         home.RunnerBGC = obj[HomeDesignDivision.DispPositionRunnerBGC];
+        home.RunnerEdge = obj[HomeDesignDivision.DispPositionRunnerEdge];
         returnData.Home = home;
 
         // 返却
@@ -207,6 +223,8 @@ export class DesignController {
         visitor.Text = obj[VisitorDesignDivision.PitcherStatsText];
         // 背景
         visitor.BGC = obj[VisitorDesignDivision.PitcherStatsBGC];
+        // 縁取り
+        visitor.Edge = obj[VisitorDesignDivision.PitcherStatsEdge];
         returnData.Visitor = visitor;
 
         // ホーム投手成績
@@ -215,6 +233,8 @@ export class DesignController {
         home.Text = obj[HomeDesignDivision.PitcherStatsText];
         // 背景
         home.BGC = obj[HomeDesignDivision.PitcherStatsBGC];
+        // 縁取り
+        home.Edge = obj[HomeDesignDivision.PitcherStatsEdge];
         returnData.Home = home;
 
         // 返却

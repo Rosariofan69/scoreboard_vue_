@@ -156,8 +156,15 @@ class ResultCheckBoxModel {
             writable: true,
             value: void 0
         });
-        /** 三振 */
-        Object.defineProperty(this, "StrikeOut", {
+        /** 見逃三振 */
+        Object.defineProperty(this, "LookingStrikeOut", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 空振三振 */
+        Object.defineProperty(this, "SwingingStrikeOut", {
             enumerable: true,
             configurable: true,
             writable: true,

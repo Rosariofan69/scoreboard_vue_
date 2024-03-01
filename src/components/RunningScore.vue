@@ -590,8 +590,8 @@ watch(props, () => {
 .Now-Frame{
   outline: 3.5px solid v-bind('design.ScoreFrame');
   outline-offset: -3.5px;
-  box-shadow: 0px 0px 3px 6px rgba(0, 0, 0, 0.2) inset;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 3px 7px rgba(0, 0, 0, 0.25) inset;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
 
 .Running-Score-Odd{

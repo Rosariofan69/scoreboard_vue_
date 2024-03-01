@@ -326,9 +326,9 @@ export class GameController {
             }
         }
 
-        if (gameInfo.GameProgressInfo.NowInning >= 9 && gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home && visitorR < homeR) {
-            dispScoreData[this.inningKeys[gameInfo.GameProgressInfo.NowInning + 11]] = scoreData.HomeScore[gameInfo.GameProgressInfo.NowInning - 1].toString() + 'x';
-        }
+        // if (gameInfo.GameProgressInfo.NowInning >= 9 && gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home && visitorR < homeR) {
+        //     dispScoreData[this.inningKeys[gameInfo.GameProgressInfo.NowInning + 11]] = scoreData.HomeScore[gameInfo.GameProgressInfo.NowInning - 1].toString() + 'x';
+        // }
 
         dispScoreData.VisitorR = visitorR.toString();
         dispScoreData.VisitorH = scoreData.VisitorH.toString();

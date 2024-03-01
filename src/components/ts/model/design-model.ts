@@ -34,6 +34,8 @@ export class MemberDesignModel {
     NameBasicText: string;
     /** 名前（標準） - 背景 */
     NameBasicBGC: string;
+    /** 名前（標準） - 縁取り */
+    NameBasicEdge: string;
     /** 守備位置（打者） - 文字 */
     PositionBatterText: string;
     /** 守備位置（打者） - 背景 */
@@ -42,6 +44,8 @@ export class MemberDesignModel {
     NameBatterText: string;
     /** 名前（打者） - 背景 */
     NameBatterBGC: string;
+    /** 名前（打者） - 縁取り */
+    NameBatterEdge: string;
     /** 守備位置（走者） - 文字 */
     PositionRunnerText: string;
     /** 守備位置（走者） - 背景 */
@@ -50,6 +54,8 @@ export class MemberDesignModel {
     NameRunnerText: string;
     /** 名前（走者） - 背景 */
     NameRunnerBGC: string;
+    /** 名前（走者） - 縁取り */
+    NameRunnerEdge: string;
     /** 守備位置（次回先頭） - 文字 */
     PositionNextText: string;
     /** 守備位置（次回先頭） - 背景 */
@@ -58,6 +64,8 @@ export class MemberDesignModel {
     NameNextText: string;
     /** 名前（次回先頭） - 背景 */
     NameNextBGC: string;
+    /** 名前（次回先頭） - 縁取り */
+    NameNextEdge: string;
     /** 交代時 */
     Change: string;
 }
@@ -80,6 +88,8 @@ export class FielderStatsDesignModel {
     Text: string;
     /** 背景 */
     BGC: string;
+    /** 縁取り */
+    Edge: string;
 }
 
 /**
@@ -100,10 +110,14 @@ export class PositionDesignModel {
     FielderText: string;
     /** 野手 - 背景 */
     FielderBGC: string;
+    /** 野手 - 縁取り */
+    FielderEdge: string;
     /** 走者 - 文字 */
     RunnerText: string;
     /** 走者 - 背景 */
     RunnerBGC: string;
+    /** 走者 - 縁取り */
+    RunnerEdge: string;
 }
 
 /**
@@ -124,6 +138,8 @@ export class PitcherStatsDesignModel {
     Text: string;
     /** 背景 */
     BGC: string;
+    /** 縁取り */
+    Edge: string;
 }
 
 /**

@@ -10,7 +10,9 @@
         id="pitcher"
         class="Position-Name-Text"
         :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Position-Text-Home':'Position-Text-Visitor',
-                 pitcherTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+                 pitcherTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center',
+                 gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor && design.Home.FielderEdge ? 'Home-Fielder-Edge-Shadow' : 'Text-Shadow',
+                 gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home && design.Visitor.FielderEdge ? 'Visitor-Fielder-Edge-Shadow' : 'Text-Shadow',]"
         :style="[{transform: `scaleX(${pitcherTrans})`, transformOrigin: 'left'}]"
       >{{ position.P }}</div>
     </div>
@@ -23,7 +25,9 @@
         id="catcher"
         class="Position-Name-Text"
         :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Position-Text-Home':'Position-Text-Visitor',
-                 catcherTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+                 catcherTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center',
+                 gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor && design.Home.FielderEdge ? 'Home-Fielder-Edge-Shadow' : 'Text-Shadow',
+                 gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home && design.Visitor.FielderEdge ? 'Visitor-Fielder-Edge-Shadow' : 'Text-Shadow',]"
         :style="[{transform: `scaleX(${catcherTrans})`, transformOrigin: 'left'}]"
       >{{ position.C }}</div>
     </div>
@@ -36,7 +40,9 @@
         id="first"
         class="Position-Name-Text"
         :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Position-Text-Home':'Position-Text-Visitor',
-                 firstTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+                 firstTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center',
+                 gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor && design.Home.FielderEdge ? 'Home-Fielder-Edge-Shadow' : 'Text-Shadow',
+                 gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home && design.Visitor.FielderEdge ? 'Visitor-Fielder-Edge-Shadow' : 'Text-Shadow',]"
         :style="[{transform: `scaleX(${firstTrans})`, transformOrigin: 'left'}]"
       >{{ position.FB }}</div>
     </div>
@@ -49,7 +55,9 @@
         id="second"
         class="Position-Name-Text"
         :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Position-Text-Home':'Position-Text-Visitor',
-                 secondTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+                 secondTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center',
+                 gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor && design.Home.FielderEdge ? 'Home-Fielder-Edge-Shadow' : 'Text-Shadow',
+                 gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home && design.Visitor.FielderEdge ? 'Visitor-Fielder-Edge-Shadow' : 'Text-Shadow',]"
         :style="[{transform: `scaleX(${secondTrans})`, transformOrigin: 'left'}]"
       >{{ position.SB }}</div>
     </div>
@@ -62,7 +70,9 @@
         id="third"
         class="Position-Name-Text"
         :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Position-Text-Home':'Position-Text-Visitor',
-                 thirdTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+                 thirdTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center',
+                 gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor && design.Home.FielderEdge ? 'Home-Fielder-Edge-Shadow' : 'Text-Shadow',
+                 gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home && design.Visitor.FielderEdge ? 'Visitor-Fielder-Edge-Shadow' : 'Text-Shadow',]"
         :style="[{transform: `scaleX(${thirdTrans})`, transformOrigin: 'left'}]"
       >{{ position.TB }}</div>
     </div>
@@ -75,7 +85,9 @@
         id="shortStop"
         class="Position-Name-Text"
         :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Position-Text-Home':'Position-Text-Visitor',
-                 shortStopTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+                 shortStopTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center',
+                 gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor && design.Home.FielderEdge ? 'Home-Fielder-Edge-Shadow' : 'Text-Shadow',
+                 gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home && design.Visitor.FielderEdge ? 'Visitor-Fielder-Edge-Shadow' : 'Text-Shadow',]"
         :style="[{transform: `scaleX(${shortStopTrans})`, transformOrigin: 'left'}]"
       >{{ position.SS }}</div>
     </div>
@@ -88,7 +100,9 @@
         id="left"
         class="Position-Name-Text"
         :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Position-Text-Home':'Position-Text-Visitor',
-                 leftTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+                 leftTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center',
+                 gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor && design.Home.FielderEdge ? 'Home-Fielder-Edge-Shadow' : 'Text-Shadow',
+                 gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home && design.Visitor.FielderEdge ? 'Visitor-Fielder-Edge-Shadow' : 'Text-Shadow',]"
         :style="[{transform: `scaleX(${leftTrans})`, transformOrigin: 'left'}]"
       >{{ position.LF }}</div>
     </div>
@@ -101,7 +115,9 @@
         id="center"
         class="Position-Name-Text"
         :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Position-Text-Home':'Position-Text-Visitor',
-                 centerTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+                 centerTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center',
+                 gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor && design.Home.FielderEdge ? 'Home-Fielder-Edge-Shadow' : 'Text-Shadow',
+                 gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home && design.Visitor.FielderEdge ? 'Visitor-Fielder-Edge-Shadow' : 'Text-Shadow',]"
         :style="[{transform: `scaleX(${centerTrans})`, transformOrigin: 'left'}]"
       >{{ position.CF }}</div>
     </div>
@@ -114,7 +130,9 @@
         id="right"
         class="Position-Name-Text"
         :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Position-Text-Home':'Position-Text-Visitor',
-                 rightTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+                 rightTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center',
+                 gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor && design.Home.FielderEdge ? 'Home-Fielder-Edge-Shadow' : 'Text-Shadow',
+                 gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home && design.Visitor.FielderEdge ? 'Visitor-Fielder-Edge-Shadow' : 'Text-Shadow',]"
         :style="[{transform: `scaleX(${rightTrans})`, transformOrigin: 'left'}]"
       >{{ position.RF }}</div>
     </div>
@@ -127,7 +145,9 @@
         id="firstRunner"
         class="Position-Name-Text"
         :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Runner-Text-Visitor':'Runner-Text-Home',
-                 firstRunnerTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+                 firstRunnerTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center',
+                 gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor && design.Visitor.RunnerEdge ? 'Visitor-Runner-Edge-Shadow' : 'Text-Shadow',
+                 gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home && design.Home.RunnerEdge ? 'Home-Runner-Edge-Shadow' : 'Text-Shadow',]"
         :style="[{transform: `scaleX(${firstRunnerTrans})`, transformOrigin: 'left'}]"
       >{{ runner.First.Name }}</div>
     </div>
@@ -140,7 +160,9 @@
         id="secondRunner"
         class="Position-Name-Text"
         :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Runner-Text-Visitor':'Runner-Text-Home',
-                 secondRunnerTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+                 secondRunnerTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center',
+                 gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor && design.Visitor.RunnerEdge ? 'Visitor-Runner-Edge-Shadow' : 'Text-Shadow',
+                 gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home && design.Home.RunnerEdge ? 'Home-Runner-Edge-Shadow' : 'Text-Shadow',]"
         :style="[{transform: `scaleX(${secondRunnerTrans})`, transformOrigin: 'left'}]"
       >{{ runner.Second.Name }}</div>
     </div>
@@ -153,7 +175,9 @@
         id="thirdRunner"
         class="Position-Name-Text"
         :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'Runner-Text-Visitor':'Runner-Text-Home',
-                 thirdRunnerTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+                 thirdRunnerTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center',
+                 gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor && design.Visitor.RunnerEdge ? 'Visitor-Runner-Edge-Shadow' : 'Text-Shadow',
+                 gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home && design.Home.RunnerEdge ? 'Home-Runner-Edge-Shadow' : 'Text-Shadow',]"
         :style="[{transform: `scaleX(${thirdRunnerTrans})`, transformOrigin: 'left'}]"
       >{{ runner.Third.Name }}</div>
     </div>
@@ -414,6 +438,58 @@ watch(props, () => {
 
 .Text-Align-Last-Justify {
   text-align-last: justify;
+}
+
+.Text-Shadow {
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+}
+
+.Visitor-Fielder-Edge-Shadow {
+  text-shadow: 1px 1px 0px v-bind('design.Visitor.FielderEdge'),
+               -1px -1px 0px v-bind('design.Visitor.FielderEdge'),
+               -1px 1px 0px v-bind('design.Visitor.FielderEdge'),
+               -1px -1px 0px v-bind('design.Visitor.FielderEdge'),
+               0px 1px 0px v-bind('design.Visitor.FielderEdge'),
+               0px -1px 0px v-bind('design.Visitor.FielderEdge'),
+               -1px 0px 0px v-bind('design.Visitor.FielderEdge'),
+               1px 0px 0px v-bind('design.Visitor.FielderEdge'),
+               2px 2px 2px rgba(0, 0, 0, 0.8);
+}
+
+.Home-Fielder-Edge-Shadow {
+  text-shadow: 1px 1px 0px v-bind('design.Home.FielderEdge'),
+               -1px -1px 0px v-bind('design.Home.FielderEdge'),
+               -1px 1px 0px v-bind('design.Home.FielderEdge'),
+               -1px -1px 0px v-bind('design.Home.FielderEdge'),
+               0px 1px 0px v-bind('design.Home.FielderEdge'),
+               0px -1px 0px v-bind('design.Home.FielderEdge'),
+               -1px 0px 0px v-bind('design.Home.FielderEdge'),
+               1px 0px 0px v-bind('design.Home.FielderEdge'),
+               2px 2px 2px rgba(0, 0, 0, 0.8);
+}
+
+.Visitor-Runner-Edge-Shadow {
+  text-shadow: 1px 1px 0px v-bind('design.Visitor.RunnerEdge'),
+               -1px -1px 0px v-bind('design.Visitor.RunnerEdge'),
+               -1px 1px 0px v-bind('design.Visitor.RunnerEdge'),
+               -1px -1px 0px v-bind('design.Visitor.RunnerEdge'),
+               0px 1px 0px v-bind('design.Visitor.RunnerEdge'),
+               0px -1px 0px v-bind('design.Visitor.RunnerEdge'),
+               -1px 0px 0px v-bind('design.Visitor.RunnerEdge'),
+               1px 0px 0px v-bind('design.Visitor.RunnerEdge'),
+               2px 2px 2px rgba(0, 0, 0, 0.8);
+}
+
+.Home-Runner-Edge-Shadow {
+  text-shadow: 1px 1px 0px v-bind('design.Home.RunnerEdge'),
+               -1px -1px 0px v-bind('design.Home.RunnerEdge'),
+               -1px 1px 0px v-bind('design.Home.RunnerEdge'),
+               -1px -1px 0px v-bind('design.Home.RunnerEdge'),
+               0px 1px 0px v-bind('design.Home.RunnerEdge'),
+               0px -1px 0px v-bind('design.Home.RunnerEdge'),
+               -1px 0px 0px v-bind('design.Home.RunnerEdge'),
+               1px 0px 0px v-bind('design.Home.RunnerEdge'),
+               2px 2px 2px rgba(0, 0, 0, 0.8);
 }
 
 </style>

@@ -58,8 +58,10 @@ export class ResultCheckBoxModel {
     LineDrive: boolean;
     /** 併殺 */
     DoublePlay: boolean;
-    /** 三振 */
-    StrikeOut: boolean;
+    /** 見逃三振 */
+    LookingStrikeOut: boolean;
+    /** 空振三振 */
+    SwingingStrikeOut: boolean;
     /** 四球 */
     FourPitchWalk: boolean;
     /** 死球 */

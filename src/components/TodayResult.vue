@@ -82,7 +82,7 @@ function calcAnimation(element: any) {
   animeSecond1stLap.value = '';
   animeLastPer.value = '100%';
   if (element) {
-    if (element.scrollWidth > 450) {
+    if (props.datas.length > 3) {
       // 1周目
       let second1st = element.scrollWidth / 80;
       let lastPer = element.scrollWidth / 450;
