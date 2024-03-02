@@ -81,46 +81,46 @@
     <div class="Control-Section">
       <div>走塁死</div>
       <div class="MultiSelect">
-        <label style="display: block;">
+        <label style="display: block; white-space: nowrap;">
           <input type="checkbox" v-model="selectedBaseRunningOut" :value="runnerData.Batter.Order" v-if="runnerData.Batter.Name">{{ runnerData.Batter.Name }}
         </label>
-        <label style="display: block;">
+        <label style="display: block; white-space: nowrap;">
           <input type="checkbox" v-model="selectedBaseRunningOut" :value="runnerData.First.Order" v-if="runnerData.First.Name">{{ runnerData.First.Name }}
         </label>
-        <label style="display: block;">
+        <label style="display: block; white-space: nowrap;">
           <input type="checkbox" v-model="selectedBaseRunningOut" :value="runnerData.Second.Order" v-if="runnerData.Second.Name">{{ runnerData.Second.Name }}
         </label>
-        <label style="display: block;">
+        <label style="display: block; white-space: nowrap;">
           <input type="checkbox" v-model="selectedBaseRunningOut" :value="runnerData.Third.Order" v-if="runnerData.Third.Name">{{ runnerData.Third.Name }}
         </label>
       </div>
       <div>生還</div>
       <div class="MultiSelect">
-        <label style="display: block;">
+        <label style="display: block; white-space: nowrap;">
           <input type="checkbox" v-model="selectedBaseRuns" :value="runnerData.Batter.Order" v-if="runnerData.Batter.Name">{{ runnerData.Batter.Name }}
         </label>
-        <label style="display: block;">
+        <label style="display: block; white-space: nowrap;">
           <input type="checkbox" v-model="selectedBaseRuns" :value="runnerData.First.Order" v-if="runnerData.First.Name">{{ runnerData.First.Name }}
         </label>
-        <label style="display: block;">
+        <label style="display: block; white-space: nowrap;">
           <input type="checkbox" v-model="selectedBaseRuns" :value="runnerData.Second.Order" v-if="runnerData.Second.Name">{{ runnerData.Second.Name }}
         </label>
-        <label style="display: block;">
+        <label style="display: block; white-space: nowrap;">
           <input type="checkbox" v-model="selectedBaseRuns" :value="runnerData.Third.Order" v-if="runnerData.Third.Name">{{ runnerData.Third.Name }}
         </label>
       </div>
       <button class="OnBase-Status-Button" v-on:click="onBaseStatusBoxDispFlg = !onBaseStatusBoxDispFlg;">出塁状況</button>
       <div class="OnBase-Status-Box" v-if="onBaseStatusBoxDispFlg">
         <div v-if="gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor">
-          <div v-for="(visitorMember) in visitorParticipationMember" :key="visitorMember.ID">
-            <label>
+          <div v-for="(visitorMember, index) in visitorParticipationMember" :key="visitorMember.ID">
+            <label v-if="index != 'Pitcher'">
               <input type="checkbox" v-model="visitorMember.DispStatus.Runner">{{ visitorMember.Name }}
             </label>
           </div>
         </div>
         <div v-if="gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home">
-          <div v-for="(homeMember) in homeParticipationMember" :key="homeMember.ID">
-            <label>
+          <div v-for="(homeMember, index) in homeParticipationMember" :key="homeMember.ID">
+            <label v-if="index != 'Pitcher'">
               <input type="checkbox" v-model="homeMember.DispStatus.Runner">{{ homeMember.Name }}
             </label>
           </div>
@@ -194,25 +194,25 @@
         <div class="Play-Result-Row">
           <button class="Stolen-Base-Button" v-on:click="stolenBaseBoxDispFlg = !stolenBaseBoxDispFlg">盗塁</button>
           <div class="Stolen-Base-Select MultiSelect" v-if="stolenBaseBoxDispFlg">
-            <label style="display: block;">
+            <label style="display: block; white-space: nowrap;">
               <input type="checkbox" v-model="selectedStolenBase" :value="runnerData.First.Order" v-if="runnerData.First.Name">{{ runnerData.First.Name }}
             </label>
-            <label style="display: block;">
+            <label style="display: block; white-space: nowrap;">
               <input type="checkbox" v-model="selectedStolenBase" :value="runnerData.Second.Order" v-if="runnerData.Second.Name">{{ runnerData.Second.Name }}
             </label>
-            <label style="display: block;">
+            <label style="display: block; white-space: nowrap;">
               <input type="checkbox" v-model="selectedStolenBase" :value="runnerData.Third.Order" v-if="runnerData.Third.Name">{{ runnerData.Third.Name }}
             </label>
           </div>
           <button class="Stolen-Base-Button" v-on:click="caughtStealingBoxDispFlg = !caughtStealingBoxDispFlg">盗塁死</button>
           <div class="Caught-Stealing-Select MultiSelect" v-if="caughtStealingBoxDispFlg">
-            <label style="display: block;">
+            <label style="display: block; white-space: nowrap;">
               <input type="checkbox" v-model="selectedCaughtStealing" :value="runnerData.First.Order" v-if="runnerData.First.Name">{{ runnerData.First.Name }}
             </label>
-            <label style="display: block;">
+            <label style="display: block; white-space: nowrap;">
               <input type="checkbox" v-model="selectedCaughtStealing" :value="runnerData.Second.Order" v-if="runnerData.Second.Name">{{ runnerData.Second.Name }}
             </label>
-            <label style="display: block;">
+            <label style="display: block; white-space: nowrap;">
               <input type="checkbox" v-model="selectedCaughtStealing" :value="runnerData.Third.Order" v-if="runnerData.Third.Name">{{ runnerData.Third.Name }}
             </label>
           </div>
@@ -2086,7 +2086,6 @@ function getPitcherInfo() {
   border: 1px solid black;
   font-size: 15px;
   line-height: 20px;
-  white-space: nowrap;
 }
 
 .Control-Section {
@@ -2298,8 +2297,7 @@ function getPitcherInfo() {
   bottom: 29px;
   width: 120px;
   height: 195px;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: auto;
   background-color: white;
   border: 1px solid black;
   font-size: 14px;

@@ -332,14 +332,14 @@ var ResultCheckBox;
     ResultCheckBox[ResultCheckBox["FourPitchWalk"] = 6] = "FourPitchWalk";
     /** 死球 */
     ResultCheckBox[ResultCheckBox["HitByPitch"] = 7] = "HitByPitch";
-    /** 敬遠 */
-    ResultCheckBox[ResultCheckBox["IntentionalWalk"] = 8] = "IntentionalWalk";
     /** 邪飛 */
-    ResultCheckBox[ResultCheckBox["FoulFly"] = 9] = "FoulFly";
+    ResultCheckBox[ResultCheckBox["FoulFly"] = 8] = "FoulFly";
     /** 犠飛 */
-    ResultCheckBox[ResultCheckBox["SacrificeFly"] = 10] = "SacrificeFly";
+    ResultCheckBox[ResultCheckBox["SacrificeFly"] = 9] = "SacrificeFly";
     /** 犠打 */
-    ResultCheckBox[ResultCheckBox["SacrificeBunt"] = 11] = "SacrificeBunt";
+    ResultCheckBox[ResultCheckBox["SacrificeBunt"] = 10] = "SacrificeBunt";
+    /** 敬遠 */
+    ResultCheckBox[ResultCheckBox["IntentionalWalk"] = 11] = "IntentionalWalk";
     /** 犠打失策 */
     ResultCheckBox[ResultCheckBox["SacrificeBuntError"] = 12] = "SacrificeBuntError";
     /** 犠打野選 */

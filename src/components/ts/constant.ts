@@ -328,14 +328,14 @@ export enum ResultCheckBox {
     FourPitchWalk,
     /** 死球 */
     HitByPitch,
-    /** 敬遠 */
-    IntentionalWalk,
     /** 邪飛 */
     FoulFly,
     /** 犠飛 */
     SacrificeFly,
     /** 犠打 */
     SacrificeBunt,
+    /** 敬遠 */
+    IntentionalWalk,
     /** 犠打失策 */
     SacrificeBuntError,
     /** 犠打野選 */
