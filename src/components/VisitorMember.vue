@@ -4,6 +4,7 @@
     :class="[gameInfo.GameBaseInfo.HomePosition == '一塁側' ? 'Position-Left' : 'Position-Right']"
   >
     <div class="Team">
+      <img :src="require(`./image/${gameInfo.GameBaseInfo.VisitorTeamName}.png`)" v-if="gameInfo.GameBaseInfo.VisitorTeamText == ''">
       <div
         id="visitorTeamName"
         class="Team-Text"
@@ -796,6 +797,19 @@ watch(props, () => {
   height: 49px;
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.Team img{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: auto;
+  width: auto;
+  max-width: 95%;
+  max-height: 95%;
+  margin: auto;
 }
 
 .Team-Text{

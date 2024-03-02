@@ -419,7 +419,7 @@ export enum PositionName {
  */
 export enum Message {
     Message001 = '守備位置が選択されていません。',
-    Message002 = '走者の数と塁状況が合っていません。',
+    Message002 = '走者の数と塁状況が合っていません。塁状況を入力し、確定ボタンを押してください。',
     Message003 = '結果を確定しますか？',
     Message004 = '試合終了条件を満たしました。終了しますか？',
 }

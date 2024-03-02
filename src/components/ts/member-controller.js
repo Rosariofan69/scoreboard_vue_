@@ -126,24 +126,27 @@ class MemberController {
      * @returns
      */
     SetPitcherInfo(member, pitcherInfoList) {
+        let addFlg = true;
         for (let i = 0; i < 10; i++) {
             if (member[this.orderKeysDH[i]].Position == '1') {
                 // 既に投手情報がセット済みの投手（再登板）の場合、処理を行わない
                 pitcherInfoList.forEach(x => {
                     if (member[this.orderKeysDH[i]].ID == x.ID) {
-                        return pitcherInfoList;
+                        addFlg = false;
                     }
                 });
-                const pushData = new member_info_model_1.PitcherInfoModel();
-                pushData.ID = member[this.orderKeysDH[i]].ID;
-                pushData.Number = member[this.orderKeysDH[i]].Number;
-                pushData.Name = member[this.orderKeysDH[i]].Name;
-                pushData.FullName = member[this.orderKeysDH[i]].FullName;
-                pushData.PitchCount = 0;
-                pushData.ThisAtBat = 0;
-                pushData.SO = 0;
-                pushData.BB = 0;
-                pitcherInfoList.push(pushData);
+                if (addFlg) {
+                    const pushData = new member_info_model_1.PitcherInfoModel();
+                    pushData.ID = member[this.orderKeysDH[i]].ID;
+                    pushData.Number = member[this.orderKeysDH[i]].Number;
+                    pushData.Name = member[this.orderKeysDH[i]].Name;
+                    pushData.FullName = member[this.orderKeysDH[i]].FullName;
+                    pushData.PitchCount = 0;
+                    pushData.ThisAtBat = 0;
+                    pushData.SO = 0;
+                    pushData.BB = 0;
+                    pitcherInfoList.push(pushData);
+                }
                 break;
             }
         }

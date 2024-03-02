@@ -44,7 +44,12 @@ app.get('/getMainInfo', (req, res) => {
     let meinInfo = [];
     for (let y = startRow; y <= endRow; y++) {
         let cellAddress = xlsx.utils.encode_cell({ c: startColumn, r: y });
-        meinInfo.push(worksheet[cellAddress].v);
+        if (worksheet[cellAddress] === undefined) {
+            meinInfo.push('');
+        }
+        else {
+            meinInfo.push(worksheet[cellAddress].v);
+        }
     }
     res.send(meinInfo);
 });

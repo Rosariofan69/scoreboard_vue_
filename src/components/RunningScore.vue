@@ -40,7 +40,7 @@
     </div>
     <div class="Running-Score-Box">
       <div class="Score-Team-Visitor">
-        <img :src="visitorImageSrc" v-if="gameInfo.GameBaseInfo.VisitorTeamText == ''">
+        <img :src="require(`./image/${gameInfo.GameBaseInfo.VisitorTeamName}.png`)" v-if="gameInfo.GameBaseInfo.VisitorTeamText == ''">
         <div id="visitorTeamNameScore" :style="[{transform: `scaleX(${visitorTeamTrans})`, transformOrigin: 'left'}]">
           {{ gameInfo.GameBaseInfo.VisitorTeamText }}
         </div>
@@ -145,7 +145,7 @@
     <div class="Running-Score-MidLine"></div>
     <div class="Running-Score-Box">
       <div class="Score-Team-Home">
-        <img :src="homeImageSrc" v-if="gameInfo.GameBaseInfo.HomeTeamText == ''">
+        <img :src="require(`./image/${gameInfo.GameBaseInfo.HomeTeamName}.png`)" v-if="gameInfo.GameBaseInfo.HomeTeamText == ''">
         <div id="homeTeamNameScore" :style="[{transform: `scaleX(${homeTeamTrans})`, transformOrigin: 'left'}]">
           {{ gameInfo.GameBaseInfo.HomeTeamText }}
         </div>
@@ -265,10 +265,6 @@ const props = defineProps<{
   gameInfo: GameInfoModel;
   design: ScoreDesignModel;
 }>()
-
-// 画像パス
-let visitorImageSrc = '';
-let homeImageSrc = '';
 
 // 延長表示フラグ
 let dispFlg10th = ref(false);
@@ -490,8 +486,6 @@ watch(props, () => {
   }
   nextTick(() => {
     if (props.gameInfo.GameProgressInfo.IsStarted == undefined) {
-      visitorImageSrc = "./image/" + props.gameInfo.GameBaseInfo.VisitorTeamName + ".png";
-      homeImageSrc = "./image/" + props.gameInfo.GameBaseInfo.HomeTeamName + ".png";
       visitorTeamTrans.value = calcTeamWidth(document.getElementById('visitorTeamNameScore'));
       homeTeamTrans.value = calcTeamWidth(document.getElementById('homeTeamNameScore'));
     }

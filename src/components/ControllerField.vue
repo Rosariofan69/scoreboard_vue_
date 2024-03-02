@@ -396,6 +396,12 @@
       <button class="Cancel" v-on:click="closeGameSetDialog()">キャンセル</button>
     </div>
   </div>
+  <div class="Dialog" v-if="messageDialogDispFlg">
+    {{ message }}
+    <div class="Footer">
+      <button class="Ok" v-on:click="messageDialogDispFlg = false">OK</button>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -574,6 +580,8 @@ let messageDialogDispFlg = ref(false);
 let onBaseStatusBoxDispFlg = ref(false);
 // カスタムテキスト
 let customText = ref('');
+// メッセージ
+let message = ref('');
 
 /**
  * 表示ボタンクリック時処理
@@ -730,7 +738,7 @@ async function getBulkVisitorParticipationMember() {
 /**
  * Enterボタン（ホーム）クリック
  */
- async function getHomeParticipationMember(index: number, cancel: boolean) {
+async function getHomeParticipationMember(index: number, cancel: boolean) {
   if (!gameInfo.value.GameProgressInfo.IsStarted) {
     homeParticipationMember.value = memberController.GetParticipationMemberData(homeParticipationMember.value, homeParticipationInput, defaultHomeMemberList, index);
     emits('sendHomeMemberData', homeParticipationMember.value);
@@ -1009,6 +1017,13 @@ function clickOutMinus() {
  * 確定クリック
  */
 async function clickConfirm() {
+  // 守備位置チェック
+  checkPositionConfirm();
+  if (message.value != '') {
+    messageDialogDispFlg.value = true;
+    return;
+  }
+
   if (resultOptionCheckBox.value.PlusError) {
     // +失策
     litError();
@@ -1092,6 +1107,12 @@ async function clickConfirm() {
   } else {
     // 攻守交代
     changeAttackTeam();
+  }
+
+  // 走者チェック
+  checkRunnerNumber();
+  if (message.value != '') {
+    messageDialogDispFlg.value = true;
   }
 }
 
@@ -1636,7 +1657,7 @@ function SaveBattingResult() {
 
   // 打点つきで二塁打か三塁打
   if (selectedRBI.value != '0' && (resultCheckBox.value.TwoBaseHit || resultCheckBox.value.ThreeBaseHit)) {
-    result = result.substring(0);
+    result = result.slice(0, 1);
   }
 
   let resultStr = result;
@@ -1954,6 +1975,28 @@ function clickOkGameSet() {
   gameSetDialogDispFlg.value = false;
 
   [runningScore, dispRunningScore.value] = gameController.GameSet(runningScore, dispRunningScore.value, gameInfo.value, countData.value);
+  let restRunner: number[] = [];
+  // 残塁算出
+  runnerProperty.forEach(x => {
+    if (runnerData.value.Batter.Order != runnerData.value[x].Order && runnerData.value[x].Order != null) {
+      restRunner.push(runnerData.value[x].Order);
+    }
+  });
+
+  if (gameInfo.value.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor) {
+    if (restRunner.length > 0) {
+      runningScore.VisitorLOB += restRunner.length;
+      dispRunningScore.value.Score.VisitorLOB = runningScore.VisitorLOB.toString();
+      emits('sendScoreData', dispRunningScore.value);
+    }
+  } else {
+    if (restRunner.length > 0) {
+      runningScore.HomeLOB += restRunner.length;
+      dispRunningScore.value.Score.HomeLOB = runningScore.HomeLOB.toString();
+      emits('sendScoreData', dispRunningScore.value);
+    }
+  }
+
   gameInfo.value.GameProgressInfo.IsStarted = false;
   clearInterval(bigInfoTimer);
   bigInfoDispFlg.value = false;
@@ -2039,6 +2082,71 @@ function getPitcherInfo() {
     pitcherInfo.value = memberController.GetPitcherInfo(visitorParticipationMember.value, visitorPitcherInfo);
   }
   emits('sendPitcherData', pitcherInfo.value);
+}
+
+/**
+ * 確定時守備位置チェック
+ */
+function checkPositionConfirm() {
+  message.value = '';
+  if (resultCheckBox.value.GroundBall ||
+      resultCheckBox.value.FlyBall ||
+      resultCheckBox.value.LineDrive ||
+      resultCheckBox.value.DoublePlay ||
+      resultCheckBox.value.FoulFly ||
+      resultCheckBox.value.SacrificeFly ||
+      resultCheckBox.value.SacrificeBunt ||
+      resultCheckBox.value.SacrificeBuntError ||
+      resultCheckBox.value.SacrificeBuntFC ||
+      resultCheckBox.value.SingleHit ||
+      resultCheckBox.value.TwoBaseHit ||
+      resultCheckBox.value.ThreeBaseHit ||
+      resultCheckBox.value.HomeRun ||
+      resultCheckBox.value.Error ||
+      resultCheckBox.value.FieldersChoice) {
+    if (resultPositionCheckBox.value.length == 0) {
+      message.value = Message.Message001;
+    }
+  }
+}
+
+/**
+ * 走者チェック
+ */
+function checkRunnerNumber() {
+  message.value = '';
+  let memberRunner = 0;
+  let stateRunner = 0;
+
+  // メンバー
+  if (gameInfo.value.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor) {
+    memberController.orderKeysDH.forEach(x => {
+      if (visitorParticipationMember.value[x].DispStatus.Runner) {
+        memberRunner++;
+      }
+    });
+  } else {
+    memberController.orderKeysDH.forEach(x => {
+      if (homeParticipationMember.value[x].DispStatus.Runner) {
+        memberRunner++;
+      }
+    });
+  }
+
+  // 塁状況
+  if (runnerState.value.First) {
+    stateRunner++;
+  }
+  if (runnerState.value.Second) {
+    stateRunner++;
+  }
+  if (runnerState.value.Third) {
+    stateRunner++;
+  }
+
+  if (memberRunner != stateRunner) {
+    message.value = Message.Message002;
+  }
 }
 
 </script>
@@ -2256,6 +2364,7 @@ function getPitcherInfo() {
   top: 0;
   bottom: 0;
   margin: auto;
+  padding: 10px;
   width: 400px;
   height: 240px;
 }
