@@ -179,3 +179,21 @@ export class GameProgressLogModel {
     /** 打席結果 */
     BattingResult: AtBatResultModel[];
 }
+
+/**
+ * 得点経過モデル
+ */
+export class ScoreProgressModel {
+    /** イニング */
+    Inning: string;
+    /** キー選手 */
+    KeyPlayer: string;
+    /** キープレイ */
+    KeyPlay: string;
+    /** 同点、逆転、勝ち越し */
+    Lead: string;
+    /** ビジター得点 */
+    VisitorScore: string;
+    /** ホーム得点 */
+    HomeScore: string;
+}

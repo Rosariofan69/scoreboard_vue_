@@ -651,39 +651,49 @@ export class MemberController {
         }
 
         if (before[orderDH].ID != after[orderDH].ID) {
-            // 選手ごと
-            member[orderDH].DispStatus.ChangeBeforePisition = false;
-            member[orderDH].DispStatus.ChangeAfterPisition = false;
-            member[orderDH].DispStatus.ChangeBeforeMember = false;
-            member[orderDH].DispStatus.ChangeAfterMember = true;
-            let afterMember = new DefaultMemberModel();
-            defMember.forEach(x => {
-                if (x.Id == after[orderDH].ID) {
-                    afterMember = x;
+            // 選手ごと交代
+            // 既に同じIDの選手が存在するため、打席結果の作成を行わない
+            let pushFlg = true;
+            batRes[order].forEach(x => {
+                if (x.ID == after[orderDH].ID) {
+                    pushFlg = false;
                 }
             });
-            // ID
-            member[orderDH].ID = afterMember.Id;
-            // 背番号
-            member[orderDH].Number = afterMember.Number;
-            // 守備位置
-            member[orderDH].Position = after[orderDH].Position;
-            // 名前
-            member[orderDH].Name = afterMember.Name;
-            // フルネーム
-            member[orderDH].FullName = afterMember.FullName;
-            // 行番号
-            member[orderDH].RowNumber = afterMember.RowNumber;
 
-            // 投手以外の場合、打席結果作成
-            if (index < 9) {
-                const pushItem = new BattingResultAtGameModel();
-
-                pushItem.ID = member[order].ID;
-                pushItem.Number = member[order].Number;
-                pushItem.Position = member[order].Position;
-                pushItem.Name = member[order].FullName;
-                batRes[order].push(pushItem);
+            if (pushFlg) {
+                member[orderDH].DispStatus.ChangeBeforePisition = false;
+                member[orderDH].DispStatus.ChangeAfterPisition = false;
+                member[orderDH].DispStatus.ChangeBeforeMember = false;
+                member[orderDH].DispStatus.ChangeAfterMember = true;
+                let afterMember = new DefaultMemberModel();
+                defMember.forEach(x => {
+                    if (x.Id == after[orderDH].ID) {
+                        afterMember = x;
+                    }
+                });
+                // ID
+                member[orderDH].ID = afterMember.Id;
+                // 背番号
+                member[orderDH].Number = afterMember.Number;
+                // 守備位置
+                member[orderDH].Position = after[orderDH].Position;
+                // 名前
+                member[orderDH].Name = afterMember.Name;
+                // フルネーム
+                member[orderDH].FullName = afterMember.FullName;
+                // 行番号
+                member[orderDH].RowNumber = afterMember.RowNumber;
+    
+                // 投手以外の場合、打席結果作成
+                if (index < 9) {
+                    const pushItem = new BattingResultAtGameModel();
+    
+                    pushItem.ID = member[order].ID;
+                    pushItem.Number = member[order].Number;
+                    pushItem.Position = member[order].Position;
+                    pushItem.Name = member[order].FullName;
+                    batRes[order].push(pushItem);
+                }
             }
         } else if (before[orderDH].Position != after[orderDH].Position) {
             // 守備位置のみ
@@ -764,11 +774,13 @@ export class MemberController {
      */
     public CalcOBP(stats: BatterStatsModel): string {
         let res = '';
+        const a = stats.Hit + stats.BB + stats.HBP;
+        const b = stats.Atbat + stats.BB + stats.HBP + stats.SacFly;
 
-        if (stats.Atbat == 0) {
+        if (a == 0) {
             res = '---';
         } else {
-            const calcRes = (stats.Hit + stats.BB + stats.HBP) / (stats.Atbat + stats.BB + stats.HBP + stats.SacFly);
+            const calcRes = a / b;
             if (calcRes == 1) {
                 res = '1.00';
             } else {
@@ -787,15 +799,21 @@ export class MemberController {
     public CalcOPS(stats: BatterStatsModel): string {
         let res = '';
 
-        if (stats.Atbat == 0) {
+        const a = stats.Hit + stats.BB + stats.HBP;
+        const b = stats.Atbat + stats.BB + stats.HBP + stats.SacFly;
+
+        if (a == 0) {
             res = '---';
         } else {
             // 出塁率
-            const obp = (stats.Hit + stats.BB + stats.HBP) / (stats.Atbat + stats.BB + stats.HBP + stats.SacFly);
+            const obp = a / b;
             // 長打率
-            const srg = stats.TotalBases / stats.Atbat;
+            let slg = 0;
+            if (stats.Atbat > 0) {
+                slg = stats.TotalBases / stats.Atbat;
+            }
             // 合計
-            const calcRes = obp + srg;
+            const calcRes = obp + slg;
             // 小数第4位四捨五入
             res = (Math.round(calcRes * 1000) / 1000).toFixed(3).toString();
 

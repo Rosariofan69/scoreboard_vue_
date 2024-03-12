@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GameProgressLogModel = exports.ResultPositionCheckBoxModel = exports.ResultOptionCheckBoxModel = exports.ResultCheckBoxModel = exports.GameProgressInfoModel = exports.GameBaseInfoModel = exports.GameInfoModel = void 0;
+exports.ScoreProgressModel = exports.GameProgressLogModel = exports.ResultPositionCheckBoxModel = exports.ResultOptionCheckBoxModel = exports.ResultCheckBoxModel = exports.GameProgressInfoModel = exports.GameBaseInfoModel = exports.GameInfoModel = void 0;
 /**
  * 試合情報
  */
@@ -540,4 +540,54 @@ class GameProgressLogModel {
     }
 }
 exports.GameProgressLogModel = GameProgressLogModel;
+/**
+ * 得点経過モデル
+ */
+class ScoreProgressModel {
+    constructor() {
+        /** イニング */
+        Object.defineProperty(this, "Inning", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** キー選手 */
+        Object.defineProperty(this, "KeyPlayer", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** キープレイ */
+        Object.defineProperty(this, "KeyPlay", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 同点、逆転、勝ち越し */
+        Object.defineProperty(this, "Lead", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** ビジター得点 */
+        Object.defineProperty(this, "VisitorScore", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** ホーム得点 */
+        Object.defineProperty(this, "HomeScore", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+    }
+}
+exports.ScoreProgressModel = ScoreProgressModel;
 //# sourceMappingURL=game-model.js.map
