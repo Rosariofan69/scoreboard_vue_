@@ -597,7 +597,14 @@ class MemberController {
             }
         }
         if (before[orderDH].ID != after[orderDH].ID) {
-            // 選手ごと
+            // 選手ごと交代
+            // 既に同じIDの選手が存在するため、打席結果の作成を行わない
+            let createBatResFlg = true;
+            batRes[order].forEach(x => {
+                if (x.ID == after[orderDH].ID) {
+                    createBatResFlg = false;
+                }
+            });
             member[orderDH].DispStatus.ChangeBeforePisition = false;
             member[orderDH].DispStatus.ChangeAfterPisition = false;
             member[orderDH].DispStatus.ChangeBeforeMember = false;
@@ -620,8 +627,8 @@ class MemberController {
             member[orderDH].FullName = afterMember.FullName;
             // 行番号
             member[orderDH].RowNumber = afterMember.RowNumber;
-            // 投手以外の場合、打席結果作成
-            if (index < 9) {
+            // 投手以外のかつ打席結果作成フラグがTrueの場合、打席結果作成
+            if (index < 9 && createBatResFlg) {
                 const pushItem = new member_info_model_1.BattingResultAtGameModel();
                 pushItem.ID = member[order].ID;
                 pushItem.Number = member[order].Number;
@@ -701,11 +708,13 @@ class MemberController {
      */
     CalcOBP(stats) {
         let res = '';
-        if (stats.Atbat == 0) {
+        const a = stats.Hit + stats.BB + stats.HBP;
+        const b = stats.Atbat + stats.BB + stats.HBP + stats.SacFly;
+        if (a == 0) {
             res = '---';
         }
         else {
-            const calcRes = (stats.Hit + stats.BB + stats.HBP) / (stats.Atbat + stats.BB + stats.HBP + stats.SacFly);
+            const calcRes = a / b;
             if (calcRes == 1) {
                 res = '1.00';
             }
@@ -722,18 +731,22 @@ class MemberController {
      */
     CalcOPS(stats) {
         let res = '';
-        if (stats.Atbat == 0) {
+        const a = stats.Hit + stats.BB + stats.HBP;
+        const b = stats.Atbat + stats.BB + stats.HBP + stats.SacFly;
+        if (a == 0) {
             res = '---';
         }
         else {
             // 出塁率
-            const obp = (stats.Hit + stats.BB + stats.HBP) / (stats.Atbat + stats.BB + stats.HBP + stats.SacFly);
+            const obp = Math.round((a / b) * 1000) / 1000;
             // 長打率
-            const srg = stats.TotalBases / stats.Atbat;
+            let slg = 0;
+            if (stats.Atbat > 0) {
+                slg = Math.round((stats.TotalBases / stats.Atbat) * 1000) / 1000;
+            }
             // 合計
-            const calcRes = obp + srg;
-            // 小数第4位四捨五入
-            res = (Math.round(calcRes * 1000) / 1000).toFixed(3).toString();
+            const calcRes = obp + slg;
+            res = calcRes.toFixed(3).toString();
             if (calcRes < 1) {
                 // 1.000未満の場合先頭の0を除外
                 res = res.slice(1);
@@ -769,6 +782,35 @@ class MemberController {
         // 小数第3位四捨五入
         res = (Math.round(rc27 * 100) / 100).toFixed(2).toString();
         return res;
+    }
+    /**
+     * 半角チェック
+     * @param str
+     */
+    checkHalfWidth(str) {
+        let res = false;
+        const reg = new RegExp(/^[a-zA-Z0-9!-/:-@¥[-`{-~]*$/);
+        if (str) {
+            if (reg.test(str)) {
+                res = true;
+            }
+        }
+        return res;
+    }
+    /**
+     * text-align-last決定
+     * @param text テキスト
+     */
+    decisionTextAlignLastJustify(text) {
+        let returnData = true;
+        const reg = new RegExp(/^[a-zA-Z0-9!-/:-@¥[-`{-~]*$/);
+        // 半角英数か1文字の場合、中央
+        if (text) {
+            if (reg.test(text) || text.length === 1) {
+                returnData = false;
+            }
+        }
+        return returnData;
     }
 }
 exports.MemberController = MemberController;

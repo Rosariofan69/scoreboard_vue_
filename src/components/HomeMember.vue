@@ -7,11 +7,11 @@
       <img :src="require(`./image/${gameInfo.GameBaseInfo.HomeTeamName}.png`)" v-if="gameInfo.GameBaseInfo.HomeTeamText == ''">
       <div
         id="homeTeamName"
-        class="Team-Text"
         v-if="gameInfo.GameBaseInfo.HomeTeamText != ''"
+        :class="[teamNameHalfWidthFlg ? 'Team-Text-Half-Width' : 'Team-Text-Full-Width',
+                 teamNameTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
         :style="[{transform: `scaleX(${teamNameTrans})`, transformOrigin: 'left'}]"
-      >{{ gameInfo.GameBaseInfo.HomeTeamText }}
-      </div>
+      >{{ gameInfo.GameBaseInfo.HomeTeamText }}</div>
     </div>
     <div
       class="Box-Full"
@@ -624,6 +624,22 @@ const props = defineProps<{
 }>()
 
 /**
+ * 半角チェック
+ * @param str 
+ */
+function checkHalfWidth(str: string): boolean {
+  let res = false;
+
+  if (str) {
+    if (str.match(/^[\x20-\x7e]*$/)) {
+      res = true;
+    }
+  }
+
+  return res;
+}
+
+/**
  * チーム名の横幅計算
  * @param element 
  */
@@ -676,7 +692,7 @@ function decisionTextAlignLastJustify(text: string): boolean {
   let returnData = true;
   // 半角英数か1文字の場合、中央
   if (text) {
-    if (text.length === 1) {
+    if (text.match(/^[\x20-\x7e]*$/) || text.length === 1) {
       returnData = false;
     }
   }
@@ -685,6 +701,8 @@ function decisionTextAlignLastJustify(text: string): boolean {
 
 // チーム名
 let teamNameTrans = ref('1.0');
+let teamNameHalfWidthFlg = ref(true);
+let teamNameTextAlignLastJustify = ref(true);
 // 1番
 let leadOffPosTrans = ref('1.0');
 let leadOffNameTrans = ref('1.0');
@@ -729,6 +747,8 @@ let pitcherTextAlignLastJustify = ref(true);
 watch(props, () => {
   nextTick(() => {
     teamNameTrans.value = calcTeamWidth(document.getElementById('homeTeamName'));
+    teamNameHalfWidthFlg.value = checkHalfWidth(props.gameInfo.GameBaseInfo.HomeTeamText);
+    teamNameTextAlignLastJustify.value = decisionTextAlignLastJustify(props.gameInfo.GameBaseInfo.HomeTeamText);
     leadOffPosTrans.value = calcPosWidth(document.getElementById('homeLeadOffPos'));
     leadOffNameTrans.value = calcNameWidth(document.getElementById('homeLeadOffName'));
     leadOffTextAlignLastJustify.value = decisionTextAlignLastJustify(props.data.LeadOff.Name);
@@ -791,6 +811,7 @@ watch(props, () => {
   margin-bottom: 10px;
   margin-left: 20px;
   background: v-bind('design.TeamNameBGC');
+  color: v-bind('design.TeamNameText');
   position: relative;
   overflow: hidden;
   width: 170px;
@@ -812,11 +833,16 @@ watch(props, () => {
   margin: auto;
 }
 
-.Team-Text{
+.Team-Text-Half-Width{
   font-family: 'Bahnschrift';
-  color: v-bind('design.TeamNameText');
   font-size: 40px;
   line-height: 53px;
+}
+
+.Team-Text-Full-Width{
+  font-family: 'Noto Sans JP', sans-serif;
+  line-height: 44px;
+  font-size: 38px;
 }
 
 .Box-Full-P{

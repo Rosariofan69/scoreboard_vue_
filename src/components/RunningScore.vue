@@ -41,7 +41,12 @@
     <div class="Running-Score-Box">
       <div class="Score-Team-Visitor">
         <img :src="require(`./image/${gameInfo.GameBaseInfo.VisitorTeamName}.png`)" v-if="gameInfo.GameBaseInfo.VisitorTeamText == ''">
-        <div id="visitorTeamNameScore" :style="[{transform: `scaleX(${visitorTeamTrans})`, transformOrigin: 'left'}]">
+        <div
+          id="visitorTeamNameScore"
+          v-if="gameInfo.GameBaseInfo.VisitorTeamText"
+          :class="[visitorTeamNameHalfWidthFlg ? 'Team-Text-Half-Width' : 'Team-Text-Full-Width',
+                   visitorTeamNameTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+          :style="[{transform: `scaleX(${visitorTeamTrans})`, transformOrigin: 'left'}]">
           {{ gameInfo.GameBaseInfo.VisitorTeamText }}
         </div>
       </div>
@@ -146,7 +151,12 @@
     <div class="Running-Score-Box">
       <div class="Score-Team-Home">
         <img :src="require(`./image/${gameInfo.GameBaseInfo.HomeTeamName}.png`)" v-if="gameInfo.GameBaseInfo.HomeTeamText == ''">
-        <div id="homeTeamNameScore" :style="[{transform: `scaleX(${homeTeamTrans})`, transformOrigin: 'left'}]">
+        <div
+          id="homeTeamNameScore"
+          v-if="gameInfo.GameBaseInfo.HomeTeamText"
+          :class="[homeTeamNameHalfWidthFlg ? 'Team-Text-Half-Width' : 'Team-Text-Full-Width',
+                   homeTeamNameTextAlignLastJustify ? 'Text-Align-Last-Justify' : 'Text-Align-Last-Center']"
+          :style="[{transform: `scaleX(${homeTeamTrans})`, transformOrigin: 'left'}]">
           {{ gameInfo.GameBaseInfo.HomeTeamText }}
         </div>
       </div>
@@ -275,9 +285,15 @@ let dispFlg12th = ref(false);
 let parentWidth = ref('36px');
 let parentPadding = ref('4px');
 
-// 横幅
+// チーム名
 let visitorTeamTrans = ref('1.0');
+let visitorTeamNameHalfWidthFlg = ref(true);
+let visitorTeamNameTextAlignLastJustify = ref(true);
 let homeTeamTrans = ref('1.0');
+let homeTeamNameHalfWidthFlg = ref(true);
+let homeTeamNameTextAlignLastJustify = ref(true);
+
+// 横幅
 let title1stTrans = ref('1.0');
 let title2ndTrans = ref('1.0');
 let title3rdTrans = ref('1.0');
@@ -325,6 +341,22 @@ let homeLOBTrans = ref('1.0');
 let frameFlg = ref(new FrameFlgModel());
 
 /**
+ * 半角チェック
+ * @param str 
+ */
+ function checkHalfWidth(str: string): boolean {
+  let res = false;
+
+  if (str) {
+    if (str.match(/^[\x20-\x7e]*$/)) {
+      res = true;
+    }
+  }
+
+  return res;
+}
+
+/**
  * チーム名の横幅計算
  * @param element 
  */
@@ -350,6 +382,21 @@ function calcNumbersWidth(element: any): string {
     if (element.scrollWidth > parentWidthNum) {
       let width = parentWidthNum / element.scrollWidth;
       returnData = width.toString();
+    }
+  }
+  return returnData;
+}
+
+/**
+ * text-align-last決定
+ * @param text テキスト
+ */
+function decisionTextAlignLastJustify(text: string): boolean {
+  let returnData = true;
+  // 半角英数か1文字の場合、中央
+  if (text) {
+    if (text.match(/^[\x20-\x7e]*$/) || text.length === 1) {
+      returnData = false;
     }
   }
   return returnData;
@@ -487,7 +534,11 @@ watch(props, () => {
   nextTick(() => {
     if (props.gameInfo.GameProgressInfo.IsStarted == undefined) {
       visitorTeamTrans.value = calcTeamWidth(document.getElementById('visitorTeamNameScore'));
+      visitorTeamNameHalfWidthFlg.value = checkHalfWidth(props.gameInfo.GameBaseInfo.VisitorTeamText);
+      visitorTeamNameTextAlignLastJustify.value = decisionTextAlignLastJustify(props.gameInfo.GameBaseInfo.VisitorTeamText);
       homeTeamTrans.value = calcTeamWidth(document.getElementById('homeTeamNameScore'));
+      homeTeamNameHalfWidthFlg.value = checkHalfWidth(props.gameInfo.GameBaseInfo.HomeTeamText);
+      homeTeamNameTextAlignLastJustify.value = decisionTextAlignLastJustify(props.gameInfo.GameBaseInfo.HomeTeamText);
     }
     if (props.gameInfo.GameProgressInfo.NowInning == null || props.gameInfo.GameProgressInfo.NowInning % 9 == 1) {
       title1stTrans.value = calcNumbersWidth(document.getElementById('title1st'));
@@ -627,6 +678,18 @@ watch(props, () => {
   background-color: v-bind('design.OtherFrame');
 }
 
+.Team-Text-Half-Width{
+  font-family: 'Bahnschrift';
+  font-size: 40px;
+  line-height: 53px;
+}
+
+.Team-Text-Full-Width{
+  font-family: 'Noto Sans JP', sans-serif;
+  line-height: 40px;
+  font-size: 35px;
+}
+
 .Score-Team-Visitor{
   position: relative;
   width: 128px;
@@ -649,10 +712,16 @@ watch(props, () => {
   padding-right: 5px;
   line-height: 48px;
   font-size: 38px;
-  font-family: 'Bahnschrift';
-  text-align: center;
   background-color: v-bind('design.HomeTeamNameBGC');
   color: v-bind('design.HomeTeamNameText');
+}
+
+.Text-Align-Last-Center {
+  text-align-last: center;
+}
+
+.Text-Align-Last-Justify {
+  text-align-last: justify;
 }
 
 .Score-Team-Visitor-BGC {

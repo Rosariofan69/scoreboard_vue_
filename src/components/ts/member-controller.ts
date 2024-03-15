@@ -653,47 +653,45 @@ export class MemberController {
         if (before[orderDH].ID != after[orderDH].ID) {
             // 選手ごと交代
             // 既に同じIDの選手が存在するため、打席結果の作成を行わない
-            let pushFlg = true;
+            let createBatResFlg = true;
             batRes[order].forEach(x => {
                 if (x.ID == after[orderDH].ID) {
-                    pushFlg = false;
+                    createBatResFlg = false;
                 }
             });
 
-            if (pushFlg) {
-                member[orderDH].DispStatus.ChangeBeforePisition = false;
-                member[orderDH].DispStatus.ChangeAfterPisition = false;
-                member[orderDH].DispStatus.ChangeBeforeMember = false;
-                member[orderDH].DispStatus.ChangeAfterMember = true;
-                let afterMember = new DefaultMemberModel();
-                defMember.forEach(x => {
-                    if (x.Id == after[orderDH].ID) {
-                        afterMember = x;
-                    }
-                });
-                // ID
-                member[orderDH].ID = afterMember.Id;
-                // 背番号
-                member[orderDH].Number = afterMember.Number;
-                // 守備位置
-                member[orderDH].Position = after[orderDH].Position;
-                // 名前
-                member[orderDH].Name = afterMember.Name;
-                // フルネーム
-                member[orderDH].FullName = afterMember.FullName;
-                // 行番号
-                member[orderDH].RowNumber = afterMember.RowNumber;
-    
-                // 投手以外の場合、打席結果作成
-                if (index < 9) {
-                    const pushItem = new BattingResultAtGameModel();
-    
-                    pushItem.ID = member[order].ID;
-                    pushItem.Number = member[order].Number;
-                    pushItem.Position = member[order].Position;
-                    pushItem.Name = member[order].FullName;
-                    batRes[order].push(pushItem);
+            member[orderDH].DispStatus.ChangeBeforePisition = false;
+            member[orderDH].DispStatus.ChangeAfterPisition = false;
+            member[orderDH].DispStatus.ChangeBeforeMember = false;
+            member[orderDH].DispStatus.ChangeAfterMember = true;
+            let afterMember = new DefaultMemberModel();
+            defMember.forEach(x => {
+                if (x.Id == after[orderDH].ID) {
+                    afterMember = x;
                 }
+            });
+            // ID
+            member[orderDH].ID = afterMember.Id;
+            // 背番号
+            member[orderDH].Number = afterMember.Number;
+            // 守備位置
+            member[orderDH].Position = after[orderDH].Position;
+            // 名前
+            member[orderDH].Name = afterMember.Name;
+            // フルネーム
+            member[orderDH].FullName = afterMember.FullName;
+            // 行番号
+            member[orderDH].RowNumber = afterMember.RowNumber;
+
+            // 投手以外のかつ打席結果作成フラグがTrueの場合、打席結果作成
+            if (index < 9 && createBatResFlg) {
+                const pushItem = new BattingResultAtGameModel();
+
+                pushItem.ID = member[order].ID;
+                pushItem.Number = member[order].Number;
+                pushItem.Position = member[order].Position;
+                pushItem.Name = member[order].FullName;
+                batRes[order].push(pushItem);
             }
         } else if (before[orderDH].Position != after[orderDH].Position) {
             // 守備位置のみ
@@ -806,16 +804,15 @@ export class MemberController {
             res = '---';
         } else {
             // 出塁率
-            const obp = a / b;
+            const obp = Math.round((a / b) * 1000) / 1000;
             // 長打率
             let slg = 0;
             if (stats.Atbat > 0) {
-                slg = stats.TotalBases / stats.Atbat;
+                slg = Math.round((stats.TotalBases / stats.Atbat) * 1000) / 1000;
             }
             // 合計
             const calcRes = obp + slg;
-            // 小数第4位四捨五入
-            res = (Math.round(calcRes * 1000) / 1000).toFixed(3).toString();
+            res = calcRes.toFixed(3).toString();
 
             if (calcRes < 1) {
                 // 1.000未満の場合先頭の0を除外
@@ -858,5 +855,38 @@ export class MemberController {
         res = (Math.round(rc27 * 100) / 100).toFixed(2).toString();
 
         return res;
+    }
+        
+    /**
+     * 半角チェック
+     * @param str 
+     */
+    public checkHalfWidth(str: string): boolean {
+        let res = false;
+        const reg = new RegExp(/^[a-zA-Z0-9!-/:-@¥[-`{-~]*$/);
+    
+        if (str) {
+            if (reg.test(str)) {
+                res = true;
+            }
+        }
+    
+        return res;
+    }
+  
+    /**
+     * text-align-last決定
+     * @param text テキスト
+     */
+    public decisionTextAlignLastJustify(text: string): boolean {
+        let returnData = true;
+        const reg = new RegExp(/^[a-zA-Z0-9!-/:-@¥[-`{-~]*$/);
+        // 半角英数か1文字の場合、中央
+        if (text) {
+            if (reg.test(text) || text.length === 1) {
+                returnData = false;
+            }
+        }
+        return returnData;
     }
 }
