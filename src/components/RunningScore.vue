@@ -679,9 +679,9 @@ watch(props, () => {
 }
 
 .Team-Text-Half-Width{
+  line-height: 48px;
+  font-size: 38px;
   font-family: 'Bahnschrift';
-  font-size: 40px;
-  line-height: 53px;
 }
 
 .Team-Text-Full-Width{
@@ -696,9 +696,6 @@ watch(props, () => {
   height: 44px;
   padding-left: 5px;
   padding-right: 5px;
-  line-height: 48px;
-  font-size: 38px;
-  font-family: 'Bahnschrift';
   text-align: center;
   background-color: v-bind('design.VisitorTeamNameBGC');
   color: v-bind('design.VisitorTeamNameText');
@@ -710,8 +707,6 @@ watch(props, () => {
   height: 44px;
   padding-left: 5px;
   padding-right: 5px;
-  line-height: 48px;
-  font-size: 38px;
   background-color: v-bind('design.HomeTeamNameBGC');
   color: v-bind('design.HomeTeamNameText');
 }
