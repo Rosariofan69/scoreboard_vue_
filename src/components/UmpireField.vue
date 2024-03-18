@@ -63,12 +63,13 @@
   
 <script setup lang="ts">
 import { defineProps, ref, defineEmits, watch, nextTick } from 'vue';
-import { UmpireDesignModel } from './ts/model/design-model';
+import { ScoreDesignModel, UmpireDesignModel } from './ts/model/design-model';
 import { UmpireModel } from './ts/model/member-info-model';
 
 const props = defineProps<{
   data: UmpireModel
   design: UmpireDesignModel
+  scoreDesign: ScoreDesignModel;
 }>()
 
 // margin
@@ -160,7 +161,7 @@ watch(props, () => {
   display: flex;
   width: 100%;
   height: 30px;
-  border-bottom: 4px solid #7F7F7F;
+  border-bottom: 4px solid v-bind('scoreDesign.OtherFrame');
 }
 
 .Content-Field{

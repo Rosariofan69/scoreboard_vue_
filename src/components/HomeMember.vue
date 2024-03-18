@@ -640,7 +640,7 @@ function checkHalfWidth(str: string): boolean {
 }
 
 /**
- * チーム名の横幅計算
+ * チーム名の横幅計算（アルファベット）
  * @param element 
  */
 function calcTeamWidth(element: any): string {
@@ -648,6 +648,21 @@ function calcTeamWidth(element: any): string {
   if (element) {
     if (element.scrollWidth > 170) {
       let width = 170 / element.scrollWidth;
+      returnData = width.toString();
+    }
+  }
+  return returnData;
+}
+
+/**
+ * チーム名の横幅計算（アルファベット）
+ * @param element 
+ */
+function calcTeamWidthJP(element: any): string {
+  let returnData = '1.0';
+  if (element) {
+    if (element.scrollWidth > 174) {
+      let width = 174 / element.scrollWidth;
       returnData = width.toString();
     }
   }
@@ -746,8 +761,12 @@ let pitcherTextAlignLastJustify = ref(true);
 
 watch(props, () => {
   nextTick(() => {
-    teamNameTrans.value = calcTeamWidth(document.getElementById('homeTeamName'));
     teamNameHalfWidthFlg.value = checkHalfWidth(props.gameInfo.GameBaseInfo.HomeTeamText);
+    if (teamNameHalfWidthFlg.value) {
+      teamNameTrans.value = calcTeamWidth(document.getElementById('homeTeamName'));
+    } else {
+      teamNameTrans.value = calcTeamWidthJP(document.getElementById('homeTeamName'));
+    }
     teamNameTextAlignLastJustify.value = decisionTextAlignLastJustify(props.gameInfo.GameBaseInfo.HomeTeamText);
     leadOffPosTrans.value = calcPosWidth(document.getElementById('homeLeadOffPos'));
     leadOffNameTrans.value = calcNameWidth(document.getElementById('homeLeadOffName'));
@@ -814,6 +833,7 @@ watch(props, () => {
   color: v-bind('design.TeamNameText');
   position: relative;
   overflow: hidden;
+  white-space: nowrap;
   width: 170px;
   height: 49px;
   padding-left: 10px;
@@ -841,8 +861,8 @@ watch(props, () => {
 
 .Team-Text-Full-Width{
   font-family: 'Noto Sans JP', sans-serif;
-  line-height: 44px;
-  font-size: 38px;
+  line-height: 45px;
+  font-size: 39px;
 }
 
 .Box-Full-P{

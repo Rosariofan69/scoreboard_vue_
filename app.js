@@ -66,6 +66,7 @@ app.get('/getDesign', (req, res) => {
     const endColumn = 16;
     let endRow = 42;
     let teamDesign = [];
+    // デザインは全セルに計算式が入っているため、空欄はスルーできる（vがないだけで他の要素はある）
     // チームごとのデザイン
     for (let x = startColumn; x <= endColumn; x++) {
         for (let y = startRow; y <= endRow; y++) {

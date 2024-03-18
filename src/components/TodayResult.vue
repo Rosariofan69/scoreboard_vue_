@@ -24,9 +24,11 @@
 
 <script setup lang="ts">
 import { defineProps, nextTick, ref, watch } from 'vue';
+import { ScoreDesignModel } from './ts/model/design-model';
 import { AtBatResultModel } from './ts/model/member-info-model';
 
 const props = defineProps<{
+  design: ScoreDesignModel;
   datas: AtBatResultModel[];
 }>()
 
@@ -120,7 +122,7 @@ watch(props, () => {
   bottom: 0%;
   width: 100%;
   height: 40px;
-  border-top: 4px solid #7F7F7F;
+  border-top: 4px solid v-bind('design.OtherFrame');
   background: black;
   overflow: hidden;
 }

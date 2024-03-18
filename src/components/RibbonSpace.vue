@@ -10,8 +10,10 @@
   
 <script setup lang="ts">
 import { defineProps, nextTick, ref, watch } from 'vue';
+import { ScoreDesignModel } from './ts/model/design-model';
 
 const props = defineProps<{
+  design: ScoreDesignModel;
   text: string;
 }>()
 
@@ -51,7 +53,7 @@ watch(props, () => {
   height: 46px;
   left: 50%;
   transform: translate(-50%, 144px);
-  border: 2px solid #7F7F7F;
+  border: 2px solid v-bind('design.OtherFrame');
   box-sizing: border-box;
   background-color: #000000;
   overflow: hidden;

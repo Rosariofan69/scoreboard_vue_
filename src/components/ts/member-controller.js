@@ -600,11 +600,13 @@ class MemberController {
             // 選手ごと交代
             // 既に同じIDの選手が存在するため、打席結果の作成を行わない
             let createBatResFlg = true;
-            batRes[order].forEach(x => {
-                if (x.ID == after[orderDH].ID) {
-                    createBatResFlg = false;
-                }
-            });
+            if (index < 9) {
+                batRes[order].forEach(x => {
+                    if (x.ID == after[orderDH].ID) {
+                        createBatResFlg = false;
+                    }
+                });
+            }
             member[orderDH].DispStatus.ChangeBeforePisition = false;
             member[orderDH].DispStatus.ChangeAfterPisition = false;
             member[orderDH].DispStatus.ChangeBeforeMember = false;

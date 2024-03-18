@@ -70,11 +70,12 @@
 <script setup lang="ts">
 import { ParticipationMemberModel, ParticipationMemberPerTeamModel } from './ts/model/member-info-model';
 import { defineProps, nextTick, ref, toRef, toRefs, watch } from 'vue';
-import { DesignModel, MemberDesignModel } from './ts/model/design-model';
+import { ScoreDesignModel } from './ts/model/design-model';
 import { GameInfoModel } from './ts/model/game-model';
 import { CountModel, JudgeModel } from './ts/model/score-info-model';
 
 const props = defineProps<{
+  design: ScoreDesignModel;
   count: CountModel;
   judge: JudgeModel;
   gameInfo: GameInfoModel;
@@ -88,7 +89,7 @@ const props = defineProps<{
   width: 216px;
   height: 100px;
   background-color: rgba(0,0,0,0.7);
-  border: 2px solid #7F7F7F;
+  border: 2px solid v-bind('design.OtherFrame');
   display: flex;
 }
 

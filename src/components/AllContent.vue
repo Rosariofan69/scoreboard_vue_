@@ -12,12 +12,14 @@
     />
     <RibbonSpace
       v-if="GameInfoData.GameBaseInfo.VisitorTeamName"
+      :design="DesignData.Score"
       :text="RibbonTextData"
     />
     <div class="Big-Info" v-if="GameInfoData.GameBaseInfo.VisitorTeamName">
       <UmpireField
         :data="UmpireData"
         :design="DesignData.Umpire"
+        :scoreDesign="DesignData.Score"
       />
       <FielderStats
         :data="BatterStatsData"
@@ -33,6 +35,7 @@
         :dispFlg="PositionDataDispFlg"
       />
       <TodayResult
+        :design="DesignData.Score"
         :datas="BattingResultData"
       />
     </div>
@@ -43,6 +46,7 @@
         :design="DesignData.PitcherStats"
       />
       <CountField
+        :design="DesignData.Score"
         :count="CountData"
         :judge="JudgeData"
         :gameInfo="GameInfoData"
@@ -268,7 +272,7 @@ const getRibbonTextData = (data: string) => {
   height: 340px;
   top: 200px;
   left: 270px;
-  border: 5px solid #7F7F7F;
+  border: 5px solid v-bind('DesignData.Score.OtherFrame');
   box-sizing: border-box;
   overflow: hidden;
 }

@@ -372,6 +372,21 @@ function calcTeamWidth(element: any): string {
 }
 
 /**
+ * チーム名の横幅計算（アルファベット）
+ * @param element 
+ */
+function calcTeamWidthJP(element: any): string {
+  let returnData = '1.0';
+  if (element) {
+    if (element.scrollWidth > 138) {
+      let width = 138 / element.scrollWidth;
+      returnData = width.toString();
+    }
+  }
+  return returnData;
+}
+
+/**
  * 数字等の横幅計算
  * @param element 
  */
@@ -533,11 +548,21 @@ watch(props, () => {
   }
   nextTick(() => {
     if (props.gameInfo.GameProgressInfo.IsStarted == undefined) {
-      visitorTeamTrans.value = calcTeamWidth(document.getElementById('visitorTeamNameScore'));
       visitorTeamNameHalfWidthFlg.value = checkHalfWidth(props.gameInfo.GameBaseInfo.VisitorTeamText);
+      // 半角と全角で計算する関数を分ける
+      if (visitorTeamNameHalfWidthFlg.value) {
+        visitorTeamTrans.value = calcTeamWidth(document.getElementById('visitorTeamNameScore'));
+      } else {
+        visitorTeamTrans.value = calcTeamWidthJP(document.getElementById('visitorTeamNameScore'));
+      }
       visitorTeamNameTextAlignLastJustify.value = decisionTextAlignLastJustify(props.gameInfo.GameBaseInfo.VisitorTeamText);
-      homeTeamTrans.value = calcTeamWidth(document.getElementById('homeTeamNameScore'));
       homeTeamNameHalfWidthFlg.value = checkHalfWidth(props.gameInfo.GameBaseInfo.HomeTeamText);
+      // 半角と全角で計算する関数を分ける
+      if (homeTeamNameHalfWidthFlg.value) {
+        homeTeamTrans.value = calcTeamWidth(document.getElementById('homeTeamNameScore'));
+      } else {
+        homeTeamTrans.value = calcTeamWidthJP(document.getElementById('homeTeamNameScore'));
+      }
       homeTeamNameTextAlignLastJustify.value = decisionTextAlignLastJustify(props.gameInfo.GameBaseInfo.HomeTeamText);
     }
     if (props.gameInfo.GameProgressInfo.NowInning == null || props.gameInfo.GameProgressInfo.NowInning % 9 == 1) {
@@ -697,6 +722,7 @@ watch(props, () => {
   padding-left: 5px;
   padding-right: 5px;
   text-align: center;
+  white-space: nowrap;
   background-color: v-bind('design.VisitorTeamNameBGC');
   color: v-bind('design.VisitorTeamNameText');
 }
@@ -707,6 +733,7 @@ watch(props, () => {
   height: 44px;
   padding-left: 5px;
   padding-right: 5px;
+  white-space: nowrap;
   background-color: v-bind('design.HomeTeamNameBGC');
   color: v-bind('design.HomeTeamNameText');
 }
