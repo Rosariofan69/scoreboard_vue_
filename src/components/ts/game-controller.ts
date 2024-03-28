@@ -1,7 +1,7 @@
 import { RunningScoreModel, DispRunningScoreModel, DispScoreModel, CountModel } from './model/score-info-model';
 import { MemberController } from './member-controller';
-import { GameInfoDivision, VisitorHomeDivision, ScoreDesignDivision } from './constant';
-import { GameInfoModel, GameProgressInfoModel } from './model/game-model';
+import { GameInfoDivision, VisitorHomeDivision, ScoreDesignDivision, ResultCheckBoxText } from './constant';
+import { GameInfoModel, GameProgressInfoModel, ScoreProgressModel, ResultCheckBoxModel, ResultPositionCheckBoxModel, ResultOptionCheckBoxModel } from './model/game-model';
 import { ExcelController } from './excel-controller';
 import { ParticipationMemberPerTeamModel,
          BattingResultPerTeamModel,
@@ -66,9 +66,11 @@ export class GameController {
         returnData.GameBaseInfo.VisitorTeamName = responseData[GameInfoDivision.VisitorTeamName];
         returnData.GameBaseInfo.VisitorTeamText = responseData[GameInfoDivision.VisitorTeamText];
         returnData.GameBaseInfo.VisitorLastRow = responseData[GameInfoDivision.VisitorLastRow];
+        returnData.GameBaseInfo.VisitorAbbreviation = responseData[GameInfoDivision.VisitorAbbreviation];
         returnData.GameBaseInfo.HomeTeamName = responseData[GameInfoDivision.HomeTeamName];
         returnData.GameBaseInfo.HomeTeamText = responseData[GameInfoDivision.HomeTeamText];
         returnData.GameBaseInfo.HomeLastRow = responseData[GameInfoDivision.HomeLastRow];
+        returnData.GameBaseInfo.HomeAbbreviation = responseData[GameInfoDivision.HomeAbbreviation];
         returnData.GameBaseInfo.InningLimit = responseData[GameInfoDivision.InningLimit];
         returnData.GameBaseInfo.StatsAddition = responseData[GameInfoDivision.StatsAddition];
         returnData.GameBaseInfo.HomePosition = responseData[GameInfoDivision.HomePosition];
@@ -326,10 +328,6 @@ export class GameController {
             }
         }
 
-        // if (gameInfo.GameProgressInfo.NowInning >= 9 && gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home && visitorR < homeR) {
-        //     dispScoreData[this.inningKeys[gameInfo.GameProgressInfo.NowInning + 11]] = scoreData.HomeScore[gameInfo.GameProgressInfo.NowInning - 1].toString() + 'x';
-        // }
-
         dispScoreData.VisitorR = visitorR.toString();
         dispScoreData.VisitorH = scoreData.VisitorH.toString();
         dispScoreData.VisitorE = scoreData.VisitorE.toString();
@@ -393,5 +391,167 @@ export class GameController {
         }
 
         return [score, dispScore];
+    }
+
+    public CreateScoreProgress(
+        attack: RunnerNameModel,
+        defense: PositionModel,
+        result: ResultCheckBoxModel,
+        opt: ResultOptionCheckBoxModel,
+        pos: string[],
+        runs: number,
+        gameInfo: GameInfoModel,
+        before: RunningScoreModel,
+        after: RunningScoreModel): ScoreProgressModel {
+        const scoreProgress = new ScoreProgressModel();
+
+        scoreProgress.Inning = gameInfo.GameProgressInfo.NowInning.toString() + '回';
+
+        if (gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor) {
+            scoreProgress.Inning = scoreProgress.Inning + '表';
+        } else {
+            scoreProgress.Inning = scoreProgress.Inning + '裏';
+        }
+
+        let position = '';
+        if (pos[0] == '投') {
+            scoreProgress.KeyPlayPosition = 'ピッチャー';
+            position = defense.P;
+        } else if (pos[0] == '捕') {
+            scoreProgress.KeyPlayPosition = 'キャッチャー';
+            position = defense.C;
+        } else if (pos[0] == '一') {
+            scoreProgress.KeyPlayPosition = 'ファースト';
+            position = defense.FB;
+        } else if (pos[0] == '二') {
+            scoreProgress.KeyPlayPosition = 'セカンド';
+            position = defense.SB;
+        } else if (pos[0] == '三') {
+            scoreProgress.KeyPlayPosition = 'サード';
+            position = defense.TB;
+        } else if (pos[0] == '遊') {
+            scoreProgress.KeyPlayPosition = 'ショート';
+            position = defense.SS;
+        } else if (pos[0] == '左') {
+            scoreProgress.KeyPlayPosition = 'レフト';
+            position = defense.LF;
+        } else if (pos[0] == '中') {
+            scoreProgress.KeyPlayPosition = 'センター';
+            position = defense.CF;
+        } else if (pos[0] == '右') {
+            scoreProgress.KeyPlayPosition = 'ライト';
+            position = defense.RF;
+        } else if (pos[0] == '左中') {
+            scoreProgress.KeyPlayPosition = '左中間';
+        } else if (pos[0] == '右中') {
+            scoreProgress.KeyPlayPosition = '右中間';
+        }
+
+        if (result.SingleHit || result.TwoBaseHit || result.ThreeBaseHit || result.HomeRun) {
+            // 安打
+            scoreProgress.KeyPlayer = attack.Batter.Name;
+
+            if (result.HomeRun) {
+                if (runs == 1) {
+                    scoreProgress.KeyPlay = 'ソロホームラン';
+                } else if (runs == 4) {
+                    scoreProgress.KeyPlay = '満塁ホームラン';
+                } else {
+                    scoreProgress.KeyPlay = runs.toString() + 'ランホームラン';
+                }
+            } else {
+                if (runs > 1) {
+                    scoreProgress.KeyPlay = '点';
+                }
+
+                if (result.SingleHit) {
+                    scoreProgress.KeyPlay = 'タイムリーヒット';
+                } else if (result.TwoBaseHit) {
+                    scoreProgress.KeyPlay = 'タイムリーツーベース';
+                } else if (result.ThreeBaseHit) {
+                    scoreProgress.KeyPlay = 'タイムリースリーベース';
+                }
+            }
+        } else {
+            if (result.GroundBall) {
+                scoreProgress.KeyPlay = ResultCheckBoxText.GroundBall
+                scoreProgress.KeyPlayer = attack.Batter.Name;
+            } else if (result.FlyBall) {
+                scoreProgress.KeyPlay = ResultCheckBoxText.FlyBall;
+                scoreProgress.KeyPlayer = attack.Batter.Name;
+            } else if (result.DoublePlay) {
+                scoreProgress.KeyPlay = '併殺打';
+                scoreProgress.KeyPlayer = attack.Batter.Name;
+            } else if (result.LineDrive) {
+                scoreProgress.KeyPlay = ResultCheckBoxText.LineDrive;
+                scoreProgress.KeyPlayer = attack.Batter.Name;
+            } else if (result.FoulFly) {
+                scoreProgress.KeyPlay = ResultCheckBoxText.FoulFly;
+                scoreProgress.KeyPlayer = attack.Batter.Name;
+            } else if (result.FourPitchWalk) {
+                scoreProgress.KeyPlay = ResultCheckBoxText.FourPitchWalk;
+                scoreProgress.KeyPlayer = attack.Batter.Name;
+            } else if (result.HitByPitch) {
+                scoreProgress.KeyPlay = ResultCheckBoxText.HitByPitch;
+                scoreProgress.KeyPlayer = attack.Batter.Name;
+            } else if (result.SacrificeBuntError) {
+                scoreProgress.KeyPlay = ResultCheckBoxText.SacrificeBuntError;
+                scoreProgress.KeyPlayer = position;
+            } else if (result.SacrificeBuntFC) {
+                scoreProgress.KeyPlay = ResultCheckBoxText.SacrificeBuntFC;
+                scoreProgress.KeyPlayer = position;
+            } else if (result.SacrificeBunt) {
+                scoreProgress.KeyPlay = ResultCheckBoxText.SacrificeBunt;
+                scoreProgress.KeyPlayer = attack.Batter.Name;
+            } else if (result.SacrificeFly) {
+                scoreProgress.KeyPlay = ResultCheckBoxText.SacrificeFly;
+                scoreProgress.KeyPlayer = attack.Batter.Name;
+            } else if (result.IntentionalWalk) {
+                scoreProgress.KeyPlay = ResultCheckBoxText.IntentionalWalk;
+                scoreProgress.KeyPlayer = attack.Batter.Name;
+            } else if (result.Error) {
+                scoreProgress.KeyPlay = ResultCheckBoxText.Error;
+                scoreProgress.KeyPlayer = position;
+            } else if (result.Interference) {
+                scoreProgress.KeyPlay = ResultCheckBoxText.Interference;
+            } else if (result.Obstruction) {
+                scoreProgress.KeyPlay = ResultCheckBoxText.Obstruction;
+            } else if (opt.PlusError) {
+                scoreProgress.KeyPlay = ResultCheckBoxText.Error;
+                scoreProgress.KeyPlayer = position;
+            }
+        }
+
+        let beforeVisitorR = 0;
+        let beforeHomeR = 0;
+        let afterVisitorR = 0;
+        let afterHomeR = 0;
+        before.VisitorScore.forEach(x => {
+            beforeVisitorR += x;
+        })
+        before.HomeScore.forEach(x => {
+            beforeHomeR += x;
+        });
+        after.VisitorScore.forEach(x => {
+            afterVisitorR += x;
+        })
+        after.HomeScore.forEach(x => {
+            afterHomeR += x;
+        });
+
+        scoreProgress.VisitorScore = afterVisitorR.toString();
+        scoreProgress.HomeScore = afterHomeR.toString();
+
+        if (beforeVisitorR == 0 && beforeHomeR == 0) {
+            scoreProgress.Lead = '先制';
+        } else if (afterVisitorR == afterHomeR) {
+            scoreProgress.Lead = '同点';
+        } else if ((beforeVisitorR > beforeHomeR && beforeVisitorR < beforeHomeR) || (beforeVisitorR < beforeHomeR && beforeVisitorR > beforeHomeR)) {
+            scoreProgress.Lead = '逆転';
+        } else if (beforeVisitorR == beforeHomeR) {
+            scoreProgress.Lead = '勝ち越し';
+        }
+
+        return scoreProgress;
     }
 }

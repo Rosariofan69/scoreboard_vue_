@@ -40,7 +40,7 @@ app.get('/getMainInfo', (req, res) => {
     const worksheet = book.Sheets['設定'];
     const startColumn = 11;
     let startRow = 3;
-    let endRow = 11;
+    let endRow = 16;
     let meinInfo = [];
     for (let y = startRow; y <= endRow; y++) {
         let cellAddress = xlsx.utils.encode_cell({ c: startColumn, r: y });

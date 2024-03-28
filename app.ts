@@ -41,7 +41,7 @@ app.get('/getMainInfo', (req: any, res: any) => {
 
   const startColumn = 11;
   let startRow = 3;
-  let endRow = 11;
+  let endRow = 16;
 
   let meinInfo: string[] = [];
   for (let y = startRow; y <= endRow; y++) {

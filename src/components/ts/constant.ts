@@ -226,12 +226,16 @@ export enum GameInfoDivision {
     VisitorTeamText,
     /** ビジター最終行 */
     VisitorLastRow,
+    /** ビジター略称 */
+    VisitorAbbreviation,
     /** ホームチーム名 */
     HomeTeamName,
     /** ホームチームテキスト */
     HomeTeamText,
     /** ホーム最終行 */
     HomeLastRow,
+    /** ホーム略称 */
+    HomeAbbreviation,
     /** イニング上限 */
     InningLimit,
     /** 成績加算 */
@@ -363,6 +367,60 @@ export enum ResultCheckBox {
 }
 
 /**
+ * 結果ラジオボタン（テキスト）
+ */
+export enum ResultCheckBoxText {
+    /** ゴロ */
+    GroundBall = 'ゴロ',
+    /** フライ */
+    FlyBall = '',
+    /** ライナー */
+    LineDrive = 'ライナー',
+    /** 併殺 */
+    DoublePlay = '併殺',
+    /** 見逃三振 */
+    LookingStrikeOut = '見三振',
+    /** 空振三振 */
+    SwingingStrikeOut = '空三振',
+    /** 四球 */
+    FourPitchWalk = '四球',
+    /** 死球 */
+    HitByPitch = '死球',
+    /** 邪飛 */
+    FoulFly = '邪飛',
+    /** 犠飛 */
+    SacrificeFly = '犠飛',
+    /** 犠打 */
+    SacrificeBunt = '犠打',
+    /** 敬遠 */
+    IntentionalWalk = '敬遠',
+    /** 犠打失策 */
+    SacrificeBuntError = '犠打失策',
+    /** 犠打野選 */
+    SacrificeBuntFC = '犠打野選',
+    /** 安打 */
+    SingleHit = '安打',
+    /** 二塁打 */
+    TwoBaseHit = '二塁打',
+    /** 三塁打 */
+    ThreeBaseHit = '三塁打',
+    /** 本塁打 */
+    HomeRun = '本塁打',
+    /** 失策 */
+    Error = '失策',
+    /** 野選 */
+    FieldersChoice = '野選',
+    /** 振り逃げ */
+    UncaughtThirdStrike = '振り逃げ',
+    /** 打撃妨害 */
+    Interference = '打撃妨害',
+    /** 走塁妨害 */
+    Obstruction = '走塁妨害',
+    /** 未選択 */
+    UnSelected = '未選択',
+}
+
+/**
  * 結果守備位置
  */
 export enum ResultPositionCheckBox {
@@ -443,5 +501,43 @@ export enum DialogCallDivision {
     /** 投手情報（ホーム） */
     HomePitcherInfo = '投手情報（ホーム）',
     /** スコア */
-    Score = 'スコア'
+    Score = 'スコア',
+    /** 得点経過 */
+    ScoreProgress = '得点経過'
+}
+
+/**
+ * 打者成績表示区分
+ */
+export enum BatterStatsDispDivision {
+    /** 打者成績 */
+    BatterStats = '打者成績',
+    /** 守備位置 */
+    Position = '守備位置',
+    /** 交互表示 */
+    Alternating = '打者⇔守備'
+}
+
+/**
+ * リボンスペース表示区分
+ */
+export enum RibbonSpaceDispDivision { 
+    /** 得点経過 */
+    ScoreProgress = '得点経過',
+    /** カスタムテキスト */
+    CustomText = 'カスタムテキスト'
+}
+
+/**
+ * 得点経過（打者なし）
+ */
+export enum ScoreProgressNotBatter {
+    /** 本盗 */
+    HomeSteel = '本盗',
+    /** 暴投 */
+    WildPitch = '暴投',
+    /** ボーク */
+    Balk = 'ボーク',
+    /** 捕逸 */
+    PassedBall = '捕逸'
 }

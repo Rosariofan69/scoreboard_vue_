@@ -230,6 +230,35 @@
           </tbody>
         </table>
       </div>
+      <div v-if="props.callDivision == DialogCallDivision.ScoreProgress">
+        <table border="1">
+          <div>
+            <thead>
+              <tr>
+                <th>イニング</th>
+                <th>名前</th>
+                <th>守備位置</th>
+                <th>プレー</th>
+                <th>状況</th>
+                <th>得点</th>
+              </tr>
+            </thead>
+            <tbody>
+              <div v-for="(scoreProgress, index) in editScoreProgress" :key="index">
+                <tr>
+                  <td><input type="text" v-model="scoreProgress.Inning" class="Result-Input-Name"></td>
+                  <td><input type="text" v-model="scoreProgress.KeyPlayer" class="Result-Input-Name"></td>
+                  <td><input type="text" v-model="scoreProgress.KeyPlayPosition" class="Result-Input-Name"></td>
+                  <td><input type="text" v-model="scoreProgress.KeyPlay" class="Result-Input-Name"></td>
+                  <td><input type="text" v-model="scoreProgress.Lead" class="Result-Input-Name"></td>
+                  <td>{{ gameInfo.GameBaseInfo.VisitorAbbreviation }}<input type="text" v-model="scoreProgress.VisitorScore" class="Result-Input-Name">-
+                      <input type="text" v-model="scoreProgress.HomeScore" class="Result-Input-Name">{{ gameInfo.GameBaseInfo.HomeAbbreviation }}</td>
+                </tr>
+              </div>
+            </tbody>
+          </div>
+        </table>
+      </div>
     </div>
     <div class="Footer">
       <button class="Ok" v-on:click="clickOK()">OK</button>
@@ -245,7 +274,7 @@ import { MemberController } from './ts/member-controller';
 import { BattingResultPerTeamModel, DefaultMemberModel, PitcherInfoModel, UmpireModel } from './ts/model/member-info-model';
 import { RunningScoreModel } from './ts/model/score-info-model';
 import _ from 'lodash';
-import { GameInfoModel } from './ts/model/game-model';
+import { GameInfoModel, ScoreProgressModel } from './ts/model/game-model';
 
 const props = defineProps<{
   flag: boolean;
@@ -257,6 +286,7 @@ const props = defineProps<{
   visitorPitcherInfos: PitcherInfoModel[];
   homePitcherInfos: PitcherInfoModel[];
   scoreData: RunningScoreModel;
+  scoreProgress: ScoreProgressModel[];
   gameInfo: GameInfoModel;
 }>()
 
@@ -275,6 +305,7 @@ let editHomeBattingResults = ref(new BattingResultPerTeamModel());
 let editVisitorPitcherInfos = ref<PitcherInfoModel[]>([]);
 let editHomePitcherInfos = ref<PitcherInfoModel[]>([]);
 let editScoreData = ref(new RunningScoreModel());
+let editScoreProgress = ref<ScoreProgressModel[]>([]);
 let gameInfo = ref(new GameInfoModel());
 // イニング
 let inning = ref(0);
@@ -307,6 +338,9 @@ function clickOK(): void {
       break;
     case DialogCallDivision.Score:
       emits('sendModifyData', editScoreData.value);
+      break;
+    case DialogCallDivision.ScoreProgress:
+      emits('sendModifyData', editScoreProgress.value);
       break;
     default:
       break;

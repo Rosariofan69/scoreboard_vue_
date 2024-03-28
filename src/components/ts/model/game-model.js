@@ -49,6 +49,13 @@ class GameBaseInfoModel {
             writable: true,
             value: void 0
         });
+        /** ビジター略称 */
+        Object.defineProperty(this, "VisitorAbbreviation", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
         /** ホームチーム名 */
         Object.defineProperty(this, "HomeTeamName", {
             enumerable: true,
@@ -65,6 +72,13 @@ class GameBaseInfoModel {
         });
         /** ホーム最終行 */
         Object.defineProperty(this, "HomeLastRow", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** ホーム略称 */
+        Object.defineProperty(this, "HomeAbbreviation", {
             enumerable: true,
             configurable: true,
             writable: true,
@@ -554,6 +568,13 @@ class ScoreProgressModel {
         });
         /** キー選手 */
         Object.defineProperty(this, "KeyPlayer", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** キープレイ守備位置 */
+        Object.defineProperty(this, "KeyPlayPosition", {
             enumerable: true,
             configurable: true,
             writable: true,

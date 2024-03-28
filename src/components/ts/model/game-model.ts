@@ -20,12 +20,16 @@ export class GameBaseInfoModel {
     VisitorTeamText: string;
     /** ビジター最終行 */
     VisitorLastRow: number;
+    /** ビジター略称 */
+    VisitorAbbreviation: string;
     /** ホームチーム名 */
     HomeTeamName: string;
     /** ホームチームテキスト */
     HomeTeamText: string;
     /** ホーム最終行 */
     HomeLastRow: number;
+    /** ホーム略称 */
+    HomeAbbreviation: string;
     /** イニング上限 */
     InningLimit: number;
     /** 成績加算 */
@@ -188,6 +192,8 @@ export class ScoreProgressModel {
     Inning: string;
     /** キー選手 */
     KeyPlayer: string;
+    /** キープレイ守備位置 */
+    KeyPlayPosition: string;
     /** キープレイ */
     KeyPlay: string;
     /** 同点、逆転、勝ち越し */

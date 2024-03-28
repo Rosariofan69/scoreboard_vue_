@@ -14,6 +14,9 @@
       v-if="GameInfoData.GameBaseInfo.VisitorTeamName"
       :design="DesignData.Score"
       :text="RibbonTextData"
+      :scoreProgressList="ScoreProgressData"
+      :gameInfo="GameInfoData"
+      :dispDivision="RibbonSpaceDispDivision"
     />
     <div class="Big-Info" v-if="GameInfoData.GameBaseInfo.VisitorTeamName">
       <UmpireField
@@ -75,6 +78,8 @@
       @sendBattingResultData="getBattingResultData"
       @sendBigInfoDispFlg="getBigInfoDispFlg"
       @sendCustomText="getRibbonTextData"
+      @sendScoreProgressData="getScoreProgressData"
+      @sendRibbonSpaceDispDivision="getRibbonSpaceDispDivision"
     />
   </div>
 </template>
@@ -96,7 +101,7 @@ import { CountModel, DispRunningScoreModel, DispRunningScoreTitleModel, RunningS
 import { DesignModel } from './ts/model/design-model';
 import { emit } from 'process';
 import { ref } from 'vue';
-import { GameInfoModel } from './ts/model/game-model';
+import { GameInfoModel, ScoreProgressModel } from './ts/model/game-model';
 
 // ビジターメンバー
 let VisitorMemberData = ref(new ParticipationMemberPerTeamModel());
@@ -128,6 +133,10 @@ let DesignData = ref(new DesignModel());
 let GameInfoData = ref(new GameInfoModel());
 // リボンテキスト
 let RibbonTextData = ref('');
+// 得点経過
+let ScoreProgressData = ref<ScoreProgressModel[]>([]);
+// リボンスペース表示区分
+let RibbonSpaceDispDivision = ref('');
 
 /**
  * デザインデータ取得
@@ -251,6 +260,20 @@ const getBigInfoDispFlg = (data: boolean) => {
  */
 const getRibbonTextData = (data: string) => {
   RibbonTextData.value = data;
+}
+
+/**
+ * 得点経過データ取得
+ */
+const getScoreProgressData = (data: ScoreProgressModel[]) => {
+  ScoreProgressData.value = data;
+}
+
+/**
+ * リボンスペース表示区分取得
+ */
+const getRibbonSpaceDispDivision = (data: string) => {
+  RibbonSpaceDispDivision.value = data;
 }
 </script>
 

@@ -222,7 +222,6 @@
     <div class="Control-Section">
       <button class="Game-Start-End-Button" v-on:click="clickGameStart()">試合開始</button>
       <button class="Game-Start-End-Button">試合終了</button>
-      <button class="Game-Start-End-Button">タイブレーク</button>
       <div class="Base-Area">
         <button class="Base-Button Base-First" v-on:click="clickBase(PositionName.FB)" :class="[{'Button-Color-Out' : runnerState.First}]"></button>
         <button class="Base-Button Base-Second" v-on:click="clickBase(PositionName.SB)" :class="[{'Button-Color-Out' : runnerState.Second}]"></button>
@@ -264,6 +263,7 @@
           <option>{{ DialogCallDivision.VisitorPitcherInfo }}</option>
           <option>{{ DialogCallDivision.HomePitcherInfo }}</option>
           <option>{{ DialogCallDivision.Score }}</option>
+          <option>{{ DialogCallDivision.ScoreProgress }}</option>
         </select>
         <button class="Modify-Button" v-on:click="clickModify()">修正</button>
       </div>
@@ -280,9 +280,16 @@
     </div>
     <div class="Control-Section" style="font-size: 13.5px;">
       打者成績表示の切替
-      <select class="Setting-DropDown"></select>
-      INFOスペースの表示
-      <select class="Setting-DropDown"></select>
+      <select class="Setting-DropDown" v-model="selectedBatterStatsDispDivision" @change="changeBatterStatsDispDivision()">
+        <option>{{ BatterStatsDispDivision.BatterStats }}</option>
+        <option>{{ BatterStatsDispDivision.Position }}</option>
+        <option>{{ BatterStatsDispDivision.Alternating }}</option>
+      </select>
+      リボンスペースの表示
+      <select class="Setting-DropDown" v-model="selectedRibbonSpaceDispDivision" @change="emits('sendRibbonSpaceDispDivision', selectedRibbonSpaceDispDivision)">
+        <option>{{ RibbonSpaceDispDivision.ScoreProgress }}</option>
+        <option>{{ RibbonSpaceDispDivision.CustomText }}</option>
+      </select>
       カスタムテキスト
       <textarea class="Custom-TextArea" v-model="customText" @change="changeCustomText()"></textarea>
     </div>
@@ -384,6 +391,7 @@
       :visitorPitcherInfos="visitorPitcherInfo"
       :homePitcherInfos="homePitcherInfo"
       :scoreData="runningScore"
+      :scoreProgress="scoreProgressList"
       :gameInfo="gameInfo"
       @sendModifyData="getModifyData"
       @closeDialog="getCloseDialog"
@@ -400,6 +408,15 @@
     {{ message }}
     <div class="Footer">
       <button class="Ok" v-on:click="messageDialogDispFlg = false">OK</button>
+    </div>
+  </div>
+  <div class="Dialog" v-if="scoreProgressAddInputDialog">
+    <input type="checkbox" v-model="selectedScoreProgressNotBatterResult" :value="ScoreProgressNotBatter.HomeSteel">{{ ScoreProgressNotBatter.HomeSteel }}
+    <input type="checkbox" v-model="selectedScoreProgressNotBatterResult" :value="ScoreProgressNotBatter.WildPitch">{{ ScoreProgressNotBatter.WildPitch }}
+    <input type="checkbox" v-model="selectedScoreProgressNotBatterResult" :value="ScoreProgressNotBatter.Balk">{{ ScoreProgressNotBatter.Balk }}
+    <input type="checkbox" v-model="selectedScoreProgressNotBatterResult" :value="ScoreProgressNotBatter.PassedBall">{{ ScoreProgressNotBatter.PassedBall }}
+    <div class="Footer">
+      <button class="Ok" v-on:click="closeScoreProgressAddInputDialog()">OK</button>
     </div>
   </div>
 </template>
@@ -421,16 +438,14 @@ import { DefaultMemberModel,
          RunnerStateModel,
          BatterStatsUpdateModel,
          AtBatResultModel, 
-ChangeCancelMemberModel} from './ts/model/member-info-model';
+         ChangeCancelMemberModel} from './ts/model/member-info-model';
 import { GameController } from './ts/game-controller';
-import { GameInfoModel, ResultCheckBoxModel, ResultOptionCheckBoxModel, ResultPositionCheckBoxModel, GameProgressLogModel } from './ts/model/game-model';
-import { VisitorHomeDivision } from './ts/constant';
+import { GameInfoModel, ResultCheckBoxModel, ResultOptionCheckBoxModel, ResultPositionCheckBoxModel, GameProgressLogModel, ScoreProgressModel } from './ts/model/game-model';
 import UmpireDialogComponent from './UmpireDialogComponent.vue';
 import ModifyDialogComponent from './ModifyDialogComponent.vue';
-import { CountModel, DispRunningScoreModel, DispScoreModel, JudgeModel, RunningScoreModel } from './ts/model/score-info-model';
-import { ResultCheckBox, PositionName, Message, DialogCallDivision } from './ts/constant';
+import { CountModel, DispScoreModel, JudgeModel, RunningScoreModel } from './ts/model/score-info-model';
+import { VisitorHomeDivision, ResultCheckBox, PositionName, Message, DialogCallDivision, BatterStatsDispDivision, RibbonSpaceDispDivision, ScoreProgressNotBatter } from './ts/constant';
 import _ from 'lodash';
-import e from 'express';
 
 // デザインコントローラー
 const designController = new DesignController();
@@ -455,6 +470,8 @@ const emits = defineEmits<{
   (e: 'sendBattingResultData', v: AtBatResultModel[]): void;
   (e: 'sendBigInfoDispFlg', v: boolean): void;
   (e: 'sendCustomText', v: string): void;
+  (e: 'sendScoreProgressData', v: ScoreProgressModel[]): void;
+  (e: 'sendRibbonSpaceDispDivision', v: string): void;
 }>()
 // デザインデータ
 let design: DesignModel = new DesignModel();
@@ -582,6 +599,20 @@ let onBaseStatusBoxDispFlg = ref(false);
 let customText = ref('');
 // メッセージ
 let message = ref('');
+// 得点経過リスト
+let scoreProgressList = ref<ScoreProgressModel[]>([]);
+// 得点経過 - 攻撃
+let attackMember = ref(new RunnerNameModel());
+// 得点経過 - 守備
+let defenseMember = ref(new PositionModel());
+// 得点経過追加入力ダイアログ
+let scoreProgressAddInputDialog = ref(false);
+// 打者成績表示区分選択値
+let selectedBatterStatsDispDivision = ref('');
+// リボンスペース表示区分選択値
+let selectedRibbonSpaceDispDivision = ref('');
+// 得点経過（打者なし）選択値
+let selectedScoreProgressNotBatterResult = ref('');
 
 /**
  * 表示ボタンクリック時処理
@@ -862,6 +893,7 @@ function clickGameStart() {
     cloneGameInfo.GameProgressInfo
   ] = gameController.SetDataGameStart(visitorParticipationMember.value, homeParticipationMember.value);
 
+  // selectedRibbonSpaceDispDivision.value = RibbonSpaceDispDivision.ScoreProgress;
   cloneVisitorMember.LeadOff.DispStatus.Batter = true;
   cloneVisitorMember.LeadOff.DispStatus.Basic = false;
   cloneHomeMember.LeadOff.DispStatus.NextRead = true;
@@ -970,7 +1002,6 @@ function pitchPlus(batterChangeFlg: boolean) {
   } else {
     pitcherInfo.value.ThisAtBat++;
   }
-  // emits('sendPitcherData', pitcherInfo.value);
 }
 
 /**
@@ -1040,6 +1071,15 @@ async function clickConfirm() {
     caughtStealing();
   }
 
+  // 得点経過作成準備
+  attackMember.value = _.cloneDeep(runnerData.value);
+  defenseMember.value = positionData.value;
+  const beforeScore = _.cloneDeep(runningScore);
+  const result = resultCheckBox.value;
+  const opt = resultOptionCheckBox.value;
+  const resultPosition = resultPositionCheckBox.value;
+  const runs = selectedBaseRuns.value;
+
   if (resultCheckBox.value.LookingStrikeOut || resultCheckBox.value.SwingingStrikeOut) {
     // 三振
     strikeOut();
@@ -1087,6 +1127,20 @@ async function clickConfirm() {
     } else {
       homeParticipationMember.value = cloneMember;
       emits('sendHomeMemberData', homeParticipationMember.value);
+    }
+  }
+
+  // 得点経過作成
+  const afterScore = runningScore;
+  if (runs.length > 0) {
+    scoreProgressList.value.push(gameController.CreateScoreProgress(attackMember.value, defenseMember.value, result, opt, resultPosition, runs.length, gameInfo.value, beforeScore, afterScore));
+    
+    if (scoreProgressList.value[scoreProgressList.value.length - 1].KeyPlay == '') {
+      scoreProgressAddInputDialog.value = true;
+    } else {
+      selectedRibbonSpaceDispDivision.value = RibbonSpaceDispDivision.ScoreProgress;
+      emits('sendRibbonSpaceDispDivision', selectedRibbonSpaceDispDivision.value);
+      emits('sendScoreProgressData', scoreProgressList.value);
     }
   }
 
@@ -2103,7 +2157,8 @@ function checkPositionConfirm() {
       resultCheckBox.value.ThreeBaseHit ||
       resultCheckBox.value.HomeRun ||
       resultCheckBox.value.Error ||
-      resultCheckBox.value.FieldersChoice) {
+      resultCheckBox.value.FieldersChoice||
+      resultOptionCheckBox.value.PlusError) {
     if (resultPositionCheckBox.value.length == 0) {
       message.value = Message.Message001;
     }
@@ -2149,6 +2204,54 @@ function checkRunnerNumber() {
   }
 }
 
+/**
+ * 得点経過ダイアログクローズ
+ */
+function closeScoreProgressAddInputDialog() {
+  scoreProgressAddInputDialog.value = false;
+
+  if (selectedScoreProgressNotBatterResult.value == ScoreProgressNotBatter.HomeSteel) {
+    // 本盗
+    scoreProgressList.value[scoreProgressList.value.length - 1].KeyPlayer = attackMember.value.Third.Name;
+    scoreProgressList.value[scoreProgressList.value.length - 1].KeyPlay = 'ホームスチール';
+  } else if (selectedScoreProgressNotBatterResult.value == ScoreProgressNotBatter.WildPitch) {
+    // 暴投
+    scoreProgressList.value[scoreProgressList.value.length - 1].KeyPlayer = defenseMember.value.P;
+    scoreProgressList.value[scoreProgressList.value.length - 1].KeyPlay = ScoreProgressNotBatter.WildPitch;
+  } else if (selectedScoreProgressNotBatterResult.value == ScoreProgressNotBatter.Balk) {
+    // ボーク
+    scoreProgressList.value[scoreProgressList.value.length - 1].KeyPlayer = defenseMember.value.P;
+    scoreProgressList.value[scoreProgressList.value.length - 1].KeyPlay = ScoreProgressNotBatter.Balk;
+  } else if (selectedScoreProgressNotBatterResult.value == ScoreProgressNotBatter.PassedBall) {
+    // 捕逸
+    scoreProgressList.value[scoreProgressList.value.length - 1].KeyPlayer = defenseMember.value.C;
+    scoreProgressList.value[scoreProgressList.value.length - 1].KeyPlay = ScoreProgressNotBatter.PassedBall;
+  }
+  
+  selectedRibbonSpaceDispDivision.value = RibbonSpaceDispDivision.ScoreProgress;
+  emits('sendRibbonSpaceDispDivision', selectedRibbonSpaceDispDivision.value);
+  emits('sendScoreProgressData', scoreProgressList.value);
+}
+
+/**
+ * 打者成績表示区分変更
+ */
+function changeBatterStatsDispDivision() {
+  if (selectedBatterStatsDispDivision.value == BatterStatsDispDivision.BatterStats) {
+    // 打者成績
+    clearInterval(bigInfoTimer);
+    bigInfoDispFlg.value = true;
+    emits('sendBigInfoDispFlg', bigInfoDispFlg.value);
+  } else if (selectedBatterStatsDispDivision.value == BatterStatsDispDivision.Position) {
+    // 守備位置
+    clearInterval(bigInfoTimer);
+    bigInfoDispFlg.value = false;
+    emits('sendBigInfoDispFlg', bigInfoDispFlg.value);
+  } else if (selectedBatterStatsDispDivision.value == BatterStatsDispDivision.Alternating) {
+    // 交互表示
+    startTimerBigInfo();
+  }
+}
 </script>
 
 <style scoped>
@@ -2258,7 +2361,7 @@ function checkRunnerNumber() {
 }
 
 .Base-Area {
-  margin-top: 20px;
+  margin-top: 60px;
   height: 70px;
   position: relative;
 }

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DialogCallDivision = exports.Message = exports.PositionName = exports.ResultPositionCheckBox = exports.ResultCheckBox = exports.ExcelColumnsNamePopulate = exports.ExcelColumnsName = exports.VisitorHomeDivision = exports.GameInfoDivision = exports.UmpireDesignDivision = exports.ScoreDesignDivision = exports.HomeDesignDivision = exports.VisitorDesignDivision = void 0;
+exports.ScoreProgressNotBatter = exports.RibbonSpaceDispDivision = exports.BatterStatsDispDivision = exports.DialogCallDivision = exports.Message = exports.PositionName = exports.ResultPositionCheckBox = exports.ResultCheckBoxText = exports.ResultCheckBox = exports.ExcelColumnsNamePopulate = exports.ExcelColumnsName = exports.VisitorHomeDivision = exports.GameInfoDivision = exports.UmpireDesignDivision = exports.ScoreDesignDivision = exports.HomeDesignDivision = exports.VisitorDesignDivision = void 0;
 /**
  * デザイン区分（ビジター）
  */
@@ -230,18 +230,22 @@ var GameInfoDivision;
     GameInfoDivision[GameInfoDivision["VisitorTeamText"] = 1] = "VisitorTeamText";
     /** ビジター最終行 */
     GameInfoDivision[GameInfoDivision["VisitorLastRow"] = 2] = "VisitorLastRow";
+    /** ビジター略称 */
+    GameInfoDivision[GameInfoDivision["VisitorAbbreviation"] = 3] = "VisitorAbbreviation";
     /** ホームチーム名 */
-    GameInfoDivision[GameInfoDivision["HomeTeamName"] = 3] = "HomeTeamName";
+    GameInfoDivision[GameInfoDivision["HomeTeamName"] = 4] = "HomeTeamName";
     /** ホームチームテキスト */
-    GameInfoDivision[GameInfoDivision["HomeTeamText"] = 4] = "HomeTeamText";
+    GameInfoDivision[GameInfoDivision["HomeTeamText"] = 5] = "HomeTeamText";
     /** ホーム最終行 */
-    GameInfoDivision[GameInfoDivision["HomeLastRow"] = 5] = "HomeLastRow";
+    GameInfoDivision[GameInfoDivision["HomeLastRow"] = 6] = "HomeLastRow";
+    /** ホーム略称 */
+    GameInfoDivision[GameInfoDivision["HomeAbbreviation"] = 7] = "HomeAbbreviation";
     /** イニング上限 */
-    GameInfoDivision[GameInfoDivision["InningLimit"] = 6] = "InningLimit";
+    GameInfoDivision[GameInfoDivision["InningLimit"] = 8] = "InningLimit";
     /** 成績加算 */
-    GameInfoDivision[GameInfoDivision["StatsAddition"] = 7] = "StatsAddition";
+    GameInfoDivision[GameInfoDivision["StatsAddition"] = 9] = "StatsAddition";
     /** ホーム位置 */
-    GameInfoDivision[GameInfoDivision["HomePosition"] = 8] = "HomePosition";
+    GameInfoDivision[GameInfoDivision["HomePosition"] = 10] = "HomePosition";
 })(GameInfoDivision = exports.GameInfoDivision || (exports.GameInfoDivision = {}));
 /**
  * ビジターorホーム
@@ -366,6 +370,60 @@ var ResultCheckBox;
     ResultCheckBox[ResultCheckBox["UnSelected"] = 23] = "UnSelected";
 })(ResultCheckBox = exports.ResultCheckBox || (exports.ResultCheckBox = {}));
 /**
+ * 結果ラジオボタン（テキスト）
+ */
+var ResultCheckBoxText;
+(function (ResultCheckBoxText) {
+    /** ゴロ */
+    ResultCheckBoxText["GroundBall"] = "\u30B4\u30ED";
+    /** フライ */
+    ResultCheckBoxText["FlyBall"] = "";
+    /** ライナー */
+    ResultCheckBoxText["LineDrive"] = "\u30E9\u30A4\u30CA\u30FC";
+    /** 併殺 */
+    ResultCheckBoxText["DoublePlay"] = "\u4F75\u6BBA";
+    /** 見逃三振 */
+    ResultCheckBoxText["LookingStrikeOut"] = "\u898B\u4E09\u632F";
+    /** 空振三振 */
+    ResultCheckBoxText["SwingingStrikeOut"] = "\u7A7A\u4E09\u632F";
+    /** 四球 */
+    ResultCheckBoxText["FourPitchWalk"] = "\u56DB\u7403";
+    /** 死球 */
+    ResultCheckBoxText["HitByPitch"] = "\u6B7B\u7403";
+    /** 邪飛 */
+    ResultCheckBoxText["FoulFly"] = "\u90AA\u98DB";
+    /** 犠飛 */
+    ResultCheckBoxText["SacrificeFly"] = "\u72A0\u98DB";
+    /** 犠打 */
+    ResultCheckBoxText["SacrificeBunt"] = "\u72A0\u6253";
+    /** 敬遠 */
+    ResultCheckBoxText["IntentionalWalk"] = "\u656C\u9060";
+    /** 犠打失策 */
+    ResultCheckBoxText["SacrificeBuntError"] = "\u72A0\u6253\u5931\u7B56";
+    /** 犠打野選 */
+    ResultCheckBoxText["SacrificeBuntFC"] = "\u72A0\u6253\u91CE\u9078";
+    /** 安打 */
+    ResultCheckBoxText["SingleHit"] = "\u5B89\u6253";
+    /** 二塁打 */
+    ResultCheckBoxText["TwoBaseHit"] = "\u4E8C\u5841\u6253";
+    /** 三塁打 */
+    ResultCheckBoxText["ThreeBaseHit"] = "\u4E09\u5841\u6253";
+    /** 本塁打 */
+    ResultCheckBoxText["HomeRun"] = "\u672C\u5841\u6253";
+    /** 失策 */
+    ResultCheckBoxText["Error"] = "\u5931\u7B56";
+    /** 野選 */
+    ResultCheckBoxText["FieldersChoice"] = "\u91CE\u9078";
+    /** 振り逃げ */
+    ResultCheckBoxText["UncaughtThirdStrike"] = "\u632F\u308A\u9003\u3052";
+    /** 打撃妨害 */
+    ResultCheckBoxText["Interference"] = "\u6253\u6483\u59A8\u5BB3";
+    /** 走塁妨害 */
+    ResultCheckBoxText["Obstruction"] = "\u8D70\u5841\u59A8\u5BB3";
+    /** 未選択 */
+    ResultCheckBoxText["UnSelected"] = "\u672A\u9078\u629E";
+})(ResultCheckBoxText = exports.ResultCheckBoxText || (exports.ResultCheckBoxText = {}));
+/**
  * 結果守備位置
  */
 var ResultPositionCheckBox;
@@ -448,5 +506,43 @@ var DialogCallDivision;
     DialogCallDivision["HomePitcherInfo"] = "\u6295\u624B\u60C5\u5831\uFF08\u30DB\u30FC\u30E0\uFF09";
     /** スコア */
     DialogCallDivision["Score"] = "\u30B9\u30B3\u30A2";
+    /** 得点経過 */
+    DialogCallDivision["ScoreProgress"] = "\u5F97\u70B9\u7D4C\u904E";
 })(DialogCallDivision = exports.DialogCallDivision || (exports.DialogCallDivision = {}));
+/**
+ * 打者成績表示区分
+ */
+var BatterStatsDispDivision;
+(function (BatterStatsDispDivision) {
+    /** 打者成績 */
+    BatterStatsDispDivision["BatterStats"] = "\u6253\u8005\u6210\u7E3E";
+    /** 守備位置 */
+    BatterStatsDispDivision["Position"] = "\u5B88\u5099\u4F4D\u7F6E";
+    /** 交互表示 */
+    BatterStatsDispDivision["Alternating"] = "\u6253\u8005\u21D4\u5B88\u5099";
+})(BatterStatsDispDivision = exports.BatterStatsDispDivision || (exports.BatterStatsDispDivision = {}));
+/**
+ * リボンスペース表示区分
+ */
+var RibbonSpaceDispDivision;
+(function (RibbonSpaceDispDivision) {
+    /** 得点経過 */
+    RibbonSpaceDispDivision["ScoreProgress"] = "\u5F97\u70B9\u7D4C\u904E";
+    /** カスタムテキスト */
+    RibbonSpaceDispDivision["CustomText"] = "\u30AB\u30B9\u30BF\u30E0\u30C6\u30AD\u30B9\u30C8";
+})(RibbonSpaceDispDivision = exports.RibbonSpaceDispDivision || (exports.RibbonSpaceDispDivision = {}));
+/**
+ * 得点経過（打者なし）
+ */
+var ScoreProgressNotBatter;
+(function (ScoreProgressNotBatter) {
+    /** 本盗 */
+    ScoreProgressNotBatter["HomeSteel"] = "\u672C\u76D7";
+    /** 暴投 */
+    ScoreProgressNotBatter["WildPitch"] = "\u66B4\u6295";
+    /** ボーク */
+    ScoreProgressNotBatter["Balk"] = "\u30DC\u30FC\u30AF";
+    /** 捕逸 */
+    ScoreProgressNotBatter["PassedBall"] = "\u6355\u9038";
+})(ScoreProgressNotBatter = exports.ScoreProgressNotBatter || (exports.ScoreProgressNotBatter = {}));
 //# sourceMappingURL=constant.js.map
