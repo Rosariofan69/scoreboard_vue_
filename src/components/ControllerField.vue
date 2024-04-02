@@ -672,6 +672,10 @@ const getModifyData = (data: any) => {
       dispRunningScore.value.Score = gameController.CreateDispRunningScore(gameInfo.value, runningScore);
       emits('sendScoreData', dispRunningScore.value);
       break;
+    case DialogCallDivision.ScoreProgress:
+      scoreProgressList.value = data;
+      emits('sendScoreProgressData', scoreProgressList.value);
+      break;
     default:
       break;
   }
@@ -911,6 +915,7 @@ function clickGameStart() {
   emits('sendVisitorMemberData', visitorParticipationMember.value);
   emits('sendHomeMemberData', homeParticipationMember.value);
   emits('sendGameInfoData', gameInfo.value);
+  emits('sendBigInfoDispFlg', bigInfoDispFlg.value);
   startTimerBigInfo();
 }
 
@@ -1299,6 +1304,7 @@ async function fourPitchWalk() {
 async function intentionalWalk() {
   resetCount();
   pitcherInfo.value.BB++;
+  pitcherInfo.value.ThisAtBat = 0;
   await onBase(false);
 }
 

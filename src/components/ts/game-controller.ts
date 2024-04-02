@@ -504,7 +504,7 @@ export class GameController {
                 scoreProgress.KeyPlay = ResultCheckBoxText.SacrificeBunt;
                 scoreProgress.KeyPlayer = attack.Batter.Name;
             } else if (result.SacrificeFly) {
-                scoreProgress.KeyPlay = ResultCheckBoxText.SacrificeFly;
+                scoreProgress.KeyPlay = '犠牲フライ';
                 scoreProgress.KeyPlayer = attack.Batter.Name;
             } else if (result.IntentionalWalk) {
                 scoreProgress.KeyPlay = ResultCheckBoxText.IntentionalWalk;

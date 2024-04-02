@@ -236,7 +236,7 @@
             <thead>
               <tr>
                 <th>イニング</th>
-                <th>名前</th>
+                <th>選手名</th>
                 <th>守備位置</th>
                 <th>プレー</th>
                 <th>状況</th>
@@ -244,17 +244,20 @@
               </tr>
             </thead>
             <tbody>
-              <div v-for="(scoreProgress, index) in editScoreProgress" :key="index">
-                <tr>
-                  <td><input type="text" v-model="scoreProgress.Inning" class="Result-Input-Name"></td>
-                  <td><input type="text" v-model="scoreProgress.KeyPlayer" class="Result-Input-Name"></td>
-                  <td><input type="text" v-model="scoreProgress.KeyPlayPosition" class="Result-Input-Name"></td>
-                  <td><input type="text" v-model="scoreProgress.KeyPlay" class="Result-Input-Name"></td>
-                  <td><input type="text" v-model="scoreProgress.Lead" class="Result-Input-Name"></td>
-                  <td>{{ gameInfo.GameBaseInfo.VisitorAbbreviation }}<input type="text" v-model="scoreProgress.VisitorScore" class="Result-Input-Name">-
-                      <input type="text" v-model="scoreProgress.HomeScore" class="Result-Input-Name">{{ gameInfo.GameBaseInfo.HomeAbbreviation }}</td>
-                </tr>
-              </div>
+              <tr v-for="(progress, index) in editScoreProgress" :key="index">
+                <td><input type="text" v-model="progress.Inning" class="Progress-Inning"></td>
+                <td><input type="text" v-model="progress.KeyPlayer" class="Progress-Name"></td>
+                <td><input type="text" v-model="progress.KeyPlayPosition" class="Progress-Inning"></td>
+                <td><input type="text" v-model="progress.KeyPlay" class="Result-Input-Name"></td>
+                <td><input type="text" v-model="progress.Lead" class="Member-Num"></td>
+                <td>
+                  <div style="display: flex;">
+                    {{ gameInfo.GameBaseInfo.VisitorAbbreviation }}
+                    <input type="text" v-model="progress.VisitorScore" class="Member-Num">-
+                    <input type="text" v-model="progress.HomeScore" class="Member-Num">
+                    {{ gameInfo.GameBaseInfo.HomeAbbreviation }}
+                  </div></td>
+              </tr>
             </tbody>
           </div>
         </table>
@@ -460,6 +463,9 @@ watch(props, () => {
       calcScore();
       inning.value = props.scoreData.VisitorScore.length;
       break;
+    case DialogCallDivision.ScoreProgress:
+      editScoreProgress.value = _.cloneDeep(props.scoreProgress);
+      break;
     default:
       break;
   }
@@ -579,6 +585,14 @@ watch(props, () => {
   width: 140px;
   color: #000000;
   background-color: #FFFFFF;
+}
+
+.Progress-Inning {
+  width: 70px;
+}
+
+.Progress-Name {
+  width: 100px;
 }
 
 </style>

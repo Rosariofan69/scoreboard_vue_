@@ -528,7 +528,7 @@ class GameController {
                 scoreProgress.KeyPlayer = attack.Batter.Name;
             }
             else if (result.SacrificeFly) {
-                scoreProgress.KeyPlay = constant_1.ResultCheckBoxText.SacrificeFly;
+                scoreProgress.KeyPlay = '犠牲フライ';
                 scoreProgress.KeyPlayer = attack.Batter.Name;
             }
             else if (result.IntentionalWalk) {

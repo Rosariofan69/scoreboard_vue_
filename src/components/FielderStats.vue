@@ -1,7 +1,7 @@
 <template>
   <div
     class="Stats-Box"
-    v-if="(gameInfo.GameProgressInfo.IsStarted && data.Number) || dispFlg"
+    v-if="(gameInfo.GameProgressInfo.IsStarted && data.Number) && dispFlg"
     :class="[gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor ? 'BGC-Visitor':'BGC-Home']"
   >
     <div class="Stats-Name-Row">
