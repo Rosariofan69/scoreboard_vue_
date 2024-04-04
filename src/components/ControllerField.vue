@@ -170,7 +170,7 @@
         </div>
         <div class="Play-Result-Row">
           <label><input type="checkbox" name="resultOption" v-model="resultOptionCheckBox.BatterOnBase">打者出塁</label>
-          <label><input type="checkbox" name="resultOption" v-model="resultOptionCheckBox.PlusError">＋失策</label>
+          <label><input type="checkbox" name="resultOption" v-model="resultOptionCheckBox.PlusError" @change="changeResultCheck()">＋失策</label>
         </div>
       </div>
       <div class="Res-Fours-Category">
@@ -1213,7 +1213,12 @@ function changeResultCheck(changeItem: number, targetValue: boolean) {
     returnValue[resultCheckBoxPropertyList[changeItem]] = targetValue;
     resultCheckBox.value = returnValue;
   } else {
-    resultPositionFlg.value = true;
+    if (resultOptionCheckBox.value.PlusError) {
+      resultPositionFlg.value = false;
+    } else {
+      resultPositionFlg.value = true;
+    }
+
     resultPositionCheckBox.value = [];
     resultCheckBox.value = new ResultCheckBoxModel();
   }
