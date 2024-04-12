@@ -1180,9 +1180,9 @@ async function clickConfirm() {
  * @param changeItem
  * @param targetValue
  */
-function changeResultCheck(changeItem: number, targetValue: boolean) {
+function changeResultCheck(changeItem?: number, targetValue?: boolean) {
   resultCheckBox.value = new ResultCheckBoxModel();
-  if (targetValue) {
+  if (changeItem && targetValue) {
     // 守備位置活性制御
     if (changeItem == ResultCheckBox.LookingStrikeOut ||
         changeItem == ResultCheckBox.SwingingStrikeOut ||

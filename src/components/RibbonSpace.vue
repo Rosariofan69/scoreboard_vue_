@@ -16,7 +16,7 @@
             {{ progress.KeyPlayer }}
           </div>
           <div class="Score-Progress-Content">
-            <div v-if="progress.KeyPlayPosition != ''" style="display: flex;">
+            <div v-if="progress.KeyPlayPosition != '' && !(progress.KeyPlay.includes('失策') || progress.KeyPlay.includes('野選'))" style="display: flex;">
             {{ progress.KeyPlayPosition }}
               <div v-if="progress.KeyPlay.includes('タイムリー') ||
                          progress.KeyPlay.includes('ホームラン') ||

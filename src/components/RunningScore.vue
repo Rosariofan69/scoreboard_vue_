@@ -463,13 +463,13 @@ function assignFrame(): void {
               (props.gameInfo.GameBaseInfo.InningLimit > 12 && (props.gameInfo.GameProgressInfo.NowInning) % 9 == 0)) {
       frameFlg.value = new FrameFlgModel();
       frameFlg.value.TopOf9th = true;
-    } else if (props.gameInfo.GameProgressInfo.NowInning == 10 || props.gameInfo.GameBaseInfo.InningLimit <= 12) {
+    } else if (props.gameInfo.GameProgressInfo.NowInning == 10 && props.gameInfo.GameBaseInfo.InningLimit <= 12) {
       frameFlg.value = new FrameFlgModel();
       frameFlg.value.TopOf10th = true;
-    } else if (props.gameInfo.GameProgressInfo.NowInning == 11 || props.gameInfo.GameBaseInfo.InningLimit <= 12) {
+    } else if (props.gameInfo.GameProgressInfo.NowInning == 11 && props.gameInfo.GameBaseInfo.InningLimit <= 12) {
       frameFlg.value = new FrameFlgModel();
       frameFlg.value.TopOf11th = true;
-    } else if (props.gameInfo.GameProgressInfo.NowInning == 12 || props.gameInfo.GameBaseInfo.InningLimit <= 12) {
+    } else if (props.gameInfo.GameProgressInfo.NowInning == 12 && props.gameInfo.GameBaseInfo.InningLimit <= 12) {
       frameFlg.value = new FrameFlgModel();
       frameFlg.value.TopOf12th = true;
     }
@@ -510,13 +510,13 @@ function assignFrame(): void {
               (props.gameInfo.GameBaseInfo.InningLimit > 12 && (props.gameInfo.GameProgressInfo.NowInning) % 9 == 0)) {
       frameFlg.value = new FrameFlgModel();
       frameFlg.value.BottomOf9th = true;
-    } else if (props.gameInfo.GameProgressInfo.NowInning == 10 || props.gameInfo.GameBaseInfo.InningLimit <= 12) {
+    } else if (props.gameInfo.GameProgressInfo.NowInning == 10 && props.gameInfo.GameBaseInfo.InningLimit <= 12) {
       frameFlg.value = new FrameFlgModel();
       frameFlg.value.BottomOf10th = true;
-    } else if (props.gameInfo.GameProgressInfo.NowInning == 11 || props.gameInfo.GameBaseInfo.InningLimit <= 12) {
+    } else if (props.gameInfo.GameProgressInfo.NowInning == 11 && props.gameInfo.GameBaseInfo.InningLimit <= 12) {
       frameFlg.value = new FrameFlgModel();
       frameFlg.value.BottomOf11th = true;
-    } else if (props.gameInfo.GameProgressInfo.NowInning == 12 || props.gameInfo.GameBaseInfo.InningLimit <= 12) {
+    } else if (props.gameInfo.GameProgressInfo.NowInning == 12 && props.gameInfo.GameBaseInfo.InningLimit <= 12) {
       frameFlg.value = new FrameFlgModel();
       frameFlg.value.BottomOf12th = true;
     }

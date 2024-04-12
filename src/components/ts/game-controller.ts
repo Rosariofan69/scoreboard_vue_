@@ -512,6 +512,9 @@ export class GameController {
             } else if (result.Error) {
                 scoreProgress.KeyPlay = ResultCheckBoxText.Error;
                 scoreProgress.KeyPlayer = position;
+            } else if (result.FieldersChoice) {
+                scoreProgress.KeyPlay = ResultCheckBoxText.FieldersChoice;
+                scoreProgress.KeyPlayer = position;
             } else if (result.Interference) {
                 scoreProgress.KeyPlay = ResultCheckBoxText.Interference;
             } else if (result.Obstruction) {
@@ -550,6 +553,8 @@ export class GameController {
             scoreProgress.Lead = '逆転';
         } else if (beforeVisitorR == beforeHomeR) {
             scoreProgress.Lead = '勝ち越し';
+        } else if (afterVisitorR < afterHomeR && gameInfo.GameProgressInfo.NowInning >= 9 && gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home) {
+            scoreProgress.Lead = 'サヨナラ';
         }
 
         return scoreProgress;
