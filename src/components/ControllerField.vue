@@ -1182,7 +1182,7 @@ async function clickConfirm() {
  */
 function changeResultCheck(changeItem?: number, targetValue?: boolean) {
   resultCheckBox.value = new ResultCheckBoxModel();
-  if (changeItem && targetValue) {
+  if (changeItem != null && targetValue) {
     // 守備位置活性制御
     if (changeItem == ResultCheckBox.LookingStrikeOut ||
         changeItem == ResultCheckBox.SwingingStrikeOut ||

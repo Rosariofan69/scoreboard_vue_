@@ -539,6 +539,10 @@ class GameController {
                 scoreProgress.KeyPlay = constant_1.ResultCheckBoxText.Error;
                 scoreProgress.KeyPlayer = position;
             }
+            else if (result.FieldersChoice) {
+                scoreProgress.KeyPlay = constant_1.ResultCheckBoxText.FieldersChoice;
+                scoreProgress.KeyPlayer = position;
+            }
             else if (result.Interference) {
                 scoreProgress.KeyPlay = constant_1.ResultCheckBoxText.Interference;
             }
@@ -579,6 +583,9 @@ class GameController {
         }
         else if (beforeVisitorR == beforeHomeR) {
             scoreProgress.Lead = '勝ち越し';
+        }
+        else if (afterVisitorR < afterHomeR && gameInfo.GameProgressInfo.NowInning >= 9 && gameInfo.GameProgressInfo.NowAttackTeam == constant_1.VisitorHomeDivision.Home) {
+            scoreProgress.Lead = 'サヨナラ';
         }
         return scoreProgress;
     }

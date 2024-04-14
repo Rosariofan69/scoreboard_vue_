@@ -712,7 +712,7 @@ class MemberController {
         let res = '';
         const a = stats.Hit + stats.BB + stats.HBP;
         const b = stats.Atbat + stats.BB + stats.HBP + stats.SacFly;
-        if (a == 0) {
+        if (a == 0 && b == 0) {
             res = '---';
         }
         else {
@@ -735,7 +735,7 @@ class MemberController {
         let res = '';
         const a = stats.Hit + stats.BB + stats.HBP;
         const b = stats.Atbat + stats.BB + stats.HBP + stats.SacFly;
-        if (a == 0) {
+        if (a == 0 && b == 0) {
             res = '---';
         }
         else {
