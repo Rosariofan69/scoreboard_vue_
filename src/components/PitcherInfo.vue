@@ -286,11 +286,7 @@ watch(props, () => {
 }
 
 .Visitor-Edge-Shadow {
-  text-shadow: 1px 1px 0px v-bind('design.Visitor.Edge'),
-               -1px -1px 0px v-bind('design.Visitor.Edge'),
-               -1px 1px 0px v-bind('design.Visitor.Edge'),
-               -1px -1px 0px v-bind('design.Visitor.Edge'),
-               0px 1px 0px v-bind('design.Visitor.Edge'),
+  text-shadow: 0px 1px 0px v-bind('design.Visitor.Edge'),
                0px -1px 0px v-bind('design.Visitor.Edge'),
                -1px 0px 0px v-bind('design.Visitor.Edge'),
                1px 0px 0px v-bind('design.Visitor.Edge'),
@@ -298,11 +294,7 @@ watch(props, () => {
 }
 
 .Home-Edge-Shadow {
-  text-shadow: 1px 1px 0px v-bind('design.Home.Edge'),
-               -1px -1px 0px v-bind('design.Home.Edge'),
-               -1px 1px 0px v-bind('design.Home.Edge'),
-               -1px -1px 0px v-bind('design.Home.Edge'),
-               0px 1px 0px v-bind('design.Home.Edge'),
+  text-shadow: 0px 1px 0px v-bind('design.Home.Edge'),
                0px -1px 0px v-bind('design.Home.Edge'),
                -1px 0px 0px v-bind('design.Home.Edge'),
                1px 0px 0px v-bind('design.Home.Edge'),

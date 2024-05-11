@@ -445,11 +445,7 @@ watch(props, () => {
 }
 
 .Visitor-Fielder-Edge-Shadow {
-  text-shadow: 1px 1px 0px v-bind('design.Visitor.FielderEdge'),
-               -1px -1px 0px v-bind('design.Visitor.FielderEdge'),
-               -1px 1px 0px v-bind('design.Visitor.FielderEdge'),
-               -1px -1px 0px v-bind('design.Visitor.FielderEdge'),
-               0px 1px 0px v-bind('design.Visitor.FielderEdge'),
+  text-shadow: 0px 1px 0px v-bind('design.Visitor.FielderEdge'),
                0px -1px 0px v-bind('design.Visitor.FielderEdge'),
                -1px 0px 0px v-bind('design.Visitor.FielderEdge'),
                1px 0px 0px v-bind('design.Visitor.FielderEdge'),
@@ -457,11 +453,7 @@ watch(props, () => {
 }
 
 .Home-Fielder-Edge-Shadow {
-  text-shadow: 1px 1px 0px v-bind('design.Home.FielderEdge'),
-               -1px -1px 0px v-bind('design.Home.FielderEdge'),
-               -1px 1px 0px v-bind('design.Home.FielderEdge'),
-               -1px -1px 0px v-bind('design.Home.FielderEdge'),
-               0px 1px 0px v-bind('design.Home.FielderEdge'),
+  text-shadow: 0px 1px 0px v-bind('design.Home.FielderEdge'),
                0px -1px 0px v-bind('design.Home.FielderEdge'),
                -1px 0px 0px v-bind('design.Home.FielderEdge'),
                1px 0px 0px v-bind('design.Home.FielderEdge'),
@@ -469,11 +461,7 @@ watch(props, () => {
 }
 
 .Visitor-Runner-Edge-Shadow {
-  text-shadow: 1px 1px 0px v-bind('design.Visitor.RunnerEdge'),
-               -1px -1px 0px v-bind('design.Visitor.RunnerEdge'),
-               -1px 1px 0px v-bind('design.Visitor.RunnerEdge'),
-               -1px -1px 0px v-bind('design.Visitor.RunnerEdge'),
-               0px 1px 0px v-bind('design.Visitor.RunnerEdge'),
+  text-shadow: 0px 1px 0px v-bind('design.Visitor.RunnerEdge'),
                0px -1px 0px v-bind('design.Visitor.RunnerEdge'),
                -1px 0px 0px v-bind('design.Visitor.RunnerEdge'),
                1px 0px 0px v-bind('design.Visitor.RunnerEdge'),
@@ -481,11 +469,7 @@ watch(props, () => {
 }
 
 .Home-Runner-Edge-Shadow {
-  text-shadow: 1px 1px 0px v-bind('design.Home.RunnerEdge'),
-               -1px -1px 0px v-bind('design.Home.RunnerEdge'),
-               -1px 1px 0px v-bind('design.Home.RunnerEdge'),
-               -1px -1px 0px v-bind('design.Home.RunnerEdge'),
-               0px 1px 0px v-bind('design.Home.RunnerEdge'),
+  text-shadow: 0px 1px 0px v-bind('design.Home.RunnerEdge'),
                0px -1px 0px v-bind('design.Home.RunnerEdge'),
                -1px 0px 0px v-bind('design.Home.RunnerEdge'),
                1px 0px 0px v-bind('design.Home.RunnerEdge'),

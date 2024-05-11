@@ -501,7 +501,7 @@ export class GameController {
                 scoreProgress.KeyPlay = ResultCheckBoxText.SacrificeBuntFC;
                 scoreProgress.KeyPlayer = position;
             } else if (result.SacrificeBunt) {
-                scoreProgress.KeyPlay = ResultCheckBoxText.SacrificeBunt;
+                scoreProgress.KeyPlay = 'スクイズ';
                 scoreProgress.KeyPlayer = attack.Batter.Name;
             } else if (result.SacrificeFly) {
                 scoreProgress.KeyPlay = '犠牲フライ';
@@ -510,7 +510,7 @@ export class GameController {
                 scoreProgress.KeyPlay = ResultCheckBoxText.IntentionalWalk;
                 scoreProgress.KeyPlayer = attack.Batter.Name;
             } else if (result.Error) {
-                scoreProgress.KeyPlay = ResultCheckBoxText.Error;
+                scoreProgress.KeyPlay = 'タイムリーエラー';
                 scoreProgress.KeyPlayer = position;
             } else if (result.FieldersChoice) {
                 scoreProgress.KeyPlay = ResultCheckBoxText.FieldersChoice;
@@ -544,17 +544,17 @@ export class GameController {
 
         scoreProgress.VisitorScore = afterVisitorR.toString();
         scoreProgress.HomeScore = afterHomeR.toString();
-
-        if (beforeVisitorR == 0 && beforeHomeR == 0) {
+        
+        if (afterVisitorR < afterHomeR && gameInfo.GameProgressInfo.NowInning >= 9 && gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home) {
+            scoreProgress.Lead = 'サヨナラ';
+        } else if (beforeVisitorR == 0 && beforeHomeR == 0) {
             scoreProgress.Lead = '先制';
         } else if (afterVisitorR == afterHomeR) {
             scoreProgress.Lead = '同点';
-        } else if ((beforeVisitorR > beforeHomeR && beforeVisitorR < beforeHomeR) || (beforeVisitorR < beforeHomeR && beforeVisitorR > beforeHomeR)) {
+        } else if ((beforeVisitorR > beforeHomeR && afterVisitorR < afterHomeR) || (beforeVisitorR < beforeHomeR && afterVisitorR > afterHomeR)) {
             scoreProgress.Lead = '逆転';
         } else if (beforeVisitorR == beforeHomeR) {
             scoreProgress.Lead = '勝ち越し';
-        } else if (afterVisitorR < afterHomeR && gameInfo.GameProgressInfo.NowInning >= 9 && gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home) {
-            scoreProgress.Lead = 'サヨナラ';
         }
 
         return scoreProgress;

@@ -1987,11 +1987,7 @@ watch(props, () => {
 }
 
 .Basic-Shadow {
-  text-shadow: 1px 1px 0px v-bind('design.NameBasicEdge'),
-               -1px -1px 0px v-bind('design.NameBasicEdge'),
-               -1px 1px 0px v-bind('design.NameBasicEdge'),
-               -1px -1px 0px v-bind('design.NameBasicEdge'),
-               0px 1px 0px v-bind('design.NameBasicEdge'),
+  text-shadow: 0px 1px 0px v-bind('design.NameBasicEdge'),
                0px -1px 0px v-bind('design.NameBasicEdge'),
                -1px 0px 0px v-bind('design.NameBasicEdge'),
                1px 0px 0px v-bind('design.NameBasicEdge'),
@@ -1999,11 +1995,7 @@ watch(props, () => {
 }
 
 .Batter-Shadow {
-  text-shadow: 1px 1px 0px v-bind('design.NameBatterEdge'),
-               -1px -1px 0px v-bind('design.NameBatterEdge'),
-               -1px 1px 0px v-bind('design.NameBatterEdge'),
-               -1px -1px 0px v-bind('design.NameBatterEdge'),
-               0px 1px 0px v-bind('design.NameBatterEdge'),
+  text-shadow: 0px 1px 0px v-bind('design.NameBatterEdge'),
                0px -1px 0px v-bind('design.NameBatterEdge'),
                -1px 0px 0px v-bind('design.NameBatterEdge'),
                1px 0px 0px v-bind('design.NameBatterEdge'),
@@ -2011,11 +2003,7 @@ watch(props, () => {
 }
 
 .Runner-Shadow {
-  text-shadow: 1px 1px 0px v-bind('design.NameRunnerEdge'),
-               -1px -1px 0px v-bind('design.NameRunnerEdge'),
-               -1px 1px 0px v-bind('design.NameRunnerEdge'),
-               -1px -1px 0px v-bind('design.NameRunnerEdge'),
-               0px 1px 0px v-bind('design.NameRunnerEdge'),
+  text-shadow: 0px 1px 0px v-bind('design.NameRunnerEdge'),
                0px -1px 0px v-bind('design.NameRunnerEdge'),
                -1px 0px 0px v-bind('design.NameRunnerEdge'),
                1px 0px 0px v-bind('design.NameRunnerEdge'),
@@ -2023,11 +2011,7 @@ watch(props, () => {
 }
 
 .Next-Shadow {
-  text-shadow: 1px 1px 0px v-bind('design.NameNextEdge'),
-               -1px -1px 0px v-bind('design.NameNextEdge'),
-               -1px 1px 0px v-bind('design.NameNextEdge'),
-               -1px -1px 0px v-bind('design.NameNextEdge'),
-               0px 1px 0px v-bind('design.NameNextEdge'),
+  text-shadow: 0px 1px 0px v-bind('design.NameNextEdge'),
                0px -1px 0px v-bind('design.NameNextEdge'),
                -1px 0px 0px v-bind('design.NameNextEdge'),
                1px 0px 0px v-bind('design.NameNextEdge'),
