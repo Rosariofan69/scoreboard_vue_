@@ -373,7 +373,7 @@ export enum ResultCheckBoxText {
     /** ゴロ */
     GroundBall = 'ゴロ',
     /** フライ */
-    FlyBall = '',
+    FlyBall = 'フライ',
     /** ライナー */
     LineDrive = 'ライナー',
     /** 併殺 */

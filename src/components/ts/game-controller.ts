@@ -461,15 +461,15 @@ export class GameController {
                 }
             } else {
                 if (runs > 1) {
-                    scoreProgress.KeyPlay = '点';
+                    scoreProgress.KeyPlay = runs.toString() + '点';
                 }
 
                 if (result.SingleHit) {
-                    scoreProgress.KeyPlay = 'タイムリーヒット';
+                    scoreProgress.KeyPlay = scoreProgress.KeyPlay + 'タイムリーヒット';
                 } else if (result.TwoBaseHit) {
-                    scoreProgress.KeyPlay = 'タイムリーツーベース';
+                    scoreProgress.KeyPlay = scoreProgress.KeyPlay + 'タイムリーツーベース';
                 } else if (result.ThreeBaseHit) {
-                    scoreProgress.KeyPlay = 'タイムリースリーベース';
+                    scoreProgress.KeyPlay = scoreProgress.KeyPlay + 'タイムリースリーベース';
                 }
             }
         } else {
@@ -485,14 +485,17 @@ export class GameController {
             } else if (result.LineDrive) {
                 scoreProgress.KeyPlay = ResultCheckBoxText.LineDrive;
                 scoreProgress.KeyPlayer = attack.Batter.Name;
+            } else if (result.LookingStrikeOut || result.SwingingStrikeOut) {
+                scoreProgress.KeyPlay = '三振';
+                scoreProgress.KeyPlayer = attack.Batter.Name;
             } else if (result.FoulFly) {
                 scoreProgress.KeyPlay = ResultCheckBoxText.FoulFly;
                 scoreProgress.KeyPlayer = attack.Batter.Name;
             } else if (result.FourPitchWalk) {
-                scoreProgress.KeyPlay = ResultCheckBoxText.FourPitchWalk;
+                scoreProgress.KeyPlay = '押し出し四球';
                 scoreProgress.KeyPlayer = attack.Batter.Name;
             } else if (result.HitByPitch) {
-                scoreProgress.KeyPlay = ResultCheckBoxText.HitByPitch;
+                scoreProgress.KeyPlay = '押し出し死球';
                 scoreProgress.KeyPlayer = attack.Batter.Name;
             } else if (result.SacrificeBuntError) {
                 scoreProgress.KeyPlay = ResultCheckBoxText.SacrificeBuntError;
@@ -515,6 +518,9 @@ export class GameController {
             } else if (result.FieldersChoice) {
                 scoreProgress.KeyPlay = ResultCheckBoxText.FieldersChoice;
                 scoreProgress.KeyPlayer = position;
+            } else if (result.UncaughtThirdStrike) {
+                scoreProgress.KeyPlay = ResultCheckBoxText.UncaughtThirdStrike;
+                scoreProgress.KeyPlayer = attack.Batter.Name;
             } else if (result.Interference) {
                 scoreProgress.KeyPlay = ResultCheckBoxText.Interference;
             } else if (result.Obstruction) {
