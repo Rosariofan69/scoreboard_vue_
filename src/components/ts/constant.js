@@ -377,7 +377,7 @@ var ResultCheckBoxText;
     /** ゴロ */
     ResultCheckBoxText["GroundBall"] = "\u30B4\u30ED";
     /** フライ */
-    ResultCheckBoxText["FlyBall"] = "";
+    ResultCheckBoxText["FlyBall"] = "\u30D5\u30E9\u30A4";
     /** ライナー */
     ResultCheckBoxText["LineDrive"] = "\u30E9\u30A4\u30CA\u30FC";
     /** 併殺 */

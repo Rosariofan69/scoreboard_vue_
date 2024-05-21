@@ -503,16 +503,20 @@ class GameController {
                 scoreProgress.KeyPlay = constant_1.ResultCheckBoxText.LineDrive;
                 scoreProgress.KeyPlayer = attack.Batter.Name;
             }
+            else if (result.LookingStrikeOut || result.SwingingStrikeOut) {
+                scoreProgress.KeyPlay = '三振';
+                scoreProgress.KeyPlayer = attack.Batter.Name;
+            }
             else if (result.FoulFly) {
                 scoreProgress.KeyPlay = constant_1.ResultCheckBoxText.FoulFly;
                 scoreProgress.KeyPlayer = attack.Batter.Name;
             }
             else if (result.FourPitchWalk) {
-                scoreProgress.KeyPlay = constant_1.ResultCheckBoxText.FourPitchWalk;
+                scoreProgress.KeyPlay = '押し出し四球';
                 scoreProgress.KeyPlayer = attack.Batter.Name;
             }
             else if (result.HitByPitch) {
-                scoreProgress.KeyPlay = constant_1.ResultCheckBoxText.HitByPitch;
+                scoreProgress.KeyPlay = '押し出し死球';
                 scoreProgress.KeyPlayer = attack.Batter.Name;
             }
             else if (result.SacrificeBuntError) {
