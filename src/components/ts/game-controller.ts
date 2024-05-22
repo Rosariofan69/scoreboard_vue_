@@ -460,16 +460,16 @@ export class GameController {
                     scoreProgress.KeyPlay = runs.toString() + 'ランホームラン';
                 }
             } else {
-                if (runs > 1) {
-                    scoreProgress.KeyPlay = runs.toString() + '点';
-                }
-
                 if (result.SingleHit) {
-                    scoreProgress.KeyPlay = scoreProgress.KeyPlay + 'タイムリーヒット';
+                    scoreProgress.KeyPlay = 'タイムリーヒット';
                 } else if (result.TwoBaseHit) {
-                    scoreProgress.KeyPlay = scoreProgress.KeyPlay + 'タイムリーツーベース';
+                    scoreProgress.KeyPlay = 'タイムリーツーベース';
                 } else if (result.ThreeBaseHit) {
-                    scoreProgress.KeyPlay = scoreProgress.KeyPlay + 'タイムリースリーベース';
+                    scoreProgress.KeyPlay = 'タイムリースリーベース';
+                }
+                
+                if (runs > 1) {
+                    scoreProgress.KeyPlay = runs.toString() + '点' + scoreProgress.KeyPlay;
                 }
             }
         } else {
@@ -553,6 +553,7 @@ export class GameController {
         
         if (afterVisitorR < afterHomeR && gameInfo.GameProgressInfo.NowInning >= 9 && gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Home) {
             scoreProgress.Lead = 'サヨナラ';
+            scoreProgress.HomeScore = scoreProgress.HomeScore + 'x';
         } else if (beforeVisitorR == 0 && beforeHomeR == 0) {
             scoreProgress.Lead = '先制';
         } else if (afterVisitorR == afterHomeR) {

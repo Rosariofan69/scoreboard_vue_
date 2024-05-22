@@ -2146,6 +2146,7 @@ function getPitcherInfo() {
   } else {
     pitcherInfo.value = memberController.GetPitcherInfo(visitorParticipationMember.value, visitorPitcherInfo);
   }
+  pitcherInfo.value.ThisAtBat = 0;
   emits('sendPitcherData', pitcherInfo.value);
 }
 

@@ -154,9 +154,9 @@ export class DesignController {
         // 文字
         visitor.Text = obj[VisitorDesignDivision.FielderStatsText];
         // 背景
-        visitor.BGC = obj[VisitorDesignDivision.DispPositionFielderBGC];
+        visitor.BGC = obj[VisitorDesignDivision.FielderStatsBGC];
         // 縁取り
-        visitor.Edge = obj[VisitorDesignDivision.DispPositionFielderEdge];
+        visitor.Edge = obj[VisitorDesignDivision.FielderStatsEdge];
         returnData.Visitor = visitor;
 
         // ホーム野手成績
@@ -164,9 +164,9 @@ export class DesignController {
         // 文字
         home.Text = obj[HomeDesignDivision.FielderStatsText];
         // 背景
-        home.BGC = obj[HomeDesignDivision.DispPositionFielderBGC];
+        home.BGC = obj[HomeDesignDivision.FielderStatsBGC];
         // 縁取り
-        home.Edge = obj[HomeDesignDivision.DispPositionFielderEdge];
+        home.Edge = obj[HomeDesignDivision.FielderStatsEdge];
         returnData.Home = home;
 
         // 返却

@@ -147,18 +147,18 @@ class DesignController {
         // 文字
         visitor.Text = obj[constant_1.VisitorDesignDivision.FielderStatsText];
         // 背景
-        visitor.BGC = obj[constant_1.VisitorDesignDivision.DispPositionFielderBGC];
+        visitor.BGC = obj[constant_1.VisitorDesignDivision.FielderStatsBGC];
         // 縁取り
-        visitor.Edge = obj[constant_1.VisitorDesignDivision.DispPositionFielderEdge];
+        visitor.Edge = obj[constant_1.VisitorDesignDivision.FielderStatsEdge];
         returnData.Visitor = visitor;
         // ホーム野手成績
         const home = new design_model_1.FielderStatsDesignModel();
         // 文字
         home.Text = obj[constant_1.HomeDesignDivision.FielderStatsText];
         // 背景
-        home.BGC = obj[constant_1.HomeDesignDivision.DispPositionFielderBGC];
+        home.BGC = obj[constant_1.HomeDesignDivision.FielderStatsBGC];
         // 縁取り
-        home.Edge = obj[constant_1.HomeDesignDivision.DispPositionFielderEdge];
+        home.Edge = obj[constant_1.HomeDesignDivision.FielderStatsEdge];
         returnData.Home = home;
         // 返却
         return returnData;
