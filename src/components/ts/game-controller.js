@@ -544,7 +544,7 @@ class GameController {
                 scoreProgress.KeyPlayer = position;
             }
             else if (result.FieldersChoice) {
-                scoreProgress.KeyPlay = constant_1.ResultCheckBoxText.FieldersChoice;
+                scoreProgress.KeyPlay = 'フィルダースチョイス';
                 scoreProgress.KeyPlayer = position;
             }
             else if (result.UncaughtThirdStrike) {
@@ -560,6 +560,10 @@ class GameController {
             else if (opt.PlusError) {
                 scoreProgress.KeyPlay = constant_1.ResultCheckBoxText.Error;
                 scoreProgress.KeyPlayer = position;
+            }
+            else {
+                scoreProgress.KeyPlay = '';
+                scoreProgress.KeyPlayer = '';
             }
         }
         let beforeVisitorR = 0;

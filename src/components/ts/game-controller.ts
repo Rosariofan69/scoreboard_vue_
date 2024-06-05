@@ -516,7 +516,7 @@ export class GameController {
                 scoreProgress.KeyPlay = 'タイムリーエラー';
                 scoreProgress.KeyPlayer = position;
             } else if (result.FieldersChoice) {
-                scoreProgress.KeyPlay = ResultCheckBoxText.FieldersChoice;
+                scoreProgress.KeyPlay = 'フィルダースチョイス';
                 scoreProgress.KeyPlayer = position;
             } else if (result.UncaughtThirdStrike) {
                 scoreProgress.KeyPlay = ResultCheckBoxText.UncaughtThirdStrike;
@@ -528,6 +528,9 @@ export class GameController {
             } else if (opt.PlusError) {
                 scoreProgress.KeyPlay = ResultCheckBoxText.Error;
                 scoreProgress.KeyPlayer = position;
+            } else {
+                scoreProgress.KeyPlay = '';
+                scoreProgress.KeyPlayer = '';
             }
         }
 

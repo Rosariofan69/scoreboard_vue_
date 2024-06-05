@@ -411,10 +411,10 @@
     </div>
   </div>
   <div class="Dialog" v-if="scoreProgressAddInputDialog">
-    <input type="checkbox" v-model="selectedScoreProgressNotBatterResult" :value="ScoreProgressNotBatter.HomeSteel">{{ ScoreProgressNotBatter.HomeSteel }}
-    <input type="checkbox" v-model="selectedScoreProgressNotBatterResult" :value="ScoreProgressNotBatter.WildPitch">{{ ScoreProgressNotBatter.WildPitch }}
-    <input type="checkbox" v-model="selectedScoreProgressNotBatterResult" :value="ScoreProgressNotBatter.Balk">{{ ScoreProgressNotBatter.Balk }}
-    <input type="checkbox" v-model="selectedScoreProgressNotBatterResult" :value="ScoreProgressNotBatter.PassedBall">{{ ScoreProgressNotBatter.PassedBall }}
+    <label><input type="checkbox" name="scoreProgressNotBatter" v-model="selectedScoreProgressNotBatterResult" :value=ScoreProgressNotBatter.HomeSteel>{{ ScoreProgressNotBatter.HomeSteel }}</label>
+    <label><input type="checkbox" name="scoreProgressNotBatter" v-model="selectedScoreProgressNotBatterResult" :value=ScoreProgressNotBatter.WildPitch>{{ ScoreProgressNotBatter.WildPitch }}</label>
+    <label><input type="checkbox" name="scoreProgressNotBatter" v-model="selectedScoreProgressNotBatterResult" :value=ScoreProgressNotBatter.Balk>{{ ScoreProgressNotBatter.Balk }}</label>
+    <label><input type="checkbox" name="scoreProgressNotBatter" v-model="selectedScoreProgressNotBatterResult" :value=ScoreProgressNotBatter.PassedBall>{{ ScoreProgressNotBatter.PassedBall }}</label>
     <div class="Footer">
       <button class="Ok" v-on:click="closeScoreProgressAddInputDialog()">OK</button>
     </div>
@@ -612,7 +612,7 @@ let selectedBatterStatsDispDivision = ref('');
 // リボンスペース表示区分選択値
 let selectedRibbonSpaceDispDivision = ref('');
 // 得点経過（打者なし）選択値
-let selectedScoreProgressNotBatterResult = ref('');
+let selectedScoreProgressNotBatterResult = ref<string[]>([]);
 
 /**
  * 表示ボタンクリック時処理
@@ -2222,24 +2222,27 @@ function checkRunnerNumber() {
 function closeScoreProgressAddInputDialog() {
   scoreProgressAddInputDialog.value = false;
 
-  if (selectedScoreProgressNotBatterResult.value == ScoreProgressNotBatter.HomeSteel) {
-    // 本盗
-    scoreProgressList.value[scoreProgressList.value.length - 1].KeyPlayer = attackMember.value.Third.Name;
-    scoreProgressList.value[scoreProgressList.value.length - 1].KeyPlay = 'ホームスチール';
-  } else if (selectedScoreProgressNotBatterResult.value == ScoreProgressNotBatter.WildPitch) {
-    // 暴投
-    scoreProgressList.value[scoreProgressList.value.length - 1].KeyPlayer = defenseMember.value.P;
-    scoreProgressList.value[scoreProgressList.value.length - 1].KeyPlay = ScoreProgressNotBatter.WildPitch;
-  } else if (selectedScoreProgressNotBatterResult.value == ScoreProgressNotBatter.Balk) {
-    // ボーク
-    scoreProgressList.value[scoreProgressList.value.length - 1].KeyPlayer = defenseMember.value.P;
-    scoreProgressList.value[scoreProgressList.value.length - 1].KeyPlay = ScoreProgressNotBatter.Balk;
-  } else if (selectedScoreProgressNotBatterResult.value == ScoreProgressNotBatter.PassedBall) {
-    // 捕逸
-    scoreProgressList.value[scoreProgressList.value.length - 1].KeyPlayer = defenseMember.value.C;
-    scoreProgressList.value[scoreProgressList.value.length - 1].KeyPlay = ScoreProgressNotBatter.PassedBall;
+  if (selectedScoreProgressNotBatterResult.value.length > 0) {
+    if (selectedScoreProgressNotBatterResult.value[0] == ScoreProgressNotBatter.HomeSteel) {
+      // 本盗
+      scoreProgressList.value[scoreProgressList.value.length - 1].KeyPlayer = attackMember.value.Third.Name;
+      scoreProgressList.value[scoreProgressList.value.length - 1].KeyPlay = 'ホームスチール';
+    } else if (selectedScoreProgressNotBatterResult.value[0] == ScoreProgressNotBatter.WildPitch) {
+      // 暴投
+      scoreProgressList.value[scoreProgressList.value.length - 1].KeyPlayer = defenseMember.value.P;
+      scoreProgressList.value[scoreProgressList.value.length - 1].KeyPlay = ScoreProgressNotBatter.WildPitch;
+    } else if (selectedScoreProgressNotBatterResult.value[0] == ScoreProgressNotBatter.Balk) {
+      // ボーク
+      scoreProgressList.value[scoreProgressList.value.length - 1].KeyPlayer = defenseMember.value.P;
+      scoreProgressList.value[scoreProgressList.value.length - 1].KeyPlay = ScoreProgressNotBatter.Balk;
+    } else if (selectedScoreProgressNotBatterResult.value[0] == ScoreProgressNotBatter.PassedBall) {
+      // 捕逸
+      scoreProgressList.value[scoreProgressList.value.length - 1].KeyPlayer = defenseMember.value.C;
+      scoreProgressList.value[scoreProgressList.value.length - 1].KeyPlay = ScoreProgressNotBatter.PassedBall;
+    }
   }
-  
+
+  selectedScoreProgressNotBatterResult.value = [];
   selectedRibbonSpaceDispDivision.value = RibbonSpaceDispDivision.ScoreProgress;
   emits('sendRibbonSpaceDispDivision', selectedRibbonSpaceDispDivision.value);
   emits('sendScoreProgressData', scoreProgressList.value);

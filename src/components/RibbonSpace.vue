@@ -16,7 +16,7 @@
             {{ progress.KeyPlayer }}
           </div>
           <div class="Score-Progress-Content">
-            <div v-if="progress.KeyPlayPosition != '' && !(progress.KeyPlay.includes('失策') || progress.KeyPlay.includes('野選'))" style="display: flex;">
+            <div v-if="progress.KeyPlayPosition != '' && !(progress.KeyPlay.includes('エラー') || progress.KeyPlay.includes('フィルダースチョイス'))" style="display: flex;">
             {{ progress.KeyPlayPosition }}
               <div v-if="progress.KeyPlay.includes('タイムリー') ||
                          progress.KeyPlay.includes('ホームラン') ||
@@ -114,7 +114,7 @@ watch(props, () => {
   display: inline-block;
   color: #fff;
   font-size: 30px;
-  line-height: 38px;
+  line-height: 41px;
   padding-left: 710px;
   white-space: nowrap;
 }
