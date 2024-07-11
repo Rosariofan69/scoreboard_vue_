@@ -405,7 +405,20 @@ class GameController {
         }
         return [score, dispScore];
     }
-    CreateScoreProgress(attack, defense, result, opt, pos, runs, gameInfo, before, after) {
+    /**
+     * 得点経過作成
+     * @param attack
+     * @param defense
+     * @param result
+     * @param opt
+     * @param pos
+     * @param runs
+     * @param gameInfo
+     * @param before
+     * @param after
+     * @returns
+     */
+    CreateScoreProgress(attack, defense, result, opt, proOpt, pos, runs, gameInfo, before, after) {
         const scoreProgress = new game_model_1.ScoreProgressModel();
         scoreProgress.Inning = gameInfo.GameProgressInfo.NowInning.toString() + '回';
         if (gameInfo.GameProgressInfo.NowAttackTeam == constant_1.VisitorHomeDivision.Visitor) {
@@ -461,14 +474,25 @@ class GameController {
             // 安打
             scoreProgress.KeyPlayer = attack.Batter.Name;
             if (result.HomeRun) {
-                if (runs == 1) {
-                    scoreProgress.KeyPlay = 'ソロホームラン';
+                if (proOpt.StartBatterFlg) {
+                    scoreProgress.KeyPlay = '先頭打者ホームラン';
                 }
-                else if (runs == 4) {
-                    scoreProgress.KeyPlay = '満塁ホームラン';
+                else if (proOpt.BackToBackHomerun > 1) {
+                    scoreProgress.KeyPlay = proOpt.BackToBackHomerun.toString() + "者連続ホームラン";
                 }
                 else {
-                    scoreProgress.KeyPlay = runs.toString() + 'ランホームラン';
+                    if (runs == 1) {
+                        scoreProgress.KeyPlay = 'ソロホームラン';
+                    }
+                    else if (runs == 4) {
+                        scoreProgress.KeyPlay = '満塁ホームラン';
+                    }
+                    else {
+                        scoreProgress.KeyPlay = runs.toString() + 'ランホームラン';
+                    }
+                }
+                if (proOpt.HomerunNumber > 0) {
+                    scoreProgress.KeyPlay = proOpt.HomerunNumber.toString() + "号" + scoreProgress.KeyPlay;
                 }
             }
             else {

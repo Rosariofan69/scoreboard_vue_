@@ -440,7 +440,7 @@ import { DefaultMemberModel,
          AtBatResultModel, 
          ChangeCancelMemberModel} from './ts/model/member-info-model';
 import { GameController } from './ts/game-controller';
-import { GameInfoModel, ResultCheckBoxModel, ResultOptionCheckBoxModel, ResultPositionCheckBoxModel, GameProgressLogModel, ScoreProgressModel } from './ts/model/game-model';
+import { GameInfoModel, ResultCheckBoxModel, ResultOptionCheckBoxModel, ResultPositionCheckBoxModel, GameProgressLogModel, ScoreProgressModel, ScoreProgressOptionModel } from './ts/model/game-model';
 import UmpireDialogComponent from './UmpireDialogComponent.vue';
 import ModifyDialogComponent from './ModifyDialogComponent.vue';
 import { CountModel, DispScoreModel, JudgeModel, RunningScoreModel } from './ts/model/score-info-model';
@@ -613,6 +613,8 @@ let selectedBatterStatsDispDivision = ref('');
 let selectedRibbonSpaceDispDivision = ref('');
 // 得点経過（打者なし）選択値
 let selectedScoreProgressNotBatterResult = ref<string[]>([]);
+// 得点経過オプション
+let scoreProgressOption = ref(new ScoreProgressOptionModel());
 
 /**
  * 表示ボタンクリック時処理
@@ -897,7 +899,6 @@ function clickGameStart() {
     cloneGameInfo.GameProgressInfo
   ] = gameController.SetDataGameStart(visitorParticipationMember.value, homeParticipationMember.value);
 
-  // selectedRibbonSpaceDispDivision.value = RibbonSpaceDispDivision.ScoreProgress;
   cloneVisitorMember.LeadOff.DispStatus.Batter = true;
   cloneVisitorMember.LeadOff.DispStatus.Basic = false;
   cloneHomeMember.LeadOff.DispStatus.NextRead = true;
@@ -908,6 +909,15 @@ function clickGameStart() {
   visitorParticipationMember.value = cloneVisitorMember;
   homeParticipationMember.value = cloneHomeMember;
   gameInfo.value = cloneGameInfo;
+
+  // 得点経過オプション
+  scoreProgressOption.value.StartBatterFlg = true;
+  scoreProgressOption.value.BackToBackHomerun = 0;
+  if (gameInfo.value.GameBaseInfo.StatsAddition == "しない") {
+    scoreProgressOption.value.HomerunNumber = -1;
+  } else {
+    scoreProgressOption.value.HomerunNumber = batterStats.value.HR + 1;
+  }
 
   emits('sendPitcherData', pitcherInfo.value);
   emits('sendBatterStatsData', batterStats.value);
@@ -1084,6 +1094,11 @@ async function clickConfirm() {
   const opt = resultOptionCheckBox.value;
   const resultPosition = resultPositionCheckBox.value;
   const runs = selectedBaseRuns.value;
+  if (resultCheckBox.value.HomeRun) {
+    scoreProgressOption.value.BackToBackHomerun++;
+  } else {
+    scoreProgressOption.value.BackToBackHomerun = 0;
+  }
 
   if (resultCheckBox.value.LookingStrikeOut || resultCheckBox.value.SwingingStrikeOut) {
     // 三振
@@ -1138,7 +1153,7 @@ async function clickConfirm() {
   // 得点経過作成
   const afterScore = runningScore;
   if (runs.length > 0) {
-    scoreProgressList.value.push(gameController.CreateScoreProgress(attackMember.value, defenseMember.value, result, opt, resultPosition, runs.length, gameInfo.value, beforeScore, afterScore));
+    scoreProgressList.value.push(gameController.CreateScoreProgress(attackMember.value, defenseMember.value, result, opt, scoreProgressOption.value, resultPosition, runs.length, gameInfo.value, beforeScore, afterScore));
     
     if (scoreProgressList.value[scoreProgressList.value.length - 1].KeyPlay == '') {
       scoreProgressAddInputDialog.value = true;
@@ -1148,6 +1163,7 @@ async function clickConfirm() {
       emits('sendScoreProgressData', scoreProgressList.value);
     }
   }
+  scoreProgressOption.value.StartBatterFlg = false;
 
   // 投手情報保存
   if (gameInfo.value.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor) {
@@ -1172,6 +1188,11 @@ async function clickConfirm() {
   checkRunnerNumber();
   if (message.value != '') {
     messageDialogDispFlg.value = true;
+  }
+
+  // 得点経過オプション（号）
+  if (gameInfo.value.GameBaseInfo.StatsAddition == "する") {
+    scoreProgressOption.value.HomerunNumber = batterStats.value.HR + 1;
   }
 }
 
@@ -1591,6 +1612,9 @@ async function changeAttackTeam() {
     }
   } else {
     battingResultList = visitorBattingResult.value;
+    if (gameInfo.value.GameProgressInfo.NowInning == 1) {
+      scoreProgressOption.value.StartBatterFlg = true;
+    }
     if (restRunner.length > 0) {
       cloneHomeMember = gameController.ResolvedRunner(cloneHomeMember, restRunner);
       runningScore.HomeLOB += restRunner.length;
@@ -1962,6 +1986,8 @@ function saveGameProgressLog() {
   pushData.Runner = _.cloneDeep(runnerData.value);
   pushData.RunnerState = _.cloneDeep(runnerState.value);
   pushData.BattingResult = _.cloneDeep(battingResultData.value);
+  pushData.ScoreProgress = _.cloneDeep(scoreProgressList.value);
+  pushData.ScoreProgressOption = _.cloneDeep(scoreProgressOption.value);
 
   gameProgressLogList.push(pushData);
 }
@@ -1990,6 +2016,8 @@ function clickUndo() {
   runnerData.value = beforeData.Runner;
   runnerState.value = beforeData.RunnerState;
   battingResultData.value = beforeData.BattingResult;
+  scoreProgressList.value = beforeData.ScoreProgress;
+  scoreProgressOption.value = beforeData.ScoreProgressOption;
 
   gameProgressLogList.pop();
 
@@ -2003,6 +2031,7 @@ function clickUndo() {
   emits('sendPitcherData', pitcherInfo.value);
   emits('sendRunnerData', runnerData.value);
   emits('sendBattingResultData', battingResultData.value);
+  emits('sendScoreProgressData', scoreProgressList.value);
 }
 
 /**

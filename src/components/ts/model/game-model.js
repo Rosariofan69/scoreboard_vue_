@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ScoreProgressModel = exports.GameProgressLogModel = exports.ResultPositionCheckBoxModel = exports.ResultOptionCheckBoxModel = exports.ResultCheckBoxModel = exports.GameProgressInfoModel = exports.GameBaseInfoModel = exports.GameInfoModel = void 0;
+exports.ScoreProgressOptionModel = exports.ScoreProgressModel = exports.GameProgressLogModel = exports.ResultPositionCheckBoxModel = exports.ResultOptionCheckBoxModel = exports.ResultCheckBoxModel = exports.GameProgressInfoModel = exports.GameBaseInfoModel = exports.GameInfoModel = void 0;
 /**
  * 試合情報
  */
@@ -551,6 +551,20 @@ class GameProgressLogModel {
             writable: true,
             value: void 0
         });
+        /** 得点経過 */
+        Object.defineProperty(this, "ScoreProgress", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 得点経過オプション */
+        Object.defineProperty(this, "ScoreProgressOption", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
     }
 }
 exports.GameProgressLogModel = GameProgressLogModel;
@@ -611,4 +625,33 @@ class ScoreProgressModel {
     }
 }
 exports.ScoreProgressModel = ScoreProgressModel;
+/**
+ * 得点経過オプションモデル
+ */
+class ScoreProgressOptionModel {
+    constructor() {
+        /** 先頭打者フラグ */
+        Object.defineProperty(this, "StartBatterFlg", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** 連続ホームラン */
+        Object.defineProperty(this, "BackToBackHomerun", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        /** ホームラン（号） */
+        Object.defineProperty(this, "HomerunNumber", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+    }
+}
+exports.ScoreProgressOptionModel = ScoreProgressOptionModel;
 //# sourceMappingURL=game-model.js.map

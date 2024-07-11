@@ -182,6 +182,10 @@ export class GameProgressLogModel {
     RunnerState: RunnerStateModel;
     /** 打席結果 */
     BattingResult: AtBatResultModel[];
+    /** 得点経過 */
+    ScoreProgress: ScoreProgressModel[];
+    /** 得点経過オプション */
+    ScoreProgressOption: ScoreProgressOptionModel;
 }
 
 /**
@@ -202,4 +206,16 @@ export class ScoreProgressModel {
     VisitorScore: string;
     /** ホーム得点 */
     HomeScore: string;
+}
+
+/**
+ * 得点経過オプションモデル
+ */
+export class ScoreProgressOptionModel {
+    /** 先頭打者フラグ */
+    StartBatterFlg: boolean;
+    /** 連続ホームラン */
+    BackToBackHomerun: number;
+    /** ホームラン（号） */
+    HomerunNumber: number;
 }

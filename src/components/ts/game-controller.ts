@@ -1,7 +1,7 @@
 import { RunningScoreModel, DispRunningScoreModel, DispScoreModel, CountModel } from './model/score-info-model';
 import { MemberController } from './member-controller';
 import { GameInfoDivision, VisitorHomeDivision, ScoreDesignDivision, ResultCheckBoxText } from './constant';
-import { GameInfoModel, GameProgressInfoModel, ScoreProgressModel, ResultCheckBoxModel, ResultPositionCheckBoxModel, ResultOptionCheckBoxModel } from './model/game-model';
+import { GameInfoModel, GameProgressInfoModel, ScoreProgressModel, ResultCheckBoxModel, ResultPositionCheckBoxModel, ResultOptionCheckBoxModel, ScoreProgressOptionModel } from './model/game-model';
 import { ExcelController } from './excel-controller';
 import { ParticipationMemberPerTeamModel,
          BattingResultPerTeamModel,
@@ -393,11 +393,25 @@ export class GameController {
         return [score, dispScore];
     }
 
+    /**
+     * 得点経過作成
+     * @param attack 
+     * @param defense 
+     * @param result 
+     * @param opt 
+     * @param pos 
+     * @param runs 
+     * @param gameInfo 
+     * @param before 
+     * @param after 
+     * @returns 
+     */
     public CreateScoreProgress(
         attack: RunnerNameModel,
         defense: PositionModel,
         result: ResultCheckBoxModel,
         opt: ResultOptionCheckBoxModel,
+        proOpt: ScoreProgressOptionModel,
         pos: string[],
         runs: number,
         gameInfo: GameInfoModel,
@@ -452,12 +466,22 @@ export class GameController {
             scoreProgress.KeyPlayer = attack.Batter.Name;
 
             if (result.HomeRun) {
-                if (runs == 1) {
-                    scoreProgress.KeyPlay = 'ソロホームラン';
-                } else if (runs == 4) {
-                    scoreProgress.KeyPlay = '満塁ホームラン';
+                if (proOpt.StartBatterFlg) {
+                    scoreProgress.KeyPlay = '先頭打者ホームラン';
+                } else if (proOpt.BackToBackHomerun > 1) {
+                    scoreProgress.KeyPlay = proOpt.BackToBackHomerun.toString() + "者連続ホームラン";
                 } else {
-                    scoreProgress.KeyPlay = runs.toString() + 'ランホームラン';
+                    if (runs == 1) {
+                        scoreProgress.KeyPlay = 'ソロホームラン';
+                    } else if (runs == 4) {
+                        scoreProgress.KeyPlay = '満塁ホームラン';
+                    } else {
+                        scoreProgress.KeyPlay = runs.toString() + 'ランホームラン';
+                    }
+                }
+                
+                if (proOpt.HomerunNumber > 0) {
+                    scoreProgress.KeyPlay = proOpt.HomerunNumber.toString() + "号" + scoreProgress.KeyPlay;
                 }
             } else {
                 if (result.SingleHit) {

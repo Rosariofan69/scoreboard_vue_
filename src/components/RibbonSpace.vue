@@ -114,7 +114,7 @@ watch(props, () => {
   display: inline-block;
   color: #fff;
   font-size: 30px;
-  line-height: 41px;
+  line-height: 40px;
   padding-left: 710px;
   white-space: nowrap;
 }
