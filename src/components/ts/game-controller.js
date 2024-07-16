@@ -421,11 +421,17 @@ class GameController {
     CreateScoreProgress(attack, defense, result, opt, proOpt, pos, runs, gameInfo, before, after) {
         const scoreProgress = new game_model_1.ScoreProgressModel();
         scoreProgress.Inning = gameInfo.GameProgressInfo.NowInning.toString() + '回';
+        let atcTeam = '';
+        let defTeam = '';
         if (gameInfo.GameProgressInfo.NowAttackTeam == constant_1.VisitorHomeDivision.Visitor) {
             scoreProgress.Inning = scoreProgress.Inning + '表';
+            atcTeam = '(' + gameInfo.GameBaseInfo.VisitorAbbreviation + ')';
+            defTeam = '(' + gameInfo.GameBaseInfo.HomeAbbreviation + ')';
         }
         else {
             scoreProgress.Inning = scoreProgress.Inning + '裏';
+            atcTeam = '(' + gameInfo.GameBaseInfo.HomeAbbreviation + ')';
+            defTeam = '(' + gameInfo.GameBaseInfo.VisitorAbbreviation + ')';
         }
         let position = '';
         if (pos[0] == '投') {
@@ -472,7 +478,7 @@ class GameController {
         }
         if (result.SingleHit || result.TwoBaseHit || result.ThreeBaseHit || result.HomeRun) {
             // 安打
-            scoreProgress.KeyPlayer = attack.Batter.Name;
+            scoreProgress.KeyPlayer = attack.Batter.Name + atcTeam;
             if (result.HomeRun) {
                 if (proOpt.StartBatterFlg) {
                     scoreProgress.KeyPlay = '先頭打者ホームラン';
@@ -513,67 +519,67 @@ class GameController {
         else {
             if (result.GroundBall) {
                 scoreProgress.KeyPlay = constant_1.ResultCheckBoxText.GroundBall;
-                scoreProgress.KeyPlayer = attack.Batter.Name;
+                scoreProgress.KeyPlayer = attack.Batter.Name + atcTeam;
             }
             else if (result.FlyBall) {
                 scoreProgress.KeyPlay = constant_1.ResultCheckBoxText.FlyBall;
-                scoreProgress.KeyPlayer = attack.Batter.Name;
+                scoreProgress.KeyPlayer = attack.Batter.Name + atcTeam;
             }
             else if (result.DoublePlay) {
                 scoreProgress.KeyPlay = '併殺打';
-                scoreProgress.KeyPlayer = attack.Batter.Name;
+                scoreProgress.KeyPlayer = attack.Batter.Name + atcTeam;
             }
             else if (result.LineDrive) {
                 scoreProgress.KeyPlay = constant_1.ResultCheckBoxText.LineDrive;
-                scoreProgress.KeyPlayer = attack.Batter.Name;
+                scoreProgress.KeyPlayer = attack.Batter.Name + atcTeam;
             }
             else if (result.LookingStrikeOut || result.SwingingStrikeOut) {
                 scoreProgress.KeyPlay = '三振';
-                scoreProgress.KeyPlayer = attack.Batter.Name;
+                scoreProgress.KeyPlayer = attack.Batter.Name + atcTeam;
             }
             else if (result.FoulFly) {
                 scoreProgress.KeyPlay = constant_1.ResultCheckBoxText.FoulFly;
-                scoreProgress.KeyPlayer = attack.Batter.Name;
+                scoreProgress.KeyPlayer = attack.Batter.Name + atcTeam;
             }
             else if (result.FourPitchWalk) {
                 scoreProgress.KeyPlay = '押し出し四球';
-                scoreProgress.KeyPlayer = attack.Batter.Name;
+                scoreProgress.KeyPlayer = attack.Batter.Name + atcTeam;
             }
             else if (result.HitByPitch) {
                 scoreProgress.KeyPlay = '押し出し死球';
-                scoreProgress.KeyPlayer = attack.Batter.Name;
+                scoreProgress.KeyPlayer = attack.Batter.Name + atcTeam;
             }
             else if (result.SacrificeBuntError) {
                 scoreProgress.KeyPlay = constant_1.ResultCheckBoxText.SacrificeBuntError;
-                scoreProgress.KeyPlayer = position;
+                scoreProgress.KeyPlayer = position + defTeam;
             }
             else if (result.SacrificeBuntFC) {
                 scoreProgress.KeyPlay = constant_1.ResultCheckBoxText.SacrificeBuntFC;
-                scoreProgress.KeyPlayer = position;
+                scoreProgress.KeyPlayer = position + defTeam;
             }
             else if (result.SacrificeBunt) {
                 scoreProgress.KeyPlay = 'スクイズ';
-                scoreProgress.KeyPlayer = attack.Batter.Name;
+                scoreProgress.KeyPlayer = attack.Batter.Name + atcTeam;
             }
             else if (result.SacrificeFly) {
                 scoreProgress.KeyPlay = '犠牲フライ';
-                scoreProgress.KeyPlayer = attack.Batter.Name;
+                scoreProgress.KeyPlayer = attack.Batter.Name + atcTeam;
             }
             else if (result.IntentionalWalk) {
                 scoreProgress.KeyPlay = constant_1.ResultCheckBoxText.IntentionalWalk;
-                scoreProgress.KeyPlayer = attack.Batter.Name;
+                scoreProgress.KeyPlayer = attack.Batter.Name + atcTeam;
             }
             else if (result.Error) {
                 scoreProgress.KeyPlay = 'タイムリーエラー';
-                scoreProgress.KeyPlayer = position;
+                scoreProgress.KeyPlayer = position + defTeam;
             }
             else if (result.FieldersChoice) {
                 scoreProgress.KeyPlay = 'フィルダースチョイス';
-                scoreProgress.KeyPlayer = position;
+                scoreProgress.KeyPlayer = position + defTeam;
             }
             else if (result.UncaughtThirdStrike) {
                 scoreProgress.KeyPlay = constant_1.ResultCheckBoxText.UncaughtThirdStrike;
-                scoreProgress.KeyPlayer = attack.Batter.Name;
+                scoreProgress.KeyPlayer = attack.Batter.Name + atcTeam;
             }
             else if (result.Interference) {
                 scoreProgress.KeyPlay = constant_1.ResultCheckBoxText.Interference;
@@ -583,7 +589,7 @@ class GameController {
             }
             else if (opt.PlusError) {
                 scoreProgress.KeyPlay = constant_1.ResultCheckBoxText.Error;
-                scoreProgress.KeyPlayer = position;
+                scoreProgress.KeyPlayer = position + defTeam;
             }
             else {
                 scoreProgress.KeyPlay = '';

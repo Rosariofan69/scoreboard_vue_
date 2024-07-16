@@ -421,10 +421,16 @@ export class GameController {
 
         scoreProgress.Inning = gameInfo.GameProgressInfo.NowInning.toString() + '回';
 
+        let atcTeam = '';
+        let defTeam = '';
         if (gameInfo.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor) {
             scoreProgress.Inning = scoreProgress.Inning + '表';
+            atcTeam = '(' + gameInfo.GameBaseInfo.VisitorAbbreviation + ')';
+            defTeam = '(' + gameInfo.GameBaseInfo.HomeAbbreviation + ')';
         } else {
             scoreProgress.Inning = scoreProgress.Inning + '裏';
+            atcTeam = '(' + gameInfo.GameBaseInfo.HomeAbbreviation + ')';
+            defTeam = '(' + gameInfo.GameBaseInfo.VisitorAbbreviation + ')';
         }
 
         let position = '';
@@ -463,7 +469,7 @@ export class GameController {
 
         if (result.SingleHit || result.TwoBaseHit || result.ThreeBaseHit || result.HomeRun) {
             // 安打
-            scoreProgress.KeyPlayer = attack.Batter.Name;
+            scoreProgress.KeyPlayer = attack.Batter.Name + atcTeam;
 
             if (result.HomeRun) {
                 if (proOpt.StartBatterFlg) {
@@ -499,59 +505,59 @@ export class GameController {
         } else {
             if (result.GroundBall) {
                 scoreProgress.KeyPlay = ResultCheckBoxText.GroundBall
-                scoreProgress.KeyPlayer = attack.Batter.Name;
+                scoreProgress.KeyPlayer = attack.Batter.Name + atcTeam;
             } else if (result.FlyBall) {
                 scoreProgress.KeyPlay = ResultCheckBoxText.FlyBall;
-                scoreProgress.KeyPlayer = attack.Batter.Name;
+                scoreProgress.KeyPlayer = attack.Batter.Name + atcTeam;
             } else if (result.DoublePlay) {
                 scoreProgress.KeyPlay = '併殺打';
-                scoreProgress.KeyPlayer = attack.Batter.Name;
+                scoreProgress.KeyPlayer = attack.Batter.Name + atcTeam;
             } else if (result.LineDrive) {
                 scoreProgress.KeyPlay = ResultCheckBoxText.LineDrive;
-                scoreProgress.KeyPlayer = attack.Batter.Name;
+                scoreProgress.KeyPlayer = attack.Batter.Name + atcTeam;
             } else if (result.LookingStrikeOut || result.SwingingStrikeOut) {
                 scoreProgress.KeyPlay = '三振';
-                scoreProgress.KeyPlayer = attack.Batter.Name;
+                scoreProgress.KeyPlayer = attack.Batter.Name + atcTeam;
             } else if (result.FoulFly) {
                 scoreProgress.KeyPlay = ResultCheckBoxText.FoulFly;
-                scoreProgress.KeyPlayer = attack.Batter.Name;
+                scoreProgress.KeyPlayer = attack.Batter.Name + atcTeam;
             } else if (result.FourPitchWalk) {
                 scoreProgress.KeyPlay = '押し出し四球';
-                scoreProgress.KeyPlayer = attack.Batter.Name;
+                scoreProgress.KeyPlayer = attack.Batter.Name + atcTeam;
             } else if (result.HitByPitch) {
                 scoreProgress.KeyPlay = '押し出し死球';
-                scoreProgress.KeyPlayer = attack.Batter.Name;
+                scoreProgress.KeyPlayer = attack.Batter.Name + atcTeam;
             } else if (result.SacrificeBuntError) {
                 scoreProgress.KeyPlay = ResultCheckBoxText.SacrificeBuntError;
-                scoreProgress.KeyPlayer = position;
+                scoreProgress.KeyPlayer = position + defTeam;
             } else if (result.SacrificeBuntFC) {
                 scoreProgress.KeyPlay = ResultCheckBoxText.SacrificeBuntFC;
-                scoreProgress.KeyPlayer = position;
+                scoreProgress.KeyPlayer = position + defTeam;
             } else if (result.SacrificeBunt) {
                 scoreProgress.KeyPlay = 'スクイズ';
-                scoreProgress.KeyPlayer = attack.Batter.Name;
+                scoreProgress.KeyPlayer = attack.Batter.Name + atcTeam;
             } else if (result.SacrificeFly) {
                 scoreProgress.KeyPlay = '犠牲フライ';
-                scoreProgress.KeyPlayer = attack.Batter.Name;
+                scoreProgress.KeyPlayer = attack.Batter.Name + atcTeam;
             } else if (result.IntentionalWalk) {
                 scoreProgress.KeyPlay = ResultCheckBoxText.IntentionalWalk;
-                scoreProgress.KeyPlayer = attack.Batter.Name;
+                scoreProgress.KeyPlayer = attack.Batter.Name + atcTeam;
             } else if (result.Error) {
                 scoreProgress.KeyPlay = 'タイムリーエラー';
-                scoreProgress.KeyPlayer = position;
+                scoreProgress.KeyPlayer = position + defTeam;
             } else if (result.FieldersChoice) {
                 scoreProgress.KeyPlay = 'フィルダースチョイス';
-                scoreProgress.KeyPlayer = position;
+                scoreProgress.KeyPlayer = position + defTeam;
             } else if (result.UncaughtThirdStrike) {
                 scoreProgress.KeyPlay = ResultCheckBoxText.UncaughtThirdStrike;
-                scoreProgress.KeyPlayer = attack.Batter.Name;
+                scoreProgress.KeyPlayer = attack.Batter.Name + atcTeam;
             } else if (result.Interference) {
                 scoreProgress.KeyPlay = ResultCheckBoxText.Interference;
             } else if (result.Obstruction) {
                 scoreProgress.KeyPlay = ResultCheckBoxText.Obstruction;
             } else if (opt.PlusError) {
                 scoreProgress.KeyPlay = ResultCheckBoxText.Error;
-                scoreProgress.KeyPlayer = position;
+                scoreProgress.KeyPlayer = position + defTeam;
             } else {
                 scoreProgress.KeyPlay = '';
                 scoreProgress.KeyPlayer = '';
