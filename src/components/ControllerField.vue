@@ -718,6 +718,11 @@ async function getVisitorParticipationMember(index: number, cancel: boolean) {
         const id = visitorParticipationMember.value[memberController.orderKeysDH[runnerData.value.Batter.Order - 1]].ID;
         battingResultData.value = memberController.GetBattingResult(visitorBattingResult.value, runnerData.value.Batter.Order - 1, id);
         runnerData.value = gameController.SortRunner(visitorParticipationMember.value, runnerState.value, runnerData.value.Batter);
+        if (gameInfo.value.GameBaseInfo.StatsAddition == "しない") {
+          scoreProgressOption.value.HomerunNumber = -1;
+        } else {
+          scoreProgressOption.value.HomerunNumber = batterStats.value.HR + 1;
+        }
         emits('sendBatterStatsData', batterStats.value);
         emits('sendBattingResultData', battingResultData.value);
         emits('sendRunnerData', runnerData.value);
@@ -757,6 +762,11 @@ async function getBulkVisitorParticipationMember() {
         const id = visitorParticipationMember.value[memberController.orderKeysDH[runnerData.value.Batter.Order - 1]].ID;
         battingResultData.value = memberController.GetBattingResult(visitorBattingResult.value, runnerData.value.Batter.Order - 1, id);
         runnerData.value = gameController.SortRunner(visitorParticipationMember.value, runnerState.value, runnerData.value.Batter);
+        if (gameInfo.value.GameBaseInfo.StatsAddition == "しない") {
+          scoreProgressOption.value.HomerunNumber = -1;
+        } else {
+          scoreProgressOption.value.HomerunNumber = batterStats.value.HR + 1;
+        }
         emits('sendBatterStatsData', batterStats.value);
         emits('sendBattingResultData', battingResultData.value);
         emits('sendRunnerData', runnerData.value);
@@ -797,6 +807,11 @@ async function getHomeParticipationMember(index: number, cancel: boolean) {
         const id = homeParticipationMember.value[memberController.orderKeysDH[runnerData.value.Batter.Order - 1]].ID;
         battingResultData.value = memberController.GetBattingResult(homeBattingResult.value, runnerData.value.Batter.Order - 1, id);
         runnerData.value = gameController.SortRunner(homeParticipationMember.value, runnerState.value, runnerData.value.Batter);
+        if (gameInfo.value.GameBaseInfo.StatsAddition == "しない") {
+          scoreProgressOption.value.HomerunNumber = -1;
+        } else {
+          scoreProgressOption.value.HomerunNumber = batterStats.value.HR + 1;
+        }
         emits('sendBatterStatsData', batterStats.value);
         emits('sendBattingResultData', battingResultData.value);
         emits('sendRunnerData', runnerData.value);
@@ -836,6 +851,11 @@ async function getBulkHomeParticipationMember() {
         const id = homeParticipationMember.value[memberController.orderKeysDH[runnerData.value.Batter.Order - 1]].ID;
         battingResultData.value = memberController.GetBattingResult(homeBattingResult.value, runnerData.value.Batter.Order - 1, id);
         runnerData.value = gameController.SortRunner(homeParticipationMember.value, runnerState.value, runnerData.value.Batter);
+        if (gameInfo.value.GameBaseInfo.StatsAddition == "しない") {
+          scoreProgressOption.value.HomerunNumber = -1;
+        } else {
+          scoreProgressOption.value.HomerunNumber = batterStats.value.HR + 1;
+        }
         emits('sendBatterStatsData', batterStats.value);
         emits('sendBattingResultData', battingResultData.value);
         emits('sendRunnerData', runnerData.value);
@@ -1612,9 +1632,6 @@ async function changeAttackTeam() {
     }
   } else {
     battingResultList = visitorBattingResult.value;
-    if (gameInfo.value.GameProgressInfo.NowInning == 1) {
-      scoreProgressOption.value.StartBatterFlg = true;
-    }
     if (restRunner.length > 0) {
       cloneHomeMember = gameController.ResolvedRunner(cloneHomeMember, restRunner);
       runningScore.HomeLOB += restRunner.length;
@@ -1636,6 +1653,9 @@ async function changeAttackTeam() {
       emits('sendScoreData', dispRunningScore.value);
     }
     cloneGameInfo.GameProgressInfo.NowAttackTeam = VisitorHomeDivision.Home;
+    if (gameInfo.value.GameProgressInfo.NowInning == 1) {
+      scoreProgressOption.value.StartBatterFlg = true;
+    }
 
     positionData.value = memberController.SetPositionData(visitorParticipationMember.value);
   } else {
@@ -2250,6 +2270,16 @@ function checkRunnerNumber() {
  */
 function closeScoreProgressAddInputDialog() {
   scoreProgressAddInputDialog.value = false;
+
+  let attTeam = '';
+  let defTeam = '';
+  if (gameInfo.value.GameProgressInfo.NowAttackTeam == VisitorHomeDivision.Visitor) {
+    attTeam = '(' + gameInfo.value.GameBaseInfo.VisitorAbbreviation + ')';
+    defTeam = '(' + gameInfo.value.GameBaseInfo.HomeAbbreviation + ')';
+  } else {
+    attTeam = '(' + gameInfo.value.GameBaseInfo.HomeAbbreviation + ')';
+    defTeam = '(' + gameInfo.value.GameBaseInfo.VisitorAbbreviation + ')';
+  }
 
   if (selectedScoreProgressNotBatterResult.value.length > 0) {
     if (selectedScoreProgressNotBatterResult.value[0] == ScoreProgressNotBatter.HomeSteel) {
