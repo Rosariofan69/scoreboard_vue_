@@ -1701,7 +1701,7 @@ function SaveBattingResult() {
       result = '直';
       break;
     case resultCheckBox.value.DoublePlay:
-      result = '併殺';
+      result = '併打';
       break;
     case resultCheckBox.value.LookingStrikeOut:
       result = '見三振';
@@ -1713,7 +1713,7 @@ function SaveBattingResult() {
       result = '四球';
       break;
     case resultCheckBox.value.HitByPitch:
-      result = '死球';
+      result = 'デッドボール';
       break;
     case resultCheckBox.value.FoulFly:
       result = '邪飛';

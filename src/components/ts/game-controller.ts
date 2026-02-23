@@ -510,7 +510,7 @@ export class GameController {
                 scoreProgress.KeyPlay = ResultCheckBoxText.FlyBall;
                 scoreProgress.KeyPlayer = attack.Batter.Name + atcTeam;
             } else if (result.DoublePlay) {
-                scoreProgress.KeyPlay = '併殺打';
+                scoreProgress.KeyPlay = 'ダブルプレー';
                 scoreProgress.KeyPlayer = attack.Batter.Name + atcTeam;
             } else if (result.LineDrive) {
                 scoreProgress.KeyPlay = ResultCheckBoxText.LineDrive;
@@ -525,7 +525,7 @@ export class GameController {
                 scoreProgress.KeyPlay = '押し出し四球';
                 scoreProgress.KeyPlayer = attack.Batter.Name + atcTeam;
             } else if (result.HitByPitch) {
-                scoreProgress.KeyPlay = '押し出し死球';
+                scoreProgress.KeyPlay = '押し出しデッドボール';
                 scoreProgress.KeyPlayer = attack.Batter.Name + atcTeam;
             } else if (result.SacrificeBuntError) {
                 scoreProgress.KeyPlay = ResultCheckBoxText.SacrificeBuntError;
