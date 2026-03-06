@@ -304,50 +304,129 @@ class GameController {
      * @returns
      */
     CreateDispRunningScore(gameInfo, scoreData) {
-        const dispScoreData = new score_info_model_1.DispRunningScoreModel();
-        let visitorR = 0;
-        let homeR = 0;
-        if (gameInfo.GameBaseInfo.InningLimit <= 12 || (gameInfo.GameBaseInfo.InningLimit > 12 && gameInfo.GameProgressInfo.NowInning < 10)) {
-            // ビジター
-            scoreData.VisitorScore.forEach((x, index) => {
-                dispScoreData[this.inningKeys[index]] = x.toString();
-                visitorR += Number(x);
-            });
-            // ホーム
-            scoreData.HomeScore.forEach((x, index) => {
-                dispScoreData[this.inningKeys[index + 12]] = x.toString();
-                homeR += Number(x);
-            });
+        // const dispScoreData = new DispRunningScoreModel();
+        // let visitorR = 0;
+        // let homeR = 0;
+        // if (gameInfo.GameBaseInfo.InningLimit <= 12 || (gameInfo.GameBaseInfo.InningLimit > 12 && gameInfo.GameProgressInfo.NowInning < 10)) {
+        //     // ビジター
+        //     scoreData.VisitorScore.forEach((x, index) => {
+        //         dispScoreData[this.inningKeys[index]] = x.toString();
+        //         visitorR += Number(x);
+        //     })
+        //     // ホーム
+        //     scoreData.HomeScore.forEach((x, index) => {
+        //         dispScoreData[this.inningKeys[index + 12]] = x.toString();
+        //         homeR += Number(x);
+        //     })
+        // } else {
+        //     const disp = new DispRunningScoreModel();
+        //     let visitorR = 0;
+        //     let homeR = 0;
+        //     const now = gameInfo.GameProgressInfo.NowInning;
+        //     // --- 固定ブロック方式の開始イニング計算 ---
+        //     let startInning = 1;
+        //     if (now > 9) {
+        //         startInning = Math.floor((now - 1) / 9) * 9 + 1;
+        //     }
+        //     const endInning = startInning + 8; // 常に9イニング表示
+        //     // --- 9イニング分を表示 ---
+        //     for (let i = 0; i < 9; i++) {
+        //         const inning = startInning + i;
+        //         // Visitor
+        //         const v = scoreData.VisitorScore[inning - 1];
+        //         if (v !== undefined) {
+        //             disp[this.inningKeys[i]] = v.toString();
+        //             visitorR += Number(v);
+        //         }
+        //         // Home
+        //         const h = scoreData.HomeScore[inning - 1];
+        //         if (h !== undefined) {
+        //             disp[this.inningKeys[i + 12]] = h.toString();
+        //             homeR += Number(h);
+        //         }
+        //     }
+        // }
+        // dispScoreData.VisitorR = visitorR.toString();
+        // dispScoreData.VisitorH = scoreData.VisitorH.toString();
+        // dispScoreData.VisitorE = scoreData.VisitorE.toString();
+        // dispScoreData.VisitorLOB = scoreData.VisitorLOB.toString();
+        // dispScoreData.HomeR = homeR.toString();
+        // dispScoreData.HomeH = scoreData.HomeH.toString();
+        // dispScoreData.HomeE = scoreData.HomeE.toString();
+        // dispScoreData.HomeLOB = scoreData.HomeLOB.toString();
+        // return dispScoreData;
+        const disp = new score_info_model_1.DispRunningScoreModel();
+        const now = gameInfo.GameProgressInfo.NowInning;
+        const limit = gameInfo.GameBaseInfo.InningLimit;
+        let startInning = 1;
+        let endInning = 9;
+        // --- 上限あり（例：12回制） ---
+        if (limit <= 12) {
+            startInning = 1;
+            endInning = Math.min(limit, 12); // 1〜12 を表示
         }
+        // --- 上限なし（無制限延長） ---
         else {
-            let startInning = 0;
-            let endInning = 0;
-            if (gameInfo.GameProgressInfo.NowInning % 9 == 0) {
-                startInning = gameInfo.GameProgressInfo.NowInning - 8;
+            if (now <= 9) {
+                startInning = 1;
             }
             else {
-                startInning = (gameInfo.GameProgressInfo.NowInning - (gameInfo.GameProgressInfo.NowInning % 9));
+                startInning = Math.floor((now - 1) / 9) * 9 + 1;
             }
-            endInning = gameInfo.GameProgressInfo.NowInning;
-            for (let i = 0; i < (endInning - startInning); i++) {
-                // ビジター
-                if (scoreData.VisitorScore.length >= endInning - 1) {
-                    dispScoreData[this.inningKeys[i]] = scoreData.VisitorScore[startInning + i - 1].toString();
-                }
-                // ホーム
-                if (scoreData.HomeScore.length >= endInning - 1) {
-                    dispScoreData[this.inningKeys[i + 12]] = scoreData.HomeScore[startInning + i - 1].toString();
-                }
+            endInning = startInning + 8;
+        }
+        // --- 表示用スコアを埋める ---
+        for (let i = 0; i < (endInning - startInning + 1); i++) {
+            const inning = startInning + i;
+            const v = scoreData.VisitorScore[inning - 1];
+            if (v !== undefined) {
+                disp[this.inningKeys[i]] = v.toString();
+            }
+            const h = scoreData.HomeScore[inning - 1];
+            if (h !== undefined) {
+                disp[this.inningKeys[i + 12]] = h.toString();
             }
         }
-        dispScoreData.VisitorR = visitorR.toString();
-        dispScoreData.VisitorH = scoreData.VisitorH.toString();
-        dispScoreData.VisitorE = scoreData.VisitorE.toString();
-        dispScoreData.VisitorLOB = scoreData.VisitorLOB.toString();
-        dispScoreData.HomeR = homeR.toString();
-        dispScoreData.HomeH = scoreData.HomeH.toString();
-        dispScoreData.HomeE = scoreData.HomeE.toString();
-        dispScoreData.HomeLOB = scoreData.HomeLOB.toString();
+        // --- 得点合計（試合全体） ---
+        const visitorR = scoreData.VisitorScore.reduce((a, b) => a + Number(b), 0);
+        const homeR = scoreData.HomeScore.reduce((a, b) => a + Number(b), 0);
+        disp.VisitorR = visitorR.toString();
+        disp.VisitorH = scoreData.VisitorH.toString();
+        disp.VisitorE = scoreData.VisitorE.toString();
+        disp.VisitorLOB = scoreData.VisitorLOB.toString();
+        disp.HomeR = homeR.toString();
+        disp.HomeH = scoreData.HomeH.toString();
+        disp.HomeE = scoreData.HomeE.toString();
+        disp.HomeLOB = scoreData.HomeLOB.toString();
+        return disp;
+    }
+    /**
+     * 表示用ランニングスコアタイトル加算（延長を伴う）
+     * @param dispScoreTitle
+     * @returns
+     */
+    PlusDispRunningScoreTitle(dispScoreTitle) {
+        dispScoreTitle.The1 += 9;
+        dispScoreTitle.The2 += 9;
+        dispScoreTitle.The3 += 9;
+        dispScoreTitle.The4 += 9;
+        dispScoreTitle.The5 += 9;
+        dispScoreTitle.The6 += 9;
+        dispScoreTitle.The7 += 9;
+        dispScoreTitle.The8 += 9;
+        dispScoreTitle.The9 += 9;
+        return dispScoreTitle;
+    }
+    /**
+     * 表示用ランニングスコアリセット（延長に伴う）
+     * @param dispScoreData
+     * @returns
+     */
+    ResetDispRunningScore(dispScoreData) {
+        for (let i = 0; i < 24; i++) {
+            const key = this.inningKeys[i];
+            dispScoreData[key] = '';
+        }
         return dispScoreData;
     }
     /**
