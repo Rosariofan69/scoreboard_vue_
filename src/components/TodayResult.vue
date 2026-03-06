@@ -68,7 +68,7 @@ function decisionTextColor(text: string): string {
     let res = '';
     if (text.includes('安') || text.includes('２') || text.includes('３') || text.includes('本')) {
         res = 'green';
-    } else if (text.includes('犠') || text.includes('球') || text.includes('敬遠')) {
+    } else if (text.includes('犠') || text.includes('球') || text.includes('敬遠') || text.includes('ボール')) {
         res = 'yellow';
     } else {
         res = 'white';

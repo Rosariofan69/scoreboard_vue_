@@ -221,7 +221,7 @@
     </div>
     <div class="Control-Section">
       <button class="Game-Start-End-Button" v-on:click="clickGameStart()">試合開始</button>
-      <button class="Game-Start-End-Button">試合終了</button>
+      <button class="Game-Start-End-Button" v-on:click="gameSetDialogDispFlg = true">試合終了</button>
       <div class="Base-Area">
         <button class="Base-Button Base-First" v-on:click="clickBase(PositionName.FB)" :class="[{'Button-Color-Out' : runnerState.First}]"></button>
         <button class="Base-Button Base-Second" v-on:click="clickBase(PositionName.SB)" :class="[{'Button-Color-Out' : runnerState.Second}]"></button>
@@ -1664,6 +1664,15 @@ async function changeAttackTeam() {
       [runningScore, dispRunningScore.value.Score] = gameController.CalcRuns(0, cloneGameInfo, runningScore, dispRunningScore.value.Score);
       emits('sendScoreData', dispRunningScore.value);
     }
+
+    // 延長突入（18回終了～なども含む）
+    if (cloneGameInfo.GameProgressInfo.NowInning % 9 == 0) {
+      // 表示用ランニングスコア調整
+      dispRunningScore.value.Title = gameController.PlusDispRunningScoreTitle(dispRunningScore.value.Title);
+      dispRunningScore.value.Score = gameController.ResetDispRunningScore(dispRunningScore.value.Score);
+      emits('sendScoreData', dispRunningScore.value);
+    }
+
     cloneGameInfo.GameProgressInfo.NowAttackTeam = VisitorHomeDivision.Visitor;
     cloneGameInfo.GameProgressInfo.NowInning++;
 

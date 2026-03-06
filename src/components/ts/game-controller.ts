@@ -1,4 +1,4 @@
-import { RunningScoreModel, DispRunningScoreModel, DispScoreModel, CountModel } from './model/score-info-model';
+import { RunningScoreModel, DispRunningScoreModel, DispScoreModel, CountModel, DispRunningScoreTitleModel } from './model/score-info-model';
 import { MemberController } from './member-controller';
 import { GameInfoDivision, VisitorHomeDivision, ScoreDesignDivision, ResultCheckBoxText } from './constant';
 import { GameInfoModel, GameProgressInfoModel, ScoreProgressModel, ResultCheckBoxModel, ResultPositionCheckBoxModel, ResultOptionCheckBoxModel, ScoreProgressOptionModel } from './model/game-model';
@@ -336,6 +336,39 @@ export class GameController {
         dispScoreData.HomeH = scoreData.HomeH.toString();
         dispScoreData.HomeE = scoreData.HomeE.toString();
         dispScoreData.HomeLOB = scoreData.HomeLOB.toString();
+
+        return dispScoreData;
+    }
+
+    /**
+     * 表示用ランニングスコアタイトル加算（延長を伴う）
+     * @param dispScoreTitle 
+     * @returns 
+     */
+    public PlusDispRunningScoreTitle(dispScoreTitle: DispRunningScoreTitleModel): DispRunningScoreTitleModel {
+        dispScoreTitle.The1 += 9;
+        dispScoreTitle.The2 += 9;
+        dispScoreTitle.The3 += 9;
+        dispScoreTitle.The4 += 9;
+        dispScoreTitle.The5 += 9;
+        dispScoreTitle.The6 += 9;
+        dispScoreTitle.The7 += 9;
+        dispScoreTitle.The8 += 9;
+        dispScoreTitle.The9 += 9;
+
+        return dispScoreTitle;
+    }
+
+    /**
+     * 表示用ランニングスコアリセット（延長に伴う）
+     * @param dispScoreData 
+     * @returns 
+     */
+    public ResetDispRunningScore(dispScoreData: DispRunningScoreModel): DispRunningScoreModel {
+        for (let i = 0; i < 24; i++) {
+            const key = this.inningKeys[i];
+            dispScoreData[key] = '';
+        }
 
         return dispScoreData;
     }
