@@ -211,10 +211,10 @@
             <tr>
               <td><input type="text" class="Member-Input-Name" v-model="gameInfo.GameBaseInfo.VisitorTeamName" disabled></td>
               <td v-for="(visitor, index) in editScoreData.VisitorScore" :key="index"><input type="text" class="Member-Num" v-model="editScoreData.VisitorScore[index]" @change="calcScore()"></td>
-              <td><input type="text" class="Member-Num" v-model="visitorScore" disabled></td>
-              <td><input type="text" class="Member-Num" v-model="editScoreData.VisitorH"></td>
-              <td><input type="text" class="Member-Num" v-model="editScoreData.VisitorE"></td>
-              <td><input type="text" class="Member-Num" v-model="editScoreData.VisitorLOB"></td>
+              <td><input type="text" class="Member-Num" v-model.number="visitorScore" disabled></td>
+              <td><input type="text" class="Member-Num" v-model.number="editScoreData.VisitorH"></td>
+              <td><input type="text" class="Member-Num" v-model.number="editScoreData.VisitorE"></td>
+              <td><input type="text" class="Member-Num" v-model.number="editScoreData.VisitorLOB"></td>
             </tr>
             <tr>
               <td><input type="text" class="Member-Input-Name" v-model="gameInfo.GameBaseInfo.HomeTeamName" disabled></td>
@@ -222,10 +222,10 @@
               <td v-if="gameInfo.GameProgressInfo.NowInning > editScoreData.HomeScore.length && gameInfo.GameProgressInfo.NowInning == editScoreData.VisitorScore.length">
                 <input type="text" class="Member-Num" disabled>
               </td>
-              <td><input type="text" class="Member-Num" v-model="homeScore" disabled></td>
-              <td><input type="text" class="Member-Num" v-model="editScoreData.HomeH"></td>
-              <td><input type="text" class="Member-Num" v-model="editScoreData.HomeE"></td>
-              <td><input type="text" class="Member-Num" v-model="editScoreData.HomeLOB"></td>
+              <td><input type="text" class="Member-Num" v-model.number="homeScore" disabled></td>
+              <td><input type="text" class="Member-Num" v-model.number="editScoreData.HomeH"></td>
+              <td><input type="text" class="Member-Num" v-model.number="editScoreData.HomeE"></td>
+              <td><input type="text" class="Member-Num" v-model.number="editScoreData.HomeLOB"></td>
             </tr>
           </tbody>
         </table>
