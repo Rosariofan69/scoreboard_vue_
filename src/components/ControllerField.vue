@@ -1666,7 +1666,7 @@ async function changeAttackTeam() {
     }
 
     // 延長突入（18回終了～なども含む）
-    if (cloneGameInfo.GameProgressInfo.NowInning % 9 == 0) {
+    if (cloneGameInfo.GameProgressInfo.NowInning % 9 == 0 && gameInfo.value.GameBaseInfo.InningLimit > 12) {
       // 表示用ランニングスコア調整
       dispRunningScore.value.Title = gameController.PlusDispRunningScoreTitle(dispRunningScore.value.Title);
       dispRunningScore.value.Score = gameController.ResetDispRunningScore(dispRunningScore.value.Score);
